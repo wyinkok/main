@@ -816,7 +816,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `InternshipList` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Delete person
@@ -824,9 +824,9 @@ _{More to be added}_
 *MSS*
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  InternshipList shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  InternshipList deletes the person
 +
 Use case ends.
 
@@ -840,9 +840,102 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. InternshipList shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+=== Use case: Add companies
+
+*MSS*
+
+1. User keys in requests to add companies
+2. InternshipList prompts for list of inputs
+3. User keys in details of companies
+4. InternshipList verifies that the details are correct
+5. InternshipList add the company into the system
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 4a. InternshipList detects incorrect details.
++
+[none]
+** 4a1. InternshipList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Find Internship
+
+*System*: Chat Bot
+
+*MSS*
+
+1. User keys in command to find internship
+2. Chat Bot gives user a list of prompts ( e.g. Salary, duration )
+3. User follows the prompts and key in the relevant details
+4. Chat Bot replies with a list of internship companies
+5. Chat Bot further gives user more prompts to filter the companies
+6. Repeat steps 3-5 until the user is satisfied
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. User key in invalid inputs or prompts.
++
+[none]
+** 3a1. Chat Bot detects error and shows user the error.
++
+Use case resumes at step 2.
+
+[none]
+* 3b. User chooses to terminate conversation with Chat Bot.
++
+[none]
+** 3b1. Chat Bot requests confirmation.
+** 3b2. User confirms termination.
++
+Use case ends.
+
+[discrete]
+=== Use case: Explore Internship
+
+*System*: Chat Bot
+
+*MSS*
+
+1. User keys in command to explore internship
+2. Chat Bot gives user a list of prompts ( common skills sets )
+3. User fills in a prompt or a list of prompts
+4. Chat Bot replies with a list of internship companies
+5. Chat Bot further gives user more prompts to further filter the list
+6. Repeats steps 3-5 until user is satisfied
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. User key in invalid inputs or prompts.
++
+[none]
+** 3a1. Chat Bot detects error and shows user the error.
++
+Use case resumes at step 2.
+
+[none]
+* 3b. User chooses to terminate conversation with Chat Bot.
++
+[none]
+** 3b1. Chat Bot requests confirmation.
+** 3b2. User confirms termination.
++
+Use case ends.
 
 _{More to be added}_
 
