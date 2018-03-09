@@ -945,6 +945,13 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `1.8.0_60` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should respond to commands within 5 seconds.
+.  Should be usable by a novice who is using the system for the first time.
+.  A user looking for internship should not need to key in more than 19 commands.
+.  An expert or regular user should be able to have the alternative to use command line instead of the chat bot.
+.  Should have a clean and easy to use interface.
+.  Should be designed for a British-English speaking user.
+.  Should be current and up to date (i.e. companies recruitment status).
 
 _{More to be added}_
 
