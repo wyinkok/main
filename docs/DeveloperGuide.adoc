@@ -10,7 +10,8 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/CS2103JAN2018-F11-B3/main
+:repoURL: https://github.com/CS2103JAN2018-F11-B3/tree/master
+
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
@@ -782,13 +783,14 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* are university students looking for internships/jobs
+* but not sure where to start or what to look for
+* prefers typing rather than clicking on internship portals
+* wants to narrow down the list of internships in an intuitive manner
 * can type fast
-* prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: An intuitive and better way to find jobs and internships
 
 [appendix]
 == User Stories
@@ -798,20 +800,24 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` | experienced student | filter internship by details (industries/type/date/skillset) |narrow down on the list of internship to apply for
 
-|`* * *` |user |add a new person |
+|`* * *` | new student  | input my relevant skillsets/interests | explore internships that are suitable and interesting for me
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` | student | be able view a ranked list of internship (sorted and ranked according to my preferences) | know which internship to focus on
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` | admin  | restrict some information | control which type of student gets to view which information / internship
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` | admin  | have some statistical data on what is popular / most searched | find more internships of these type to add
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* *` |lazy student | be able to upload my files / details somewhere | reuse these information for my applications
+
+|`* *` |lazy student | track the internships I have search and applied for | better keep track of them
+
+|`*` | student | know when companies will reply me | know whether I am rejected or not
+
 |=======================================================================
 
-_{More to be added}_
 
 [appendix]
 == Use Cases
