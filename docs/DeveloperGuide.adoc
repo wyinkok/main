@@ -979,11 +979,11 @@ A subclass of an information filtering system that seeks to predict a rating or 
 In this project, we will recommend internship opportunities that matches the users' preferences and objectives.
 
 [appendix]
-== Product Survey
+== ProductSurvey
 
 *Symplicity*
 
-Used by: National University of Singapore (NUS) and Yale-NUS College
+Used by: National University of Singapore (NUS) and Yale-NUS College.
 
 Pros:
 
