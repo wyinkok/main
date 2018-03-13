@@ -972,7 +972,7 @@ In this project, our chat bot will guide the user to find his ideal internships.
 Windows, Linux, Unix, OS-X
 
 [[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
+A contact detail that is not meant to be shared with others.
 
 [[recommender-systems]] Recommender Systems::
 A subclass of an information filtering system that seeks to predict a rating or preference a user will give to an item.
