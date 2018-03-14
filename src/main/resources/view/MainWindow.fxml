@@ -25,8 +25,8 @@
 
       <VBox prefWidth="320.0">
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Commands" />
+          <Menu mnemonicParsing="false" text="File">
+            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                   <MenuItem fx:id="glossaryMenuItem" mnemonicParsing="false" onAction="#handleGlossary" text="Glossary" />
           </Menu>
           <Menu mnemonicParsing="false" text="Quit">
