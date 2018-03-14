@@ -23,17 +23,18 @@
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox>
+      <VBox prefWidth="320.0">
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
           <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Commands" />
+                  <MenuItem fx:id="glossaryMenuItem" mnemonicParsing="false" onAction="#handleGlossary" text="Glossary" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="Quit">
+            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
         </MenuBar>
 
-        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.889937106918239, 0.9213836477987422" VBox.vgrow="ALWAYS">
+        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.889937106918239, 0.5" VBox.vgrow="ALWAYS">
           <VBox fx:id="personList" SplitPane.resizableWithParent="false">
             <padding>
               <Insets bottom="10" left="10" right="10" top="10" />
@@ -55,7 +56,7 @@
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="88.0" prefHeight="100.0" prefWidth="320.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100.0" minHeight="52.0" prefHeight="100.0" prefWidth="320.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
