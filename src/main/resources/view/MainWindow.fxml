@@ -25,9 +25,13 @@
 
       <VBox prefWidth="320.0">
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
+               <Menu mnemonicParsing="false" text="Glossary">
+                 <items>
+                     <MenuItem fx:id="glossaryMenuItem" mnemonicParsing="false" onAction="#handleGlossary" text="Glossary" />
+                 </items>
+               </Menu>
+          <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-                  <MenuItem fx:id="glossaryMenuItem" mnemonicParsing="false" onAction="#handleGlossary" text="Glossary" />
           </Menu>
           <Menu mnemonicParsing="false" text="Quit">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
