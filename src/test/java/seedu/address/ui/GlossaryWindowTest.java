@@ -21,7 +21,7 @@ public class GlossaryWindowTest extends GuiUnitTest {
     public void setUp() throws Exception {
         guiRobot.interact(() -> glossaryWindow = new GlossaryWindow());
         Stage glossaryWindowStage = FxToolkit.setupStage((stage)
-                -> stage.setScene(glossaryWindow.getRoot().getScene()));
+            -> stage.setScene(glossaryWindow.getRoot().getScene()));
         FxToolkit.showStage();
         glossaryWindowHandle = new GlossaryWindowHandle(glossaryWindowStage);
     }
