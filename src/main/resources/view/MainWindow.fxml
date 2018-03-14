@@ -54,13 +54,13 @@
           </StackPane>
         </SplitPane>
 
-        <StackPane fx:id="commandBoxPlaceholder" prefHeight="67.0" prefWidth="320.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="commandBoxPlaceholder" prefHeight="32.0" prefWidth="320.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="168.0" minHeight="52.0" prefHeight="168.0" prefWidth="331.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100.0" minHeight="52.0" prefHeight="100.0" prefWidth="320.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
