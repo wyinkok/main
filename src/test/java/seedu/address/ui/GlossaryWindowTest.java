@@ -31,4 +31,5 @@ public class GlossaryWindowTest extends GuiUnitTest {
         URL expectedGlossaryPage = GlossaryWindow.class.getResource(USERGUIDE_FILE_PATH);
         assertEquals(expectedGlossaryPage, glossaryWindowHandle.getLoadedUrl());
     }
+
 }
