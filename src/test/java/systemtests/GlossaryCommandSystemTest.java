@@ -39,9 +39,9 @@ public class GlossaryCommandSystemTest extends AddressBookSystemTest {
         getMainMenu().openGlossaryWindowUsingAccelerator();
         assertGlossaryWindowOpen();
 
-        //getPersonListPanel().click();
-        //getMainMenu().openGlossaryWindowUsingAccelerator();
-        //assertGlossaryWindowNotOpen();
+        getPersonListPanel().click();
+        getMainMenu().openGlossaryWindowUsingAccelerator();
+        assertGlossaryWindowOpen();
 
         getBrowserPanel().click();
         getMainMenu().openGlossaryWindowUsingAccelerator();
@@ -55,7 +55,7 @@ public class GlossaryCommandSystemTest extends AddressBookSystemTest {
         executeCommand(GlossaryCommand.COMMAND_WORD);
         assertGlossaryWindowOpen();
 
-        // open glossary window and give it focus
+        // open help window and give it focus
         executeCommand(GlossaryCommand.COMMAND_WORD);
         getMainWindowHandle().focus();
 
