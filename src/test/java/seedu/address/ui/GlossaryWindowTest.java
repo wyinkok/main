@@ -20,16 +20,16 @@ public class GlossaryWindowTest extends GuiUnitTest {
     @Before
     public void setUp() throws Exception {
         guiRobot.interact(() -> glossaryWindow = new GlossaryWindow());
-        Stage glossaryWindowStage =
-                FxToolkit.setupStage((stage) -> stage.setScene(glossaryWindow.getRoot().getScene()));
+        Stage glossaryWindowStage = FxToolkit.setupStage((stage)
+            -> stage.setScene(glossaryWindow.getRoot().getScene()));
         FxToolkit.showStage();
         glossaryWindowHandle = new GlossaryWindowHandle(glossaryWindowStage);
     }
 
     @Test
     public void display() {
-        URL expectedHelpPage = HelpWindow.class.getResource(USERGUIDE_FILE_PATH);
-        assertEquals(expectedHelpPage, glossaryWindowHandle.getLoadedUrl());
+        URL expectedGlossaryPage = GlossaryWindow.class.getResource(USERGUIDE_FILE_PATH);
+        assertEquals(expectedGlossaryPage, glossaryWindowHandle.getLoadedUrl());
     }
 }
 
