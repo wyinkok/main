@@ -29,6 +29,20 @@ public class MainMenuHandle extends NodeHandle<Node> {
     public void openHelpWindowUsingAccelerator() {
         guiRobot.push(KeyCode.F1);
     }
+    /**
+     * Opens the {@code GlossaryWindow} using the menu bar in {@code MainWindow}.
+     */
+    public void openGlossaryWindowUsingMenu() {
+        clickOnMenuItemsSequentially("Glossary", "F2");
+    }
+
+    /**
+     * Opens the {@code GlossaryWindow} by pressing the shortcut key associated
+     * with the menu bar in {@code MainWindow}.
+     */
+    public void openGlossaryWindowUsingAccelerator() {
+        guiRobot.push(KeyCode.F2);
+    }
 
     /**
      * Clicks on {@code menuItems} in order.
@@ -37,3 +51,5 @@ public class MainMenuHandle extends NodeHandle<Node> {
         Arrays.stream(menuItems).forEach(guiRobot::clickOn);
     }
 }
+
+
