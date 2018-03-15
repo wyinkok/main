@@ -60,6 +60,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
+=== Viewing glossary : `glossary`
+
+View list of all jobs, industries and related information for the user
+
+Format: `glossary`
+
 === Adding a person: `add`
 
 Adds a person to the address book +
