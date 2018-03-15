@@ -31,5 +31,4 @@ public class GlossaryWindowTest extends GuiUnitTest {
         assertEquals(expectedGlossaryPage, glossaryWindowHandle.getLoadedUrl());
     }
 }
-
 */
