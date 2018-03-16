@@ -1,12 +1,13 @@
 package systemtests;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import guitests.GuiRobot;
@@ -85,10 +86,9 @@ public class GlossaryCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Asserts that the help window isn't open.
+     * Asserts that the glossary window isn't open.
      */
     private void assertGlossaryWindowNotOpen() {
         assertFalse(ERROR_MESSAGE, GlossaryWindowHandle.isWindowPresent());
     }
-
 }
