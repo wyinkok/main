@@ -789,7 +789,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * can type fast
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: An intuitive and better way to find jobs and internships
+*Value proposition*: An intuitive and interactive way to find jobs and internships
 
 [appendix]
 == User Stories
@@ -799,15 +799,21 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` | experienced student | filter internship by details (industries/type/date/skillset) |narrow down on the list of internship to apply for
+|`* * *` | experienced student | filter internship by details (industries/type/date/skillset) |narrow down on the list of internship to apply for efficiently
 
 |`* * *` | new student  | input my relevant skillsets/interests | explore internships that are suitable and interesting for me
 
 |`* * *` | student | be able view a ranked list of internship (sorted and ranked according to my preferences) | know which internship to focus on
 
-|`* * *` | admin  | restrict some information | control which type of student gets to view which information / internship
+|`* * *` | busy student | have a user-friendly and clean application interface | use the app easily to communicate my preferences and needs
 
-|`* * *` | admin  | have some statistical data on what is popular / most searched | find more internships of these type to add
+|`* * *` | student | given a list of potential industries, jobs, skills and related information | better informed of the available options I can explore
+
+|`* * *` | student | save specific internships I am interested it and access it anytime | further narrow down on my interested internships conveniently
+
+|`* * ` | organised student | split up my saved internships into personalised collections | categorise and organise my interested internship in various folders
+
+|`* * ` | curious student | given data analysis about successful internships and job search within a faculty or in a given year | overview of the job prospects in that year and understand the market competitiveness
 
 |`* *` |lazy student | be able to upload my files / details somewhere | reuse these information for my applications
 
