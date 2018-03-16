@@ -118,9 +118,9 @@ Returns `john` and `John Doe`
 Returns any person having names `Betsy`, `Tim`, or `John`
 * `find 12345678` +
 Returns any person having phone number `12345678`
-* `find `Betsy@gmail.com` +
+* `find Betsy@gmail.com` +
 Returns any person having email `Betsy@gmail.com`
-* `find `Serangoon` +
+* `find Serangoon` +
 Returns any person having address with `Serangoon` in it
 
 === Deleting a person : `delete`
