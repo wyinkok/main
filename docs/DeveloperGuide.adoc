@@ -12,7 +12,6 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-F11-B3/tree/master
 
-
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Setting up
@@ -783,13 +782,14 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* are university students looking for internships/jobs
+* but not sure where to start or what to look for
+* prefers typing rather than clicking on internship portals
+* wants to narrow down the list of internships in an intuitive manner
 * can type fast
-* prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: An intuitive and better way to find jobs and internships
 
 [appendix]
 == User Stories
@@ -799,25 +799,29 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` | experienced student | filter internship by details (industries/type/date/skillset) |narrow down on the list of internship to apply for
 
-|`* * *` |user |add a new person |
+|`* * *` | new student  | input my relevant skillsets/interests | explore internships that are suitable and interesting for me
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` | student | be able view a ranked list of internship (sorted and ranked according to my preferences) | know which internship to focus on
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` | admin  | restrict some information | control which type of student gets to view which information / internship
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` | admin  | have some statistical data on what is popular / most searched | find more internships of these type to add
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* *` |lazy student | be able to upload my files / details somewhere | reuse these information for my applications
+
+|`* *` |lazy student | track the internships I have search and applied for | better keep track of them
+
+|`*` | student | know when companies will reply me | know whether I am rejected or not
+
 |=======================================================================
 
-_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `InternshipList` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Delete person
@@ -825,9 +829,9 @@ _{More to be added}_
 *MSS*
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  InternshipList shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  InternshipList deletes the person
 +
 Use case ends.
 
@@ -841,9 +845,102 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. InternshipList shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+=== Use case: Add companies
+
+*MSS*
+
+1. User keys in requests to add companies
+2. InternshipList prompts for list of inputs
+3. User keys in details of companies
+4. InternshipList verifies that the details are correct
+5. InternshipList add the company into the system
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 4a. InternshipList detects incorrect details.
++
+[none]
+** 4a1. InternshipList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Find Internship
+
+*System*: Chat Bot
+
+*MSS*
+
+1. User keys in command to find internship
+2. Chat Bot gives user a list of prompts ( e.g. Salary, duration )
+3. User follows the prompts and key in the relevant details
+4. Chat Bot replies with a list of internship companies
+5. Chat Bot further gives user more prompts to filter the companies
+6. Repeat steps 3-5 until the user is satisfied
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. User key in invalid inputs or prompts.
++
+[none]
+** 3a1. Chat Bot detects error and shows user the error.
++
+Use case resumes at step 2.
+
+[none]
+* 3b. User chooses to terminate conversation with Chat Bot.
++
+[none]
+** 3b1. Chat Bot requests confirmation.
+** 3b2. User confirms termination.
++
+Use case ends.
+
+[discrete]
+=== Use case: Explore Internship
+
+*System*: Chat Bot
+
+*MSS*
+
+1. User keys in command to explore internship
+2. Chat Bot gives user a list of prompts ( common skills sets )
+3. User fills in a prompt or a list of prompts
+4. Chat Bot replies with a list of internship companies
+5. Chat Bot further gives user more prompts to further filter the list
+6. Repeats steps 3-5 until user is satisfied
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. User key in invalid inputs or prompts.
++
+[none]
+** 3a1. Chat Bot detects error and shows user the error.
++
+Use case resumes at step 2.
+
+[none]
+* 3b. User chooses to terminate conversation with Chat Bot.
++
+[none]
+** 3b1. Chat Bot requests confirmation.
+** 3b2. User confirms termination.
++
+Use case ends.
 
 _{More to be added}_
 
@@ -853,34 +950,54 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `1.8.0_60` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should respond to commands within 5 seconds.
+.  Should be usable by a novice who is using the system for the first time.
+.  A user looking for internship should not need to key in more than 19 commands.
+.  An expert or regular user should be able to have the alternative to use command line instead of the chat bot.
+.  Should have a clean and easy to use interface.
+.  Should be designed for a British-English speaking user.
+.  Should be current and up to date (i.e. companies recruitment status).
 
 _{More to be added}_
 
 [appendix]
 == Glossary
 
+[[chatbot]] Chat Bot::
+A computer program that stimulates a human conversation by communicating with a real person.
+In this project, our chat bot will guide the user to find his ideal internships.
+
+
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
 [[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
+A contact detail that is not meant to be shared with others.
+
+[[recommender-systems]] Recommender Systems::
+A subclass of an information filtering system that seeks to predict a rating or preference a user will give to an item.
+In this project, we will recommend internship opportunities that matches the users' preferences and objectives.
 
 [appendix]
-== Product Survey
+== ProductSurvey
 
-*Product Name*
+*Symplicity*
 
-Author: ...
+Used by: National University of Singapore (NUS) and Yale-NUS College.
 
 Pros:
 
-* ...
-* ...
+* Provides a list of potential internships, research opportunities, full-time job applications,
+on-campus jobs for students
+* Ability to filter according to job type, company, location, etc.
+* Ability to apply for an opportunity via the platform
 
 Cons:
 
-* ...
-* ...
+* Limited filtering options such that it does not provide all the information the student is looking for
+For example, the relevant faculties, number of available openings, internship period, internship start and end date, etc.
+* Does not have a chat bot recommender system that interacts with its end users so users have to browse through extensively
+to find their ideal internships.
 
 [appendix]
 == Instructions for Manual Testing
