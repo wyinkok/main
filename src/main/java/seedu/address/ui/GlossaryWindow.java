@@ -47,7 +47,7 @@ public class GlossaryWindow extends UiPart<Stage> {
      *         if this method is called on a thread other than the JavaFX Application Thread.
      *     </li>
      *     <li>
-     *         if this method is called during animation or layout processing.
+     *         if this method is called during animation or layout processing.ad
      *     </li>
      *     <li>
      *         if this method is called on the primary stage.

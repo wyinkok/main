@@ -22,6 +22,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GlossaryCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -140,5 +141,11 @@ public class AddressBookParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
+    }
+
+    @Test
+    public void parseCommand_glossary() throws Exception {
+        assertTrue(parser.parseCommand(GlossaryCommand.COMMAND_WORD) instanceof GlossaryCommand);
+        assertTrue(parser.parseCommand(GlossaryCommand.COMMAND_WORD + " 3") instanceof GlossaryCommand);
     }
 }
