@@ -890,9 +890,8 @@ Use case resumes at step 2.
 1. User keys in command to find internship
 2. Chat Bot gives user a list of prompts ( e.g. Salary, duration )
 3. User follows the prompts and key in the relevant details
-4. Chat Bot replies with a list of internship companies
-5. Chat Bot further gives user more prompts to filter the companies
-6. Repeat steps 3-5 until the user is satisfied
+4. Chat Bot replies with a list of internship companies and provide filter prompts
+5. Repeat steps 3-4 until the user is satisfied
 +
 Use case ends.
 
@@ -925,9 +924,8 @@ Use case ends.
 1. User keys in command to explore internship
 2. Chat Bot gives user a list of prompts ( common skills sets )
 3. User fills in a prompt or a list of prompts
-4. Chat Bot replies with a list of internship companies
-5. Chat Bot further gives user more prompts to further filter the list
-6. Repeats steps 3-5 until user is satisfied
+4. Chat Bot replies with a list of internship companies and provide filter prompts
+5. Repeats steps 3-4 until user is satisfied
 +
 Use case ends.
 
