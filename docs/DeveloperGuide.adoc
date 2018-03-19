@@ -807,6 +807,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` | busy student | have a user-friendly and clean application interface | use the app easily to communicate my preferences and needs
 
+|`* * *` | young student | have an interactive interface to source for internships | have a more engaging and personal experience when searching for development opportunities
+
 |`* * *` | student | given a list of potential industries, jobs, skills and related information | better informed of the available options I can explore
 
 |`* * *` | student | save specific internships I am interested it and access it anytime | further narrow down on my interested internships conveniently
