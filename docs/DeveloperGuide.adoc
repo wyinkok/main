@@ -780,7 +780,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-=== Features Contribution*
+=== Features Contribution
 
 [width="59%",cols="22%,<23%,<15%,<50%",options="header",]
 |=======================================================================
@@ -789,11 +789,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 | Colin | Model Enhancement | Minor | Modify list view to work with new commands. Allow Refiltering / Searching / Finding from existing list instead of new list
 
+| Colin | Save Command | Minor | Save selected internship / lists
+
 | Ci Kang | Morph Model Component| Major | Morph to store internship / job instead of addressbook
 
 | Ci Kang | Search All Command | Minor | Implement a search all function that works with the new model
 
-| Wyin | GUI Revamp | Major | Revamp UI to resemble a chatbot format
+| Wyin | GUI Revamp | Major | Revamp UI to resemble a Chatbot format
 
 | Wyin | Glossary Command | Minor | Glossary of commands for use with for the Chatbot
 
@@ -802,7 +804,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 
 
-=== Target user profile:
+=== Target user profile
 
 * are university students looking for internships/jobs
 * but not sure where to start or what to look for
@@ -811,7 +813,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * can type fast
 * is reasonably comfortable using CLI apps
 
-=== Value proposition:
+=== Value proposition
 * An intuitive and interactive way to find jobs and internships
 
 [appendix]
@@ -913,7 +915,7 @@ Use case resumes at step 2.
 2. Chat Bot gives user a list of prompts ( e.g. Salary, duration )
 3. User follows the prompts and key in the relevant details
 4. Chat Bot replies with a list of internship companies
-5. Chat Bot further gives user more prompts to filter the companies
+5. User views the list and further filter using the prompts given by the Chat Bot
 6. Repeat steps 3-5 until the user is satisfied
 +
 Use case ends.
@@ -948,7 +950,7 @@ Use case ends.
 2. Chat Bot gives user a list of prompts ( common skills sets )
 3. User fills in a prompt or a list of prompts
 4. Chat Bot replies with a list of internship companies
-5. Chat Bot further gives user more prompts to further filter the list
+5. User views the list and further filter using the prompts given by the Chat Bot
 6. Repeats steps 3-5 until user is satisfied
 +
 Use case ends.
