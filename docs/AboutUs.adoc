@@ -12,28 +12,29 @@ and https://www.yale-nus.edu.sg[Yale-NUS College].
 == Project Team
 
 === Wyin Kok
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
-
-Role: Project Advisor
-
-'''
-
-=== Colin Ng
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+image::Wyin.jpg[width="150", align="left"]
+{empty}[http://github.com/wyinkok[github]] [<<Wyin#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: UI
 
 '''
 
-=== Tan Ci Kang
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Colin Ng
+image::Colin.png[width="150", align="left"]
+{empty}[http://github.com/niloc94[github]] [<<Colin#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: Model
+
+'''
+
+=== Tan Ci Kang
+image::CiKang.jpg[width="150", align="left"]
+{empty}[https://github.com/TanCiKang[github]] [<<CiKang#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Logic
 
 '''
 
