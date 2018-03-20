@@ -18,7 +18,7 @@ import seedu.address.commons.events.ui.InternshipPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of internships, research and other development opportunities.
  */
 public class InternshipListPanel extends UiPart<Region> {
     private static final String FXML = "InternshipListPanel.fxml";
@@ -52,7 +52,7 @@ public class InternshipListPanel extends UiPart<Region> {
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Scrolls to the {@code InternshipCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
@@ -68,7 +68,7 @@ public class InternshipListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code InternshipCard}.
      */
     class InternshipListViewCell extends ListCell<InternshipCard> {
 
