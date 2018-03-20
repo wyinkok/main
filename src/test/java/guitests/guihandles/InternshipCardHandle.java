@@ -7,9 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 
-/*
- * Provides a handle to an internship card in the internship list panel.
+/**
+ * Provides a handle to a internship card in the internship list panel.
  */
+
 public class InternshipCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";

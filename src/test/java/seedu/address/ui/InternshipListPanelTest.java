@@ -51,7 +51,8 @@ public class InternshipListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        InternshipCardHandle expectedCard = internshipListPanelHandle.getInternshipCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+        InternshipCardHandle expectedCard = internshipListPanelHandle
+            .getInternshipCardHandle(INDEX_SECOND_PERSON.getZeroBased());
         InternshipCardHandle selectedCard = internshipListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedCard, selectedCard);
     }
