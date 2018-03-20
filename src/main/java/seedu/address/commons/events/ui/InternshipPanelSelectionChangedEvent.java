@@ -4,7 +4,7 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.ui.InternshipCard;
 
 /**
- * Represents a selection change in the Person List Panel
+ * Represents a selection change in the Internship List Panel
  */
 public class InternshipPanelSelectionChangedEvent extends BaseEvent {
 
