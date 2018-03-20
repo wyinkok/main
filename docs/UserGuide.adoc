@@ -94,13 +94,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+Edits the salary number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 === Locating persons by name: `find`
 
-Finds persons whose names, phone, email or address contain any of the given keywords. +
+Finds persons whose names, salary, email or address contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -117,7 +117,7 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 * `find 12345678` +
-Returns any person having phone number `12345678`
+Returns any person having salary number `12345678`
 * `find Betsy@gmail.com` +
 Returns any person having email `Betsy@gmail.com`
 * `find Serangoon` +

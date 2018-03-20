@@ -3,7 +3,7 @@
     <!-- Person with invalid email field -->
     <persons>
         <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
+        <salary isPrivate="false">9482424</salary>
         <email isPrivate="false">hans@exam!32ple</email>
         <address isPrivate="false">4th street</address>
     </persons>
