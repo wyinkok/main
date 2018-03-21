@@ -36,7 +36,8 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        internships.addAll(src.getInternshipList().stream().map(XmlAdaptedInternship::new).collect(Collectors.toList()));
+        internships.addAll(src.getInternshipList().stream().map(XmlAdaptedInternship::new)
+                .collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 

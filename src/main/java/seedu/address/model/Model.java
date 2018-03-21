@@ -29,8 +29,8 @@ public interface Model {
     /**
      * Replaces the given internship {@code target} with {@code editedInternship}.
      *
-     * @throws DuplicateInternshipException if updating the internship's details causes the internship to be equivalent to
-     *      another existing internship in the list.
+     * @throws DuplicateInternshipException if updating the internship's details causes the internship to be equivalent
+     * to another existing internship in the list.
      * @throws InternshipNotFoundException if {@code target} could not be found in the list.
      */
     void updateInternship(Internship target, Internship editedInternship)

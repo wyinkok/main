@@ -99,7 +99,8 @@ public class EditCommand extends UndoableCommand {
      * Creates and returns a {@code Internship} with the details of {@code internshipToEdit}
      * edited with {@code editInternshipDescriptor}.
      */
-    private static Internship createEditedInternship(Internship internshipToEdit, EditInternshipDescriptor editInternshipDescriptor) {
+    private static Internship createEditedInternship(Internship internshipToEdit,
+                                                     EditInternshipDescriptor editInternshipDescriptor) {
         assert internshipToEdit != null;
 
         Name updatedName = editInternshipDescriptor.getName().orElse(internshipToEdit.getName());

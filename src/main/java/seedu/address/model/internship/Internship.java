@@ -1,7 +1,5 @@
 package seedu.address.model.internship;
 
-
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;

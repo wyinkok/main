@@ -97,8 +97,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the given internship {@code target} in the list with {@code editedInternship}.
      * {@code AddressBook}'s tag list will be updated with the tags of {@code editedInternship}.
      *
-     * @throws DuplicateInternshipException if updating the internship's details causes the internship to be equivalent to
-     *      another existing internship in the list.
+     * @throws DuplicateInternshipException if updating the internship's details causes the internship to be equivalent
+     * to another existing internship in the list.
      * @throws InternshipNotFoundException if {@code target} could not be found in the list.
      *
      * @see #syncWithMasterTagList(Internship)
@@ -116,8 +116,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      *  Updates the master tag list to include tags in {@code internship} that are not in the list.
-     *  @return a copy of this {@code internship} such that every tag in this internship points to a Tag object in the master
-     *  list.
+     *  @return a copy of this {@code internship} such that every tag in this internship points to a Tag object in the
+     *  master list.
      */
     private Internship syncWithMasterTagList(Internship internship) {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
@@ -132,7 +132,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         final Set<Tag> correctTagReferences = new HashSet<>();
         internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Internship(
-                internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(), correctTagReferences);
+                internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
+                correctTagReferences);
     }
 
     /**

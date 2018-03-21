@@ -35,7 +35,8 @@ public class UniqueInternshipList implements Iterable<Internship> {
     /**
      * Adds a internship to the list.
      *
-     * @throws DuplicateInternshipException if the internship to add is a duplicate of an existing internship in the list.
+     * @throws DuplicateInternshipException if the internship to add is a duplicate of an existing internship in the
+     * list.
      */
     public void add(Internship toAdd) throws DuplicateInternshipException {
         requireNonNull(toAdd);

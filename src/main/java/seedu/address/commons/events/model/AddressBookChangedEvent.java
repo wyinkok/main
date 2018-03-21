@@ -14,6 +14,7 @@ public class AddressBookChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of internships " + data.getInternshipList().size() + ", number of tags " + data.getTagList().size();
+        return "number of internships " + data.getInternshipList().size() + ", number of tags "
+                + data.getTagList().size();
     }
 }
