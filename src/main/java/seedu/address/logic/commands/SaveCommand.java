@@ -33,6 +33,7 @@ public class SaveCommand extends UndoableCommand {
 
     public static final String MESSAGE_SAVED_INTERNSHIP_SUCCESS = "New internship saved: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the collection";
+    public static final String MESSAGE_DUPLICATE_TAG = "This internship has been saved";
 
     private final Index targetIndex;
 
@@ -73,12 +74,12 @@ public class SaveCommand extends UndoableCommand {
     }
 
 
-    private Person addSavedTagToInternship(Person person) {
+    private Person addSavedTagToInternship(Person person) throws CommandException {
         final UniqueTagList personTags = new UniqueTagList(internshipToSave.getTags());
         try {
             personTags.add(new Tag(savedtagName));
         } catch (UniqueTagList.DuplicateTagException e) {
-            throw new AssertionError("The tag already exists");
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
 
         // Create map with values = tag object references in the master list
