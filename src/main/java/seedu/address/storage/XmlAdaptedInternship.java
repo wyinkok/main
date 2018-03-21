@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 /**
  * JAXB-friendly version of the Internship.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedInternship {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Internship's %s field is missing!";
 
@@ -36,15 +36,15 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedInternship.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedInternship() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given internship details.
+     * Constructs an {@code XmlAdaptedInternship} with the given internship details.
      */
-    public XmlAdaptedPerson(String name, String salary, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedInternship(String name, String salary, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.salary = salary;
         this.email = email;
@@ -57,9 +57,9 @@ public class XmlAdaptedPerson {
     /**
      * Converts a given Internship into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedInternship
      */
-    public XmlAdaptedPerson(Internship source) {
+    public XmlAdaptedInternship(Internship source) {
         name = source.getName().fullName;
         salary = source.getSalary().value;
         email = source.getEmail().value;
@@ -76,9 +76,9 @@ public class XmlAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted internship
      */
     public Internship toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> internshipTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            internshipTags.add(tag.toModelType());
         }
 
         if (this.name == null) {
@@ -113,7 +113,7 @@ public class XmlAdaptedPerson {
         }
         final Address address = new Address(this.address);
 
-        final Set<Tag> tags = new HashSet<>(personTags);
+        final Set<Tag> tags = new HashSet<>(internshipTags);
         return new Internship(name, salary, email, address, tags);
     }
 
@@ -123,15 +123,15 @@ public class XmlAdaptedPerson {
             return true;
         }
 
-        if (!(other instanceof XmlAdaptedPerson)) {
+        if (!(other instanceof XmlAdaptedInternship)) {
             return false;
         }
 
-        XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(salary, otherPerson.salary)
-                && Objects.equals(email, otherPerson.email)
-                && Objects.equals(address, otherPerson.address)
-                && tagged.equals(otherPerson.tagged);
+        XmlAdaptedInternship otherInternship = (XmlAdaptedInternship) other;
+        return Objects.equals(name, otherInternship.name)
+                && Objects.equals(salary, otherInternship.salary)
+                && Objects.equals(email, otherInternship.email)
+                && Objects.equals(address, otherInternship.address)
+                && tagged.equals(otherInternship.tagged);
     }
 }

@@ -19,8 +19,8 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Internship> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of internships */
+    ObservableList<Internship> getFilteredInternshipList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();

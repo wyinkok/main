@@ -20,8 +20,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.PersonContainsKeywordsPredicate;
-import seedu.address.model.internship.exceptions.PersonNotFoundException;
+import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
+import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -98,7 +98,7 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Internship> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Internship> expectedFilteredList = new ArrayList<>(actualModel.getFilteredInternshipList());
 
         try {
             command.execute();
@@ -106,7 +106,7 @@ public class CommandTestUtil {
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedAddressBook, actualModel.getAddressBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertEquals(expectedFilteredList, actualModel.getFilteredInternshipList());
         }
     }
 
@@ -115,23 +115,23 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredInternshipList().size());
 
-        Internship internship = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Internship internship = model.getFilteredInternshipList().get(targetIndex.getZeroBased());
         final String[] splitName = internship.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new PersonContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredInternshipList(new InternshipContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredInternshipList().size());
     }
 
     /**
      * Deletes the first internship in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstPerson(Model model) {
-        Internship firstInternship = model.getFilteredPersonList().get(0);
+        Internship firstInternship = model.getFilteredInternshipList().get(0);
         try {
-            model.deletePerson(firstInternship);
-        } catch (PersonNotFoundException pnfe) {
+            model.deleteInternship(firstInternship);
+        } catch (InternshipNotFoundException pnfe) {
             throw new AssertionError("Internship in filtered list must exist in model.", pnfe);
         }
     }

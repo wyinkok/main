@@ -10,14 +10,14 @@ import seedu.address.model.internship.Email;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Salary;
-import seedu.address.model.internship.exceptions.DuplicatePersonException;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Internship[] getSamplePersons() {
+    public static Internship[] getSampleInternships() {
         return new Internship[] {
             new Internship(new Name("Alex Yeoh"), new Salary("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -43,12 +43,12 @@ public class SampleDataUtil {
     public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
             AddressBook sampleAb = new AddressBook();
-            for (Internship sampleInternship : getSamplePersons()) {
-                sampleAb.addPerson(sampleInternship);
+            for (Internship sampleInternship : getSampleInternships()) {
+                sampleAb.addInternship(sampleInternship);
             }
             return sampleAb;
-        } catch (DuplicatePersonException e) {
-            throw new AssertionError("sample data cannot contain duplicate persons", e);
+        } catch (DuplicateInternshipException e) {
+            throw new AssertionError("sample data cannot contain duplicate internships", e);
         }
     }
 

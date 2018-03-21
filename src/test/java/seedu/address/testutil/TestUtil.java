@@ -35,20 +35,20 @@ public class TestUtil {
      * Returns the middle index of the internship in the {@code model}'s internship list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getAddressBook().getPersonList().size() / 2);
+        return Index.fromOneBased(model.getAddressBook().getInternshipList().size() / 2);
     }
 
     /**
      * Returns the last index of the internship in the {@code model}'s internship list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getAddressBook().getPersonList().size());
+        return Index.fromOneBased(model.getAddressBook().getInternshipList().size());
     }
 
     /**
      * Returns the internship in the {@code model}'s internship list at {@code index}.
      */
     public static Internship getPerson(Model model, Index index) {
-        return model.getAddressBook().getPersonList().get(index.getZeroBased());
+        return model.getAddressBook().getInternshipList().get(index.getZeroBased());
     }
 }

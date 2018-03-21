@@ -47,7 +47,7 @@ import seedu.address.model.internship.Email;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Salary;
-import seedu.address.model.internship.exceptions.DuplicatePersonException;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -75,7 +75,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addPerson(toAdd);
+        model.addInternship(toAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
@@ -136,14 +136,14 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: add a duplicate internship -> rejected */
         command = PersonUtil.getAddCommand(HOON);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_INTERNSHIP);
 
         /* Case: add a duplicate internship except with different tags -> rejected */
         // "friends" is an existing tag used in the default model, see TypicalPersons#ALICE
         // This test will fail if a new tag that is not in the model is used, see the bug documented in
-        // AddressBook#addPerson(Internship)
+        // AddressBook#addInternship(Internship)
         command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_INTERNSHIP);
 
         /* Case: missing name -> rejected */
         command = AddCommand.COMMAND_WORD + SALARY_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
@@ -213,8 +213,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Internship toAdd) {
         Model expectedModel = getModel();
         try {
-            expectedModel.addPerson(toAdd);
-        } catch (DuplicatePersonException dpe) {
+            expectedModel.addInternship(toAdd);
+        } catch (DuplicateInternshipException dpe) {
             throw new IllegalArgumentException("toAdd already exists in the model.");
         }
         String expectedResultMessage = String.format(AddCommand.MESSAGE_SUCCESS, toAdd);

@@ -22,8 +22,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.exceptions.DuplicatePersonException;
-import seedu.address.model.internship.exceptions.PersonNotFoundException;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
+import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -54,7 +54,7 @@ public class AddCommandTest {
         Internship validInternship = new PersonBuilder().build();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_INTERNSHIP);
 
         getAddCommandForPerson(validInternship, modelStub).execute();
     }
@@ -97,7 +97,7 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Internship internship) throws DuplicatePersonException {
+        public void addInternship(Internship internship) throws DuplicateInternshipException {
             fail("This method should not be called.");
         }
 
@@ -113,35 +113,35 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deletePerson(Internship target) throws PersonNotFoundException {
+        public void deleteInternship(Internship target) throws InternshipNotFoundException {
             fail("This method should not be called.");
         }
 
         @Override
-        public void updatePerson(Internship target, Internship editedInternship)
-                throws DuplicatePersonException {
+        public void updateInternship(Internship target, Internship editedInternship)
+                throws DuplicateInternshipException {
             fail("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Internship> getFilteredPersonList() {
+        public ObservableList<Internship> getFilteredInternshipList() {
             fail("This method should not be called.");
             return null;
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Internship> predicate) {
+        public void updateFilteredInternshipList(Predicate<Internship> predicate) {
             fail("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that always throw a DuplicatePersonException when trying to add a internship.
+     * A Model stub that always throw a DuplicateInternshipException when trying to add a internship.
      */
     private class ModelStubThrowingDuplicatePersonException extends ModelStub {
         @Override
-        public void addPerson(Internship internship) throws DuplicatePersonException {
-            throw new DuplicatePersonException();
+        public void addInternship(Internship internship) throws DuplicateInternshipException {
+            throw new DuplicateInternshipException();
         }
 
         @Override
@@ -157,7 +157,7 @@ public class AddCommandTest {
         final ArrayList<Internship> personsAdded = new ArrayList<>();
 
         @Override
-        public void addPerson(Internship internship) throws DuplicatePersonException {
+        public void addInternship(Internship internship) throws DuplicateInternshipException {
             requireNonNull(internship);
             personsAdded.add(internship);
         }

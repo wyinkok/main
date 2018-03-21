@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.exceptions.PersonNotFoundException;
+import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 
 public class UndoableCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -56,10 +56,10 @@ public class UndoableCommandTest {
 
         @Override
         public CommandResult executeUndoableCommand() throws CommandException {
-            Internship internshipToDelete = model.getFilteredPersonList().get(0);
+            Internship internshipToDelete = model.getFilteredInternshipList().get(0);
             try {
-                model.deletePerson(internshipToDelete);
-            } catch (PersonNotFoundException pnfe) {
+                model.deleteInternship(internshipToDelete);
+            } catch (InternshipNotFoundException pnfe) {
                 fail("Impossible: internshipToDelete was retrieved from model.");
             }
             return new CommandResult("");

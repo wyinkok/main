@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.exceptions.DuplicatePersonException;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 
 /**
  * Adds a internship to the address book.
@@ -34,7 +34,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New internship added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This internship already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the address book";
 
     private final Internship toAdd;
 
@@ -50,10 +50,10 @@ public class AddCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         try {
-            model.addPerson(toAdd);
+            model.addInternship(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (DuplicatePersonException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        } catch (DuplicateInternshipException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
         }
 
     }

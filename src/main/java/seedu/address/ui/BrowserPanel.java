@@ -41,7 +41,7 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    private void loadPersonPage(Internship internship) {
+    private void loadInternshipPage(Internship internship) {
         loadPage(SEARCH_PAGE_URL + internship.getName().fullName);
     }
 
@@ -65,8 +65,8 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(InternshipPanelSelectionChangedEvent event) {
+    private void handleInternshipPanelSelectionChangedEvent(InternshipPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection().internship);
+        loadInternshipPage(event.getNewSelection().internship);
     }
 }

@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -24,8 +24,8 @@ import seedu.address.model.internship.Email;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Salary;
-import seedu.address.model.internship.exceptions.DuplicatePersonException;
-import seedu.address.model.internship.exceptions.PersonNotFoundException;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
+import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -73,22 +73,22 @@ public class EditCommand extends UndoableCommand {
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         try {
-            model.updatePerson(internshipToEdit, editedInternship);
-        } catch (DuplicatePersonException dpe) {
+            model.updateInternship(internshipToEdit, editedInternship);
+        } catch (DuplicateInternshipException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        } catch (PersonNotFoundException pnfe) {
+        } catch (InternshipNotFoundException pnfe) {
             throw new AssertionError("The target internship cannot be missing");
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedInternship));
     }
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        List<Internship> lastShownList = model.getFilteredPersonList();
+        List<Internship> lastShownList = model.getFilteredInternshipList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
         internshipToEdit = lastShownList.get(index.getZeroBased());

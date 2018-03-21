@@ -13,8 +13,8 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.exceptions.DuplicatePersonException;
-import seedu.address.model.internship.exceptions.PersonNotFoundException;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
+import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -36,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        filteredInternships = new FilteredList<>(this.addressBook.getPersonList());
+        filteredInternships = new FilteredList<>(this.addressBook.getInternshipList());
     }
 
     public ModelManager() {
@@ -60,24 +60,24 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(Internship target) throws PersonNotFoundException {
-        addressBook.removePerson(target);
+    public synchronized void deleteInternship(Internship target) throws InternshipNotFoundException {
+        addressBook.removeInternship(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addPerson(Internship internship) throws DuplicatePersonException {
-        addressBook.addPerson(internship);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public synchronized void addInternship(Internship internship) throws DuplicateInternshipException {
+        addressBook.addInternship(internship);
+        updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(Internship target, Internship editedInternship)
-            throws DuplicatePersonException, PersonNotFoundException {
+    public void updateInternship(Internship target, Internship editedInternship)
+            throws DuplicateInternshipException, InternshipNotFoundException {
         requireAllNonNull(target, editedInternship);
 
-        addressBook.updatePerson(target, editedInternship);
+        addressBook.updateInternship(target, editedInternship);
         indicateAddressBookChanged();
     }
 
@@ -88,12 +88,12 @@ public class ModelManager extends ComponentManager implements Model {
      * {@code addressBook}
      */
     @Override
-    public ObservableList<Internship> getFilteredPersonList() {
+    public ObservableList<Internship> getFilteredInternshipList() {
         return FXCollections.unmodifiableObservableList(filteredInternships);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Internship> predicate) {
+    public void updateFilteredInternshipList(Predicate<Internship> predicate) {
         requireNonNull(predicate);
         filteredInternships.setPredicate(predicate);
     }

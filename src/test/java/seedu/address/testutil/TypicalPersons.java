@@ -17,7 +17,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.exceptions.DuplicatePersonException;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 
 /**
  * A utility class containing a list of {@code Internship} objects to be used in tests.
@@ -67,8 +67,8 @@ public class TypicalPersons {
         AddressBook ab = new AddressBook();
         for (Internship internship : getTypicalPersons()) {
             try {
-                ab.addPerson(internship);
-            } catch (DuplicatePersonException e) {
+                ab.addInternship(internship);
+            } catch (DuplicateInternshipException e) {
                 throw new AssertionError("not possible");
             }
         }

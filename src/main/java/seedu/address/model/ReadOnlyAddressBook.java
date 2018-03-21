@@ -10,10 +10,10 @@ import seedu.address.model.tag.Tag;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the internships list.
+     * This list will not contain any duplicate internships.
      */
-    ObservableList<Internship> getPersonList();
+    ObservableList<Internship> getInternshipList();
 
     /**
      * Returns an unmodifiable view of the tags list.

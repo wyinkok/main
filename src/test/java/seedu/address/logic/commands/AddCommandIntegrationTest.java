@@ -32,7 +32,7 @@ public class AddCommandIntegrationTest {
         Internship validInternship = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validInternship);
+        expectedModel.addInternship(validInternship);
 
         assertCommandSuccess(prepareCommand(validInternship, model), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, validInternship), expectedModel);
@@ -40,8 +40,8 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Internship internshipInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(prepareCommand(internshipInList, model), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        Internship internshipInList = model.getAddressBook().getInternshipList().get(0);
+        assertCommandFailure(prepareCommand(internshipInList, model), model, AddCommand.MESSAGE_DUPLICATE_INTERNSHIP);
     }
 
     /**
