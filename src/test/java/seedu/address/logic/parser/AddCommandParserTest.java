@@ -58,7 +58,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + SALARY_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
-        // multiple phones - last phone accepted
+        // multiple salaries - last salary accepted
         assertParseSuccess(parser, NAME_DESC_BOB + SALARY_DESC_AMY + SALARY_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
@@ -95,7 +95,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_BOB + SALARY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
                 expectedMessage);
 
-        // missing phone prefix
+        // missing salary prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_SALARY_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
                 expectedMessage);
 
@@ -118,7 +118,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_NAME_DESC + SALARY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_NAME_CONSTRAINTS);
 
-        // invalid phone
+        // invalid salary
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_SALARY_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Salary.MESSAGE_SALARY_CONSTRAINTS);
 

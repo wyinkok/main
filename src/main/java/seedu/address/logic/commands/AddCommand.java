@@ -21,7 +21,7 @@ public class AddCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_SALARY + "PHONE "
+            + PREFIX_SALARY + "SALRAY "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"

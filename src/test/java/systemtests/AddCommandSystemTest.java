@@ -86,7 +86,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a person with all fields same as another person in the address book except phone -> added */
+        /* Case: add a person with all fields same as another person in the address book except salary -> added */
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withSalary(VALID_SALARY_BOB).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + SALARY_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
@@ -149,7 +149,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         command = AddCommand.COMMAND_WORD + SALARY_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
-        /* Case: missing phone -> rejected */
+        /* Case: missing salary -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
@@ -169,7 +169,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + SALARY_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
-        /* Case: invalid phone -> rejected */
+        /* Case: invalid salary -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_SALARY_DESC + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Salary.MESSAGE_SALARY_CONSTRAINTS);
 
