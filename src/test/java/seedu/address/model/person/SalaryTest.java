@@ -29,11 +29,17 @@ public class SalaryTest {
         assertFalse(Salary.isValidSalary("")); // empty string
         assertFalse(Salary.isValidSalary(" ")); // spaces only
         assertFalse(Salary.isValidSalary("salary")); // non-numeric
-        assertFalse(Salary.isValidSalary("9011p041")); // alphabets within digits
-        assertFalse(Salary.isValidSalary("9312 1534")); // spaces within digits
+        assertFalse(Salary.isValidSalary("11p0")); // alphabets within digits
+        assertFalse(Salary.isValidSalary("10 4")); // spaces within digits
+        assertFalse(Salary.isValidSalary("-1000")); // negative numbers
+        assertFalse(Salary.isValidSalary("21.10")); // decimals points
 
         // valid salary
-        assertTrue(Salary.isValidSalary("93121534"));
+        assertTrue(Salary.isValidSalary("1"));
+        assertTrue(Salary.isValidSalary("10"));
+        assertTrue(Salary.isValidSalary("100"));
+        assertTrue(Salary.isValidSalary("1000"));
+        assertTrue(Salary.isValidSalary("10000"));
         assertTrue(Salary.isValidSalary("124293842033123")); // long numbers
     }
 }
