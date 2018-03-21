@@ -13,51 +13,51 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.InternshipPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of internships, research and other development opportunities.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class InternshipListPanel extends UiPart<Region> {
+    private static final String FXML = "InternshipListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(InternshipListPanel.class);
 
     @FXML
-    private ListView<PersonCard> personListView;
+    private ListView<InternshipCard> internshipListView;
 
-    public PersonListPanel(ObservableList<Person> personList) {
+    public InternshipListPanel(ObservableList<Person> internshipList) {
         super(FXML);
-        setConnections(personList);
+        setConnections(internshipList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Person> personList) {
-        ObservableList<PersonCard> mappedList = EasyBind.map(
-                personList, (person) -> new PersonCard(person, personList.indexOf(person) + 1));
-        personListView.setItems(mappedList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+    private void setConnections(ObservableList<Person> internshipList) {
+        ObservableList<InternshipCard> mappedList = EasyBind.map(
+                internshipList, (person) -> new InternshipCard(person, internshipList.indexOf(person) + 1));
+        internshipListView.setItems(mappedList);
+        internshipListView.setCellFactory(listView -> new InternshipListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        internshipListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new InternshipPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Scrolls to the {@code InternshipCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            internshipListView.scrollTo(index);
+            internshipListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -68,12 +68,12 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code InternshipCard}.
      */
-    class PersonListViewCell extends ListCell<PersonCard> {
+    class InternshipListViewCell extends ListCell<InternshipCard> {
 
         @Override
-        protected void updateItem(PersonCard person, boolean empty) {
+        protected void updateItem(InternshipCard person, boolean empty) {
             super.updateItem(person, empty);
 
             if (empty || person == null) {
