@@ -3,7 +3,7 @@
     <!-- Person with invalid name field -->
     <persons>
         <name>Ha!ns Mu@ster</name>
-        <salary isPrivate="false">9482424</salary>
+        <salary isPrivate="false">1000</salary>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
     </persons>
