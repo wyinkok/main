@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.internship;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
-public class PersonContainsKeywordsPredicateTest {
+public class InternshipContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
@@ -37,7 +37,7 @@ public class PersonContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different internship -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

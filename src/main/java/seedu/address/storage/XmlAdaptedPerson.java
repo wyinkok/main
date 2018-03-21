@@ -9,19 +9,19 @@ import java.util.Set;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Salary;
+import seedu.address.model.internship.Address;
+import seedu.address.model.internship.Email;
+import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.Name;
+import seedu.address.model.internship.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Internship.
  */
 public class XmlAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Internship's %s field is missing!";
 
     @XmlElement(required = true)
     private String name;
@@ -42,7 +42,7 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * Constructs an {@code XmlAdaptedPerson} with the given internship details.
      */
     public XmlAdaptedPerson(String name, String salary, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
@@ -55,11 +55,11 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Internship into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
-    public XmlAdaptedPerson(Person source) {
+    public XmlAdaptedPerson(Internship source) {
         name = source.getName().fullName;
         salary = source.getSalary().value;
         email = source.getEmail().value;
@@ -71,11 +71,11 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted internship object into the model's Internship object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted internship
      */
-    public Person toModelType() throws IllegalValueException {
+    public Internship toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -114,7 +114,7 @@ public class XmlAdaptedPerson {
         final Address address = new Address(this.address);
 
         final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, salary, email, address, tags);
+        return new Internship(name, salary, email, address, tags);
     }
 
     @Override

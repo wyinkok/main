@@ -1,4 +1,6 @@
-package seedu.address.model.person;
+package seedu.address.model.internship;
+
+
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,10 +12,10 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Internship in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Internship {
 
     private final Name name;
     private final Salary salary;
@@ -25,7 +27,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Salary salary, Email email, Address address, Set<Tag> tags) {
+    public Internship(Name name, Salary salary, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, salary, email, address, tags);
         this.name = name;
         this.salary = salary;
@@ -65,15 +67,15 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Internship)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(this.getName())
-                && otherPerson.getSalary().equals(this.getSalary())
-                && otherPerson.getEmail().equals(this.getEmail())
-                && otherPerson.getAddress().equals(this.getAddress());
+        Internship otherInternship = (Internship) other;
+        return otherInternship.getName().equals(this.getName())
+                && otherInternship.getSalary().equals(this.getSalary())
+                && otherInternship.getEmail().equals(this.getEmail())
+                && otherInternship.getAddress().equals(this.getAddress());
     }
 
     @Override

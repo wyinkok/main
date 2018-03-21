@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<person>
-    <name>Hans Muster</name>
+<!-- Internship with missing name field -->
+<internship>
     <salary>1000</salary>
     <email>hans@example</email>
     <address>4th street</address>
     <tagged>friends</tagged>
-</person>
+</internship>

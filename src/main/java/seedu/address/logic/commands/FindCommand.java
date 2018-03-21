@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.internship.PersonContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name, address, salary or email contains any of the argument

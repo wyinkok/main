@@ -15,10 +15,10 @@ import guitests.guihandles.InternshipListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.model.person.Person;
+import seedu.address.model.internship.Internship;
 
 public class InternshipListPanelTest extends GuiUnitTest {
-    private static final ObservableList<Person> TYPICAL_PERSONS =
+    private static final ObservableList<Internship> TYPICAL_INTERNSHIPS =
             FXCollections.observableList(getTypicalPersons());
 
     private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PERSON);
@@ -27,7 +27,7 @@ public class InternshipListPanelTest extends GuiUnitTest {
 
     @Before
     public void setUp() {
-        InternshipListPanel personListPanel = new InternshipListPanel(TYPICAL_PERSONS);
+        InternshipListPanel personListPanel = new InternshipListPanel(TYPICAL_INTERNSHIPS);
         uiPartRule.setUiPart(personListPanel);
 
         internshipListPanelHandle = new InternshipListPanelHandle(getChildNode(personListPanel.getRoot(),
@@ -36,9 +36,9 @@ public class InternshipListPanelTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        for (int i = 0; i < TYPICAL_PERSONS.size(); i++) {
-            internshipListPanelHandle.navigateToCard(TYPICAL_PERSONS.get(i));
-            Person expectedInternship = TYPICAL_PERSONS.get(i);
+        for (int i = 0; i < TYPICAL_INTERNSHIPS.size(); i++) {
+            internshipListPanelHandle.navigateToCard(TYPICAL_INTERNSHIPS.get(i));
+            Internship expectedInternship = TYPICAL_INTERNSHIPS.get(i);
             InternshipCardHandle actualCard = internshipListPanelHandle.getInternshipCardHandle(i);
 
             assertCardDisplaysPerson(expectedInternship, actualCard);

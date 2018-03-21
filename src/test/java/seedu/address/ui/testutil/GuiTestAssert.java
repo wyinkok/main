@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import guitests.guihandles.InternshipCardHandle;
 import guitests.guihandles.InternshipListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
-import seedu.address.model.person.Person;
+import seedu.address.model.internship.Internship;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
@@ -27,33 +27,33 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that {@code actualCard} displays the details of {@code expectedPerson}.
+     * Asserts that {@code actualCard} displays the details of {@code expectedInternship}.
      */
-    public static void assertCardDisplaysPerson(Person expectedPerson, InternshipCardHandle actualCard) {
-        assertEquals(expectedPerson.getName().fullName, actualCard.getName());
-        assertEquals(expectedPerson.getSalary().value, actualCard.getSalary());
-        assertEquals(expectedPerson.getEmail().value, actualCard.getEmail());
-        assertEquals(expectedPerson.getAddress().value, actualCard.getAddress());
-        assertEquals(expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
+    public static void assertCardDisplaysPerson(Internship expectedInternship, InternshipCardHandle actualCard) {
+        assertEquals(expectedInternship.getName().fullName, actualCard.getName());
+        assertEquals(expectedInternship.getSalary().value, actualCard.getSalary());
+        assertEquals(expectedInternship.getEmail().value, actualCard.getEmail());
+        assertEquals(expectedInternship.getAddress().value, actualCard.getAddress());
+        assertEquals(expectedInternship.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
     }
 
     /**
-     * Asserts that the list in {@code internshipListPanelHandle} displays the details of {@code persons} correctly and
+     * Asserts that the list in {@code internshipListPanelHandle} displays the details of {@code internships} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(InternshipListPanelHandle internshipListPanelHandle, Person... persons) {
-        for (int i = 0; i < persons.length; i++) {
-            assertCardDisplaysPerson(persons[i], internshipListPanelHandle.getInternshipCardHandle(i));
+    public static void assertListMatching(InternshipListPanelHandle internshipListPanelHandle, Internship... internships) {
+        for (int i = 0; i < internships.length; i++) {
+            assertCardDisplaysPerson(internships[i], internshipListPanelHandle.getInternshipCardHandle(i));
         }
     }
 
     /**
-     * Asserts that the list in {@code internshipListPanelHandle} displays the details of {@code persons} correctly and
+     * Asserts that the list in {@code internshipListPanelHandle} displays the details of {@code internships} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(InternshipListPanelHandle internshipListPanelHandle, List<Person> persons) {
-        assertListMatching(internshipListPanelHandle, persons.toArray(new Person[0]));
+    public static void assertListMatching(InternshipListPanelHandle internshipListPanelHandle, List<Internship> internships) {
+        assertListMatching(internshipListPanelHandle, internships.toArray(new Internship[0]));
     }
 
     /**

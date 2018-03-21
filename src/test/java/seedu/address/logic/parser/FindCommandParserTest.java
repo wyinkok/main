@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.internship.PersonContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
-    <!-- Valid Person -->
-    <persons>
+    <!-- Valid Internship -->
+    <internships>
         <name>Hans Muster</name>
         <salary isPrivate="false">1000</salary>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
-    </persons>
-    <!-- Person with invalid salary field -->
-    <persons>
+    </internships>
+    <!-- Internship with invalid salary field -->
+    <internships>
         <name>Hans Muster</name>
         <salary isPrivate="false">948asdf2424</salary>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
-    </persons>
+    </internships>
 </addressbook>

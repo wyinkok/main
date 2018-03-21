@@ -7,30 +7,30 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Person;
+import seedu.address.model.internship.Internship;
 
 /**
- * A utility class for Person.
+ * A utility class for Internship.
  */
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code internship}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Internship internship) {
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(internship);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code internship}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Internship internship) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_SALARY + person.getSalary().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + internship.getName().fullName + " ");
+        sb.append(PREFIX_SALARY + internship.getSalary().value + " ");
+        sb.append(PREFIX_EMAIL + internship.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + internship.getAddress().value + " ");
+        internship.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();

@@ -4,9 +4,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.internship.UniquePersonList;
 
-public class UniquePersonListTest {
+public class UniqueInternshipListTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
