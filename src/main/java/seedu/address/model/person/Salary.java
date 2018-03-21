@@ -27,7 +27,7 @@ public class Salary {
     }
 
     /**
-     * Returns true if a given string is a valid person phone number.
+     * Returns true if a given string is a valid salary.
      */
     public static boolean isValidSalary(String test) {
         return test.matches(SALARY_VALIDATION_REGEX);

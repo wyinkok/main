@@ -29,8 +29,9 @@ public class SalaryTest {
         assertFalse(Salary.isValidSalary("")); // empty string
         assertFalse(Salary.isValidSalary(" ")); // spaces only
         assertFalse(Salary.isValidSalary("salary")); // non-numeric
+        assertFalse(Salary.isValidSalary("$2000")); // symbols included
         assertFalse(Salary.isValidSalary("11p0")); // alphabets within digits
-        assertFalse(Salary.isValidSalary("10 4")); // spaces within digits
+        assertFalse(Salary.isValidSalary("10 40")); // spaces within digits
         assertFalse(Salary.isValidSalary("-1000")); // negative numbers
         assertFalse(Salary.isValidSalary("21.10")); // decimals points
 
