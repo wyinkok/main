@@ -9,7 +9,7 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withInternship("John", "Doe").withTag("Friend").build();}
  */
 public class AddressBookBuilder {
 
@@ -26,7 +26,7 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code Internship} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withPerson(Internship internship) {
+    public AddressBookBuilder withInternship(Internship internship) {
         try {
             addressBook.addInternship(internship);
         } catch (DuplicateInternshipException dpe) {

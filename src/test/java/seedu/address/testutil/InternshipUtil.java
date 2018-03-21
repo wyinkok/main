@@ -12,19 +12,19 @@ import seedu.address.model.internship.Internship;
 /**
  * A utility class for Internship.
  */
-public class PersonUtil {
+public class InternshipUtil {
 
     /**
      * Returns an add command string for adding the {@code internship}.
      */
     public static String getAddCommand(Internship internship) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(internship);
+        return AddCommand.COMMAND_WORD + " " + getInternshipDetails(internship);
     }
 
     /**
      * Returns the part of command string for the given {@code internship}'s details.
      */
-    public static String getPersonDetails(Internship internship) {
+    public static String getInternshipDetails(Internship internship) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + internship.getName().fullName + " ");
         sb.append(PREFIX_SALARY + internship.getSalary().value + " ");

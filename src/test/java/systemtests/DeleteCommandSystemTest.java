@@ -6,9 +6,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_INTERNSHIP_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getPerson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TestUtil.getInternship;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
+import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -32,15 +32,15 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: delete the first internship in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
-        Internship deletedInternship = removePerson(expectedModel, INDEX_FIRST_PERSON);
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_INTERNSHIP.getOneBased() + "       ";
+        Internship deletedInternship = removeInternship(expectedModel, INDEX_FIRST_INTERNSHIP);
         String expectedResultMessage = String.format(MESSAGE_DELETE_INTERNSHIP_SUCCESS, deletedInternship);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last internship in the list -> deleted */
         Model modelBeforeDeletingLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeDeletingLast);
-        assertCommandSuccess(lastPersonIndex);
+        Index lastInternshipIndex = getLastIndex(modelBeforeDeletingLast);
+        assertCommandSuccess(lastInternshipIndex);
 
         /* Case: undo deleting the last internship in the list -> last internship restored */
         command = UndoCommand.COMMAND_WORD;
@@ -49,26 +49,26 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: redo deleting the last internship in the list -> last internship deleted again */
         command = RedoCommand.COMMAND_WORD;
-        removePerson(modelBeforeDeletingLast, lastPersonIndex);
+        removeInternship(modelBeforeDeletingLast, lastInternshipIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
         /* Case: delete the middle internship in the list -> deleted */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex);
+        Index middleInternshipIndex = getMidIndex(getModel());
+        assertCommandSuccess(middleInternshipIndex);
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered internship list, delete index within bounds of address book and internship list -> deleted */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_FIRST_PERSON;
+        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
+        Index index = INDEX_FIRST_INTERNSHIP;
         assertTrue(index.getZeroBased() < getModel().getFilteredInternshipList().size());
         assertCommandSuccess(index);
 
         /* Case: filtered internship list, delete index within bounds of address book but out of bounds of internship list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getInternshipList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
@@ -76,13 +76,13 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* --------------------- Performing delete operation while a internship card is selected ------------------------ */
 
         /* Case: delete the selected internship -> internship list panel selects the internship before the deleted internship */
-        showAllPersons();
+        showAllInternships();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
-        selectPerson(selectedIndex);
+        selectInternship(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        deletedInternship = removePerson(expectedModel, selectedIndex);
+        deletedInternship = removeInternship(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_DELETE_INTERNSHIP_SUCCESS, deletedInternship);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
@@ -116,8 +116,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * Removes the {@code Internship} at the specified {@code index} in {@code model}'s address book.
      * @return the removed internship
      */
-    private Internship removePerson(Model model, Index index) {
-        Internship targetInternship = getPerson(model, index);
+    private Internship removeInternship(Model model, Index index) {
+        Internship targetInternship = getInternship(model, index);
         try {
             model.deleteInternship(targetInternship);
         } catch (InternshipNotFoundException pnfe) {
@@ -133,7 +133,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
-        Internship deletedInternship = removePerson(expectedModel, toDelete);
+        Internship deletedInternship = removeInternship(expectedModel, toDelete);
         String expectedResultMessage = String.format(MESSAGE_DELETE_INTERNSHIP_SUCCESS, deletedInternship);
 
         assertCommandSuccess(

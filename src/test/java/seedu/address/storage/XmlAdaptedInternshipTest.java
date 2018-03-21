@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedInternship.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalInternships.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,78 +33,78 @@ public class XmlAdaptedInternshipTest {
             .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        XmlAdaptedInternship person = new XmlAdaptedInternship(BENSON);
-        assertEquals(BENSON, person.toModelType());
+    public void toModelType_validInternshipDetails_returnsInternship() throws Exception {
+        XmlAdaptedInternship internship = new XmlAdaptedInternship(BENSON);
+        assertEquals(BENSON, internship.toModelType());
     }
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        XmlAdaptedInternship person =
+        XmlAdaptedInternship internship =
                 new XmlAdaptedInternship(INVALID_NAME, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_NAME_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        XmlAdaptedInternship person = new XmlAdaptedInternship(null, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        XmlAdaptedInternship internship = new XmlAdaptedInternship(null, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
 
     @Test
     public void toModelType_invalidSalary_throwsIllegalValueException() {
-        XmlAdaptedInternship person =
+        XmlAdaptedInternship internship =
                 new XmlAdaptedInternship(VALID_NAME, INVALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = Salary.MESSAGE_SALARY_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
 
     @Test
     public void toModelType_nullSalary_throwsIllegalValueException() {
-        XmlAdaptedInternship person = new XmlAdaptedInternship(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        XmlAdaptedInternship internship = new XmlAdaptedInternship(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
 
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
-        XmlAdaptedInternship person =
+        XmlAdaptedInternship internship =
                 new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, INVALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = Email.MESSAGE_EMAIL_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        XmlAdaptedInternship person = new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, null, VALID_ADDRESS, VALID_TAGS);
+        XmlAdaptedInternship internship = new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, null, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
 
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
-        XmlAdaptedInternship person =
+        XmlAdaptedInternship internship =
                 new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS);
         String expectedMessage = Address.MESSAGE_ADDRESS_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        XmlAdaptedInternship person = new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, VALID_EMAIL, null, VALID_TAGS);
+        XmlAdaptedInternship internship = new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, VALID_EMAIL, null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<XmlAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
-        XmlAdaptedInternship person =
+        XmlAdaptedInternship internship =
                 new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, invalidTags);
-        Assert.assertThrows(IllegalValueException.class, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, internship::toModelType);
     }
 
 }

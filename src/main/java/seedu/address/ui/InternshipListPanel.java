@@ -35,7 +35,7 @@ public class InternshipListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<Internship> internshipList) {
         ObservableList<InternshipCard> mappedList = EasyBind.map(
-                internshipList, (person) -> new InternshipCard(person, internshipList.indexOf(person) + 1));
+                internshipList, (internship) -> new InternshipCard(internship, internshipList.indexOf(internship) + 1));
         internshipListView.setItems(mappedList);
         internshipListView.setCellFactory(listView -> new InternshipListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -73,14 +73,14 @@ public class InternshipListPanel extends UiPart<Region> {
     class InternshipListViewCell extends ListCell<InternshipCard> {
 
         @Override
-        protected void updateItem(InternshipCard person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(InternshipCard internship, boolean empty) {
+            super.updateItem(internship, empty);
 
-            if (empty || person == null) {
+            if (empty || internship == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(person.getRoot());
+                setGraphic(internship.getRoot());
             }
         }
     }

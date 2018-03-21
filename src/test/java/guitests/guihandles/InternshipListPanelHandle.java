@@ -100,7 +100,7 @@ public class InternshipListPanelHandle extends NodeHandle<ListView<InternshipCar
     /**
      * Remembers the selected {@code PersonCard} in the list.
      */
-    public void rememberSelectedPersonCard() {
+    public void rememberSelectedInternshipCard() {
         List<InternshipCard> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
@@ -112,9 +112,9 @@ public class InternshipListPanelHandle extends NodeHandle<ListView<InternshipCar
 
     /**
      * Returns true if the selected {@code PersonCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedPersonCard()} call.
+     * {@code rememberSelectedInternshipCard()} call.
      */
-    public boolean isSelectedPersonCardChanged() {
+    public boolean isSelectedInternshipCardChanged() {
         List<InternshipCard> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {

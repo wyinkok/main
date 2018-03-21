@@ -24,7 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.InternshipBuilder;
 
 public class AddCommandTest {
 
@@ -32,37 +32,37 @@ public class AddCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullInternship_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Internship validInternship = new PersonBuilder().build();
+    public void execute_internshipAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingInternshipAdded modelStub = new ModelStubAcceptingInternshipAdded();
+        Internship validInternship = new InternshipBuilder().build();
 
-        CommandResult commandResult = getAddCommandForPerson(validInternship, modelStub).execute();
+        CommandResult commandResult = getAddCommandForInternship(validInternship, modelStub).execute();
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validInternship), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validInternship), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validInternship), modelStub.internshipsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        ModelStub modelStub = new ModelStubThrowingDuplicatePersonException();
-        Internship validInternship = new PersonBuilder().build();
+    public void execute_duplicateInternship_throwsCommandException() throws Exception {
+        ModelStub modelStub = new ModelStubThrowingDuplicateInternshipException();
+        Internship validInternship = new InternshipBuilder().build();
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_INTERNSHIP);
 
-        getAddCommandForPerson(validInternship, modelStub).execute();
+        getAddCommandForInternship(validInternship, modelStub).execute();
     }
 
     @Test
     public void equals() {
-        Internship alice = new PersonBuilder().withName("Alice").build();
-        Internship bob = new PersonBuilder().withName("Bob").build();
+        Internship alice = new InternshipBuilder().withName("Alice").build();
+        Internship bob = new InternshipBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -86,7 +86,7 @@ public class AddCommandTest {
     /**
      * Generates a new AddCommand with the details of the given internship.
      */
-    private AddCommand getAddCommandForPerson(Internship internship, Model model) {
+    private AddCommand getAddCommandForInternship(Internship internship, Model model) {
         AddCommand command = new AddCommand(internship);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
@@ -138,7 +138,7 @@ public class AddCommandTest {
     /**
      * A Model stub that always throw a DuplicateInternshipException when trying to add a internship.
      */
-    private class ModelStubThrowingDuplicatePersonException extends ModelStub {
+    private class ModelStubThrowingDuplicateInternshipException extends ModelStub {
         @Override
         public void addInternship(Internship internship) throws DuplicateInternshipException {
             throw new DuplicateInternshipException();
@@ -153,13 +153,13 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the internship being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Internship> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingInternshipAdded extends ModelStub {
+        final ArrayList<Internship> internshipsAdded = new ArrayList<>();
 
         @Override
         public void addInternship(Internship internship) throws DuplicateInternshipException {
             requireNonNull(internship);
-            personsAdded.add(internship);
+            internshipsAdded.add(internship);
         }
 
         @Override

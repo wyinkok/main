@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.deleteFirstInternship;
+import static seedu.address.logic.commands.CommandTestUtil.showInternshipAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
+import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
 
 import org.junit.Test;
 
@@ -25,12 +25,12 @@ public class UndoableCommandTest {
     @Test
     public void executeUndo() throws Exception {
         dummyCommand.execute();
-        deleteFirstPerson(expectedModel);
+        deleteFirstInternship(expectedModel);
         assertEquals(expectedModel, model);
 
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
-        // undo() should cause the model's filtered list to show all persons
+        // undo() should cause the model's filtered list to show all internships
         dummyCommand.undo();
         expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertEquals(expectedModel, model);
@@ -38,11 +38,11 @@ public class UndoableCommandTest {
 
     @Test
     public void redo() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
-        // redo() should cause the model's filtered list to show all persons
+        // redo() should cause the model's filtered list to show all internships
         dummyCommand.redo();
-        deleteFirstPerson(expectedModel);
+        deleteFirstInternship(expectedModel);
         assertEquals(expectedModel, model);
     }
 

@@ -14,7 +14,7 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Internship objects.
  */
-public class PersonBuilder {
+public class InternshipBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_SALARY = "1000";
@@ -28,7 +28,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
 
-    public PersonBuilder() {
+    public InternshipBuilder() {
         name = new Name(DEFAULT_NAME);
         salary = new Salary(DEFAULT_SALARY);
         email = new Email(DEFAULT_EMAIL);
@@ -37,9 +37,9 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code internshipToCopy}.
+     * Initializes the InternshipBuilder with the data of {@code internshipToCopy}.
      */
-    public PersonBuilder(Internship internshipToCopy) {
+    public InternshipBuilder(Internship internshipToCopy) {
         name = internshipToCopy.getName();
         salary = internshipToCopy.getSalary();
         email = internshipToCopy.getEmail();
@@ -50,7 +50,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Name} of the {@code Internship} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public InternshipBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -58,7 +58,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Internship} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public InternshipBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -66,7 +66,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Address} of the {@code Internship} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public InternshipBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
@@ -74,7 +74,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Salary} of the {@code Internship} that we are building.
      */
-    public PersonBuilder withSalary(String salary) {
+    public InternshipBuilder withSalary(String salary) {
         this.salary = new Salary(salary);
         return this;
     }
@@ -82,7 +82,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Email} of the {@code Internship} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public InternshipBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }

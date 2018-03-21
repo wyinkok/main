@@ -12,7 +12,7 @@ import seedu.address.model.internship.Internship;
  * Contains helper methods to set up {@code Model} for testing.
  */
 public class ModelHelper {
-    private static final Predicate<Internship> PREDICATE_MATCHING_NO_PERSONS = unused -> false;
+    private static final Predicate<Internship> PREDICATE_MATCHING_NO_INTERNSHIPS = unused -> false;
 
     /**
      * Updates {@code model}'s filtered list to display only {@code toDisplay}.
@@ -20,7 +20,7 @@ public class ModelHelper {
     public static void setFilteredList(Model model, List<Internship> toDisplay) {
         Optional<Predicate<Internship>> predicate =
                 toDisplay.stream().map(ModelHelper::getPredicateMatching).reduce(Predicate::or);
-        model.updateFilteredInternshipList(predicate.orElse(PREDICATE_MATCHING_NO_PERSONS));
+        model.updateFilteredInternshipList(predicate.orElse(PREDICATE_MATCHING_NO_INTERNSHIPS));
     }
 
     /**
@@ -34,6 +34,6 @@ public class ModelHelper {
      * Returns a predicate that evaluates to true if this {@code Internship} equals to {@code other}.
      */
     private static Predicate<Internship> getPredicateMatching(Internship other) {
-        return person -> person.equals(other);
+        return internship -> internship.equals(other);
     }
 }
