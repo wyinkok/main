@@ -76,23 +76,23 @@ public class PersonContainsKeywordsPredicateTest {
     public void test_salaryContainsKeywords_returnsTrue() {
         // One keyword
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(Collections.singletonList("12345678"));
-        assertTrue(predicate.test(new PersonBuilder().withSalary("12345678").build()));
+                new PersonContainsKeywordsPredicate(Collections.singletonList("1000"));
+        assertTrue(predicate.test(new PersonBuilder().withSalary("1000").build()));
 
         // Only one matching keyword
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("12345678", "87654321"));
-        assertTrue(predicate.test(new PersonBuilder().withSalary("12345678").build()));
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("1000", "2000"));
+        assertTrue(predicate.test(new PersonBuilder().withSalary("1000").build()));
     }
 
     @Test
     public void test_salaryDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withSalary("12345678").build()));
+        assertFalse(predicate.test(new PersonBuilder().withSalary("1000").build()));
 
         // Non-matching keyword
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("12345678"));
-        assertFalse(predicate.test(new PersonBuilder().withSalary("87654321").build()));
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("1000"));
+        assertFalse(predicate.test(new PersonBuilder().withSalary("2000").build()));
     }
 
 
