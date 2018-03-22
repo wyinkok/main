@@ -73,11 +73,12 @@ public class UniqueInternshipList implements Iterable<Internship> {
      *
      * @throws InternshipNotFoundException if no such internship could be found in the list.
      */
-    public boolean remove(Internship toRemove) throws InternshipNotFoundException { requireNonNull(toRemove);
+    public boolean remove(Internship toRemove) throws InternshipNotFoundException {
+        requireNonNull(toRemove);
         final boolean internshipFoundAndDeleted = internalList.remove(toRemove);
-        if (!internshipFoundAndDeleted) {
-            throw new InternshipNotFoundException();
-        }
+            if (!internshipFoundAndDeleted) {
+                throw new InternshipNotFoundException();
+            }
         return internshipFoundAndDeleted;
     }
 
