@@ -37,10 +37,6 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
-        /* Case: delete is spelt with mixed case -> deleted */
-
-
-
         /* Case: delete the last person in the list -> deleted */
         Model modelBeforeDeletingLast = getModel();
         Index lastPersonIndex = getLastIndex(modelBeforeDeletingLast);

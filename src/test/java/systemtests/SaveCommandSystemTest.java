@@ -44,7 +44,6 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         Person editedInternship = addSavedTagToInternship(expectedmodel, firstindex);
         assertCommandSuccess(command, firstindex, editedInternship);
 
-
         /* Case: save the last internship in the list -> saved */
         Model modelBeforeSavingLast = getModel();
         Index lastPersonIndex = getLastIndex(modelBeforeSavingLast);
@@ -111,8 +110,6 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(SaveCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_SAVE_COMMAND_FORMAT);
 
-        /* Case: mixed case command word -> rejected */
-        assertCommandFailure("SaVE 1", MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
