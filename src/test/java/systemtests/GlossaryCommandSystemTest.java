@@ -41,7 +41,7 @@ public class GlossaryCommandSystemTest extends AddressBookSystemTest {
 
         getPersonListPanel().click();
         getMainMenu().openGlossaryWindowUsingAccelerator();
-        assertGlossaryWindowOpen();
+        assertGlossaryWindowNotOpen();
 
         getBrowserPanel().click();
         getMainMenu().openGlossaryWindowUsingAccelerator();
