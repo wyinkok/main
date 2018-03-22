@@ -36,9 +36,8 @@ public class SaveCommand extends UndoableCommand {
     public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the collection";
     public static final String MESSAGE_DUPLICATE_TAG = "This internship has been saved";
 
-    private final Index targetIndex;
-
     public final String savedTagName = "saved";
+    private final Index targetIndex;
     private Person internshipWithSavedTag;
     private Person internshipToSave;
 
