@@ -39,7 +39,7 @@ public class GlossaryCommandSystemTest extends AddressBookSystemTest {
         getMainMenu().openGlossaryWindowUsingAccelerator();
         assertGlossaryWindowOpen();
 
-        getPersonListPanel().click();
+        getInternshipPersonListPanel().click();
         getMainMenu().openGlossaryWindowUsingAccelerator();
         assertGlossaryWindowOpen();
 
@@ -65,7 +65,7 @@ public class GlossaryCommandSystemTest extends AddressBookSystemTest {
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(GlossaryCommand.SHOWING_GLOSSARY_MESSAGE, getResultDisplay().getText());
         assertNotEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
+        assertListMatching(getInternshipPersonListPanel(), getModel().getFilteredPersonList());
 
         // assert that the status bar too is updated correctly while the glossary window is open
         // note: the select command tested above does not update the status bar
