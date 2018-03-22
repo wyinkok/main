@@ -75,7 +75,6 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         Person personWithSavedTag = new SavedPersonBuilder()
                 .addTag(getModel().getFilteredPersonList().get(index.getZeroBased()));
         assertCommandSuccess(command, index, personWithSavedTag);
-        
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
