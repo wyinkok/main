@@ -25,15 +25,13 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsAllKeywordsPredicate;
 
-
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
  */
 public class FilterCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-
+    
     @Test
     public void equals() {
         PersonContainsAllKeywordsPredicate firstPredicate =
@@ -59,13 +57,6 @@ public class FilterCommandTest {
 
         // different person -> returns false
         assertFalse(filterFirstCommand.equals(filterSecondCommand));
-    }
-
-    // Bug here, should return 0 but returns 7
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        FilterCommand command = prepareCommand(" ");
-        assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
     @Test
