@@ -364,9 +364,9 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ==== Current Implementation
 
 The save/unsave mechanism is facilitated by the addition of a `saved` tag or removal of the `saved` tag
-respectively. It is inspired by the Instagram Save Collection feature, whereby users are able to personally curate specific
+respectively. It is inspired by the Instagram Save Collection feature, so our users are able to personally curate specific
 internships that they would like to save for a quick reference in the future as opposed to re-searching for
-a particular internship.
+a particular internship again.
 
 However, the special part of this feature is that users do not add or remove the `saved` tag themselves.
 Instead, they simply type in the command `save` or `unsave` with an index number and the command internally
@@ -374,14 +374,14 @@ adds a new "saved" tag to the internship or removes the tag. This mechanism inhe
 executed by the `LogicManager`
 
 To achieve the internal addition of a saved tag, we added a `addSavedTagToInternship` method
-within the SaveCommand object.
+within the SaveCommand object. This method is self-invocated by the object's other methods, such as `preprocessUndoableCommand`.
 ----
 private Person addSavedTagToInternship(Person person) throws CommandException {
         //Creates a UniqueTagList of the specific internship's tags only
         final UniqueTagList personTags = new UniqueTagList(internshipToSave.getTags());
 
 
-        //Adds a new tag savedTagName, which is a String "saved" to the UniqueTagList
+        //Adds a new tag savedTagName, which is a type String "saved" to the UniqueTagList
         try {
             personTags.add(new Tag(savedTagName));
         } catch (UniqueTagList.DuplicateTagException e) {
@@ -416,7 +416,7 @@ the SaveCommand.
         final UniqueTagList personTags = new UniqueTagList(internshipToUnsave.getTags());
 
 
-        //Checks for an existing "saved" tag and deletes
+        //Checks for an existing "saved" tag and removes it from the UniqueTagList
         personTags.delete(new Tag(savedTagName));
 
 
@@ -428,17 +428,19 @@ the SaveCommand.
 
 ==== Design Considerations
 
-With the "saved" tag, users are able to identify the internships they have saved in their personal collection in the `InternshipCardPanel`.
+With the `saved` tag, users are able to identify the internships they have saved in their personal collection in the `InternshipCardPanel`.
 When users want to remove the internship from their collection, they can type the `unsave` command to remove the tag.
 To view the entire collection, they can type in a command (yet to implement) that basically searches for all the
 internships with "saved" tags and displays the filtered list.
 
-We chose to use the additional and removal of tags for 2 main reasons.
+We chose to use the additional and removal of tags for two main reasons:
+
 * It is visible to the user which internship has been saved or unsaved
 * It is more straightforward in terms of implementation to do a search by a specific tag to display the Saved Collection
 
 ===== Alternative
-Another method was to create separate AddressBook Model and its own storage for the Saved Collections
+Another idea was to create separate AddressBook Model and its own storage for the Saved Collections
+
 *** Pros: Able to save in hard disk storage
 *** Cons: May have performance issues in terms of memory usage and may have to significantly change the architecture
 
@@ -876,13 +878,15 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 | Colin | Model Enhancement | Minor | Modify list view to work with new commands. Allow Refiltering / Searching / Finding from existing list instead of new list
 
-| Colin | Save Command | Minor | Save selected internship / lists
+| Colin | Save Command | Minor | Enable users to view their Saved Collection
 
 | Ci Kang | Morph Model Component| Major | Morph to store internship / job instead of addressbook
 
 | Ci Kang | Search All Command | Minor | Implement a search all function that works with the new model
 
-| Wyin | GUI Revamp | Major | Revamp UI to resemble a Chatbot format
+| Wyin | GUI Revamp | Major | Revamp UI to incorporate a Chatbot in the CLI
+
+| Wyin | Save and Unsave Command | Major/Minor | Enable user to save and unsave specific internships into a Saved Collection
 
 | Wyin | Glossary Command | Minor | Glossary of commands for use with for the Chatbot
 
