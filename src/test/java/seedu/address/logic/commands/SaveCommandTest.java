@@ -46,7 +46,6 @@ public class SaveCommandTest {
 
         assertCommandSuccess(saveCommand, model, expectedMessage, expectedModel);
     }
-    
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
