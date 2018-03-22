@@ -6,14 +6,9 @@ import java.util.Map;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -21,13 +16,13 @@ import seedu.address.model.util.SampleDataUtil;
 public class SavedPersonBuilder {
 
 
-    public final String savedTagName = "saved";
     public static final String MESSAGE_DUPLICATE_TAG = "This internship has been saved";
+    public final String savedTagName = "saved";
 
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public Person AddTag(Person personToCopy) throws CommandException {
+    public Person addTag(Person personToCopy) throws CommandException {
         final UniqueTagList personTags = new UniqueTagList(personToCopy.getTags());
         try {
             personTags.add(new Tag(savedTagName));

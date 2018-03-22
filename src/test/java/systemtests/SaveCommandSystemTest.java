@@ -17,8 +17,8 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -73,15 +73,15 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
         assertCommandSuccess(index);
 
-        /* Case: filtered internship list, save index within bounds of internship book but out of bounds of internship list
-         * -> rejected
+        /* Case: filtered internship list,
+         * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getPersonList().size();
         command = SaveCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* --------------------- Performing save operation while a internship card is selected ------------------------ */
+        /* --------------------- Performing save operation while a internship card is selected --------------------- */
 
         /* Case: save the selected internship
                     -> internship list panel selects the internship before the saved internship */
@@ -127,7 +127,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
      */
     private Person addSavedTagToInternship(Model model, Index index) throws CommandException {
         Person targetInternship = getPerson(model, index);
-        Person editedInternship = new SavedPersonBuilder().AddTag(targetInternship);
+        Person editedInternship = new SavedPersonBuilder().addTag(targetInternship);
         try {
             model.updatePerson(targetInternship, editedInternship);
         } catch (PersonNotFoundException pnfe) {
@@ -184,7 +184,8 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         }
 
         assertCommandSuccess(command, expectedModel,
-                String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, editedInternship), expectedSelectedCardIndex);
+                String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, editedInternship),
+                    expectedSelectedCardIndex);
     }
 
     /**

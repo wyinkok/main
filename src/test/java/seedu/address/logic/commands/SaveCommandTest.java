@@ -36,7 +36,7 @@ public class SaveCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
         Person internshipToSave = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person internshipWithSavedTag = new SavedPersonBuilder().AddTag(model.getFilteredPersonList().get(0));
+        Person internshipWithSavedTag = new SavedPersonBuilder().addTag(model.getFilteredPersonList().get(0));
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipToSave);
@@ -84,8 +84,8 @@ public class SaveCommandTest {
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person saved again
-        Person internshipWithSavedTag = new SavedPersonBuilder().AddTag(model.getFilteredPersonList().get(0));
-        expectedModel.updatePerson(internshipToSave,internshipWithSavedTag);
+        Person internshipWithSavedTag = new SavedPersonBuilder().addTag(model.getFilteredPersonList().get(0));
+        expectedModel.updatePerson(internshipToSave, internshipWithSavedTag);
         assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -130,7 +130,7 @@ public class SaveCommandTest {
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        Person internshipWithSavedTag = new SavedPersonBuilder().AddTag(model.getFilteredPersonList().get(1));
+        Person internshipWithSavedTag = new SavedPersonBuilder().addTag(model.getFilteredPersonList().get(1));
         expectedModel.updatePerson(internshipToSave, internshipWithSavedTag);
         assertNotEquals(internshipToSave, model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
         // redo -> saves same second person in unfiltered person list

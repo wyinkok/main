@@ -35,7 +35,6 @@ import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
-import seedu.address.testutil.SavedPersonBuilder;
 
 public class AddressBookParserTest {
     @Rule
