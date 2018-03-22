@@ -149,6 +149,8 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(GlossaryCommand.COMMAND_WORD) instanceof GlossaryCommand);
         assertTrue(parser.parseCommand(GlossaryCommand.COMMAND_WORD + " 3") instanceof GlossaryCommand);
     }
+    
+    @Test
     public void parseCommand_save() throws Exception {
         SaveCommand command = (SaveCommand) parser.parseCommand(
                 SaveCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
