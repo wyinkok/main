@@ -42,7 +42,7 @@ public class SaveCommandTest {
         String expectedMessage = String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipToSave);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updatePerson(internshipToSave,internshipWithSavedTag);
+        expectedModel.updatePerson(internshipToSave, internshipWithSavedTag);
 
         assertCommandSuccess(saveCommand, model, expectedMessage, expectedModel);
     }
