@@ -58,7 +58,7 @@ public class UnsaveCommand extends UndoableCommand {
             throw new AssertionError("The target internship cannot be missing");
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, internshipToUnsave));
+        return new CommandResult(String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, internshipWithoutSavedTag));
     }
 
     @Override

@@ -27,7 +27,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.testutil.SavedPersonBuilder;
 import seedu.address.testutil.TypicalPersonsWithSavedTag;
 import seedu.address.testutil.UnsavedPersonBuilder;
 
@@ -37,7 +36,7 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, UnsaveCommand.MESSAGE_USAGE);
 
     /**
-     * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
+     * Returns the data with saved tags to be loaded into the file in {@link #getDataFileLocation()}.
      */
     @Override
     protected AddressBook getInitialData() {
@@ -83,9 +82,13 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
         /* Case: filtered internship list, unsave index within bounds of internship book and internship list
          * -> unsave */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_SECOND_PERSON;
+        Index index = INDEX_FIRST_PERSON;
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
-        assertCommandSuccess(index);
+        command = UnsaveCommand.COMMAND_WORD + " " + index.getOneBased();
+        Person personWithoutSavedTag = new UnsavedPersonBuilder()
+                .removeTag(getModel().getFilteredPersonList().get(index.getZeroBased()));
+        assertCommandSuccess(command, index, personWithoutSavedTag);
+
 
         /* Case: filtered internship list,
          * unsave index within bounds of internship book but out of bounds of internship list -> rejected
@@ -95,7 +98,7 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
         command = UnsaveCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* --------------------- Performing unsave operation while a internship card is selected --------------------- */
+        /* --------------------- Performing unsave operation while a internship card is selected ------------------- */
 
         /* Case: unsave the selected internship
                     -> internship list panel selects the internship before the unsaved internship */
@@ -109,7 +112,7 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
         expectedResultMessage = String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, nexteditedInternship);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
-        /* --------------------------------- Performing invalid unsave operation ------------------------------------ */
+        /* --------------------------------- Performing invalid unsave operation ---------------------------------- */
 
         /* Case: invalid index (0) -> rejected */
         command = UnsaveCommand.COMMAND_WORD + " 0";
@@ -135,9 +138,8 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure("UNSaVE 1", MESSAGE_UNKNOWN_COMMAND);
     }
 
-
     /**
-     * Removes the "saved tag" from the {@code Person} at the specified {@code index}
+     * Removes the "saved" tag from the {@code Person} at the specified {@code index}
      * in {@code model}'s internship book.
      * @return the internship person without a "saved" tag
      */
@@ -166,7 +168,8 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
         String expectedResultMessage = String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, editedInternship);
 
         assertCommandSuccess(
-                UnsaveCommand.COMMAND_WORD + " " + toRemove.getOneBased(), expectedModel, expectedResultMessage);
+                UnsaveCommand.COMMAND_WORD + " " + toRemove.getOneBased(), expectedModel,
+                expectedResultMessage);
     }
 
 
@@ -175,8 +178,8 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      * browser url and selected card remain unchanged.
      * @see UnsaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
-    private void assertCommandSuccess(String command, Index toSave, Person editedInternship) {
-        assertCommandSuccess(command, toSave, editedInternship, null);
+    private void assertCommandSuccess(String command, Index toUnsave, Person editedInternship) {
+        assertCommandSuccess(command, toUnsave, editedInternship, null);
     }
 
 
@@ -185,15 +188,15 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
      * 2. Asserts that the model related components are updated to reflect the internship at index {@code toSave} being
      * updated to values specified {@code editedInternship}.<br>
-     * @param toSave the index of the current model's filtered list.
+     * @param toUnsave the index of the current model's filtered list.
      * @see UnsaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
-    private void assertCommandSuccess(String command, Index toSave, Person editedInternship,
+    private void assertCommandSuccess(String command, Index toUnsave, Person editedInternship,
                                       Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         try {
             expectedModel.updatePerson(
-                    expectedModel.getFilteredPersonList().get(toSave.getZeroBased()), editedInternship);
+                    expectedModel.getFilteredPersonList().get(toUnsave.getZeroBased()), editedInternship);
             expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         } catch (DuplicatePersonException | PersonNotFoundException e) {
             throw new IllegalArgumentException(
@@ -231,13 +234,14 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Index expectedSelectedCardIndex) {
         executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {
             assertSelectedCardChanged(expectedSelectedCardIndex);
         } else {
             assertSelectedCardUnchanged();
         }
+        assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchangedExceptSyncStatus();
     }
 

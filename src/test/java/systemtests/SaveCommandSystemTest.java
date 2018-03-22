@@ -69,10 +69,13 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: filtered internship list, save index within bounds of internship book and internship list -> save */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_SECOND_PERSON;
+        Index index = INDEX_FIRST_PERSON;
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
-        assertCommandSuccess(index);
-
+        command = SaveCommand.COMMAND_WORD + " " + index.getOneBased();
+        Person personWithSavedTag = new SavedPersonBuilder()
+                .addTag(getModel().getFilteredPersonList().get(index.getZeroBased()));
+        assertCommandSuccess(command, index, personWithSavedTag);
+        
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
@@ -214,6 +217,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Index expectedSelectedCardIndex) {
         executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {
