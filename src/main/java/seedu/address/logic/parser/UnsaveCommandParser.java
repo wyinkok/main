@@ -8,7 +8,7 @@ import seedu.address.logic.commands.UnsaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new UnsaveCommand object
+ * Parses input arguments and creates a new SaveCommand object
  */
 public class UnsaveCommandParser implements Parser<UnsaveCommand> {
 

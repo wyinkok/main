@@ -3,7 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS;
+import static seedu.address.logic.commands.SaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
@@ -92,7 +92,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         selectPerson(selectedIndex);
         command = SaveCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
         Person neweditedInternship = addSavedTagToInternship(expectedModel, selectedIndex);
-        expectedResultMessage = String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, neweditedInternship);
+        expectedResultMessage = String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, neweditedInternship);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
         /* --------------------------------- Performing invalid save operation ------------------------------------ */
@@ -146,7 +146,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(Index toSave) throws CommandException {
         Model expectedModel = getModel();
         Person editedInternship = addSavedTagToInternship(expectedModel, toSave);
-        String expectedResultMessage = String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, editedInternship);
+        String expectedResultMessage = String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, editedInternship);
 
         assertCommandSuccess(
                 SaveCommand.COMMAND_WORD + " " + toSave.getOneBased(), expectedModel, expectedResultMessage);
@@ -184,7 +184,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         }
 
         assertCommandSuccess(command, expectedModel,
-                String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, editedInternship),
+                String.format(SaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, editedInternship),
                     expectedSelectedCardIndex);
     }
 

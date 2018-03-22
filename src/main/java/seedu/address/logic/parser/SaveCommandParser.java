@@ -14,7 +14,7 @@ public class SaveCommandParser implements Parser<SaveCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SaveCommand
-     * and returns an DeleteCommand object for execution.
+     * and returns an SaveCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public SaveCommand parse(String args) throws ParseException {
