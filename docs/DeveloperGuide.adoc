@@ -385,6 +385,46 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+
+=== Model
+==== Rationale
+
+There are many details in an internship that the applicants are required to know. Below are the details:
+
+* Company Name
+* Industry
+* Type of opportunity
+* Position
+* Salary
+* Date posted
+* Application deadline
+* Spots available
+* Company description
+* Skills required for this internship and the reasons behind it
+* Skills that are good to have and the reasons behind it
+* Job scope
+* Key takeaways from this internship
+
+All these are attributes that an internship should have and thus must be implemented in `Internship` class which resides
+in `model`.
+
+==== Design Considerations
+
+Alternative 1: Adding all the attributes under Internship class
+
+Pros: Easy to implement.
+
+Cons: Duplicate methods for
+
+image::Modeldesign1.png[width="800"]
+
+Alternative 2: As some of these attributes are similar in nature, we can use encapsulation and group some of them up
+ and implementing inheritance.
+
+
+
+
+
 == Documentation
 
 We use asciidoc for writing documentation.
