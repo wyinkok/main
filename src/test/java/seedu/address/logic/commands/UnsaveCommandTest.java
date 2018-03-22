@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.prepareUndoCommand;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersonsWithSavedTag.getTypicalAddressBookWithSavedTag;
 
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ import seedu.address.testutil.UnsavedPersonBuilder;
  */
 public class UnsaveCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookWithSavedTag(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
@@ -38,7 +38,7 @@ public class UnsaveCommandTest {
         Person internshipWithoutSavedTag = new UnsavedPersonBuilder().removeTag(model.getFilteredPersonList().get(0));
         UnsaveCommand unsaveCommand = prepareCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(UnsaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, internshipToUnsave);
+        String expectedMessage = String.format(UnsaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, internshipWithoutSavedTag);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updatePerson(internshipToUnsave, internshipWithoutSavedTag);
 

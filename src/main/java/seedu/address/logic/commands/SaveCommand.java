@@ -32,7 +32,7 @@ public class SaveCommand extends UndoableCommand {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNSAVED_INTERNSHIP_SUCCESS = "New internship saved: %1$s";
+    public static final String MESSAGE_SAVED_INTERNSHIP_SUCCESS = "New internship saved: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the collection";
     public static final String MESSAGE_DUPLICATE_TAG = "This internship has been saved";
 
@@ -57,7 +57,7 @@ public class SaveCommand extends UndoableCommand {
             throw new AssertionError("The target internship cannot be missing");
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag));
+        return new CommandResult(String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag));
     }
 
     @Override
