@@ -389,7 +389,7 @@ private Person addSavedTagToInternship(Person person) throws CommandException {
         }
 
 
-        // ... rebuilds the new list of tags ...
+        // ... rebuilds the updated list of tags ...
 
 
         // returns an internship with all the same information except for an additional "saved" tag
@@ -406,10 +406,22 @@ Below is a Sequence Diagram that demonstrates the interaction within the `Logic`
 
 image::SaveSequenceDiagramv1.png[width="800"]
 
-Similarly, to achieve the internal removal of a saved tag, we added a `addSavedTagToInternship` method
-within the UnsaveCommand object.
+Similarly, to achieve the internal removal of a saved tag, we added a `removeSavedTagToInternship` method
+within the UnsaveCommand object. The implementation of this method and its concept is exactly the opposite of
+the SaveCommand.
 
 ----
+    private Person removeSavedTagToInternship(Person person) {
+        //Creates a UniqueTagList of the specific internship's tags only
+        final UniqueTagList personTags = new UniqueTagList(internshipToUnsave.getTags());
+
+
+        //Checks for an existing "saved" tag and deletes
+        personTags.delete(new Tag(savedTagName));
+
+
+        // ... rebuilds the new list of tags and returns same person object without "saved" tag  ...
+    }
 
 ----
 
@@ -418,8 +430,17 @@ within the UnsaveCommand object.
 
 With the "saved" tag, users are able to identify the internships they have saved in their personal collection in the `InternshipCardPanel`.
 When users want to remove the internship from their collection, they can type the `unsave` command to remove the tag.
-To view the entire collection, they can type in a command (yet to implement) that
+To view the entire collection, they can type in a command (yet to implement) that basically searches for all the
+internships with "saved" tags and displays the filtered list.
 
+We chose to use the additional and removal of tags for 2 main reasons.
+* It is visible to the user which internship has been saved or unsaved
+* It is more straightforward in terms of implementation to do a search by a specific tag to display the Saved Collection
+
+===== Alternative
+Another method was to create separate AddressBook Model and its own storage for the Saved Collections
+*** Pros: Able to save in hard disk storage
+*** Cons: May have performance issues in terms of memory usage and may have to significantly change the architecture
 
 
 // end::saveunsave[]
