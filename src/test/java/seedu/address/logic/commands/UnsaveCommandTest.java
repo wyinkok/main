@@ -38,7 +38,8 @@ public class UnsaveCommandTest {
         Person internshipWithoutSavedTag = new UnsavedPersonBuilder().removeTag(model.getFilteredPersonList().get(0));
         UnsaveCommand unsaveCommand = prepareCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(UnsaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, internshipWithoutSavedTag);
+        String expectedMessage = String.format(UnsaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS,
+            internshipWithoutSavedTag);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updatePerson(internshipToUnsave, internshipWithoutSavedTag);
 
