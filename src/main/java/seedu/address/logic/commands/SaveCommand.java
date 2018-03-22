@@ -39,7 +39,6 @@ public class SaveCommand extends UndoableCommand {
     private final Index targetIndex;
 
     public final String savedTagName = "saved";
-    
     private Person internshipWithSavedTag;
     private Person internshipToSave;
 
