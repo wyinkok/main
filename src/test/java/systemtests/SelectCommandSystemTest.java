@@ -51,6 +51,9 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         /* Case: select the current selected card -> selected */
         assertCommandSuccess(command, middleIndex);
 
+        /* Case: mixed case command word -> selected */
+        assertCommandSuccess("SeLeCt 1", INDEX_FIRST_PERSON);
+
         /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 
         /* Case: filtered person list, select index within bounds of address book but out of bounds of person list
@@ -87,9 +90,6 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " 1 abc",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
-
-        /* Case: mixed case command word -> rejected */
-        assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: select from empty address book -> rejected */
         deleteAllPersons();

@@ -36,12 +36,4 @@ public class FilterCommand extends Command {
                 || (other instanceof FilterCommand // instanceof handles nulls
                 && this.predicate.equals(((FilterCommand) other).predicate)); // state check
     }
-
 }
-
-
-
-
-
-
-
