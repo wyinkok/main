@@ -31,7 +31,7 @@ import seedu.address.model.person.PersonContainsAllKeywordsPredicate;
 public class FilterCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    
+
     @Test
     public void equals() {
         PersonContainsAllKeywordsPredicate firstPredicate =
