@@ -35,14 +35,14 @@ public class UnsaveCommand extends UndoableCommand {
     public static final String MESSAGE_UNSAVED_INTERNSHIP_SUCCESS =
             "New internship removed from Saved Collection: %1$s";
     public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already removed from the collection";
-    public static final String MESSAGE_DUPLICATE_TAG = "This internship has been removed";
+
 
     public final String savedTagName = "saved";
     private final Index targetIndex;
     private Person internshipWithoutSavedTag;
     private Person internshipToUnsave;
 
-    public UnsaveCommand(Index targetIndex) throws UniqueTagList.DuplicateTagException {
+    public UnsaveCommand(Index targetIndex) {
 
         this.targetIndex = targetIndex;
     }
@@ -69,7 +69,7 @@ public class UnsaveCommand extends UndoableCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        internshipToUnsave = lastShownList.get(targetIndex.getZeroBased()); //add a tag to this internship!!
+        internshipToUnsave = lastShownList.get(targetIndex.getZeroBased());
         internshipWithoutSavedTag = removeSavedTagToInternship(internshipToUnsave);
     }
 

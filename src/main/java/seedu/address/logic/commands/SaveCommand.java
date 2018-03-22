@@ -68,7 +68,7 @@ public class SaveCommand extends UndoableCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        internshipToSave = lastShownList.get(targetIndex.getZeroBased()); //add a tag to this internship!!
+        internshipToSave = lastShownList.get(targetIndex.getZeroBased());
         internshipWithSavedTag = addSavedTagToInternship(internshipToSave);
     }
 
