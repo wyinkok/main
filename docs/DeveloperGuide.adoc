@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= JobbiBot - Developer Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -12,7 +12,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-F11-B3/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team CS2103-F11-B3`      Since: `Jan 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -156,11 +156,11 @@ The sections below give more details of each component.
 === UI component
 
 .Structure of the UI Component
-image::UiClassDiagram.png[width="800"]
+image::UiClassDiagramv1.2.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `InternshipListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -780,7 +780,31 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-*Target user profile*:
+=== Features Contribution
+
+[width="59%",cols="22%,<23%,<15%,<50%",options="header",]
+|=======================================================================
+|Contributor |Feature | Major/Minor | Remarks
+| Colin | Ranking/Filtering| Major | Implement a complete set of ranking/filtering/searching commands
+
+| Colin | Model Enhancement | Minor | Modify list view to work with new commands. Allow Refiltering / Searching / Finding from existing list instead of new list
+
+| Colin | Save Command | Minor | Save selected internship / lists
+
+| Ci Kang | Morph Model Component| Major | Morph to store internship / job instead of addressbook
+
+| Ci Kang | Search All Command | Minor | Implement a search all function that works with the new model
+
+| Wyin | GUI Revamp | Major | Revamp UI to resemble a Chatbot format
+
+| Wyin | Glossary Command | Minor | Glossary of commands for use with for the Chatbot
+
+|=======================================================================
+
+
+
+
+=== Target user profile
 
 * are university students looking for internships/jobs
 * but not sure where to start or what to look for
@@ -789,7 +813,8 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * can type fast
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: An intuitive and better way to find jobs and internships
+=== Value proposition
+* An intuitive and interactive way to find jobs and internships
 
 [appendix]
 == User Stories
@@ -799,15 +824,23 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` | experienced student | filter internship by details (industries/type/date/skillset) |narrow down on the list of internship to apply for
+|`* * *` | experienced student | filter internship by details (industries/type/date/skillset) |narrow down on the list of internship to apply for efficiently
 
 |`* * *` | new student  | input my relevant skillsets/interests | explore internships that are suitable and interesting for me
 
 |`* * *` | student | be able view a ranked list of internship (sorted and ranked according to my preferences) | know which internship to focus on
 
-|`* * *` | admin  | restrict some information | control which type of student gets to view which information / internship
+|`* * *` | busy student | have a user-friendly and clean application interface | use the app easily to communicate my preferences and needs
 
-|`* * *` | admin  | have some statistical data on what is popular / most searched | find more internships of these type to add
+|`* * *` | young student | have an interactive interface to source for internships | have a more engaging and personal experience when searching for development opportunities
+
+|`* * *` | student | given a list of potential industries, jobs, skills and related information | better informed of the available options I can explore
+
+|`* * *` | student | save specific internships I am interested it and access it anytime | further narrow down on my interested internships conveniently
+
+|`* * ` | organised student | split up my saved internships into personalised collections | categorise and organise my interested internship in various folders
+
+|`* * ` | curious student | given data analysis about successful internships and job search within a faculty or in a given year | overview of the job prospects in that year and understand the market competitiveness
 
 |`* *` |lazy student | be able to upload my files / details somewhere | reuse these information for my applications
 
@@ -816,7 +849,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` | student | know when companies will reply me | know whether I am rejected or not
 
 |=======================================================================
-
 
 [appendix]
 == Use Cases
@@ -882,8 +914,8 @@ Use case resumes at step 2.
 1. User keys in command to find internship
 2. Chat Bot gives user a list of prompts ( e.g. Salary, duration )
 3. User follows the prompts and key in the relevant details
-4. Chat Bot replies with a list of internship companies
-5. Chat Bot further gives user more prompts to filter the companies
+4. Chat Bot replies with a list of internship companies and provide filter prompts
+5. User views the list and further filter using the prompts given by the Chat Bot
 6. Repeat steps 3-5 until the user is satisfied
 +
 Use case ends.
@@ -917,8 +949,8 @@ Use case ends.
 1. User keys in command to explore internship
 2. Chat Bot gives user a list of prompts ( common skills sets )
 3. User fills in a prompt or a list of prompts
-4. Chat Bot replies with a list of internship companies
-5. Chat Bot further gives user more prompts to further filter the list
+4. Chat Bot replies with a list of internship companies and provide filter prompts
+5. User views the list and further filter using the prompts given by the Chat Bot
 6. Repeats steps 3-5 until user is satisfied
 +
 Use case ends.

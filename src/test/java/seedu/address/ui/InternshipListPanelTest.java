@@ -10,38 +10,38 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.InternshipCardHandle;
+import guitests.guihandles.InternshipListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.person.Person;
 
-public class PersonListPanelTest extends GuiUnitTest {
+public class InternshipListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =
             FXCollections.observableList(getTypicalPersons());
 
     private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PERSON);
 
-    private PersonListPanelHandle personListPanelHandle;
+    private InternshipListPanelHandle internshipListPanelHandle;
 
     @Before
     public void setUp() {
-        PersonListPanel personListPanel = new PersonListPanel(TYPICAL_PERSONS);
+        InternshipListPanel personListPanel = new InternshipListPanel(TYPICAL_PERSONS);
         uiPartRule.setUiPart(personListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        internshipListPanelHandle = new InternshipListPanelHandle(getChildNode(personListPanel.getRoot(),
+                InternshipListPanelHandle.INTERNSHIP_LIST_VIEW_ID));
     }
 
     @Test
     public void display() {
         for (int i = 0; i < TYPICAL_PERSONS.size(); i++) {
-            personListPanelHandle.navigateToCard(TYPICAL_PERSONS.get(i));
-            Person expectedPerson = TYPICAL_PERSONS.get(i);
-            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+            internshipListPanelHandle.navigateToCard(TYPICAL_PERSONS.get(i));
+            Person expectedInternship = TYPICAL_PERSONS.get(i);
+            InternshipCardHandle actualCard = internshipListPanelHandle.getInternshipCardHandle(i);
 
-            assertCardDisplaysPerson(expectedPerson, actualCard);
+            assertCardDisplaysPerson(expectedInternship, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
         }
     }
@@ -51,8 +51,9 @@ public class PersonListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedCard = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
-        PersonCardHandle selectedCard = personListPanelHandle.getHandleToSelectedCard();
+        InternshipCardHandle expectedCard = internshipListPanelHandle
+            .getInternshipCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+        InternshipCardHandle selectedCard = internshipListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedCard, selectedCard);
     }
 }
