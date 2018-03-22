@@ -27,7 +27,8 @@ public class SaveCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "save";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Saves an internship to your Saved Collection by the index number used in the last internship listing.\n"
+            + ": Saves an internship to your Saved Collection "
+            + "by the index number used in the last internship listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -37,8 +38,8 @@ public class SaveCommand extends UndoableCommand {
 
     private final Index targetIndex;
 
-    private Person internshipToSave;
     private Person internshipWithSavedTag;
+    private Person internshipToSave;
 
     public final String savedTagName = "saved";
 
@@ -73,7 +74,12 @@ public class SaveCommand extends UndoableCommand {
         internshipWithSavedTag = addSavedTagToInternship(internshipToSave);
     }
 
-
+    /**
+     * Adds a "saved" tag to the existing tags of an internship
+     * @param person
+     * @return
+     * @throws CommandException
+     */
     private Person addSavedTagToInternship(Person person) throws CommandException {
         final UniqueTagList personTags = new UniqueTagList(internshipToSave.getTags());
         try {
