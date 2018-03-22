@@ -67,12 +67,6 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
 
         /* ------------------ Performing save operation while a filtered list is being shown ---------------------- */
 
-        /* Case: filtered internship list, save index within bounds of internship book and internship list -> save */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_SECOND_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
-        assertCommandSuccess(index);
-
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
