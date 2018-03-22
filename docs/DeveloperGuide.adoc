@@ -363,6 +363,64 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Save/Unsave feature
 ==== Current Implementation
 
+The save/unsave mechanism is facilitated by the addition of a `saved` tag or removal of the `saved` tag
+respectively. It is inspired by the Instagram Save Collection feature, whereby users are able to personally curate specific
+internships that they would like to save for a quick reference in the future as opposed to re-searching for
+a particular internship.
+
+However, the special part of this feature is that users do not add or remove the `saved` tag themselves.
+Instead, they simply type in the command `save` or `unsave` with an index number and the command internally
+adds a new "saved" tag to the internship or removes the tag. This mechanism inherits from `UndoableCommand` and is
+executed by the `LogicManager`
+
+To achieve the internal addition of a saved tag, we added a `addSavedTagToInternship` method
+within the SaveCommand object.
+----
+private Person addSavedTagToInternship(Person person) throws CommandException {
+        //Creates a UniqueTagList of the specific internship's tags only
+        final UniqueTagList personTags = new UniqueTagList(internshipToSave.getTags());
+
+
+        //Adds a new tag savedTagName, which is a String "saved" to the UniqueTagList
+        try {
+            personTags.add(new Tag(savedTagName));
+        } catch (UniqueTagList.DuplicateTagException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+        }
+
+
+        // ... rebuilds the new list of tags ...
+
+
+        // returns an internship with all the same information except for an additional "saved" tag
+        return new Person(
+                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
+    }
+----
+The execution of this method in the `SaveCommand` object affects
+the `Model` by adding a visible `saved` tag to a specific internship. The result of the `SaveCommand`
+execution is encapsulated as a `CommandResult` object which is passed back to UI.
+
+Below is a Sequence Diagram that demonstrates the interaction within the `Logic` component for the
+`execute("saved 1")` API call which is similar to `Delete` above.
+
+image::SaveSequenceDiagramv1.png[width="800"]
+
+Similarly, to achieve the internal removal of a saved tag, we added a `addSavedTagToInternship` method
+within the UnsaveCommand object.
+
+----
+
+----
+
+
+==== Design Considerations
+
+With the "saved" tag, users are able to identify the internships they have saved in their personal collection in the `InternshipCardPanel`.
+When users want to remove the internship from their collection, they can type the `unsave` command to remove the tag.
+To view the entire collection, they can type in a command (yet to implement) that
+
+
 
 // end::saveunsave[]
 
