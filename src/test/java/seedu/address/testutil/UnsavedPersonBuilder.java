@@ -9,8 +9,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.util.SampleDataUtil;
-
 /**
  * A utility class to help with building Person objects.
  */
@@ -25,7 +23,7 @@ public class UnsavedPersonBuilder {
      */
     public Person removeTag(Person personToCopy) throws CommandException {
         final UniqueTagList personTags = new UniqueTagList(personToCopy.getTags());
-            personTags.delete(new Tag(savedTagName));
+        personTags.delete(new Tag(savedTagName));
 
         // Create map with values = tag object references in the master list
         // used for checking person tag references

@@ -22,7 +22,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.SavedPersonBuilder;
 import seedu.address.testutil.UnsavedPersonBuilder;
 
 /**
@@ -126,7 +125,8 @@ public class UnsaveCommandTest {
 
         undoRedoStack.push(unsaveCommand);
 
-        // undo -> reverts internship database back to previous state and filtered internship list to show all internships
+        // undo -> reverts internship database back to previous state and
+        // filtered internship list to show all internships
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         Person internshipWithoutSavedTag = new UnsavedPersonBuilder().removeTag(model.getFilteredPersonList().get(1));
