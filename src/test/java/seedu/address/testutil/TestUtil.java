@@ -46,6 +46,13 @@ public class TestUtil {
     }
 
     /**
+     * Returns the second last index of the person in the {@code model}'s person list.
+     */
+    public static Index getSecondLastIndex(Model model) {
+        return Index.fromOneBased(model.getAddressBook().getPersonList().size() - 1);
+    }
+
+    /**
      * Returns the person in the {@code model}'s person list at {@code index}.
      */
     public static Person getPerson(Model model, Index index) {

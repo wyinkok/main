@@ -17,7 +17,7 @@ By: `Team CS2103-F11-B3`     Since: `Jan 2018`      Licence: `MIT`
 
 == Introduction
 
-JobbiBot (JB) is a chatbot for those who *prefer to use an interactive desktop app to source for development opportunities*. Hence, JB is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JB can find the most suitable internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+JobbiBot is a chatbot for those who *prefer to use an interactive desktop app to source for development opportunities*. Hence, JobbiBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JobbiBot can find the most suitable internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -73,9 +73,9 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all persons : `list`
+=== Listing all internships : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all internships in the internship database. +
 Format: `list`
 
 === Editing a person : `edit`
@@ -98,9 +98,9 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Locating internship by name: `find`
 
-Finds persons whose names, phone, email or address contain any of the given keywords. +
+Finds internships whose names, phone, email or address contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -143,13 +143,13 @@ Deletes the 2nd person in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
-=== Selecting a person : `select`
+=== Selecting an internship : `select`
 
-Selects the person identified by the index number used in the last person listing. +
+Selects the internship identified by the index number used in the last internships listing. +
 Format: `select INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
+* Selects the internship and loads the Google search page the internship at the specified `INDEX`.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -162,6 +162,26 @@ Selects the 2nd person in the address book.
 * `find Betsy` +
 `select 1` +
 Selects the 1st person in the results of the `find` command.
+
+=== Saving an internship to a Saved Collection : `save`
+Saves the specified internship from the internship book. +
+Format: `save INDEX`
+
+****
+* Saves the internship at the specified `INDEX`.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list` +
+`save 2` +
+Save the 2nd internship in the internship book.
+* `find Betsy` +
+`save 1` +
+Deletes the 1st person in the results of the `find` command.
+
 
 === Listing entered commands : `history`
 
@@ -176,12 +196,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the internship database to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, 'save', `edit` and `clear`).
 ====
 
 Examples:
@@ -235,7 +255,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Internships data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -264,6 +284,8 @@ e.g. `find James Jake`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
+* *Save* : `save INDEX` +
+e.g.`select 3`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
