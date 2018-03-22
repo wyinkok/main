@@ -41,39 +41,39 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         Model expectedmodel = getModel();
         Index firstindex = INDEX_FIRST_PERSON;
         String command = "     " + SaveCommand.COMMAND_WORD + "      " + firstindex.getOneBased() + "       ";
-        Person internshipWithSavedTag = addSavedTagToPerson(expectedmodel, firstindex);
-        assertCommandSuccess(command, firstindex, internshipWithSavedTag);
+        Person editedInternship = addSavedTagToInternship(expectedmodel, firstindex);
+        assertCommandSuccess(command, firstindex, editedInternship);
 
 
-        /* Case: save the last person in the list -> saved */
+        /* Case: save the last internship in the list -> saved */
         Model modelBeforeSavingLast = getModel();
         Index lastPersonIndex = getLastIndex(modelBeforeSavingLast);
         assertCommandSuccess(lastPersonIndex);
 
-        /* Case: undo saving the last person in the list -> last person restored */
+        /* Case: undo saving the last internship in the list -> last internship restored */
         command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeSavingLast, expectedResultMessage);
 
-        /* Case: redo saving the last person in the list -> last person saved again */
+        /* Case: redo saving the last internship in the list -> last internship saved again */
         command = RedoCommand.COMMAND_WORD;
-        addSavedTagToPerson(modelBeforeSavingLast, lastPersonIndex);
+        addSavedTagToInternship(modelBeforeSavingLast, lastPersonIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeSavingLast, expectedResultMessage);
 
-        /* Case: save the middle person in the list -> saved */
+        /* Case: save the middle internship in the list -> saved */
         Index middlePersonIndex = getMidIndex(getModel());
         assertCommandSuccess(middlePersonIndex);
 
         /* ------------------ Performing save operation while a filtered list is being shown ---------------------- */
 
-        /* Case: filtered person list, save index within bounds of address book and person list -> save */
+        /* Case: filtered internship list, save index within bounds of internship book and internship list -> save */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_SECOND_PERSON;
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
         assertCommandSuccess(index);
 
-        /* Case: filtered person list, save index within bounds of address book but out of bounds of person list
+        /* Case: filtered internship list, save index within bounds of internship book but out of bounds of internship list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -81,16 +81,17 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         command = SaveCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* --------------------- Performing save operation while a person card is selected ------------------------ */
+        /* --------------------- Performing save operation while a internship card is selected ------------------------ */
 
-        /* Case: save the selected person -> person list panel selects the person before the saved person */
+        /* Case: save the selected internship
+                    -> internship list panel selects the internship before the saved internship */
         showAllPersons();
         Model expectedModel = getModel();
         Index selectedIndex = getSecondLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased());
         selectPerson(selectedIndex);
         command = SaveCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        Person neweditedInternship = addSavedTagToPerson(expectedModel, selectedIndex);
+        Person neweditedInternship = addSavedTagToInternship(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, neweditedInternship);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
@@ -121,30 +122,30 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Update the {@code Person} at the specified {@code index} in {@code model}'s address book.
-     * @return the updated person with a "saved" tag
+     * Update the {@code Person} at the specified {@code index} in {@code model}'s internship book.
+     * @return the internship person with a "saved" tag
      */
-    private Person addSavedTagToPerson(Model model, Index index) throws CommandException {
+    private Person addSavedTagToInternship(Model model, Index index) throws CommandException {
         Person targetInternship = getPerson(model, index);
         Person editedInternship = new SavedPersonBuilder().AddTag(targetInternship);
         try {
             model.updatePerson(targetInternship, editedInternship);
         } catch (PersonNotFoundException pnfe) {
-            throw new AssertionError("targetPerson is retrieved from model.");
+            throw new AssertionError("targetInternship is retrieved from model.");
         } catch (DuplicatePersonException e) {
-            throw new AssertionError("editedPerson is a duplicate in expectedModel.");
+            throw new AssertionError("editedInternship is a duplicate in expectedModel.");
         }
         return editedInternship;
     }
 
     /**
-     * Saves the person at {@code toSave} by creating a default {@code SaveCommand} using {@code toSave} and
+     * Saves the internship at {@code toSave} by creating a default {@code SaveCommand} using {@code toSave} and
      * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
      * @see SaveCommandSystemTest#assertCommandSuccess(String, Index, Person)
      */
     private void assertCommandSuccess(Index toSave) throws CommandException {
         Model expectedModel = getModel();
-        Person editedInternship = addSavedTagToPerson(expectedModel, toSave);
+        Person editedInternship = addSavedTagToInternship(expectedModel, toSave);
         String expectedResultMessage = String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, editedInternship);
 
         assertCommandSuccess(
@@ -152,33 +153,38 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
     }
 
 
-    private void assertCommandSuccess(String command, Index toEdit, Person editedPerson) {
-        assertCommandSuccess(command, toEdit, editedPerson, null);
+    /**
+     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} except that the
+     * browser url and selected card remain unchanged.
+     * @see SaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
+     */
+    private void assertCommandSuccess(String command, Index toSave, Person editedInternship) {
+        assertCommandSuccess(command, toSave, editedInternship, null);
     }
 
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
      * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
-     * 2. Asserts that the model related components are updated to reflect the person at index {@code toEdit} being
-     * updated to values specified {@code editedPerson}.<br>
-     * @param toEdit the index of the current model's filtered list.
-     * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
+     * 2. Asserts that the model related components are updated to reflect the internship at index {@code toSave} being
+     * updated to values specified {@code editedInternship}.<br>
+     * @param toSave the index of the current model's filtered list.
+     * @see SaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
-    private void assertCommandSuccess(String command, Index toEdit, Person editedPerson,
+    private void assertCommandSuccess(String command, Index toSave, Person editedInternship,
                                       Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         try {
             expectedModel.updatePerson(
-                    expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()), editedPerson);
+                    expectedModel.getFilteredPersonList().get(toSave.getZeroBased()), editedInternship);
             expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         } catch (DuplicatePersonException | PersonNotFoundException e) {
             throw new IllegalArgumentException(
-                    "editedPerson is a duplicate in expectedModel, or it isn't found in the model.");
+                    "editedInternship is a duplicate in expectedModel, or it isn't found in the model.");
         }
 
         assertCommandSuccess(command, expectedModel,
-                String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, editedPerson), expectedSelectedCardIndex);
+                String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, editedInternship), expectedSelectedCardIndex);
     }
 
     /**
@@ -216,47 +222,6 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         }
         assertStatusBarUnchangedExceptSyncStatus();
     }
-
-
-
-    /**
-     * Executes {@code command} and in addition,<br>
-     * 1. Asserts that the command box displays an empty string.<br>
-     * 2. Asserts that the result display box displays {@code expectedResultMessage}.<br>
-     * 3. Asserts that the model related components equal to {@code expectedModel}.<br>
-     * 4. Asserts that the browser url and selected card remains unchanged.<br>
-     * 5. Asserts that the status bar's sync status changes.<br>
-     * 6. Asserts that the command box has the default style class.<br>
-     * Verifications 1 to 3 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-
-    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
-        assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
-    }
-    */
-
-    /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser url
-     * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
-     * @see SaveCommandSystemTest#assertCommandSuccess(String, Model, String)
-     * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
-
-    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
-            Index expectedSelectedCardIndex) {
-        executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-
-        if (expectedSelectedCardIndex != null) {
-            assertSelectedCardChanged(expectedSelectedCardIndex);
-        } else {
-            assertSelectedCardUnchanged();
-        }
-
-        assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
-    }
-    */
 
     /**
      * Executes {@code command} and in addition,<br>
