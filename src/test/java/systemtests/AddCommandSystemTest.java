@@ -95,14 +95,18 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a internship with all fields same as another internship in the address book except email -> added */
+        /* Case: add a internship with all fields same as another internship in the address book except email ->
+         * added
+         */
         toAdd = new InternshipBuilder().withName(VALID_NAME_AMY).withSalary(VALID_SALARY_AMY).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + SALARY_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a internship with all fields same as another internship in the address book except address -> added */
+        /* Case: add a internship with all fields same as another internship in the address book except address ->
+         * added
+         */
         toAdd = new InternshipBuilder().withName(VALID_NAME_AMY).withSalary(VALID_SALARY_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_FRIEND).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + SALARY_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_BOB
