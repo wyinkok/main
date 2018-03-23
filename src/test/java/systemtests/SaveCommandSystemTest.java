@@ -2,7 +2,6 @@ package systemtests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 import static seedu.address.testutil.TestUtil.getInternship;
@@ -39,10 +38,10 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: save the first person in the list, command with leading spaces and trailing spaces -> saved */
         Model expectedmodel = getModel();
-        Index firstindex = INDEX_FIRST_INTERNSHIP;
-        String command = "     " + SaveCommand.COMMAND_WORD + "      " + firstindex.getOneBased() + "       ";
-        Internship editedInternship = addSavedTagToInternship(expectedmodel, firstindex);
-        assertCommandSuccess(command, firstindex, editedInternship);
+        Index firstIndex = INDEX_FIRST_INTERNSHIP;
+        String command = "     " + SaveCommand.COMMAND_WORD + "      " + firstIndex.getOneBased() + "       ";
+        Internship editedInternship = addSavedTagToInternship(expectedmodel, firstIndex);
+        assertCommandSuccess(command, firstIndex, editedInternship);
 
         /* Case: save the last internship in the list -> saved */
         Model modelBeforeSavingLast = getModel();

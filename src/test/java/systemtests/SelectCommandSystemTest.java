@@ -52,7 +52,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, middleIndex);
 
         /* Case: mixed case command word -> selected */
-        assertCommandSuccess("SeLeCt 1", INDEX_FIRST_PERSON);
+        assertCommandSuccess("SeLeCt 1", INDEX_FIRST_INTERNSHIP);
 
         /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 

@@ -42,7 +42,7 @@ public class TypicalInternships {
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Internship GEORGE = new InternshipBuilder().withName("George Best").withSalary("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
-    public static final Person CARL2 = new PersonBuilder().withName("Carl").withSalary("1234567")
+    public static final Internship CARL2 = new InternshipBuilder().withName("Carl").withSalary("1234567")
             .withEmail("heinz2@example.com").withAddress("wall street 2").build();
 
     // Manually added
@@ -78,6 +78,6 @@ public class TypicalInternships {
     }
 
     public static List<Internship> getTypicalInternships() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, CARL2));
     }
 }
