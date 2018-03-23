@@ -59,7 +59,8 @@ public class InternshipListPanelHandle extends NodeHandle<ListView<InternshipCar
      */
     public void navigateToCard(Internship internship) {
         List<InternshipCard> cards = getRootNode().getItems();
-        Optional<InternshipCard> matchingCard = cards.stream().filter(card -> card.internship.equals(internship)).findFirst();
+        Optional<InternshipCard> matchingCard =
+                cards.stream().filter(card -> card.internship.equals(internship)).findFirst();
 
         if (!matchingCard.isPresent()) {
             throw new IllegalArgumentException("Internship does not exist.");

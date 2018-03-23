@@ -32,7 +32,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: delete the first internship in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_INTERNSHIP.getOneBased() + "       ";
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_INTERNSHIP.getOneBased()
+                + "       ";
         Internship deletedInternship = removeInternship(expectedModel, INDEX_FIRST_INTERNSHIP);
         String expectedResultMessage = String.format(MESSAGE_DELETE_INTERNSHIP_SUCCESS, deletedInternship);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
@@ -65,17 +66,19 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         assertTrue(index.getZeroBased() < getModel().getFilteredInternshipList().size());
         assertCommandSuccess(index);
 
-        /* Case: filtered internship list, delete index within bounds of address book but out of bounds of internship list
-         * -> rejected
+        /* Case: filtered internship list, delete index within bounds of address book but out of bounds of internship
+         * list -> rejected
          */
         showInternshipsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getInternshipList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
-        /* --------------------- Performing delete operation while a internship card is selected ------------------------ */
+        /* ------------------- Performing delete operation while a internship card is selected ---------------------- */
 
-        /* Case: delete the selected internship -> internship list panel selects the internship before the deleted internship */
+        /* Case: delete the selected internship -> internship list panel selects the internship before the deleted
+         * internship
+         */
         showAllInternships();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
@@ -127,8 +130,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Deletes the internship at {@code toDelete} by creating a default {@code DeleteCommand} using {@code toDelete} and
-     * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
+     * Deletes the internship at {@code toDelete} by creating a default {@code DeleteCommand} using {@code toDelete}
+     * and performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
      * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
      */
     private void assertCommandSuccess(Index toDelete) {
@@ -137,7 +140,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         String expectedResultMessage = String.format(MESSAGE_DELETE_INTERNSHIP_SUCCESS, deletedInternship);
 
         assertCommandSuccess(
-                DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);
+                DeleteCommand.COMMAND_WORD + " "
+                        + toDelete.getOneBased(), expectedModel, expectedResultMessage);
     }
 
     /**

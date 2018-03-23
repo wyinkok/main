@@ -60,8 +60,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a internship without tags to a non-empty address book, command with leading spaces and trailing spaces
-         * -> added
+        /* Case: add a internship without tags to a non-empty address book, command with leading spaces and trailing
+         * spaces -> added
          */
         Internship toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + SALARY_DESC_AMY + " "
@@ -86,7 +86,9 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a internship with all fields same as another internship in the address book except salary -> added */
+        /* Case: add a internship with all fields same as another internship in the address book except salary ->
+         * added
+         */
         toAdd = new InternshipBuilder().withName(VALID_NAME_AMY).withSalary(VALID_SALARY_BOB).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + SALARY_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
@@ -126,9 +128,11 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         showInternshipsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
-        /* ------------------------ Perform add operation while a internship card is selected --------------------------- */
+        /* ------------------------ Perform add operation while a internship card is selected ----------------------- */
 
-        /* Case: selects first card in the internship list, add a internship -> added, card selection remains unchanged */
+        /* Case: selects first card in the internship list, add a internship -> added, card selection remains
+         * unchanged
+         */
         selectInternship(Index.fromOneBased(1));
         assertCommandSuccess(CARL);
 

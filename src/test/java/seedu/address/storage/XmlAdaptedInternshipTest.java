@@ -48,7 +48,8 @@ public class XmlAdaptedInternshipTest {
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        XmlAdaptedInternship internship = new XmlAdaptedInternship(null, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        XmlAdaptedInternship internship =
+                new XmlAdaptedInternship(null, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
@@ -63,7 +64,8 @@ public class XmlAdaptedInternshipTest {
 
     @Test
     public void toModelType_nullSalary_throwsIllegalValueException() {
-        XmlAdaptedInternship internship = new XmlAdaptedInternship(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        XmlAdaptedInternship internship =
+                new XmlAdaptedInternship(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
@@ -78,7 +80,8 @@ public class XmlAdaptedInternshipTest {
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        XmlAdaptedInternship internship = new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, null, VALID_ADDRESS, VALID_TAGS);
+        XmlAdaptedInternship internship =
+                new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, null, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
@@ -93,7 +96,8 @@ public class XmlAdaptedInternshipTest {
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        XmlAdaptedInternship internship = new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, VALID_EMAIL, null, VALID_TAGS);
+        XmlAdaptedInternship internship =
+                new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, VALID_EMAIL, null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }

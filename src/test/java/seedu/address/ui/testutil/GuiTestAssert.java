@@ -39,20 +39,22 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that the list in {@code internshipListPanelHandle} displays the details of {@code internships} correctly and
-     * in the correct order.
+     * Asserts that the list in {@code internshipListPanelHandle} displays the details of {@code internships} correctly
+     * and in the correct order.
      */
-    public static void assertListMatching(InternshipListPanelHandle internshipListPanelHandle, Internship... internships) {
+    public static void assertListMatching(InternshipListPanelHandle internshipListPanelHandle,
+                                          Internship... internships) {
         for (int i = 0; i < internships.length; i++) {
             assertCardDisplaysInternship(internships[i], internshipListPanelHandle.getInternshipCardHandle(i));
         }
     }
 
     /**
-     * Asserts that the list in {@code internshipListPanelHandle} displays the details of {@code internships} correctly and
-     * in the correct order.
+     * Asserts that the list in {@code internshipListPanelHandle} displays the details of {@code internships} correctly
+     * and in the correct order.
      */
-    public static void assertListMatching(InternshipListPanelHandle internshipListPanelHandle, List<Internship> internships) {
+    public static void assertListMatching(InternshipListPanelHandle internshipListPanelHandle,
+                                          List<Internship> internships) {
         assertListMatching(internshipListPanelHandle, internships.toArray(new Internship[0]));
     }
 

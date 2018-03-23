@@ -53,12 +53,13 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
 
         /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 
-        /* Case: filtered internship list, select index within bounds of address book but out of bounds of internship list
-         * -> rejected
+        /* Case: filtered internship list, select index within bounds of address book but out of bounds of internship
+         * list -> rejected
          */
         showInternshipsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getInternshipList().size();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " "
+                + invalidIndex, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
         /* Case: filtered internship list, select index within bounds of address book and internship list -> selected */
         Index validIndex = Index.fromOneBased(1);
@@ -78,7 +79,8 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredInternshipList().size() + 1;
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " "
+                + invalidIndex, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " abc",

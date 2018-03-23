@@ -136,7 +136,8 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_INTERNSHIP;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditCommand.EditInternshipDescriptor descriptor = new EditInternshipDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditCommand.EditInternshipDescriptor descriptor =
+                new EditInternshipDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -172,7 +173,8 @@ public class EditCommandParserTest {
                 + TAG_DESC_FRIEND + SALARY_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
                 + SALARY_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
 
-        EditCommand.EditInternshipDescriptor descriptor = new EditInternshipDescriptorBuilder().withSalary(VALID_SALARY_BOB)
+        EditCommand.EditInternshipDescriptor descriptor =
+                new EditInternshipDescriptorBuilder().withSalary(VALID_SALARY_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -185,7 +187,8 @@ public class EditCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_INTERNSHIP;
         String userInput = targetIndex.getOneBased() + INVALID_SALARY_DESC + SALARY_DESC_BOB;
-        EditCommand.EditInternshipDescriptor descriptor = new EditInternshipDescriptorBuilder().withSalary(VALID_SALARY_BOB).build();
+        EditCommand.EditInternshipDescriptor descriptor =
+                new EditInternshipDescriptorBuilder().withSalary(VALID_SALARY_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

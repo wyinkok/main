@@ -71,7 +71,8 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedInternship));
 
         // multiple tags - all accepted
-        Internship expectedInternshipMultipleTags = new InternshipBuilder().withName(VALID_NAME_BOB).withSalary(VALID_SALARY_BOB)
+        Internship expectedInternshipMultipleTags =
+                new InternshipBuilder().withName(VALID_NAME_BOB).withSalary(VALID_SALARY_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + SALARY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

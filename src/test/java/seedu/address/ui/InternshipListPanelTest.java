@@ -21,7 +21,8 @@ public class InternshipListPanelTest extends GuiUnitTest {
     private static final ObservableList<Internship> TYPICAL_INTERNSHIPS =
             FXCollections.observableList(getTypicalInternships());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_INTERNSHIP);
+    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT =
+            new JumpToListRequestEvent(INDEX_SECOND_INTERNSHIP);
 
     private InternshipListPanelHandle internshipListPanelHandle;
 

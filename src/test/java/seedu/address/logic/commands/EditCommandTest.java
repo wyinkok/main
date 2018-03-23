@@ -90,7 +90,8 @@ public class EditCommandTest {
     public void execute_filteredList_success() throws Exception {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
-        Internship internshipInFilteredList = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
+        Internship internshipInFilteredList =
+                model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
         Internship editedInternship = new InternshipBuilder(internshipInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = prepareCommand(INDEX_FIRST_INTERNSHIP,
                 new EditInternshipDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -117,7 +118,8 @@ public class EditCommandTest {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
         // edit internship in filtered list into a duplicate in address book
-        Internship internshipInList = model.getAddressBook().getInternshipList().get(INDEX_SECOND_INTERNSHIP.getZeroBased());
+        Internship internshipInList =
+                model.getAddressBook().getInternshipList().get(INDEX_SECOND_INTERNSHIP.getZeroBased());
         EditCommand editCommand = prepareCommand(INDEX_FIRST_INTERNSHIP,
                 new EditInternshipDescriptorBuilder(internshipInList).build());
 
@@ -179,7 +181,8 @@ public class EditCommandTest {
         UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredInternshipList().size() + 1);
-        EditCommand.EditInternshipDescriptor descriptor = new EditInternshipDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand.EditInternshipDescriptor descriptor =
+                new EditInternshipDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = prepareCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> editCommand not pushed into undoRedoStack
