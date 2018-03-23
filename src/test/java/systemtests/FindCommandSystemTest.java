@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_INTERNSHIPS_LISTED_OVERVIEW;
 import static seedu.address.testutil.TypicalInternships.BENSON;
 import static seedu.address.testutil.TypicalInternships.CARL;
+import static seedu.address.testutil.TypicalInternships.CARL2;
 import static seedu.address.testutil.TypicalInternships.DANIEL;
 import static seedu.address.testutil.TypicalInternships.FIONA;
 import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
@@ -45,7 +46,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
          * found
          */
         command = FindCommand.COMMAND_WORD + " Carl";
-        ModelHelper.setFilteredList(expectedModel, CARL);
+        ModelHelper.setFilteredList(expectedModel, CARL, CARL2);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

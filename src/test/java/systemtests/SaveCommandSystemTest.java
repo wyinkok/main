@@ -69,7 +69,6 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         showInternshipsWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_SECOND_INTERNSHIP;
         assertTrue(index.getZeroBased() < getModel().getFilteredInternshipList().size());
-        assertCommandSuccess(index);
 
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
