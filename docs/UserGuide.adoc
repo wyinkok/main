@@ -98,17 +98,10 @@ Edits the salary number and email address of the 1st person to be `91234567` and
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-<<<<<<< HEAD
-=== Locating persons by keyword: `find`
-=======
-=== Locating internship by name: `find`
->>>>>>> b8d88808334326a1394d042a3ee9e81735858c0a
 
-<<<<<<< HEAD
+=== Locating internships by keywords: `find`
+
 Finds persons whose names, salary, email or address contain any of the given keywords. +
-=======
-Finds internships whose names, phone, email or address contain any of the given keywords. +
->>>>>>> 4708fed278ee8390e232267ef764f997ed666f11
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
