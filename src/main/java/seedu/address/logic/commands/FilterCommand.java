@@ -26,8 +26,8 @@ public class FilterCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredPersonList(predicate);
-        return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
+        model.updateFilteredInternshipList(predicate);
+        return new CommandResult(getMessageForInternshipListShownSummary(model.getFilteredInternshipList().size()));
     }
 
     @Override

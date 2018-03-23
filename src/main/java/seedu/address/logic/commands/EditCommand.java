@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,24 +19,24 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Salary;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.internship.Address;
+import seedu.address.model.internship.Email;
+import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.Name;
+import seedu.address.model.internship.Salary;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
+import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing internship in the address book.
  */
 public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the internship identified "
+            + "by the index number used in the last internship listing. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -48,67 +48,68 @@ public class EditCommand extends UndoableCommand {
             + PREFIX_SALARY + "1000 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditInternshipDescriptor editInternshipDescriptor;
 
-    private Person personToEdit;
-    private Person editedPerson;
+    private Internship internshipToEdit;
+    private Internship editedInternship;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the internship in the filtered internship list to edit
+     * @param editInternshipDescriptor details to edit the internship with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditInternshipDescriptor editInternshipDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editInternshipDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editInternshipDescriptor = new EditInternshipDescriptor(editInternshipDescriptor);
     }
 
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         try {
-            model.updatePerson(personToEdit, editedPerson);
-        } catch (DuplicatePersonException dpe) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        } catch (PersonNotFoundException pnfe) {
-            throw new AssertionError("The target person cannot be missing");
+            model.updateInternship(internshipToEdit, editedInternship);
+        } catch (DuplicateInternshipException dpe) {
+            throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
+        } catch (InternshipNotFoundException pnfe) {
+            throw new AssertionError("The target internship cannot be missing");
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+        return new CommandResult(String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS, editedInternship));
     }
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Internship> lastShownList = model.getFilteredInternshipList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
-        personToEdit = lastShownList.get(index.getZeroBased());
-        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        internshipToEdit = lastShownList.get(index.getZeroBased());
+        editedInternship = createEditedInternship(internshipToEdit, editInternshipDescriptor);
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Internship} with the details of {@code internshipToEdit}
+     * edited with {@code editInternshipDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Internship createEditedInternship(Internship internshipToEdit,
+                                                     EditInternshipDescriptor editInternshipDescriptor) {
+        assert internshipToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Salary updatedSalary = editPersonDescriptor.getSalary().orElse(personToEdit.getSalary());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editInternshipDescriptor.getName().orElse(internshipToEdit.getName());
+        Salary updatedSalary = editInternshipDescriptor.getSalary().orElse(internshipToEdit.getSalary());
+        Email updatedEmail = editInternshipDescriptor.getEmail().orElse(internshipToEdit.getEmail());
+        Address updatedAddress = editInternshipDescriptor.getAddress().orElse(internshipToEdit.getAddress());
+        Set<Tag> updatedTags = editInternshipDescriptor.getTags().orElse(internshipToEdit.getTags());
 
-        return new Person(updatedName, updatedSalary, updatedEmail, updatedAddress, updatedTags);
+        return new Internship(updatedName, updatedSalary, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -126,28 +127,28 @@ public class EditCommand extends UndoableCommand {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor)
-                && Objects.equals(personToEdit, e.personToEdit);
+                && editInternshipDescriptor.equals(e.editInternshipDescriptor)
+                && Objects.equals(internshipToEdit, e.internshipToEdit);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the internship with. Each non-empty field value will replace the
+     * corresponding field value of the internship.
      */
-    public static class EditPersonDescriptor {
+    public static class EditInternshipDescriptor {
         private Name name;
         private Salary salary;
         private Email email;
         private Address address;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditInternshipDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditInternshipDescriptor(EditInternshipDescriptor toCopy) {
             setName(toCopy.name);
             setSalary(toCopy.salary);
             setEmail(toCopy.email);
@@ -219,12 +220,12 @@ public class EditCommand extends UndoableCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditInternshipDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditInternshipDescriptor e = (EditInternshipDescriptor) other;
 
             return getName().equals(e.getName())
                     && getSalary().equals(e.getSalary())

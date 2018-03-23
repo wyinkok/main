@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.internship.Internship;
 
 /**
  * Tests that a {@code Person}'s {@code Name, Salary, Address or Email} matches any of the keywords given.
  */
-public class PersonContainsAllKeywordsPredicate implements Predicate<Person> {
+public class PersonContainsAllKeywordsPredicate implements Predicate<Internship> {
     private final List<String> keywords;
 
     public PersonContainsAllKeywordsPredicate(List<String> keywords) {
@@ -16,7 +17,7 @@ public class PersonContainsAllKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Internship person) {
         // Check if all keyword can be found in all of a person's details (e.g name, contact number, address)
         return keywords.stream().allMatch(keyword -> StringUtil.containsWordIgnoreCase(person.toString(), keyword));
     }

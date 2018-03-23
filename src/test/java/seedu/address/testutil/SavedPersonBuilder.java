@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Person;
+import seedu.address.model.internship.Internship;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -20,10 +20,10 @@ public class SavedPersonBuilder {
     public final String savedTagName = "saved";
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the PersonBuilder with the data of {@code internshipToCopy}.
      */
-    public Person addTag(Person personToCopy) throws CommandException {
-        final UniqueTagList personTags = new UniqueTagList(personToCopy.getTags());
+    public Internship addTag(Internship internshipToCopy) throws CommandException {
+        final UniqueTagList personTags = new UniqueTagList(internshipToCopy.getTags());
         try {
             personTags.add(new Tag(savedTagName));
         } catch (UniqueTagList.DuplicateTagException e) {
@@ -39,11 +39,11 @@ public class SavedPersonBuilder {
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
 
-        return new Person(
-                personToCopy.getName(),
-                personToCopy.getSalary(),
-                personToCopy.getEmail(),
-                personToCopy.getAddress(),
+        return new Internship(
+                internshipToCopy.getName(),
+                internshipToCopy.getSalary(),
+                internshipToCopy.getEmail(),
+                internshipToCopy.getAddress(),
                 correctTagReferences);
 
 
