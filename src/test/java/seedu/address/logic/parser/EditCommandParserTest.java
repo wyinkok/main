@@ -82,15 +82,15 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_SALARY_DESC, Salary.MESSAGE_SALARY_CONSTRAINTS); // invalid phone
+        assertParseFailure(parser, "1" + INVALID_SALARY_DESC, Salary.MESSAGE_SALARY_CONSTRAINTS); // invalid salary
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_EMAIL_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 
-        // invalid phone followed by valid email
+        // invalid salary followed by valid email
         assertParseFailure(parser, "1" + INVALID_SALARY_DESC + EMAIL_DESC_AMY, Salary.MESSAGE_SALARY_CONSTRAINTS);
 
-        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
+        // valid salary followed by invalid salary. The test case for invalid salary followed by valid salary
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + SALARY_DESC_BOB + INVALID_SALARY_DESC, Salary.MESSAGE_SALARY_CONSTRAINTS);
 
@@ -140,7 +140,7 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // phone
+        // salary
         userInput = targetIndex.getOneBased() + SALARY_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withSalary(VALID_SALARY_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);

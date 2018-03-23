@@ -51,7 +51,7 @@
     <tags>owesMoney</tags>
     <persons>
         <name>Carl</name>
-        <phone>1234567</phone>
+        <salary>1234567</salary>
         <email>heinz2@example.com</email>
         <address>wall street 2</address>
     </persons>
