@@ -17,7 +17,7 @@ By: `Team CS2103-F11-B3`     Since: `Jan 2018`      Licence: `MIT`
 
 == Introduction
 
-JobbiBot is a chatbot for those who *prefer to use an interactive desktop app to source for development opportunities*. Hence, JobbiBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JobbiBot can find the most suitable internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+JobbiBot is a desktop chatbot application for those who *prefer to use an interactive app to source for development opportunities*. Hence, JobbiBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JobbiBot can find the most suitable internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
