@@ -89,8 +89,8 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find phone number of person in address book -> 1 persons found */
-        command = FindCommand.COMMAND_WORD + " " + FIONA.getPhone().value;
+        /* Case: find salary of person in address book -> 1 persons found */
+        command = FindCommand.COMMAND_WORD + " " + FIONA.getSalary().value;
         ModelHelper.setFilteredList(expectedModel, FIONA);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();

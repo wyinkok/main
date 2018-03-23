@@ -95,7 +95,7 @@ public class SaveCommand extends UndoableCommand {
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Person(
-                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
+                person.getName(), person.getSalary(), person.getEmail(), person.getAddress(), correctTagReferences);
     }
 
 

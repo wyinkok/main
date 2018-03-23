@@ -4,14 +4,14 @@
 <addressbook>
     <persons>
         <name>Alice Pauline</name>
-        <phone>85355255</phone>
+        <salary>85355255</salary>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <tagged>friends</tagged>
     </persons>
     <persons>
         <name>Benson Meier</name>
-        <phone>98765432</phone>
+        <salary>98765432</salary>
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
         <tagged>owesMoney</tagged>
@@ -19,31 +19,31 @@
     </persons>
     <persons>
         <name>Carl Kurz</name>
-        <phone>95352563</phone>
+        <salary>95352563</salary>
         <email>heinz@example.com</email>
         <address>wall street</address>
     </persons>
     <persons>
         <name>Daniel Meier</name>
-        <phone>87652533</phone>
+        <salary>87652533</salary>
         <email>cornelia@example.com</email>
         <address>10th street</address>
     </persons>
     <persons>
         <name>Elle Meyer</name>
-        <phone>9482224</phone>
+        <salary>9482224</salary>
         <email>werner@example.com</email>
         <address>michegan ave</address>
     </persons>
     <persons>
         <name>Fiona Kunz</name>
-        <phone>9482427</phone>
+        <salary>9482427</salary>
         <email>lydia@example.com</email>
         <address>little tokyo</address>
     </persons>
     <persons>
         <name>George Best</name>
-        <phone>9482442</phone>
+        <salary>9482442</salary>
         <email>anna@example.com</email>
         <address>4th street</address>
     </persons>
@@ -51,7 +51,7 @@
     <tags>owesMoney</tags>
     <persons>
         <name>Carl</name>
-        <phone>1234567</phone>
+        <salary>1234567</salary>
         <email>heinz2@example.com</email>
         <address>wall street 2</address>
     </persons>
