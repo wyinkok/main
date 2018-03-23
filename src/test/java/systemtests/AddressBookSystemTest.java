@@ -141,7 +141,8 @@ public abstract class AddressBookSystemTest {
      */
     protected void showAllInternships() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getInternshipList().size(), getModel().getFilteredInternshipList().size());
+        assertEquals(getModel().getAddressBook().getInternshipList().size(),
+                getModel().getFilteredInternshipList().size());
     }
 
     /**
@@ -149,7 +150,8 @@ public abstract class AddressBookSystemTest {
      */
     protected void showInternshipsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredInternshipList().size() < getModel().getAddressBook().getInternshipList().size());
+        assertTrue(getModel().getFilteredInternshipList().size()
+                < getModel().getAddressBook().getInternshipList().size());
     }
 
     /**
@@ -170,8 +172,8 @@ public abstract class AddressBookSystemTest {
 
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
-     * {@code expectedResultMessage}, the model and storage contains the same internship objects as {@code expectedModel}
-     * and the internship list panel displays the internships in the model correctly.
+     * {@code expectedResultMessage}, the model and storage contains the same internship objects as
+     * {@code expectedModel} and the internship list panel displays the internships in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
@@ -205,8 +207,8 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
-     * Asserts that the browser's url is changed to display the details of the internship in the internship list panel at
-     * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
+     * Asserts that the browser's url is changed to display the details of the internship in the internship list panel
+     * at {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
      * @see BrowserPanelHandle#isUrlChanged()
      * @see InternshipListPanelHandle#isSelectedInternshipCardChanged()
      */
@@ -214,13 +216,15 @@ public abstract class AddressBookSystemTest {
         String selectedCardName = getInternshipInternshipListPanel().getHandleToSelectedCard().getName();
         URL expectedUrl;
         try {
-            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
+            expectedUrl =
+                    new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.");
         }
         assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
-        assertEquals(expectedSelectedCardIndex.getZeroBased(), getInternshipInternshipListPanel().getSelectedCardIndex());
+        assertEquals(expectedSelectedCardIndex.getZeroBased(),
+                getInternshipInternshipListPanel().getSelectedCardIndex());
     }
 
     /**
@@ -276,7 +280,8 @@ public abstract class AddressBookSystemTest {
             assertEquals("", getCommandBox().getInput());
             assertEquals("", getResultDisplay().getText());
             assertListMatching(getInternshipInternshipListPanel(), getModel().getFilteredInternshipList());
-            assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
+            assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE),
+                    getBrowserPanel().getLoadedUrl());
             assertEquals("./" + testApp.getStorageSaveLocation(), getStatusBarFooter().getSaveLocation());
             assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
         } catch (Exception e) {

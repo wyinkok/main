@@ -30,7 +30,7 @@ public class XmlUtilTest {
     private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validAddressBook.xml");
     private static final File MISSING_INTERNSHIP_FIELD_FILE = new File(TEST_DATA_FOLDER + "missingInternshipField.xml");
     private static final File INVALID_INTERNSHIP_FIELD_FILE = new File(TEST_DATA_FOLDER + "invalidInternshipField.xml");
-    private static final File VALID_INTERNSHIP_FILE = new File(TEST_DATA_FOLDER + "validIntership.xml");
+    private static final File VALID_INTERNSHIP_FILE = new File(TEST_DATA_FOLDER + "validInternship.xml");
     private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml"));
 
     private static final String INVALID_SALARY = "9482asf424";
@@ -138,8 +138,8 @@ public class XmlUtilTest {
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedInternship}
-     * objects.
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to
+     * {@code XmlAdaptedInternship} objects.
      */
     @XmlRootElement(name = "internship")
     private static class XmlAdaptedInternshipWithRootElement extends XmlAdaptedInternship {}

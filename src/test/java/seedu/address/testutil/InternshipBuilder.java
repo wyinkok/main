@@ -5,8 +5,8 @@ import java.util.Set;
 
 import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
-import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Salary;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;

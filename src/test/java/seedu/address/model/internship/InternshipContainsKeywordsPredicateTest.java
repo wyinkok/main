@@ -64,7 +64,8 @@ public class InternshipContainsKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        InternshipContainsKeywordsPredicate predicate = new InternshipContainsKeywordsPredicate(Collections.emptyList());
+        InternshipContainsKeywordsPredicate predicate =
+                new InternshipContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new InternshipBuilder().withName("Alice").build()));
 
         // Non-matching keyword
@@ -87,7 +88,8 @@ public class InternshipContainsKeywordsPredicateTest {
     @Test
     public void test_salaryDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        InternshipContainsKeywordsPredicate predicate = new InternshipContainsKeywordsPredicate(Collections.emptyList());
+        InternshipContainsKeywordsPredicate predicate =
+                new InternshipContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new InternshipBuilder().withSalary("1000").build()));
 
         // Non-matching keyword
@@ -119,7 +121,8 @@ public class InternshipContainsKeywordsPredicateTest {
     @Test
     public void test_addressDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        InternshipContainsKeywordsPredicate predicate = new InternshipContainsKeywordsPredicate(Collections.emptyList());
+        InternshipContainsKeywordsPredicate predicate =
+                new InternshipContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new InternshipBuilder().withAddress("Blk 30 Geylang Street 29, #06-40").build()));
 
         // Non-matching keyword
@@ -136,7 +139,7 @@ public class InternshipContainsKeywordsPredicateTest {
 
         // Only one matching keyword
         predicate =
-                new InternshipContainsKeywordsPredicate(Arrays.asList("charlotte@example.com", "berniceyu@example.com"));
+                new InternshipContainsKeywordsPredicate(Arrays.asList("charlotte@example.com", "bernice@example.com"));
         assertTrue(predicate.test(new InternshipBuilder().withEmail("charlotte@example.com").build()));
 
         // Mixed-case keyword
@@ -147,7 +150,8 @@ public class InternshipContainsKeywordsPredicateTest {
     @Test
     public void test_emailDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        InternshipContainsKeywordsPredicate predicate = new InternshipContainsKeywordsPredicate(Collections.emptyList());
+        InternshipContainsKeywordsPredicate predicate =
+                new InternshipContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new InternshipBuilder().withEmail("charlotte@example.com").build()));
 
         // Non-matching keyword

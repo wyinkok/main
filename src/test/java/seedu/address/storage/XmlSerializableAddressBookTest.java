@@ -17,7 +17,8 @@ import seedu.address.testutil.TypicalInternships;
 public class XmlSerializableAddressBookTest {
 
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlSerializableAddressBookTest/");
-    private static final File TYPICAL_INTERNSHIPS_FILE = new File(TEST_DATA_FOLDER + "typicalInternshipAddressBook.xml");
+    private static final File TYPICAL_INTERNSHIPS_FILE =
+            new File(TEST_DATA_FOLDER + "typicalInternshipAddressBook.xml");
     private static final File INVALID_INTERNSHIP_FILE = new File(TEST_DATA_FOLDER + "invalidInternshipAddressBook.xml");
     private static final File INVALID_TAG_FILE = new File(TEST_DATA_FOLDER + "invalidTagAddressBook.xml");
 

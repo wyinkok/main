@@ -46,7 +46,7 @@ public class TestUtil {
     }
 
     /**
-     * Returns the second last index of the person in the {@code model}'s person list.
+     * Returns the second last index of the internship in the {@code model}'s internship list.
      */
     public static Index getSecondLastIndex(Model model) {
         return Index.fromOneBased(model.getAddressBook().getInternshipList().size() - 1);

@@ -12,10 +12,10 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_SALARY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
@@ -36,8 +36,8 @@ import org.junit.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
-import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Salary;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.InternshipBuilder;
@@ -71,7 +71,8 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedInternship));
 
         // multiple tags - all accepted
-        Internship expectedInternshipMultipleTags = new InternshipBuilder().withName(VALID_NAME_BOB).withSalary(VALID_SALARY_BOB)
+        Internship expectedInternshipMultipleTags =
+                new InternshipBuilder().withName(VALID_NAME_BOB).withSalary(VALID_SALARY_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + SALARY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

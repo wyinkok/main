@@ -135,15 +135,17 @@ public class DeleteCommandTest {
 
         showInternshipAtIndex(model, INDEX_SECOND_INTERNSHIP);
         Internship internshipToDelete = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
-        // delete -> deletes second internship in unfiltered internship list / first internship in filtered internship list
+        // delete -> deletes second internship in unfiltered internship list / first internship in filtered internship
+        // list
         deleteCommand.execute();
         undoRedoStack.push(deleteCommand);
 
-        // undo -> reverts addressbook back to previous state and filtered internship list to show all internships
+        // undo -> reverts internship list back to previous state and filtered internship list to show all internships
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         expectedModel.deleteInternship(internshipToDelete);
-        assertNotEquals(internshipToDelete, model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased()));
+        assertNotEquals(internshipToDelete,
+                model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased()));
         // redo -> deletes same second internship in unfiltered internship list
         assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
