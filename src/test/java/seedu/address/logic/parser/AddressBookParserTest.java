@@ -145,8 +145,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_save() throws Exception {
         SaveCommand command = (SaveCommand) parser.parseCommand(
-                SaveCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new SaveCommand(INDEX_FIRST_PERSON), command);
+                SaveCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased());
+        assertEquals(new SaveCommand(INDEX_FIRST_INTERNSHIP), command);
     }
 
 }
