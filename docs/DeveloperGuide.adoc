@@ -414,14 +414,16 @@ Alternative 1: Adding all the attributes under Internship class
 
 Pros: Easy to implement.
 
-Cons: Duplicate methods for
+Cons: Duplicate methods for similar attributes such as Date posted and Application deadline.
 
 image::Modeldesign1.png[width="800"]
 
 Alternative 2: As some of these attributes are similar in nature, we can use encapsulation and group some of them up
  and implementing inheritance.
 
+image::Modeldesign2.png[width="800"]
 
+For instance, required information are compulsory information that must be entered
 
 
 
