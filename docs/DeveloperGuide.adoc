@@ -230,6 +230,54 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::RankCommmand[]
+=== Rank Command Feature
+==== Proposed Implementation
+
+The rank command features will complement with the existing find and filter command function.
+
+The rank command features takes in one or more arguments in order to give internship listing a score so as to sort them.
+
+Our proposed implementation is to give a corresponding weight to each argument and sum up the internship listing score.
+
+See Comprehensive Example below
+
+Suppose the user keys in three commands 1. `find a b c` , 2. `filter d`, 3. `rank c b d a`
+The results is as shown below:
+
+image::RankCommandExample.png[width="800"]
+
+Explanation:
+argument c is given the weight 4, b is given the weight 3, and so on
+If the internship contains the argument, then add the argument weight to a ranking score.
+Sort the final list according to this score.
+
+
+==== Design Considerations
+
+===== Aspect: Implementation of `Rank Command`
+
+* ** Alternative 1 (current choice):** Give weightage to the argument and calculate a ranking score for the internship listing
+** Pros: Give users more functionality / options
+** Cons: Harder to implement, requires modification to ModelComponent to keep track of ranking score and internship list
+
+* **Alternative 2:** Give equal weightage to all arguments, always auto-rank whenever search command is given, with the most match given at the top
+** Pros: More user friendly
+** Cons: Still requires modification to ModelComponent to keep count of matches in the internship list
+
+
+===== Aspect: Implementation of Internship Listing View for Find/Filter/Rank/Sort
+
+* **Alternative 1 (current choice):** Each time command is executed, we keep the internship list that is generated and execute further commands on that
+** Pros: Once implemented, it is easier to understand and follow and to use for future features
+** Cons: Harder to implement as it requires a few changes to the ModelComponent
+
+* **Alternative 2:** Generate brand new internship list from full list of internships by saving the arguments and keywords into another data structure and only using existing commands to generate the list
+** Pros: Relies on existing component, allows for easier adding and removing of keyword arguments
+** Cons: Harder to follow, find / filter commands must be improved much further to allow exact searching of particular lists
+
+// end::RankCommand[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
