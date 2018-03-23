@@ -41,7 +41,7 @@ public class SavedPersonBuilder {
 
         return new Person(
                 personToCopy.getName(),
-                personToCopy.getPhone(),
+                personToCopy.getSalary(),
                 personToCopy.getEmail(),
                 personToCopy.getAddress(),
                 correctTagReferences);
