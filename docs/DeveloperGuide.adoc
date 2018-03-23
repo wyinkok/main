@@ -230,6 +230,54 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::RankCommmand[]
+=== Rank Command Feature
+==== Proposed Implementation
+
+The rank command features will complement with the existing find and filter command function.
+
+The rank command features takes in one or more arguments in order to give internship listing a score so as to sort them.
+
+Our proposed implementation is to give a corresponding weight to each argument and sum up the internship listing score.
+
+See Comprehensive Example below
+
+Suppose the user keys in three commands 1. `find a b c` , 2. `filter d`, 3. `rank c b d a`
+The results is as shown below:
+
+image::RankCommandExample.png[width="800"]
+
+Explanation:
+argument c is given the weight 4, b is given the weight 3, and so on
+If the internship contains the argument, then add the argument weight to a ranking score.
+Sort the final list according to this score.
+
+
+==== Design Considerations
+
+===== Aspect: Implementation of `Rank Command`
+
+* ** Alternative 1 (current choice):** Give weightage to the argument and calculate a ranking score for the internship listing
+** Pros: Give users more functionality / options
+** Cons: Harder to implement, requires modification to ModelComponent to keep track of ranking score and internship list
+
+* **Alternative 2:** Give equal weightage to all arguments, always auto-rank whenever search command is given, with the most match given at the top
+** Pros: More user friendly
+** Cons: Still requires modification to ModelComponent to keep count of matches in the internship list
+
+
+===== Aspect: Implementation of Internship Listing View for Find/Filter/Rank/Sort
+
+* **Alternative 1 (current choice):** Each time command is executed, we keep the internship list that is generated and execute further commands on that
+** Pros: Once implemented, it is easier to understand and follow and to use for future features
+** Cons: Harder to implement as it requires a few changes to the ModelComponent
+
+* **Alternative 2:** Generate brand new internship list from full list of internships by saving the arguments and keywords into another data structure and only using existing commands to generate the list
+** Pros: Relies on existing component, allows for easier adding and removing of keyword arguments
+** Cons: Harder to follow, find / filter commands must be improved much further to allow exact searching of particular lists
+
+// end::RankCommand[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -358,6 +406,95 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two * different things.
 // end::undoredo[]
 
+
+// tag::saveunsave[]
+=== Save/Unsave feature
+==== Current Implementation
+
+The save/unsave mechanism is facilitated by the addition of a `saved` tag or removal of the `saved` tag
+respectively. It is inspired by the Instagram Save Collection feature, so our users are able to personally curate specific
+internships that they would like to save for a quick reference in the future as opposed to re-searching for
+a particular internship again.
+
+However, the special part of this feature is that users do not add or remove the `saved` tag themselves.
+Instead, they simply type in the command `save` or `unsave` with an index number and the command internally
+adds a new "saved" tag to the internship or removes the tag. This mechanism inherits from `UndoableCommand` and is
+executed by the `LogicManager`
+
+To achieve the internal addition of a saved tag, we added a `addSavedTagToInternship` method
+within the SaveCommand object. This method is self-invocated by the object's other methods, such as `preprocessUndoableCommand`.
+----
+private Person addSavedTagToInternship(Person person) throws CommandException {
+        //Creates a UniqueTagList of the specific internship's tags only
+        final UniqueTagList personTags = new UniqueTagList(internshipToSave.getTags());
+
+
+        //Adds a new tag savedTagName, which is a type String "saved" to the UniqueTagList
+        try {
+            personTags.add(new Tag(savedTagName));
+        } catch (UniqueTagList.DuplicateTagException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+        }
+
+
+        // ... rebuilds the updated list of tags ...
+
+
+        // returns an internship with all the same information except for an additional "saved" tag
+        return new Person(
+                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
+    }
+----
+The execution of this method in the `SaveCommand` object affects
+the `Model` by adding a visible `saved` tag to a specific internship. The result of the `SaveCommand`
+execution is encapsulated as a `CommandResult` object which is passed back to UI.
+
+Below is a Sequence Diagram that demonstrates the interaction within the `Logic` component for the
+`execute("saved 1")` API call which is similar to `Delete` above.
+
+image::SaveSequenceDiagramv1.png[width="800"]
+
+Similarly, to achieve the internal removal of a saved tag, we added a `removeSavedTagToInternship` method
+within the UnsaveCommand object. The implementation of this method and its concept is exactly the opposite of
+the SaveCommand.
+
+----
+    private Person removeSavedTagToInternship(Person person) {
+        //Creates a UniqueTagList of the specific internship's tags only
+        final UniqueTagList personTags = new UniqueTagList(internshipToUnsave.getTags());
+
+
+        //Checks for an existing "saved" tag and removes it from the UniqueTagList
+        personTags.delete(new Tag(savedTagName));
+
+
+        // ... rebuilds the new list of tags and returns same person object without "saved" tag  ...
+    }
+
+----
+
+
+==== Design Considerations
+
+With the `saved` tag, users are able to identify the internships they have saved in their personal collection in the `InternshipCardPanel`.
+When users want to remove the internship from their collection, they can type the `unsave` command to remove the tag.
+To view the entire collection, they can type in a command (yet to implement) that basically searches for all the
+internships with "saved" tags and displays the filtered list.
+
+We chose to use the additional and removal of tags for two main reasons:
+
+* It is visible to the user which internship has been saved or unsaved
+* It is more straightforward in terms of implementation to do a search by a specific tag to display the Saved Collection
+
+===== Alternative
+Another idea was to create separate AddressBook Model and its own storage for the Saved Collections
+
+*** Pros: Able to save in hard disk storage
+*** Cons: May have performance issues in terms of memory usage and may have to significantly change the architecture
+
+
+// end::saveunsave[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
@@ -384,6 +521,51 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+
+
+=== Model
+==== Rationale
+
+There are many details in an internship that the applicants are required to know. Below are the details:
+
+* Company Name
+* Industry
+* Type of opportunity
+* Position
+* Salary
+* Date posted
+* Application deadline
+* Spots available
+* Company description
+* Skills required for this internship and the reasons behind it
+* Skills that are good to have and the reasons behind it
+* Job scope
+* Key takeaways from this internship
+
+All these are attributes that an internship should have and thus must be implemented in `Internship` class which resides
+in `model`.
+
+==== Design Considerations
+
+Alternative 1: Adding all the attributes under Internship class
+
+Pros: Easy to implement.
+
+Cons: Duplicate methods for similar attributes such as Date posted and Application deadline.
+
+image::Modeldesign1.png[width="800"]
+
+Alternative 2: As some of these attributes are similar in nature, we can use encapsulation and group some of them up
+ and implementing inheritance. For instance, when checking for null attributes, RequiredInformation attributes will
+ return and error if it is true.
+
+ Pros: Reduce the need to change similar methods in every attribute as they are inherited from a superclass
+ (RequiredInformation, OptionalInformation). There can also be a method to return the entire attributes under
+ RequiredInformation class to further abstract it.
+
+ Cons: More difficulty when implementing
+
+image::Modeldesign2.png[width="800"]
 
 == Documentation
 
@@ -789,13 +971,15 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 | Colin | Model Enhancement | Minor | Modify list view to work with new commands. Allow Refiltering / Searching / Finding from existing list instead of new list
 
-| Colin | Save Command | Minor | Save selected internship / lists
+| Colin | Save Command | Minor | Enable users to view their Saved Collection
 
 | Ci Kang | Morph Model Component| Major | Morph to store internship / job instead of addressbook
 
 | Ci Kang | Search All Command | Minor | Implement a search all function that works with the new model
 
-| Wyin | GUI Revamp | Major | Revamp UI to resemble a Chatbot format
+| Wyin | GUI Revamp | Major | Revamp UI to incorporate a Chatbot in the CLI
+
+| Wyin | Save and Unsave Command | Major/Minor | Enable user to save and unsave specific internships into a Saved Collection
 
 | Wyin | Glossary Command | Minor | Glossary of commands for use with for the Chatbot
 

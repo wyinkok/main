@@ -1,10 +1,15 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
+<<<<<<< HEAD
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_INTERNSHIP_SUCCESS;
 import static seedu.address.testutil.TestUtil.getInternship;
+=======
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
@@ -57,6 +62,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* Case: delete the middle internship in the list -> deleted */
         Index middleInternshipIndex = getMidIndex(getModel());
         assertCommandSuccess(middleInternshipIndex);
+
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
@@ -111,8 +117,6 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(DeleteCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
-        /* Case: mixed case command word -> rejected */
-        assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**

@@ -1,7 +1,11 @@
 package systemtests;
 
+<<<<<<< HEAD
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
+=======
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
 
 import org.junit.Test;
 
@@ -52,8 +56,9 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
-        /* Case: mixed case command word -> rejected */
-        assertCommandFailure("ClEaR", MESSAGE_UNKNOWN_COMMAND);
+        /* Case: mixed case command word -> clear */
+        assertCommandSuccess(ClearCommand.COMMAND_WORD);
+        assertSelectedCardUnchanged();
     }
 
     /**

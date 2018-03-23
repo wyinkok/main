@@ -42,6 +42,8 @@ public class TypicalInternships {
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Internship GEORGE = new InternshipBuilder().withName("George Best").withSalary("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
+    public static final Person CARL2 = new PersonBuilder().withName("Carl").withSalary("1234567")
+            .withEmail("heinz2@example.com").withAddress("wall street 2").build();
 
     // Manually added
     public static final Internship HOON = new InternshipBuilder().withName("Hoon Meier").withSalary("8482424")
@@ -75,7 +77,12 @@ public class TypicalInternships {
         return ab;
     }
 
+<<<<<<< HEAD:src/test/java/seedu/address/testutil/TypicalInternships.java
     public static List<Internship> getTypicalInternships() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+=======
+    public static List<Person> getTypicalPersons() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, CARL2));
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952:src/test/java/seedu/address/testutil/TypicalPersons.java
     }
 }

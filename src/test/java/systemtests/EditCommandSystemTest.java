@@ -79,7 +79,11 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                 getModel().getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased()), editedInternship);
         assertCommandSuccess(command, model, expectedResultMessage);
 
+<<<<<<< HEAD
         /* Case: edit a internship with new values same as existing values -> edited */
+=======
+        /* Case: edit a person with new values same as existing values -> edited */
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
@@ -121,9 +125,15 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: selects first card in the internship list, edit a internship -> edited, card selection remains
          * unchanged but browser url changes
          */
+<<<<<<< HEAD
         showAllInternships();
         index = INDEX_FIRST_INTERNSHIP;
         selectInternship(index);
+=======
+        showAllPersons();
+        index = INDEX_FIRST_PERSON;
+        selectPerson(index);
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + SALARY_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
@@ -157,9 +167,15 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
                         + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS);
 
+<<<<<<< HEAD
         /* Case: invalid phone -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
                         + INVALID_SALARY_DESC, Salary.MESSAGE_SALARY_CONSTRAINTS);
+=======
+        /* Case: invalid salary -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_SALARY_DESC,
+                Salary.MESSAGE_SALARY_CONSTRAINTS);
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
 
         /* Case: invalid email -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
@@ -170,6 +186,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                         + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
+<<<<<<< HEAD
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
                         + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -188,6 +205,24 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_INTERNSHIP);
+=======
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_TAG_DESC,
+                Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        /* Case: edit a person with new values same as another person's values -> rejected */
+        executeCommand(PersonUtil.getAddCommand(BOB));
+        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
+        index = INDEX_FIRST_PERSON;
+        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+
+        /* Case: edit a person with new values same as another person's values but with different tags -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
     }
 
     /**

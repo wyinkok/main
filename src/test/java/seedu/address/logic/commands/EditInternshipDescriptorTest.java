@@ -40,8 +40,13 @@ public class EditInternshipDescriptorTest {
                 new EditInternshipDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditInternshipDescriptorTest.java
         // different phone -> returns false
         editedAmy = new EditInternshipDescriptorBuilder(DESC_AMY).withSalary(VALID_SALARY_BOB).build();
+=======
+        // different salary -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSalary(VALID_SALARY_BOB).build();
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952:src/test/java/seedu/address/logic/commands/EditPersonDescriptorTest.java
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false

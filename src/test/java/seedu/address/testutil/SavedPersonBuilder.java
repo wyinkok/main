@@ -39,11 +39,19 @@ public class SavedPersonBuilder {
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
 
+<<<<<<< HEAD
         return new Internship(
                 internshipToCopy.getName(),
                 internshipToCopy.getSalary(),
                 internshipToCopy.getEmail(),
                 internshipToCopy.getAddress(),
+=======
+        return new Person(
+                personToCopy.getName(),
+                personToCopy.getSalary(),
+                personToCopy.getEmail(),
+                personToCopy.getAddress(),
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
                 correctTagReferences);
 
 

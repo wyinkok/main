@@ -17,7 +17,7 @@ By: `Team CS2103-F11-B3`     Since: `Jan 2018`      Licence: `MIT`
 
 == Introduction
 
-JobbiBot is a chatbot for those who *prefer to use an interactive desktop app to source for development opportunities*. Hence, JobbiBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JobbiBot can find the most suitable internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+JobbiBot is a desktop chatbot application for those who *prefer to use an interactive app to source for development opportunities*. Hence, JobbiBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JobbiBot can find the most suitable internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -98,9 +98,14 @@ Edits the salary number and email address of the 1st internship to be `91234567`
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd internship to be `Betsy Crower` and clears all existing tags.
 
-=== Locating internship by name: `find`
 
+<<<<<<< HEAD
 Finds internships whose names, salary, email or address contain any of the given keywords. +
+=======
+=== Locating internships by keywords: `find`
+
+Finds persons whose names, salary, email or address contain any of the given keywords. +
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -123,7 +128,32 @@ Returns any internship having email `Betsy@gmail.com`
 * `find Serangoon` +
 Returns any internship having address with `Serangoon` in it
 
+<<<<<<< HEAD
 === Deleting a internship : `delete`
+=======
+=== Filtering Internship by keyword: `filter`
+
+Filter the internship list according to the given keywords. +
+Format: `filter KEYWORD [MORE_KEEYWORDS]`
+
+****
+* The search is case insensitive. e.g `marketing` will match `Marketing`
+* The order of the keywords does not matter. e.g. `Marketing Analytics` will match `Analytics Marketing`
+* Only full words will be matched e.g. `Market` will not match `Marketing`
+* Only Internships which contain all the keyword will be returned e.g `filter Marketing Analytics` will return only +
+containing Marketing AND Analytics but not Marketing Research or Data Analyics
+****
+
+Examples:
+
+* `filter data` +
+Returns any entries containing data e.g Data Analytics, Data Science
+* `filter data analytics` +
+Returns only entries containing data and analytics e.g 'data analytics internship', 'data analytics singapore'
+
+
+=== Deleting a person : `delete`
+>>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
 
 Deletes the specified internship from the address book. +
 Format: `delete INDEX`
@@ -279,7 +309,9 @@ e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/SALARY] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+e.g. `find Analytics Engineering`
+* *Filter* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `filter Marketing Singapore`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
