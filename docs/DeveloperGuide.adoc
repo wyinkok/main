@@ -419,13 +419,16 @@ Cons: Duplicate methods for similar attributes such as Date posted and Applicati
 image::Modeldesign1.png[width="800"]
 
 Alternative 2: As some of these attributes are similar in nature, we can use encapsulation and group some of them up
- and implementing inheritance.
+ and implementing inheritance. For instance, when checking for null attributes, RequiredInformation attributes will
+ return and error if it is true.
+
+ Pros: Reduce the need to change similar methods in every attribute as they are inherited from a superclass
+ (RequiredInformation, OptionalInformation). There can also be a method to return the entire attributes under
+ RequiredInformation class to further abstract it.
+
+ Cons: More difficulty when implementing
 
 image::Modeldesign2.png[width="800"]
-
-For instance, required information are compulsory information that must be entered
-
-
 
 == Documentation
 
