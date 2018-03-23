@@ -15,17 +15,10 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         this.keywords = keywords;
     }
 
-
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))
-                || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword))
-                || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword))
-                || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword));
+        // Check if any keyword can be found in all of a person's details (e.g name, contact number, address)
+        return keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.toString(), keyword));
     }
 
     @Override
@@ -34,5 +27,4 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 || (other instanceof PersonContainsKeywordsPredicate // instanceof handles nulls
                 && this.keywords.equals(((PersonContainsKeywordsPredicate) other).keywords)); // state check
     }
-
 }

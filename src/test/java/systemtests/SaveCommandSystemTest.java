@@ -1,8 +1,6 @@
 package systemtests;
 
-import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
@@ -10,7 +8,6 @@ import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TestUtil.getSecondLastIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
@@ -44,7 +41,6 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         Person editedInternship = addSavedTagToInternship(expectedmodel, firstindex);
         assertCommandSuccess(command, firstindex, editedInternship);
 
-
         /* Case: save the last internship in the list -> saved */
         Model modelBeforeSavingLast = getModel();
         Index lastPersonIndex = getLastIndex(modelBeforeSavingLast);
@@ -66,12 +62,6 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(middlePersonIndex);
 
         /* ------------------ Performing save operation while a filtered list is being shown ---------------------- */
-
-        /* Case: filtered internship list, save index within bounds of internship book and internship list -> save */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_SECOND_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
-        assertCommandSuccess(index);
 
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
@@ -117,8 +107,6 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(SaveCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_SAVE_COMMAND_FORMAT);
 
-        /* Case: mixed case command word -> rejected */
-        assertCommandFailure("SaVE 1", MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
