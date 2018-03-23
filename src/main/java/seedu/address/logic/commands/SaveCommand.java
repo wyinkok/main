@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,9 +12,9 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
+import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -38,8 +38,8 @@ public class SaveCommand extends UndoableCommand {
 
     public final String savedTagName = "saved";
     private final Index targetIndex;
-    private Person internshipWithSavedTag;
-    private Person internshipToSave;
+    private Internship internshipWithSavedTag;
+    private Internship internshipToSave;
 
     public SaveCommand(Index targetIndex) throws UniqueTagList.DuplicateTagException {
 
@@ -50,22 +50,22 @@ public class SaveCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(internshipToSave);
         try {
-            model.updatePerson(internshipToSave, internshipWithSavedTag);
-        } catch (DuplicatePersonException e) {
+            model.updateInternship(internshipToSave, internshipWithSavedTag);
+        } catch (DuplicateInternshipException e) {
             throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
-        } catch (PersonNotFoundException e) {
+        } catch (InternshipNotFoundException e) {
             throw new AssertionError("The target internship cannot be missing");
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         return new CommandResult(String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipToSave));
     }
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Internship> lastShownList = model.getFilteredInternshipList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
         internshipToSave = lastShownList.get(targetIndex.getZeroBased()); //add a tag to this internship!!
@@ -74,11 +74,11 @@ public class SaveCommand extends UndoableCommand {
 
     /**
      * Adds a "saved" tag to the existing tags of an internship
-     * @param person
+     * @param internship
      * @return
      * @throws CommandException
      */
-    private Person addSavedTagToInternship(Person person) throws CommandException {
+    private Internship addSavedTagToInternship(Internship internship) throws CommandException {
         final UniqueTagList personTags = new UniqueTagList(internshipToSave.getTags());
         try {
             personTags.add(new Tag(savedTagName));
@@ -87,15 +87,15 @@ public class SaveCommand extends UndoableCommand {
         }
 
         // Create map with values = tag object references in the master list
-        // used for checking person tag references
+        // used for checking internship tag references
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         personTags.forEach(tag -> masterTagObjects.put(tag, tag));
 
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
+        // Rebuild the list of internship tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        return new Person(
-                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
+        return new Internship(
+                internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(), correctTagReferences);
     }
 
 
