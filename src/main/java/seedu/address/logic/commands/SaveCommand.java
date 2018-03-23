@@ -94,14 +94,9 @@ public class SaveCommand extends UndoableCommand {
         // Rebuild the list of internship tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-<<<<<<< HEAD
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
                 correctTagReferences);
-=======
-        return new Person(
-                person.getName(), person.getSalary(), person.getEmail(), person.getAddress(), correctTagReferences);
->>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
     }
 
 

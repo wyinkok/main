@@ -80,7 +80,6 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a internship with new values same as existing values -> edited */
-
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
@@ -122,11 +121,9 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: selects first card in the internship list, edit a internship -> edited, card selection remains
          * unchanged but browser url changes
          */
-
         showAllInternships();
         index = INDEX_FIRST_INTERNSHIP;
         selectInternship(index);
-
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + SALARY_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the

@@ -1,11 +1,7 @@
 package systemtests;
 
-<<<<<<< HEAD
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
-=======
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
->>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
 
 import org.junit.Test;
 

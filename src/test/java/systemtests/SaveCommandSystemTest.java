@@ -1,26 +1,17 @@
 package systemtests;
 
-<<<<<<< HEAD
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-=======
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
->>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
 import static seedu.address.logic.commands.SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 import static seedu.address.testutil.TestUtil.getInternship;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getSecondLastIndex;
-<<<<<<< HEAD
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP;
 import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
-=======
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
->>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
 
 import org.junit.Test;
 
@@ -75,15 +66,12 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
 
         /* ------------------ Performing save operation while a filtered list is being shown ---------------------- */
 
-<<<<<<< HEAD
         /* Case: filtered internship list, save index within bounds of internship book and internship list -> save */
         showInternshipsWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_SECOND_INTERNSHIP;
         assertTrue(index.getZeroBased() < getModel().getFilteredInternshipList().size());
         assertCommandSuccess(index);
 
-=======
->>>>>>> fdd0cc6349183cf8986b03133ee6918870419952
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
