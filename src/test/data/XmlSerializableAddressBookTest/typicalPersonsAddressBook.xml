@@ -49,4 +49,10 @@
     </persons>
     <tags>friends</tags>
     <tags>owesMoney</tags>
+    <persons>
+        <name>Carl</name>
+        <phone>1234567</phone>
+        <email>heinz2@example.com</email>
+        <address>wall street 2</address>
+    </persons>
 </addressbook>
