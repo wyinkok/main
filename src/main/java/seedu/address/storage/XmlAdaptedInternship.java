@@ -9,24 +9,24 @@ import java.util.Set;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.internship.Address;
+import seedu.address.model.internship.Email;
+import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.Name;
+import seedu.address.model.internship.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Internship.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedInternship {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Internship's %s field is missing!";
 
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String phone;
+    private String salary;
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
@@ -36,17 +36,17 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedInternship.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedInternship() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * Constructs an {@code XmlAdaptedInternship} with the given internship details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedInternship(String name, String salary, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
-        this.phone = phone;
+        this.salary = salary;
         this.email = email;
         this.address = address;
         if (tagged != null) {
@@ -55,13 +55,13 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Internship into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedInternship
      */
-    public XmlAdaptedPerson(Person source) {
+    public XmlAdaptedInternship(Internship source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        salary = source.getSalary().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         tagged = new ArrayList<>();
@@ -71,14 +71,14 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted internship object into the model's Internship object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted internship
      */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+    public Internship toModelType() throws IllegalValueException {
+        final List<Tag> internshipTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            internshipTags.add(tag.toModelType());
         }
 
         if (this.name == null) {
@@ -89,13 +89,13 @@ public class XmlAdaptedPerson {
         }
         final Name name = new Name(this.name);
 
-        if (this.phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (this.salary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(this.phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        if (!Salary.isValidSalary(this.salary)) {
+            throw new IllegalValueException(Salary.MESSAGE_SALARY_CONSTRAINTS);
         }
-        final Phone phone = new Phone(this.phone);
+        final Salary salary = new Salary(this.salary);
 
         if (this.email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -113,8 +113,8 @@ public class XmlAdaptedPerson {
         }
         final Address address = new Address(this.address);
 
-        final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, email, address, tags);
+        final Set<Tag> tags = new HashSet<>(internshipTags);
+        return new Internship(name, salary, email, address, tags);
     }
 
     @Override
@@ -123,15 +123,15 @@ public class XmlAdaptedPerson {
             return true;
         }
 
-        if (!(other instanceof XmlAdaptedPerson)) {
+        if (!(other instanceof XmlAdaptedInternship)) {
             return false;
         }
 
-        XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(email, otherPerson.email)
-                && Objects.equals(address, otherPerson.address)
-                && tagged.equals(otherPerson.tagged);
+        XmlAdaptedInternship otherInternship = (XmlAdaptedInternship) other;
+        return Objects.equals(name, otherInternship.name)
+                && Objects.equals(salary, otherInternship.salary)
+                && Objects.equals(email, otherInternship.email)
+                && Objects.equals(address, otherInternship.address)
+                && tagged.equals(otherInternship.tagged);
     }
 }

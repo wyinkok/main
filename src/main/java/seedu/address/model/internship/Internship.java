@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.internship;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,13 +10,13 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Internship in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Internship {
 
     private final Name name;
-    private final Phone phone;
+    private final Salary salary;
     private final Email email;
     private final Address address;
 
@@ -25,10 +25,10 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Internship(Name name, Salary salary, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, salary, email, address, tags);
         this.name = name;
-        this.phone = phone;
+        this.salary = salary;
         this.email = email;
         this.address = address;
         // protect internal tags from changes in the arg list
@@ -39,8 +39,8 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Salary getSalary() {
+        return salary;
     }
 
     public Email getEmail() {
@@ -65,29 +65,29 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Internship)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(this.getName())
-                && otherPerson.getPhone().equals(this.getPhone())
-                && otherPerson.getEmail().equals(this.getEmail())
-                && otherPerson.getAddress().equals(this.getAddress());
+        Internship otherInternship = (Internship) other;
+        return otherInternship.getName().equals(this.getName())
+                && otherInternship.getSalary().equals(this.getSalary())
+                && otherInternship.getEmail().equals(this.getEmail())
+                && otherInternship.getAddress().equals(this.getAddress());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, salary, email, address, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
+                .append(" Salary: ")
+                .append(getSalary())
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
