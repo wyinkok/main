@@ -27,7 +27,7 @@ public class ChatBotCard extends UiPart<Region> {
         super(FXML);
         this.msg = msg;
         username.setText("Jobbi: ");
-        message.setText("Hi I am Jobbi");
+        message.setText(msg);
     }
 
    /*  @Override

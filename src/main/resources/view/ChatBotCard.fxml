@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<HBox fx:id="messagePane" prefHeight="100.0" prefWidth="189.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label fx:id="username" alignment="TOP_LEFT" text="\$username" />
-      <Label fx:id="message" alignment="TOP_LEFT" text="\$message" />
-   </children>
+<HBox fx:id="messagePane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150" />
+    </columnConstraints>
+      <HBox spacing ="5"  alignment="CENTER_LEFT">
+
+          <Label fx:id="username" alignment="TOP_LEFT" text="\$username" styleClass="cell_big_label"  />
+          <Label fx:id="message" alignment="TOP_LEFT" text="\$message" styleClass="cell_big_label"  />
+
+            </HBox>
+
+      </GridPane>
+
 </HBox>

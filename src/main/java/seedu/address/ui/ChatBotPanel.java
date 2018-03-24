@@ -17,9 +17,12 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.fxmisc.easybind.EasyBind;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -36,7 +39,7 @@ public class ChatBotPanel extends UiPart<Region> {
 
     private static final String FXML = "ChatBotPanel.fxml";
 
-   //  @FXML VBox messageList;
+    //@FXML VBox messageList;
 
     @FXML
     private ListView<ChatBotCard> chatBotListView;
@@ -44,20 +47,65 @@ public class ChatBotPanel extends UiPart<Region> {
     @FXML private Label username;
     @FXML private Label welcome;
 
+
+
+
     public ChatBotPanel() {
         super(FXML);
         initChatBot();
         registerAsAnEventHandler(this);
     }
 
+
     public void initChatBot() {
-        container.setPrefSize(200, 400);
-        //container.setContent((Node) messages);
-        username.setText("Jobbi: ");
-        welcome.setText("Hi I am Jobbi. How can I help you find your idela internship today?");
-        messages.add(new Label("I'm a message"));
-       // alignMessages();
-        //index ++;
+        ObservableList<String> messageList = addToList();
+        ObservableList<ChatBotCard> mappedList = EasyBind.map(
+                messageList, (msg) -> new ChatBotCard(msg));
+        chatBotListView.setItems(mappedList);
+        chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
+    }
+
+    public ObservableList<String> addToList() {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        list.add("I am Jobbi");
+        list.add("Nice to meet you");
+        list.add("Yay nice to see u");
+        return list;
+    }
+
+    /**
+     * Scrolls to the {@code InternshipCard} at the {@code index} and selects it.
+     */
+    private void scrollTo(int index) {
+        Platform.runLater(() -> {
+            chatBotListView.scrollTo(index);
+        });
+    }
+
+    @Subscribe
+    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        scrollTo(event.targetIndex);
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code InternshipCard}.
+     */
+    class ChatBotListViewCell extends ListCell<ChatBotCard> {
+
+        @Override
+        protected void updateItem(ChatBotCard message, boolean empty) {
+            super.updateItem(message, empty);
+
+            if (empty || message == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(message.getRoot());
+            }
+        }
+    }
+
     }
 
    /*  public void alignMessages() {
@@ -82,6 +130,6 @@ public class ChatBotPanel extends UiPart<Region> {
     } */
 
 
-}
+
 
 
