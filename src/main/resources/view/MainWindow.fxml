@@ -45,7 +45,7 @@
             </padding>
             <StackPane fx:id="internshipListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
-               <StackPane />
+               <StackPane fx:id="chatBotPanelPlaceholder" />
 
           <StackPane fx:id="browserPlaceholder">
             <padding>
