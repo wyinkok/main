@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 public class ListElementPointer {
     private List<String> list;
     private int index;
+    private int tempindex;
 
     /**
      * Constructs {@code ListElementPointer} which is backed by a defensive copy of {@code list}.
@@ -57,6 +58,17 @@ public class ListElementPointer {
 
     private boolean isWithinBounds(int index) {
         return index >= 0 && index < list.size();
+    }
+
+    /**
+     * Returns true if calling {@code #hasElement} does not throw an {@code NoSuchElementException}.
+     */
+    public boolean hasElement(String toSearch){
+        if (list.contains(toSearch)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

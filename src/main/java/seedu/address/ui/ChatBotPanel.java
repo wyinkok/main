@@ -83,7 +83,9 @@ public class ChatBotPanel extends UiPart<Region> {
 
     public ObservableList<String> addToMessageList(ObservableList<String> listToUpdate) {
         historySnapshot = logic.getHistorySnapshot();
-        listToUpdate.add(historySnapshot.current());
+        if (historySnapshot.hasElement("start")){
+            listToUpdate.add(historySnapshot.current());
+        }
         return listToUpdate;
     }
 
@@ -94,7 +96,7 @@ public class ChatBotPanel extends UiPart<Region> {
     public void buildChat(ObservableList<String> listToBuild) {
         ObservableList<String> updatedMessageList = addToMessageList(listToBuild);
         ObservableList<ChatBotCard> mappedList = EasyBind.map(
-                updatedMessageList, (msg) -> new ChatBotCard(msg, index++));
+                updatedMessageList, (msg) -> new ChatBotCard(msg, ++index));
         chatBotListView.setItems(mappedList);
         chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
     }
