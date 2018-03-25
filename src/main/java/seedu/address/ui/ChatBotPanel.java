@@ -14,7 +14,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+
 import org.fxmisc.easybind.EasyBind;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
@@ -59,8 +61,8 @@ public class ChatBotPanel extends UiPart<Region> {
      * Creates the first welcome message from Jobbi
      */
     public ObservableList<String> initMessageList(ObservableList<String> initialMessageList) {
-        initialMessageList.add("Hello, I am Jobbi! " +
-                         "I am here to help you find your ideal internship today, How can I help you?");
+        initialMessageList.add("Hello, I am Jobbi! "
+                + "I am here to help you find your ideal internship today, How can I help you?");
         return initialMessageList;
     }
 
@@ -115,12 +117,11 @@ public class ChatBotPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleNewResultAvailableForChatBot(NewResultAvailableEvent event){
+    private void handleNewResultAvailableForChatBot(NewResultAvailableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         buildChat(messagelist); // Adds to message thread whenever and whatever user types something in the command box
         Platform.runLater(() -> displayed.setValue((event.message)));
     }
-
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code ChatBotCard}.
@@ -139,7 +140,7 @@ public class ChatBotPanel extends UiPart<Region> {
             }
         }
     }
-    }
+}
 
 
 
