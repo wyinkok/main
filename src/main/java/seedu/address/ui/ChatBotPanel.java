@@ -45,6 +45,7 @@ public class ChatBotPanel extends UiPart<Region> {
     @FXML
     private Label welcome;
 
+    private ObservableList<String> list;
 
     /**
      *  Creates the chatbot thread of messages
@@ -85,8 +86,12 @@ public class ChatBotPanel extends UiPart<Region> {
         historySnapshot = logic.getHistorySnapshot();
         if (historySnapshot.hasElement("start")) {
             listToUpdate.add(historySnapshot.current());
+            if (historySnapshot.current().equals("new")) {
+                listToUpdate.clear();
+                initChatBot();
+            }
         }
-        return listToUpdate;
+            return listToUpdate;
     }
 
     /**

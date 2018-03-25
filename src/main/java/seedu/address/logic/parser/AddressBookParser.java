@@ -17,6 +17,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NewChatCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -94,6 +95,9 @@ public class AddressBookParser {
 
         case StartCommand.COMMAND_WORD:
             return new StartCommand();
+
+        case NewChatCommand.COMMAND_WORD:
+            return new NewChatCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
