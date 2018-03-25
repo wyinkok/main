@@ -130,7 +130,7 @@ public class MainWindow extends UiPart<Stage> {
         internshipListPanel = new InternshipListPanel(logic.getFilteredInternshipList());
         internshipListPanelPlaceholder.getChildren().add(internshipListPanel.getRoot());
 
-        ChatBotPanel chatBotPanel = new ChatBotPanel();
+        ChatBotPanel chatBotPanel = new ChatBotPanel(logic);
         chatBotPanelPlaceholder.getChildren().add(chatBotPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();

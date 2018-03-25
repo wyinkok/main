@@ -1,76 +1,96 @@
 package seedu.address.ui;
 
-import static org.fxmisc.easybind.EasyBind.map;
 
-import java.util.Observable;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.fxmisc.easybind.EasyBind;
 
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-
-import seedu.address.model.MessagesList;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.ListElementPointer;
+import seedu.address.logic.Logic;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.MultipleSelectionModel;
 
 public class ChatBotPanel extends UiPart<Region> {
+
     private static final Logger logger = LogsCenter.getLogger(ChatBotPanel.class);
-
-
-    private List<Label> messages = new ArrayList<>();
-    private ScrollPane container = new ScrollPane();
-    private int index = 0;
-
+    private int index = 1;
     private static final String FXML = "ChatBotPanel.fxml";
+    private Logic logic;
+    private ListElementPointer historySnapshot;
+    private ObservableList<String> messagelist = FXCollections.observableArrayList();
+    private final StringProperty displayed = new SimpleStringProperty();
 
-    //@FXML VBox messageList;
 
     @FXML
     private ListView<ChatBotCard> chatBotListView;
+    @FXML
+    private Label username;
+    @FXML
+    private Label welcome;
 
-    @FXML private Label username;
-    @FXML private Label welcome;
 
-
-
-
-    public ChatBotPanel() {
+    public ChatBotPanel(Logic logic) {
         super(FXML);
+        this.logic = logic;
         initChatBot();
         registerAsAnEventHandler(this);
     }
 
-
     public void initChatBot() {
-        ObservableList<String> messageList = addToList();
+        ObservableList<String> initialmessageList = initList(messagelist); // Creates a list of inputs
+        ObservableList<ChatBotCard> initialmappedList = EasyBind.map(
+                initialmessageList, (msg) -> new ChatBotCard(msg, index));
+        chatBotListView.setSelectionModel(new NoSelectionModel<>());
+        chatBotListView.setItems(initialmappedList);
+        chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
+    }
+
+    public ObservableList<String> initList(ObservableList<String> initiallist) {
+        initiallist.add("Hello, I am Jobbi! I am here to help you find your ideal internship today, How can I help you?");
+        return initiallist;
+    }
+
+    public ObservableList<String> addToList(ObservableList<String> listtoupdate) {
+        historySnapshot = logic.getHistorySnapshot();
+        listtoupdate.add(historySnapshot.current());
+        return listtoupdate;
+    }
+
+
+    public void buildChat(ObservableList<String> buildlist){
+        ObservableList<String> updatedmessageList = addToList(buildlist); // Creates a list of inputs
         ObservableList<ChatBotCard> mappedList = EasyBind.map(
-                messageList, (msg) -> new ChatBotCard(msg));
+                updatedmessageList, (msg) -> new ChatBotCard(msg, index++));
         chatBotListView.setItems(mappedList);
         chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
     }
 
-    public ObservableList<String> addToList() {
-        ObservableList<String> list = FXCollections.observableArrayList();
-        list.add("I am Jobbi");
-        list.add("Nice to meet you");
-        list.add("Yay nice to see u");
-        return list;
+    @Subscribe
+    private void handleNewResultAvailableForChatBot(NewResultAvailableEvent event){
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        buildChat(messagelist);
+
+        Platform.runLater(() -> displayed.setValue((event.message)));
     }
 
     /**
@@ -88,6 +108,7 @@ public class ChatBotPanel extends UiPart<Region> {
         scrollTo(event.targetIndex);
     }
 
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code InternshipCard}.
      */
@@ -96,38 +117,87 @@ public class ChatBotPanel extends UiPart<Region> {
         @Override
         protected void updateItem(ChatBotCard message, boolean empty) {
             super.updateItem(message, empty);
-
             if (empty || message == null) {
                 setGraphic(null);
                 setText(null);
+
             } else {
                 setGraphic(message.getRoot());
+
             }
         }
     }
 
-    }
 
-   /*  public void alignMessages() {
+    public class NoSelectionModel<T> extends MultipleSelectionModel<T> {
 
-        // Temporarily add the same message first
-        messages.add(new Label("I'm a message"));
-        if (index % 2 == 0) {
-
-            messages.get(index).setAlignment(Pos.TOP_LEFT);
-            System.out.println("1");
-
-        } else {
-
-            messages.get(index).setAlignment(Pos.CENTER_RIGHT);
-            System.out.println("2");
-
+        @Override
+        public ObservableList<Integer> getSelectedIndices() {
+            return FXCollections.emptyObservableList();
         }
 
-        messageList.getChildren().add(messages.get(index));
-        index++;
+        @Override
+        public ObservableList<T> getSelectedItems() {
+            return FXCollections.emptyObservableList();
+        }
 
-    } */
+        @Override
+        public void selectIndices(int index, int... indices) {
+        }
+
+        @Override
+        public void selectAll() {
+        }
+
+        @Override
+        public void selectFirst() {
+        }
+
+        @Override
+        public void selectLast() {
+        }
+
+        @Override
+        public void clearAndSelect(int index) {
+        }
+
+        @Override
+        public void select(int index) {
+        }
+
+        @Override
+        public void select(T obj) {
+        }
+
+        @Override
+        public void clearSelection(int index) {
+        }
+
+        @Override
+        public void clearSelection() {
+        }
+
+        @Override
+        public boolean isSelected(int index) {
+            return false;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return true;
+        }
+
+        @Override
+        public void selectPrevious() {
+        }
+
+        @Override
+        public void selectNext() {
+        }
+    }
+
+    }
+
 
 
 

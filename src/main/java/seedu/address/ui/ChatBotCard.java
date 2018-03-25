@@ -1,50 +1,63 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
+
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.internship.Internship;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.logic.ListElementPointer;
 
 /**
  * An UI component that displays information of a {@code Internship}.
  */
 public class ChatBotCard extends UiPart<Region> {
 
+    private static final Logger logger = LogsCenter.getLogger(ChatBotCard.class);
     private static final String FXML = "ChatBotCard.fxml";
-
-    public final String msg;
 
     @FXML
     private HBox messagePane;
     @FXML
     private Label username;
     @FXML
-    private Label message;
+    private Label messages;
 
-    public ChatBotCard(String msg) {
+    private final StringProperty displayed = new SimpleStringProperty();
+
+
+    public ChatBotCard(String msg, int index) {
         super(FXML);
-        this.msg = msg;
-        username.setText("Jobbi: ");
-        message.setText(msg);
+        setMessage(msg, index);
+        registerAsAnEventHandler(this);
     }
 
-   /*  @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
+
+    public void setMessage(String msg, int index) {
+        if (index % 2 == 0) {
+            username.setText("User: ");
+            messages.setText(msg); // Display user input into the command box (DONE!)
+        } else {
+            username.setText("Jobbi: ");
+            messages.setText(msg); // Display results of each command + prompts
+        }
+    }
+
+
+
+        @Subscribe
+        private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
+            logger.info(LogsCenter.getEventHandlingLogMessage(event));
+            Platform.runLater(() -> displayed.setValue((event.message)));
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof InternshipCard)) {
-            return false;
-        }
-
-        // state check
-        String card = (String) other;
-        return username.getText().equals(card.username.getText())
-                && msg.equals(card.msg);
-    } */
 }
