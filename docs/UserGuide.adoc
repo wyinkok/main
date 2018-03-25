@@ -17,7 +17,7 @@ By: `Team CS2103-F11-B3`     Since: `Jan 2018`      Licence: `MIT`
 
 == Introduction
 
-JobbiBot is a chatbot for those who *prefer to use an interactive desktop app to source for development opportunities*. Hence, JobbiBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JobbiBot can find the most suitable internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+JobbiBot is a desktop chatbot application for those who *prefer to use an interactive app to source for development opportunities*. Hence, JobbiBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JobbiBot can find the most suitable internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -53,20 +53,20 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order e.g. if the command specifies `n/NAME p/SALARY`, `p/SALARY n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a internship: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a internship to the address book +
+Format: `add n/NAME p/SALARY e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
-A person can have any number of tags (including 0)
+A internship can have any number of tags (including 0)
 
 Examples:
 
@@ -78,36 +78,35 @@ Examples:
 Shows a list of all internships in the internship database. +
 Format: `list`
 
-=== Editing a person : `edit`
+=== Editing a internship : `edit`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing internship in the address book. +
+Format: `edit INDEX [n/NAME] [p/SALARY] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the internship at the specified `INDEX`. The index refers to the index number shown in the last internship listing. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the internship will be removed i.e adding of tags is not cumulative.
+* You can remove all the internship's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+Edits the salary number and email address of the 1st internship to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Edits the name of the 2nd internship to be `Betsy Crower` and clears all existing tags.
 
-=== Locating internship by name: `find`
 
-Finds internships whose names, phone, email or address contain any of the given keywords. +
+Finds internships whose names, salary, email or address contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Internships matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
@@ -115,21 +114,41 @@ Examples:
 * `find John` +
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+Returns any internship having names `Betsy`, `Tim`, or `John`
 * `find 12345678` +
-Returns any person having phone number `12345678`
+Returns any internship having salary number `12345678`
 * `find Betsy@gmail.com` +
-Returns any person having email `Betsy@gmail.com`
+Returns any internship having email `Betsy@gmail.com`
 * `find Serangoon` +
-Returns any person having address with `Serangoon` in it
+Returns any internship having address with `Serangoon` in it
 
-=== Deleting a person : `delete`
+=== Filtering Internship by keyword: `filter`
 
-Deletes the specified person from the address book. +
+Filter the internship list according to the given keywords. +
+Format: `filter KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `marketing` will match `Marketing`
+* The order of the keywords does not matter. e.g. `Marketing Analytics` will match `Analytics Marketing`
+* Only full words will be matched e.g. `Market` will not match `Marketing`
+* Only Internships which contain all the keyword will be returned e.g `filter Marketing Analytics` will return only +
+containing Marketing AND Analytics but not Marketing Research or Data Analyics
+****
+
+Examples:
+
+* `filter data` +
+Returns any entries containing data e.g Data Analytics, Data Science
+* `filter data analytics` +
+Returns only entries containing data and analytics e.g 'data analytics internship', 'data analytics singapore'
+
+=== Deleting a internship : `delete`
+
+Deletes the specified internship from the address book. +
 Format: `delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
+* Deletes the internship at the specified `INDEX`.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -138,14 +157,14 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd internship in the address book.
 * `find Betsy` +
 `delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st internship in the results of the `find` command.
 
 === Selecting an internship : `select`
 
-Selects the internship identified by the index number used in the last internships listing. +
+Selects the internship identified by the index number used in the last internship listing. +
 Format: `select INDEX`
 
 ****
@@ -158,10 +177,10 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
+Selects the 2nd internship in the address book.
 * `find Betsy` +
 `select 1` +
-Selects the 1st person in the results of the `find` command.
+Selects the 1st internship in the results of the `find` command.
 
 === Saving an internship to a Saved Collection : `save`
 Saves the specified internship from the internship book. +
@@ -271,15 +290,17 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+* *Add* `add n/NAME p/SALARY e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+* *Edit* : `edit INDEX [n/NAME] [p/SALARY] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+e.g. `find Analytics Engineering`
+* *Filter* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `filter Marketing Singapore`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +

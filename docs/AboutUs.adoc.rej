@@ -1,0 +1,41 @@
+diff a/docs/AboutUs.adoc b/docs/AboutUs.adoc	(rejected hunks)
+@@ -12,28 +12,29 @@
+ == Project Team
+
+ === Wyin Kok
+-image::damithc.jpg[width="150", align="left"]
+-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
++image::Wyin.jpg[width="150", align="left"]
++{empty}[http://github.com/wyinkok[github]] [<<Wyin#, portfolio>>]
+
+-Role: Project Advisor
++Role: Team Lead +
++Responsibilities: UI
+
+ '''
+
+ === Colin Ng
+-image::lejolly.jpg[width="150", align="left"]
+-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
++image::Colin.png[width="150", align="left"]
++{empty}[http://github.com/niloc94[github]] [<<Colin#, portfolio>>]
+
+-Role: Team Lead +
+-Responsibilities: UI
++Role: Developer +
++Responsibilities: Model
+
+ '''
+
+ === Tan Ci Kang
+-image::yijinl.jpg[width="150", align="left"]
+-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
++image::CiKang.jpg[width="150", align="left"]
++{empty}[https://github.com/TanCiKang[github]] [<<CiKang#, portfolio>>]
+
+ Role: Developer +
+-Responsibilities: Data
++Responsibilities: Logic
+
+ '''
+
