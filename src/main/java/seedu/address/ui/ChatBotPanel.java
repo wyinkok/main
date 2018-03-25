@@ -91,7 +91,7 @@ public class ChatBotPanel extends UiPart<Region> {
                 initChatBot();
             }
         }
-            return listToUpdate;
+        return listToUpdate;
     }
 
     /**
