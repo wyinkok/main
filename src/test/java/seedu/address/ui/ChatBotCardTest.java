@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-
 import org.junit.Test;
 
 import guitests.guihandles.ChatBotCardHandle;
@@ -41,9 +40,9 @@ public class ChatBotCardTest extends GuiUnitTest {
     private void assertCardDisplay(ChatBotCard chatBotCard, String expectedUserInput) {
         guiRobot.pauseForHuman();
 
-        ChatBotCardHandle ChatBotCardHandle = new ChatBotCardHandle(chatBotCard.getRoot());
+        ChatBotCardHandle chatBotCardHandle = new ChatBotCardHandle(chatBotCard.getRoot());
 
         // verify internship details are displayed correctly
-        GuiTestAssert.assertChatBotUserMessage(ChatBotCardHandle, expectedUserInput);
+        GuiTestAssert.assertChatBotUserMessage(chatBotCardHandle, expectedUserInput);
     }
 }

@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
@@ -22,7 +21,7 @@ public class ChatBotCardHandle extends NodeHandle<Node> {
         this.messagesLabel = getChildNode(MESSAGES_FIELD_ID);
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return usernameLabel.getText();
     }
 
