@@ -83,7 +83,7 @@ public class ChatBotPanel extends UiPart<Region> {
 
     public ObservableList<String> addToMessageList(ObservableList<String> listToUpdate) {
         historySnapshot = logic.getHistorySnapshot();
-        if (historySnapshot.hasElement("start")){
+        if (historySnapshot.hasElement("start")) {
             listToUpdate.add(historySnapshot.current());
         }
         return listToUpdate;
