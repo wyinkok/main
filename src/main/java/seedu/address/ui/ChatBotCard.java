@@ -1,12 +1,10 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -15,10 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.logic.ListElementPointer;
 
 /**
- * An UI component that displays information of a {@code Internship}.
+ * An UI component that displays information of a chat message.
  */
 public class ChatBotCard extends UiPart<Region> {
 
@@ -31,8 +28,6 @@ public class ChatBotCard extends UiPart<Region> {
     private Label username;
     @FXML
     private Label messages;
-
-    private final StringProperty displayed = new SimpleStringProperty();
 
 
     public ChatBotCard(String msg, int index) {
@@ -48,16 +43,7 @@ public class ChatBotCard extends UiPart<Region> {
             messages.setText(msg); // Display user input into the command box (DONE!)
         } else {
             username.setText("Jobbi: ");
-            messages.setText(msg); // Display results of each command + prompts
+            messages.setText(msg); // Display results of each command + Jobbi's prompts
         }
     }
-
-
-
-        @Subscribe
-        private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
-            logger.info(LogsCenter.getEventHandlingLogMessage(event));
-            Platform.runLater(() -> displayed.setValue((event.message)));
-        }
-
 }

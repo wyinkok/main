@@ -9,37 +9,31 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
+import org.fxmisc.easybind.EasyBind;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import javafx.collections.FXCollections;
-
-import org.fxmisc.easybind.EasyBind;
-
-import javafx.scene.control.Label;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.MultipleSelectionModel;
+
+
 
 public class ChatBotPanel extends UiPart<Region> {
-
     private static final Logger logger = LogsCenter.getLogger(ChatBotPanel.class);
-    private int index = 1;
     private static final String FXML = "ChatBotPanel.fxml";
+
     private Logic logic;
     private ListElementPointer historySnapshot;
     private ObservableList<String> messagelist = FXCollections.observableArrayList();
     private final StringProperty displayed = new SimpleStringProperty();
 
+    private int index = 1;
 
     @FXML
     private ListView<ChatBotCard> chatBotListView;
@@ -49,6 +43,7 @@ public class ChatBotPanel extends UiPart<Region> {
     private Label welcome;
 
 
+    /* Initiates the chatbot thread of messages */
     public ChatBotPanel(Logic logic) {
         super(FXML);
         this.logic = logic;
@@ -56,45 +51,42 @@ public class ChatBotPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /* Creates the first welcome message from Jobbi */
+
+    public ObservableList<String> initMessageList(ObservableList<String> initialMessageList) {
+        initialMessageList.add("Hello, I am Jobbi! " +
+                         "I am here to help you find your ideal internship today, How can I help you?");
+        return initialMessageList;
+    }
+
     public void initChatBot() {
-        ObservableList<String> initialmessageList = initList(messagelist); // Creates a list of inputs
-        ObservableList<ChatBotCard> initialmappedList = EasyBind.map(
-                initialmessageList, (msg) -> new ChatBotCard(msg, index));
-        chatBotListView.setSelectionModel(new NoSelectionModel<>());
-        chatBotListView.setItems(initialmappedList);
+        ObservableList<String> initialMessageList = initMessageList(messagelist);
+        ObservableList<ChatBotCard> initialMappedList = EasyBind.map(
+                initialMessageList, (msg) -> new ChatBotCard(msg, index));
+        chatBotListView.setSelectionModel(new DisableSelectionOfListCell<>()); // prevent user from selecting list cell
+        chatBotListView.setItems(initialMappedList);
         chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
     }
 
-    public ObservableList<String> initList(ObservableList<String> initiallist) {
-        initiallist.add("Hello, I am Jobbi! I am here to help you find your ideal internship today, How can I help you?");
-        return initiallist;
-    }
+    /* Creates subsequent messages from the user end - Currently have not implemented Jobbi's reply */
 
-    public ObservableList<String> addToList(ObservableList<String> listtoupdate) {
+    public ObservableList<String> addToMessageList(ObservableList<String> listToUpdate) {
         historySnapshot = logic.getHistorySnapshot();
-        listtoupdate.add(historySnapshot.current());
-        return listtoupdate;
+        listToUpdate.add(historySnapshot.current());
+        return listToUpdate;
     }
 
-
-    public void buildChat(ObservableList<String> buildlist){
-        ObservableList<String> updatedmessageList = addToList(buildlist); // Creates a list of inputs
+    public void buildChat(ObservableList<String> listToBuild){
+        ObservableList<String> updatedMessageList = addToMessageList(listToBuild);
         ObservableList<ChatBotCard> mappedList = EasyBind.map(
-                updatedmessageList, (msg) -> new ChatBotCard(msg, index++));
+                updatedMessageList, (msg) -> new ChatBotCard(msg, index++));
         chatBotListView.setItems(mappedList);
         chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
     }
 
-    @Subscribe
-    private void handleNewResultAvailableForChatBot(NewResultAvailableEvent event){
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        buildChat(messagelist);
-
-        Platform.runLater(() -> displayed.setValue((event.message)));
-    }
 
     /**
-     * Scrolls to the {@code InternshipCard} at the {@code index} and selects it.
+     * Scrolls to the {@code ChatBotCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
@@ -108,12 +100,18 @@ public class ChatBotPanel extends UiPart<Region> {
         scrollTo(event.targetIndex);
     }
 
+    @Subscribe
+    private void handleNewResultAvailableForChatBot(NewResultAvailableEvent event){
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        buildChat(messagelist); // Adds to message thread whenever and whatever user types something in the command box
+        Platform.runLater(() -> displayed.setValue((event.message)));
+    }
+
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code InternshipCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code ChatBotCard}.
      */
     class ChatBotListViewCell extends ListCell<ChatBotCard> {
-
         @Override
         protected void updateItem(ChatBotCard message, boolean empty) {
             super.updateItem(message, empty);
@@ -127,76 +125,7 @@ public class ChatBotPanel extends UiPart<Region> {
             }
         }
     }
-
-
-    public class NoSelectionModel<T> extends MultipleSelectionModel<T> {
-
-        @Override
-        public ObservableList<Integer> getSelectedIndices() {
-            return FXCollections.emptyObservableList();
-        }
-
-        @Override
-        public ObservableList<T> getSelectedItems() {
-            return FXCollections.emptyObservableList();
-        }
-
-        @Override
-        public void selectIndices(int index, int... indices) {
-        }
-
-        @Override
-        public void selectAll() {
-        }
-
-        @Override
-        public void selectFirst() {
-        }
-
-        @Override
-        public void selectLast() {
-        }
-
-        @Override
-        public void clearAndSelect(int index) {
-        }
-
-        @Override
-        public void select(int index) {
-        }
-
-        @Override
-        public void select(T obj) {
-        }
-
-        @Override
-        public void clearSelection(int index) {
-        }
-
-        @Override
-        public void clearSelection() {
-        }
-
-        @Override
-        public boolean isSelected(int index) {
-            return false;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return true;
-        }
-
-        @Override
-        public void selectPrevious() {
-        }
-
-        @Override
-        public void selectNext() {
-        }
-    }
-
-    }
+}
 
 
 
