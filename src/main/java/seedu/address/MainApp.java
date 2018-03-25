@@ -32,7 +32,6 @@ import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
-import seedu.address.ui.ChatBotPanel;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -186,7 +185,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         ui.start(primaryStage);
-   }
+    }
 
 
     @Override

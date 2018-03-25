@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -23,6 +22,9 @@ import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
 
 
+/**
+ * Panel containing the message thread between chatbot and user.
+ */
 
 public class ChatBotPanel extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(ChatBotPanel.class);
@@ -43,7 +45,9 @@ public class ChatBotPanel extends UiPart<Region> {
     private Label welcome;
 
 
-    /* Initiates the chatbot thread of messages */
+    /**
+     *  Creates the chatbot thread of messages
+     */
     public ChatBotPanel(Logic logic) {
         super(FXML);
         this.logic = logic;
@@ -51,14 +55,18 @@ public class ChatBotPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    /* Creates the first welcome message from Jobbi */
-
+    /**
+     * Creates the first welcome message from Jobbi
+     */
     public ObservableList<String> initMessageList(ObservableList<String> initialMessageList) {
         initialMessageList.add("Hello, I am Jobbi! " +
                          "I am here to help you find your ideal internship today, How can I help you?");
         return initialMessageList;
     }
 
+    /**
+     * Initiates the chatbot thread of messages with Jobbi's first message
+     */
     public void initChatBot() {
         ObservableList<String> initialMessageList = initMessageList(messagelist);
         ObservableList<ChatBotCard> initialMappedList = EasyBind.map(
@@ -68,7 +76,9 @@ public class ChatBotPanel extends UiPart<Region> {
         chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
     }
 
-    /* Creates subsequent messages from the user end - Currently have not implemented Jobbi's reply */
+    /**
+     *  Adds subsequent messages from the user end into the message list - Currently have not implemented Jobbi's reply
+     */
 
     public ObservableList<String> addToMessageList(ObservableList<String> listToUpdate) {
         historySnapshot = logic.getHistorySnapshot();
@@ -76,7 +86,11 @@ public class ChatBotPanel extends UiPart<Region> {
         return listToUpdate;
     }
 
-    public void buildChat(ObservableList<String> listToBuild){
+    /**
+     *  Creates subsequent messages from the user end - Currently have not implemented Jobbi's reply
+     */
+
+    public void buildChat(ObservableList<String> listToBuild) {
         ObservableList<String> updatedMessageList = addToMessageList(listToBuild);
         ObservableList<ChatBotCard> mappedList = EasyBind.map(
                 updatedMessageList, (msg) -> new ChatBotCard(msg, index++));
@@ -125,7 +139,7 @@ public class ChatBotPanel extends UiPart<Region> {
             }
         }
     }
-}
+    }
 
 
 
