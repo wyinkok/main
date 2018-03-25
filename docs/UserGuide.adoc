@@ -267,6 +267,16 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+=== Start communication with program : `start`
+
+Initiates the message thread of JobbiBot. +
+Format: `start`
+
+=== Restart communication with program : `new`
+
+Restarts a new message thread of JobbiBot and the previous thread is deleted +
+Format: `new`
+
 === Exiting the program : `exit`
 
 Exits the program. +

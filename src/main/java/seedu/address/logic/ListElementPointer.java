@@ -15,7 +15,6 @@ import java.util.NoSuchElementException;
 public class ListElementPointer {
     private List<String> list;
     private int index;
-    private int tempindex;
 
     /**
      * Constructs {@code ListElementPointer} which is backed by a defensive copy of {@code list}.
