@@ -15,7 +15,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.InternshipPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.model.person.Person;
+import seedu.address.model.internship.Internship;
 
 /**
  * Panel containing the list of internships, research and other development opportunities.
@@ -27,15 +27,15 @@ public class InternshipListPanel extends UiPart<Region> {
     @FXML
     private ListView<InternshipCard> internshipListView;
 
-    public InternshipListPanel(ObservableList<Person> internshipList) {
+    public InternshipListPanel(ObservableList<Internship> internshipList) {
         super(FXML);
         setConnections(internshipList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Person> internshipList) {
+    private void setConnections(ObservableList<Internship> internshipList) {
         ObservableList<InternshipCard> mappedList = EasyBind.map(
-                internshipList, (person) -> new InternshipCard(person, internshipList.indexOf(person) + 1));
+                internshipList, (internship) -> new InternshipCard(internship, internshipList.indexOf(internship) + 1));
         internshipListView.setItems(mappedList);
         internshipListView.setCellFactory(listView -> new InternshipListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -45,7 +45,7 @@ public class InternshipListPanel extends UiPart<Region> {
         internshipListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in person list panel changed to : '" + newValue + "'");
+                        logger.fine("Selection in internship list panel changed to : '" + newValue + "'");
                         raise(new InternshipPanelSelectionChangedEvent(newValue));
                     }
                 });
@@ -73,14 +73,14 @@ public class InternshipListPanel extends UiPart<Region> {
     class InternshipListViewCell extends ListCell<InternshipCard> {
 
         @Override
-        protected void updateItem(InternshipCard person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(InternshipCard internship, boolean empty) {
+            super.updateItem(internship, empty);
 
-            if (empty || person == null) {
+            if (empty || internship == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(person.getRoot());
+                setGraphic(internship.getRoot());
             }
         }
     }
