@@ -18,7 +18,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
@@ -35,7 +34,6 @@ public class ChatBotPanel extends UiPart<Region> {
     private Logic logic;
     private ListElementPointer historySnapshot;
     private ObservableList<String> messagelist = FXCollections.observableArrayList();
-    private final StringProperty displayed = new SimpleStringProperty();
 
     @FXML
     private ListView<ChatBotCard> chatBotListView;
@@ -69,9 +67,9 @@ public class ChatBotPanel extends UiPart<Region> {
      * Initiates the chatbot thread of messages with Jobbi's first message
      */
     public void initChatBot() {
-        ObservableList<String> initialMessageList = initMessageList(messagelist);
+        ObservableList<String> initialMessageThread = initMessageList(messagelist);
         ObservableList<ChatBotCard> initialMappedList = EasyBind.map(
-                initialMessageList, (msg) -> new ChatBotCard(msg, 0));
+                initialMessageThread, (msg) -> new ChatBotCard(msg, 0));
         chatBotListView.setSelectionModel(new DisableSelectionOfListCell<>()); // prevent user from selecting list cell
         chatBotListView.setItems(initialMappedList);
         chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
@@ -81,7 +79,7 @@ public class ChatBotPanel extends UiPart<Region> {
      *  Adds subsequent messages from the user end into the message list - Currently have not implemented Jobbi's reply
      */
 
-    public ObservableList<String> addToMessageList(ObservableList<String> listToUpdate) {
+    public ObservableList<String> addToMessageThread(ObservableList<String> listToUpdate) {
         historySnapshot = logic.getHistorySnapshot();
         if (historySnapshot.hasElement("start")) {
             listToUpdate.add(historySnapshot.current());
@@ -93,7 +91,7 @@ public class ChatBotPanel extends UiPart<Region> {
         return listToUpdate;
     }
 
-    public ObservableList<String> hasInitiated(ObservableList<String> currentMessageList, String message){
+    public ObservableList<String> hasConversationStarted(ObservableList<String> currentMessageList, String message){
         historySnapshot = logic.getHistorySnapshot();
         if (historySnapshot.hasElement("start")) {
             currentMessageList.add(message);
@@ -106,7 +104,7 @@ public class ChatBotPanel extends UiPart<Region> {
      */
 
     public void buildChat(ObservableList<String> listToBuild) {
-        ObservableList<String> updatedMessageList = addToMessageList(listToBuild);
+        ObservableList<String> updatedMessageList = addToMessageThread(listToBuild);
         if (updatedMessageList.size()== (1)) {
             ObservableList<ChatBotCard> mappedList = EasyBind.map(
                     updatedMessageList, (msg) -> new ChatBotCard(msg, 0));
@@ -125,8 +123,7 @@ public class ChatBotPanel extends UiPart<Region> {
     private void handleNewResultAvailableForChatBot(NewResultAvailableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         buildChat(messagelist); // Adds to message thread whenever and whatever user types something in the command box
-        hasInitiated(messagelist, event.message);
-        Platform.runLater(() -> displayed.setValue((event.message)));
+        hasConversationStarted(messagelist, event.message);
     }
 
     /**

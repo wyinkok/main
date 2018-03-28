@@ -133,9 +133,6 @@ public class MainWindow extends UiPart<Stage> {
         ChatBotPanel chatBotPanel = new ChatBotPanel(logic);
         chatBotPanelPlaceholder.getChildren().add(chatBotPanel.getRoot());
 
-        ResultDisplay resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
