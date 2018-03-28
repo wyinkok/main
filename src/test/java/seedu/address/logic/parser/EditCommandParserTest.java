@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INDUSTRY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INDUSTRY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDUSTRY_DESC;
@@ -165,6 +166,12 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
+        // industry
+        userInput = targetIndex.getOneBased() + INDUSTRY_DESC_AMY;
+        descriptor = new EditInternshipDescriptorBuilder().withIndustry(VALID_INDUSTRY_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditInternshipDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
@@ -176,13 +183,13 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_INTERNSHIP;
         String userInput = targetIndex.getOneBased()  + SALARY_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + SALARY_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + SALARY_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
-
+                + INDUSTRY_DESC_AMY + TAG_DESC_FRIEND + SALARY_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
+                + INDUSTRY_DESC_AMY + TAG_DESC_FRIEND + SALARY_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB
+                + INDUSTRY_DESC_BOB + TAG_DESC_HUSBAND;
         EditCommand.EditInternshipDescriptor descriptor =
                 new EditInternshipDescriptorBuilder().withSalary(VALID_SALARY_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withIndustry(VALID_INDUSTRY_BOB)
+                        .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -200,9 +207,9 @@ public class EditCommandParserTest {
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_SALARY_DESC + ADDRESS_DESC_BOB
-                + SALARY_DESC_BOB;
+                + SALARY_DESC_BOB + INDUSTRY_DESC_BOB;
         descriptor = new EditInternshipDescriptorBuilder().withSalary(VALID_SALARY_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).build();
+                .withAddress(VALID_ADDRESS_BOB).withIndustry(VALID_INDUSTRY_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

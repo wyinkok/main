@@ -166,7 +166,8 @@ public class EditCommand extends UndoableCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(this.name, this.salary, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyNonNull(this.name, this.salary, this.email, this.address, this.industry,
+                    this.tags);
         }
 
         public void setName(Name name) {
@@ -200,6 +201,7 @@ public class EditCommand extends UndoableCommand {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+
         public void setIndustry(Industry industry) {
             this.industry = industry;
         }
