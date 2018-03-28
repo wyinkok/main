@@ -33,10 +33,10 @@ public class ChatBotCard extends UiPart<Region> {
 
     public void setMessage(String msg, int index) {
         if (index % 2 == 0) {
-            username.setText("User: ");
+            username.setText("Jobbi: ");
             messages.setText(msg); // Display user input into the command box (DONE!)
         } else {
-            username.setText("Jobbi: ");
+            username.setText("User: ");
             messages.setText(msg); // Display results of each command + Jobbi's prompts
         }
     }

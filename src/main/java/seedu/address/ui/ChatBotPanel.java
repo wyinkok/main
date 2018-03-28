@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 import org.fxmisc.easybind.EasyBind;
@@ -36,7 +37,7 @@ public class ChatBotPanel extends UiPart<Region> {
     private ObservableList<String> messagelist = FXCollections.observableArrayList();
     private final StringProperty displayed = new SimpleStringProperty();
 
-    private int index = 1;
+    //private int index = 1;
 
     @FXML
     private ListView<ChatBotCard> chatBotListView;
@@ -72,7 +73,7 @@ public class ChatBotPanel extends UiPart<Region> {
     public void initChatBot() {
         ObservableList<String> initialMessageList = initMessageList(messagelist);
         ObservableList<ChatBotCard> initialMappedList = EasyBind.map(
-                initialMessageList, (msg) -> new ChatBotCard(msg, index));
+                initialMessageList, (msg) -> new ChatBotCard(msg, 0));
         chatBotListView.setSelectionModel(new DisableSelectionOfListCell<>()); // prevent user from selecting list cell
         chatBotListView.setItems(initialMappedList);
         chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
@@ -100,10 +101,18 @@ public class ChatBotPanel extends UiPart<Region> {
 
     public void buildChat(ObservableList<String> listToBuild) {
         ObservableList<String> updatedMessageList = addToMessageList(listToBuild);
-        ObservableList<ChatBotCard> mappedList = EasyBind.map(
-                updatedMessageList, (msg) -> new ChatBotCard(msg, ++index));
-        chatBotListView.setItems(mappedList);
-        chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
+        if (updatedMessageList.size()== (1)) {
+            ObservableList<ChatBotCard> mappedList = EasyBind.map(
+                    updatedMessageList, (msg) -> new ChatBotCard(msg, 0));
+            chatBotListView.setItems(mappedList);
+            chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
+        } else {
+            AtomicInteger index = new AtomicInteger();
+            ObservableList<ChatBotCard> mappedList = EasyBind.map(
+                    updatedMessageList, (msg) -> new ChatBotCard(msg, index.getAndIncrement()));
+            chatBotListView.setItems(mappedList);
+            chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
+        }
     }
 
 
