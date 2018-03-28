@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -21,6 +22,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
+import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Salary;
@@ -43,6 +45,7 @@ public class EditCommand extends UndoableCommand {
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SALARY + "1000 "
@@ -107,9 +110,10 @@ public class EditCommand extends UndoableCommand {
         Salary updatedSalary = editInternshipDescriptor.getSalary().orElse(internshipToEdit.getSalary());
         Email updatedEmail = editInternshipDescriptor.getEmail().orElse(internshipToEdit.getEmail());
         Address updatedAddress = editInternshipDescriptor.getAddress().orElse(internshipToEdit.getAddress());
+        Industry updatedIndustry = editInternshipDescriptor.getIndustry().orElse(internshipToEdit.getIndustry());
         Set<Tag> updatedTags = editInternshipDescriptor.getTags().orElse(internshipToEdit.getTags());
 
-        return new Internship(updatedName, updatedSalary, updatedEmail, updatedAddress, updatedTags);
+        return new Internship(updatedName, updatedSalary, updatedEmail, updatedAddress, updatedIndustry, updatedTags);
     }
 
     @Override
@@ -140,6 +144,7 @@ public class EditCommand extends UndoableCommand {
         private Salary salary;
         private Email email;
         private Address address;
+        private Industry industry;
         private Set<Tag> tags;
 
         public EditInternshipDescriptor() {}
@@ -153,6 +158,7 @@ public class EditCommand extends UndoableCommand {
             setSalary(toCopy.salary);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setIndustry(toCopy.industry);
             setTags(toCopy.tags);
         }
 
@@ -194,7 +200,13 @@ public class EditCommand extends UndoableCommand {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+        public void setIndustry(Industry industry) {
+            this.industry = industry;
+        }
 
+        public Optional<Industry> getIndustry() {
+            return Optional.ofNullable(industry);
+        }
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -231,6 +243,7 @@ public class EditCommand extends UndoableCommand {
                     && getSalary().equals(e.getSalary())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getIndustry().equals(e.getIndustry())
                     && getTags().equals(e.getTags());
         }
     }
