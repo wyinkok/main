@@ -12,7 +12,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-F11-B3/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team CS2103-F11-B3`      Since: `Jan 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -156,11 +156,11 @@ The sections below give more details of each component.
 === UI component
 
 .Structure of the UI Component
-image::UiClassDiagram.png[width="800"]
+image::UiClassDiagramv1.2.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `InternshipListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -962,7 +962,7 @@ Use case resumes at step 2.
 1. User keys in command to find internship
 2. Chat Bot gives user a list of prompts ( e.g. Salary, duration )
 3. User follows the prompts and key in the relevant details
-4. Chat Bot replies with a list of internship companies
+4. Chat Bot replies with a list of internship companies and provide filter prompts
 5. User views the list and further filter using the prompts given by the Chat Bot
 6. Repeat steps 3-5 until the user is satisfied
 +
@@ -997,7 +997,7 @@ Use case ends.
 1. User keys in command to explore internship
 2. Chat Bot gives user a list of prompts ( common skills sets )
 3. User fills in a prompt or a list of prompts
-4. Chat Bot replies with a list of internship companies
+4. Chat Bot replies with a list of internship companies and provide filter prompts
 5. User views the list and further filter using the prompts given by the Chat Bot
 6. Repeats steps 3-5 until user is satisfied
 +

@@ -2,10 +2,9 @@ package systemtests;
 
 import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
@@ -43,8 +42,8 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find person where person list is not displaying the person we are finding -> 1 person found */
-        command = FindCommand.COMMAND_WORD + " Carl";
-        ModelHelper.setFilteredList(expectedModel, CARL);
+        command = FindCommand.COMMAND_WORD + " Elle";
+        ModelHelper.setFilteredList(expectedModel, ELLE);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -138,7 +137,8 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         /* Case: find while a person is selected -> selected card deselected */
         showAllPersons();
         selectPerson(Index.fromOneBased(1));
-        assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
+        assertFalse(getInternshipPersonListPanel().getHandleToSelectedCard()
+            .getName().equals(DANIEL.getName().fullName));
         command = FindCommand.COMMAND_WORD + " Daniel";
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
@@ -152,9 +152,11 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: mixed case command word -> rejected */
+        /* Case: mixed case command word -> 1 person found */
         command = "FiNd Meier";
-        assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
+        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
     }
 
     /**
