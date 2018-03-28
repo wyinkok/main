@@ -3,8 +3,10 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<Internship> filteredInternships;
+    private static List<String> filterKeywords;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +40,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         filteredInternships = new FilteredList<>(this.addressBook.getInternshipList());
+
+        filterKeywords = new ArrayList<String>();
     }
 
     public ModelManager() {
@@ -81,6 +86,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    public static void setKeywords(List<String> keywords) {
+        filterKeywords = keywords;
+    }
+
+    public static List<String> getKeywords(){
+        return filterKeywords;
+    }
+
     //=========== Filtered Internship List Accessors =============================================================
 
     /**
@@ -89,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public ObservableList<Internship> getFilteredInternshipList() {
-        return FXCollections.unmodifiableObservableList(filteredInternships);
+        return FXCollections.unmodifiableObservableList(filteredInternships).sorted();
     }
 
     @Override
