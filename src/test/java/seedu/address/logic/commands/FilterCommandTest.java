@@ -3,12 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.CARL2;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.GEORGE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.commons.core.Messages.MESSAGE_INTERNSHIPS_LISTED_OVERVIEW;
+import static seedu.address.testutil.TypicalInternships.CARL;
+import static seedu.address.testutil.TypicalInternships.CARL2;
+import static seedu.address.testutil.TypicalInternships.DANIEL;
+import static seedu.address.testutil.TypicalInternships.GEORGE;
+import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,7 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.internship.Internship;
 import seedu.address.model.person.PersonContainsAllKeywordsPredicate;
 
 /**
@@ -60,29 +60,29 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_zeroPersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_multipleKeywords_zeroInternshipsFound() {
+        String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 0);
         FilterCommand command = prepareCommand("Carl Daniel Meier");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
     @Test
-    public void execute_multipleKeywords_singlePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+    public void execute_multipleKeywords_singleInternshipsFound() {
+        String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 1);
         FilterCommand command = prepareCommand("Kurz Carl");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL));
     }
 
     @Test
-    public void execute_singleKeyword_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+    public void execute_singleKeyword_multipleInternshipsFound() {
+        String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 2);
         FilterCommand command = prepareCommand("Carl");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, CARL2));
     }
 
     @Test
-    public void execute_singleKeywordNonNameAttribute_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+    public void execute_singleKeywordNonNameAttribute_multipleInternshipsFound() {
+        String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 4);
         FilterCommand command = prepareCommand("Street");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, DANIEL, GEORGE, CARL2));
     }
@@ -104,12 +104,12 @@ public class FilterCommandTest {
      *     - the {@code FilteredList<Person>} is equal to {@code expectedList}<br>
      *     - the {@code AddressBook} in model remains the same after executing the {@code command}
      */
-    private void assertCommandSuccess(FilterCommand command, String expectedMessage, List<Person> expectedList) {
+    private void assertCommandSuccess(FilterCommand command, String expectedMessage, List<Internship> expectedList) {
         AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
         CommandResult commandResult = command.execute();
 
         assertEquals(expectedMessage, commandResult.feedbackToUser);
-        assertEquals(expectedList, model.getFilteredPersonList());
+        assertEquals(expectedList, model.getFilteredInternshipList());
         assertEquals(expectedAddressBook, model.getAddressBook());
     }
 }
