@@ -37,8 +37,6 @@ public class ChatBotPanel extends UiPart<Region> {
     private ObservableList<String> messagelist = FXCollections.observableArrayList();
     private final StringProperty displayed = new SimpleStringProperty();
 
-    //private int index = 1;
-
     @FXML
     private ListView<ChatBotCard> chatBotListView;
     @FXML
@@ -95,6 +93,14 @@ public class ChatBotPanel extends UiPart<Region> {
         return listToUpdate;
     }
 
+    public ObservableList<String> hasInitiated(ObservableList<String> currentMessageList, String message){
+        historySnapshot = logic.getHistorySnapshot();
+        if (historySnapshot.hasElement("start")) {
+            currentMessageList.add(message);
+        }
+        return currentMessageList;
+    }
+
     /**
      *  Creates subsequent messages from the user end - Currently have not implemented Jobbi's reply
      */
@@ -115,26 +121,11 @@ public class ChatBotPanel extends UiPart<Region> {
         }
     }
 
-
-    /**
-     * Scrolls to the {@code ChatBotCard} at the {@code index} and selects it.
-     */
-    private void scrollTo(int index) {
-        Platform.runLater(() -> {
-            chatBotListView.scrollTo(index);
-        });
-    }
-
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
-    }
-
     @Subscribe
     private void handleNewResultAvailableForChatBot(NewResultAvailableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         buildChat(messagelist); // Adds to message thread whenever and whatever user types something in the command box
+        hasInitiated(messagelist, event.message);
         Platform.runLater(() -> displayed.setValue((event.message)));
     }
 
@@ -156,9 +147,3 @@ public class ChatBotPanel extends UiPart<Region> {
         }
     }
 }
-
-
-
-
-
-
