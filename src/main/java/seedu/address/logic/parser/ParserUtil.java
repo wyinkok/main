@@ -149,7 +149,7 @@ public class ParserUtil {
     public static Industry parseIndustry(String industry) throws IllegalValueException {
         requireNonNull(industry);
         String trimmedIndustry = industry.trim();
-        if (!Address.isValidAddress(trimmedIndustry)) {
+        if (!Industry.isValidIndustry(trimmedIndustry)) {
             throw new IllegalValueException(Industry.MESSAGE_INDUSTRY_CONSTRAINTS);
         }
         return new Industry(trimmedIndustry);

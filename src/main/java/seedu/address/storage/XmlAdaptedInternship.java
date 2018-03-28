@@ -119,6 +119,10 @@ public class XmlAdaptedInternship {
         }
         final Address address = new Address(this.address);
 
+        if (this.industry == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Industry.class.getSimpleName()));
+        }
         if (!Industry.isValidIndustry(this.industry)) {
             throw new IllegalValueException(Industry.MESSAGE_INDUSTRY_CONSTRAINTS);
         }
