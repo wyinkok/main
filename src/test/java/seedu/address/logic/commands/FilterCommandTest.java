@@ -23,7 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.person.InternshipContainsKeywordsPredicate;
+import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
@@ -34,10 +34,10 @@ public class FilterCommandTest {
 
     @Test
     public void equals() {
-        InternshipContainsKeywordsPredicate firstPredicate =
-                new InternshipContainsKeywordsPredicate(Collections.singletonList("first"));
-        InternshipContainsKeywordsPredicate secondPredicate =
-                new InternshipContainsKeywordsPredicate(Collections.singletonList("second"));
+        InternshipContainsAllKeywordsPredicate firstPredicate =
+                new InternshipContainsAllKeywordsPredicate(Collections.singletonList("first"));
+        InternshipContainsAllKeywordsPredicate secondPredicate =
+                new InternshipContainsAllKeywordsPredicate(Collections.singletonList("second"));
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
@@ -93,7 +93,7 @@ public class FilterCommandTest {
      */
     private FilterCommand prepareCommand(String userInput) {
         FilterCommand command =
-                new FilterCommand(new InternshipContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
+                new FilterCommand(new InternshipContainsAllKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }

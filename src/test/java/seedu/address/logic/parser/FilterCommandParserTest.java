@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.model.person.InternshipContainsKeywordsPredicate;
+import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
 
 public class FilterCommandParserTest {
 
@@ -24,7 +24,7 @@ public class FilterCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
-                new FilterCommand(new InternshipContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new FilterCommand(new InternshipContainsAllKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFilterCommand);
 
         // multiple whitespaces between keywords
