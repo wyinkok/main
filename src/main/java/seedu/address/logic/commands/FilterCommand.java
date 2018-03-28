@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.person.PersonContainsAllKeywordsPredicate;
+import seedu.address.model.person.InternshipContainsKeywordsPredicate;
 
 
 /**
@@ -18,9 +18,9 @@ public class FilterCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + "Marketing";
 
-    private final PersonContainsAllKeywordsPredicate predicate;
+    private final InternshipContainsKeywordsPredicate predicate;
 
-    public FilterCommand(PersonContainsAllKeywordsPredicate predicate) {
+    public FilterCommand(InternshipContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
