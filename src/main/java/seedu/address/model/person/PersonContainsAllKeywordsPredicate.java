@@ -17,9 +17,19 @@ public class PersonContainsAllKeywordsPredicate implements Predicate<Internship>
     }
 
     @Override
-    public boolean test(Internship person) {
+    public boolean test(Internship internship) {
         // Check if all keyword can be found in all of a person's details (e.g name, contact number, address)
-        return keywords.stream().allMatch(keyword -> StringUtil.containsWordIgnoreCase(person.toString(), keyword));
+        String internshipAttributeString = internshipAttributeString(internship);
+        return keywords.stream().allMatch(keyword -> StringUtil.containsWordIgnoreCase(internshipAttributeString, keyword));
+    }
+
+    /**
+     * Helper method to collate all attributes of internship formats it for searching
+     */
+    private String internshipAttributeString(Internship internship) {
+        // tags currently toString as [tagName], replace [] with whitespace for searching
+        String internshipAttributeString = internship.toString().replaceAll("[\\[+\\]+]"," ");
+        return internshipAttributeString;
     }
 
     @Override
