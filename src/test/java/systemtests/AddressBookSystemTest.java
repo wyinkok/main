@@ -26,7 +26,6 @@ import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.InternshipListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
@@ -118,7 +117,7 @@ public abstract class AddressBookSystemTest {
     }
 
     //    public ResultDisplayHandle getResultDisplay() {
-      //  return mainWindowHandle.getResultDisplay();
+    //  return mainWindowHandle.getResultDisplay();
     //}
 
     /**
