@@ -56,7 +56,7 @@ public class ChatBotPanel extends UiPart<Region> {
      */
     public ObservableList<String> initMessageList(ObservableList<String> initialMessageList) {
         initialMessageList.add("Hello, I am Jobbi! "
-                + "I am here to help you find your ideal internship today, How can I help you?");
+                + "I am here to help you find your ideal internship today. Please type 'start' to begin your search.");
         return initialMessageList;
     }
 
@@ -88,7 +88,14 @@ public class ChatBotPanel extends UiPart<Region> {
         return listToUpdate;
     }
 
-    public ObservableList<String> hasConversationStarted(ObservableList<String> currentMessageList, String message){
+    /**
+     * Checks if the user has initiated conversation with Jobbi and adds Jobbi's response if he/she has.
+     * @param currentMessageList
+     * @param message
+     * @return
+     */
+
+    public ObservableList<String> hasConversationStarted(ObservableList<String> currentMessageList, String message) {
         historySnapshot = logic.getHistorySnapshot();
         if (historySnapshot.hasElement("start")) {
             currentMessageList.add(message);
@@ -102,7 +109,7 @@ public class ChatBotPanel extends UiPart<Region> {
 
     public void buildChat(ObservableList<String> listToBuild) {
         ObservableList<String> updatedMessageList = addToMessageThread(listToBuild);
-        if (updatedMessageList.size()== (1)) {
+        if (updatedMessageList.size() == (1)) {
             ObservableList<ChatBotCard> mappedList = EasyBind.map(
                     updatedMessageList, (msg) -> new ChatBotCard(msg, 0));
             chatBotListView.setItems(mappedList);
