@@ -104,8 +104,7 @@ public class XmlAdaptedInternshipTest {
     }
 
     @Test
-    public void
-    toModelType_nullAddress_throwsIllegalValueException() {
+    public void toModelType_nullAddress_throwsIllegalValueException() {
         XmlAdaptedInternship internship =
                 new XmlAdaptedInternship(VALID_NAME, VALID_SALARY, VALID_EMAIL, null, VALID_INDUSTRY,
                         VALID_TAGS);
