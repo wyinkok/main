@@ -10,7 +10,8 @@ public class StartCommand extends Command {
 
     public static final String COMMAND_WORD = "start";
 
-    public static final String MESSAGE_START_ACKNOWLEDGEMENT = "Started conversation with Jobbi";
+    public static final String MESSAGE_START_ACKNOWLEDGEMENT = "Awesome! What type of internship are you "
+            + "looking for? Please choose to type in 'part time' or 'full time' ";
 
     @Override
     public CommandResult execute() {
