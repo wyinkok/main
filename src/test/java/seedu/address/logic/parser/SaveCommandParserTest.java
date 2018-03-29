@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class SaveCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSaveCommand() throws UniqueTagList.DuplicateTagException {
-        assertParseSuccess(parser, "1", new SaveCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new SaveCommand(INDEX_FIRST_INTERNSHIP));
     }
 
     @Test

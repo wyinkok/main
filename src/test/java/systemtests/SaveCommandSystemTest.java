@@ -1,16 +1,16 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
+import static seedu.address.testutil.TestUtil.getInternship;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TestUtil.getSecondLastIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP;
+import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -21,9 +21,9 @@ import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
+import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.testutil.SavedPersonBuilder;
 
 public class SaveCommandSystemTest extends AddressBookSystemTest {
@@ -38,11 +38,10 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: save the first person in the list, command with leading spaces and trailing spaces -> saved */
         Model expectedmodel = getModel();
-        Index firstindex = INDEX_FIRST_PERSON;
-        String command = "     " + SaveCommand.COMMAND_WORD + "      " + firstindex.getOneBased() + "       ";
-        Person editedInternship = addSavedTagToInternship(expectedmodel, firstindex);
-        assertCommandSuccess(command, firstindex, editedInternship);
-
+        Index firstIndex = INDEX_FIRST_INTERNSHIP;
+        String command = "     " + SaveCommand.COMMAND_WORD + "      " + firstIndex.getOneBased() + "       ";
+        Internship editedInternship = addSavedTagToInternship(expectedmodel, firstIndex);
+        assertCommandSuccess(command, firstIndex, editedInternship);
 
         /* Case: save the last internship in the list -> saved */
         Model modelBeforeSavingLast = getModel();
@@ -67,33 +66,33 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         /* ------------------ Performing save operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered internship list, save index within bounds of internship book and internship list -> save */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        showInternshipWithName(KEYWORD_MATCHING_MEIER);
+        Index index = INDEX_FIRST_INTERNSHIP;
+        assertTrue(index.getZeroBased() < getModel().getFilteredInternshipList().size());
         command = SaveCommand.COMMAND_WORD + " " + index.getOneBased();
-        Person personWithSavedTag = new SavedPersonBuilder()
+        Internship internshipWithSavedTag = new SavedPersonBuilder()
                 .addTag(getModel().getFilteredPersonList().get(index.getZeroBased()));
-        assertCommandSuccess(command, index, personWithSavedTag);
+        assertCommandSuccess(command, index, internshipWithSavedTag);
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
+        int invalidIndex = getModel().getAddressBook().getInternshipList().size();
         command = SaveCommand.COMMAND_WORD + " " + invalidIndex;
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
         /* --------------------- Performing save operation while a internship card is selected --------------------- */
 
         /* Case: save the selected internship
                     -> internship list panel selects the internship before the saved internship */
-        showAllPersons();
+        showAllInternships();
         Model expectedModel = getModel();
         Index selectedIndex = getSecondLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased());
-        selectPerson(selectedIndex);
+        selectInternship(selectedIndex);
         command = SaveCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        Person neweditedInternship = addSavedTagToInternship(expectedModel, selectedIndex);
-        expectedResultMessage = String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, neweditedInternship);
+        Internship newEditedInternship = addSavedTagToInternship(expectedModel, selectedIndex);
+        expectedResultMessage = String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, newEditedInternship);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
         /* --------------------------------- Performing invalid save operation ------------------------------------ */
@@ -108,9 +107,9 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getPersonList().size() + 1);
+                getModel().getAddressBook().getInternshipList().size() + 1);
         command = SaveCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(SaveCommand.COMMAND_WORD + " abc", MESSAGE_INVALID_SAVE_COMMAND_FORMAT);
@@ -118,22 +117,20 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(SaveCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_SAVE_COMMAND_FORMAT);
 
-        /* Case: mixed case command word -> rejected */
-        assertCommandFailure("SaVE 1", MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
      * Update the {@code Person} at the specified {@code index} in {@code model}'s internship book.
      * @return the internship person with a "saved" tag
      */
-    private Person addSavedTagToInternship(Model model, Index index) throws CommandException {
-        Person targetInternship = getPerson(model, index);
-        Person editedInternship = new SavedPersonBuilder().addTag(targetInternship);
+    private Internship addSavedTagToInternship(Model model, Index index) throws CommandException {
+        Internship targetInternship = getInternship(model, index);
+        Internship editedInternship = new SavedPersonBuilder().addTag(targetInternship);
         try {
-            model.updatePerson(targetInternship, editedInternship);
-        } catch (PersonNotFoundException pnfe) {
+            model.updateInternship(targetInternship, editedInternship);
+        } catch (InternshipNotFoundException pnfe) {
             throw new AssertionError("targetInternship is retrieved from model.");
-        } catch (DuplicatePersonException e) {
+        } catch (DuplicateInternshipException e) {
             throw new AssertionError("editedInternship is a duplicate in expectedModel.");
         }
         return editedInternship;
@@ -142,11 +139,11 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
     /**
      * Saves the internship at {@code toSave} by creating a default {@code SaveCommand} using {@code toSave} and
      * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
-     * @see SaveCommandSystemTest#assertCommandSuccess(String, Index, Person)
+     * @see SaveCommandSystemTest#assertCommandSuccess(String, Index, Internship)
      */
     private void assertCommandSuccess(Index toSave) throws CommandException {
         Model expectedModel = getModel();
-        Person editedInternship = addSavedTagToInternship(expectedModel, toSave);
+        Internship editedInternship = addSavedTagToInternship(expectedModel, toSave);
         String expectedResultMessage = String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, editedInternship);
 
         assertCommandSuccess(
@@ -159,7 +156,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
      * browser url and selected card remain unchanged.
      * @see SaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
-    private void assertCommandSuccess(String command, Index toSave, Person editedInternship) {
+    private void assertCommandSuccess(String command, Index toSave, Internship editedInternship) {
         assertCommandSuccess(command, toSave, editedInternship, null);
     }
 
@@ -172,14 +169,14 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
      * @param toSave the index of the current model's filtered list.
      * @see SaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
-    private void assertCommandSuccess(String command, Index toSave, Person editedInternship,
+    private void assertCommandSuccess(String command, Index toSave, Internship editedInternship,
                                       Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         try {
-            expectedModel.updatePerson(
-                    expectedModel.getFilteredPersonList().get(toSave.getZeroBased()), editedInternship);
-            expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        } catch (DuplicatePersonException | PersonNotFoundException e) {
+            expectedModel.updateInternship(
+                    expectedModel.getFilteredInternshipList().get(toSave.getZeroBased()), editedInternship);
+            expectedModel.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+        } catch (DuplicateInternshipException | InternshipNotFoundException e) {
             throw new IllegalArgumentException(
                     "editedInternship is a duplicate in expectedModel, or it isn't found in the model.");
         }
@@ -216,7 +213,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
                                       Index expectedSelectedCardIndex) {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {
             assertSelectedCardChanged(expectedSelectedCardIndex);

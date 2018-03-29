@@ -1,57 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
-    <persons>
+    <internships>
         <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
+        <salary isPrivate="false">1000</salary>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
+        <industry isPrivate="false">Engineering</industry>
+    </internships>
+    <internships>
         <name>Ruth Mueller</name>
-        <phone isPrivate="false">87249245</phone>
+        <salary isPrivate="false">87249245</salary>
         <email isPrivate="false">ruth@example.com</email>
         <address isPrivate="false">81th street</address>
-    </persons>
-    <persons>
+        <industry isPrivate="false">Business</industry>
+    </internships>
+    <internships>
         <name>Heinz Kurz</name>
-        <phone isPrivate="false">95352563</phone>
+        <salary isPrivate="false">95352563</salary>
         <email isPrivate="false">heinz@example.com</email>
         <address isPrivate="false">wall street</address>
-    </persons>
-    <persons>
+        <industry isPrivate="false">Finance</industry>
+    </internships>
+    <internships>
         <name>Cornelia Meier</name>
-        <phone isPrivate="false">87652533</phone>
+        <salary isPrivate="false">87652533</salary>
         <email isPrivate="false">cornelia@example.com</email>
         <address isPrivate="false">10th street</address>
-    </persons>
-    <persons>
+        <industry isPrivate="false">Consulting</industry>
+    </internships>
+    <internships>
         <name>Werner Meyer</name>
-        <phone isPrivate="false">9482224</phone>
+        <salary isPrivate="false">9482224</salary>
         <email isPrivate="false">werner@example.com</email>
         <address isPrivate="false">michegan ave</address>
-    </persons>
-    <persons>
+        <industry isPrivate="false">Manufacturing</industry>
+    </internships>
+    <internships>
         <name>Lydia Kunz</name>
-        <phone isPrivate="false">9482427</phone>
+        <salary isPrivate="false">9482427</salary>
         <email isPrivate="false">lydia@example.com</email>
         <address isPrivate="false">little tokyo</address>
-    </persons>
-    <persons>
+        <industry isPrivate="false">Services</industry>
+    </internships>
+    <internships>
         <name>Anna Best</name>
-        <phone isPrivate="false">9482442</phone>
+        <salary isPrivate="false">9482442</salary>
         <email isPrivate="false">anna@example.com</email>
         <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
+        <industry isPrivate="false">Engineering</industry>
+    </internships>
+    <internships>
         <name>Stefan Meier</name>
-        <phone isPrivate="false">8482424</phone>
+        <salary isPrivate="false">8482424</salary>
         <email isPrivate="false">stefan@example.com</email>
         <address isPrivate="false">little india</address>
-    </persons>
-    <persons>
+        <industry isPrivate="false">Business</industry>
+    </internships>
+    <internships>
         <name>Martin Mueller</name>
-        <phone isPrivate="false">8482131</phone>
+        <salary isPrivate="false">8482131</salary>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">chicago ave</address>
-    </persons>
+        <industry isPrivate="false">Finance</industry>
+    </internships>
 </addressbook>

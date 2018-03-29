@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.scene.control.ListView;
-import seedu.address.model.person.Person;
+import seedu.address.model.internship.Internship;
 import seedu.address.ui.InternshipCard;
 
 /**
@@ -57,9 +57,10 @@ public class InternshipListPanelHandle extends NodeHandle<ListView<InternshipCar
     /**
      * Navigates the listview to display and select the internship.
      */
-    public void navigateToCard(Person person) {
+    public void navigateToCard(Internship internship) {
         List<InternshipCard> cards = getRootNode().getItems();
-        Optional<InternshipCard> matchingCard = cards.stream().filter(card -> card.person.equals(person)).findFirst();
+        Optional<InternshipCard> matchingCard =
+                cards.stream().filter(card -> card.internship.equals(internship)).findFirst();
 
         if (!matchingCard.isPresent()) {
             throw new IllegalArgumentException("Internship does not exist.");
@@ -76,15 +77,15 @@ public class InternshipListPanelHandle extends NodeHandle<ListView<InternshipCar
      * Returns the internship card handle of an internship associated with the {@code index} in the list.
      */
     public InternshipCardHandle getInternshipCardHandle(int index) {
-        return getInternshipCardHandle(getRootNode().getItems().get(index).person);
+        return getInternshipCardHandle(getRootNode().getItems().get(index).internship);
     }
 
     /**
-     * Returns the {@code InternshipCardHandle} of the specified {@code person} in the list.
+     * Returns the {@code InternshipCardHandle} of the specified {@code internship} in the list.
      */
-    public InternshipCardHandle getInternshipCardHandle(Person person) {
+    public InternshipCardHandle getInternshipCardHandle(Internship internship) {
         Optional<InternshipCardHandle> handle = getRootNode().getItems().stream()
-                .filter(card -> card.person.equals(person))
+                .filter(card -> card.internship.equals(internship))
                 .map(card -> new InternshipCardHandle(card.getRoot()))
                 .findFirst();
         return handle.orElseThrow(() -> new IllegalArgumentException("Internship does not exist."));
@@ -100,7 +101,7 @@ public class InternshipListPanelHandle extends NodeHandle<ListView<InternshipCar
     /**
      * Remembers the selected {@code PersonCard} in the list.
      */
-    public void rememberSelectedPersonCard() {
+    public void rememberSelectedInternshipCard() {
         List<InternshipCard> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
@@ -112,9 +113,9 @@ public class InternshipListPanelHandle extends NodeHandle<ListView<InternshipCar
 
     /**
      * Returns true if the selected {@code PersonCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedPersonCard()} call.
+     * {@code rememberSelectedInternshipCard()} call.
      */
-    public boolean isSelectedPersonCardChanged() {
+    public boolean isSelectedInternshipCardChanged() {
         List<InternshipCard> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
