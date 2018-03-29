@@ -24,9 +24,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NewChatCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.StartCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnsaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -151,6 +153,16 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_start() throws Exception {
+        assertTrue(parser.parseCommand(StartCommand.COMMAND_WORD) instanceof StartCommand);
+        assertTrue(parser.parseCommand(StartCommand.COMMAND_WORD + " 3") instanceof StartCommand);
+    }
+
+    @Test
+    public void parseCommand_new() throws Exception {
+        assertTrue(parser.parseCommand(NewChatCommand.COMMAND_WORD) instanceof NewChatCommand);
+        assertTrue(parser.parseCommand(NewChatCommand.COMMAND_WORD + " 3") instanceof NewChatCommand);
+
     public void parseCommand_unsave() throws Exception {
         UnsaveCommand command = (UnsaveCommand) parser.parseCommand(
                 UnsaveCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased());
