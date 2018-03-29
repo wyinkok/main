@@ -5,8 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,8 +26,8 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final FilteredList<Internship> filteredInternships;
     private static List<String> filterKeywords;
+    private final FilteredList<Internship> filteredInternships;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -90,7 +90,7 @@ public class ModelManager extends ComponentManager implements Model {
         filterKeywords = keywords;
     }
 
-    public static List<String> getKeywords(){
+    public static List<String> getKeywords() {
         return filterKeywords;
     }
 
