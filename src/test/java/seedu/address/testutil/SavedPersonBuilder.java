@@ -44,6 +44,7 @@ public class SavedPersonBuilder {
                 internshipToCopy.getSalary(),
                 internshipToCopy.getEmail(),
                 internshipToCopy.getAddress(),
+                internshipToCopy.getIndustry(),
                 correctTagReferences);
 
 

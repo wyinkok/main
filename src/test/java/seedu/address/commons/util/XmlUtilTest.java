@@ -39,6 +39,7 @@ public class XmlUtilTest {
     private static final String VALID_SALARY = "1000";
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
+    private static final String VALID_INDUSTRY = "Engineering";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
     @Rule
@@ -80,7 +81,7 @@ public class XmlUtilTest {
         XmlAdaptedInternship actualInternship = XmlUtil.getDataFromFile(
                 MISSING_INTERNSHIP_FIELD_FILE, XmlAdaptedInternshipWithRootElement.class);
         XmlAdaptedInternship expectedInternship = new XmlAdaptedInternship(
-                null, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                null, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_INDUSTRY, VALID_TAGS);
         assertEquals(expectedInternship, actualInternship);
     }
 
@@ -89,7 +90,7 @@ public class XmlUtilTest {
         XmlAdaptedInternship actualInternship = XmlUtil.getDataFromFile(
                 INVALID_INTERNSHIP_FIELD_FILE, XmlAdaptedInternshipWithRootElement.class);
         XmlAdaptedInternship expectedInternship = new XmlAdaptedInternship(
-                VALID_NAME, INVALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, INVALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_INDUSTRY, VALID_TAGS);
         assertEquals(expectedInternship, actualInternship);
     }
 
@@ -98,7 +99,7 @@ public class XmlUtilTest {
         XmlAdaptedInternship actualInternship = XmlUtil.getDataFromFile(
                 VALID_INTERNSHIP_FILE, XmlAdaptedInternshipWithRootElement.class);
         XmlAdaptedInternship expectedInternship = new XmlAdaptedInternship(
-                VALID_NAME, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_INDUSTRY, VALID_TAGS);
         assertEquals(expectedInternship, actualInternship);
     }
 

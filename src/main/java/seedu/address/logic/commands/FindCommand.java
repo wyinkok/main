@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 
 /**
- * Finds and lists all Internships in address book whose name, address, salary or email contains any of the argument
- * keywords.
+ * Finds and lists all Internships in address book whose name, address, salary, email or industry contains any of the
+ * argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {

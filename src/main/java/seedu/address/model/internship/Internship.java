@@ -19,18 +19,20 @@ public class Internship {
     private final Salary salary;
     private final Email email;
     private final Address address;
+    private final Industry industry;
 
     private final UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Internship(Name name, Salary salary, Email email, Address address, Set<Tag> tags) {
+    public Internship(Name name, Salary salary, Email email, Address address, Industry industry, Set<Tag> tags) {
         requireAllNonNull(name, salary, email, address, tags);
         this.name = name;
         this.salary = salary;
         this.email = email;
         this.address = address;
+        this.industry = industry;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
     }
@@ -49,6 +51,10 @@ public class Internship {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Industry getIndustry() {
+        return industry;
     }
 
     /**
