@@ -29,5 +29,4 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         return new FilterCommand(new PersonContainsAllKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
-
 }

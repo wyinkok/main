@@ -102,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public ObservableList<Internship> getFilteredInternshipList() {
-        return FXCollections.unmodifiableObservableList(filteredInternships).sorted();
+        return FXCollections.unmodifiableObservableList(filteredInternships);
     }
 
     @Override
