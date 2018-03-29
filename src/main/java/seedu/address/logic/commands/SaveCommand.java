@@ -57,8 +57,7 @@ public class SaveCommand extends UndoableCommand {
             throw new AssertionError("The target internship cannot be missing");
         }
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-        return new CommandResult(String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipToSave));
-    }
+        return new CommandResult(String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag));
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
@@ -68,7 +67,7 @@ public class SaveCommand extends UndoableCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
-        internshipToSave = lastShownList.get(targetIndex.getZeroBased()); //add a tag to this internship!!
+        internshipToSave = lastShownList.get(targetIndex.getZeroBased());
         internshipWithSavedTag = addSavedTagToInternship(internshipToSave);
     }
 

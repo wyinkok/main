@@ -78,7 +78,7 @@
 
 .split-pane:horizontal .split-pane-divider {
     -fx-background-color:  #f4f4f4;
-    -fx-border-color: transparent transparent transparent  #6dccf2;
+    -fx-border-color: transparent transparent transparent  #d6d6d6;
 }
 
 .split-pane {
@@ -89,32 +89,35 @@
 
 .list-view {
     -fx-background-insets: 0;
-    -fx-padding: 0;
+    -fx-padding: 10 10 10 4;
     -fx-background-color: #f4f4f4;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 5;
+    -fx-padding: 3px;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #ccdfcb;
+    -fx-background-color:#c5def5;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #6dccf2;
+    -fx-background-color: #f9d0c4;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #ff8a7f;
+    -fx-background-color: #e99695;
+    -fx-border-width: 0;
 }
 
+
+
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #f7a47b;
-    -fx-border-width: 1;
-}
+    -fx-border-color: #ffd57a;
+    -fx-border-width: 0;
+ }
 
 .list-cell .label {
     -fx-text-fill: #414141;
@@ -123,6 +126,13 @@
 .cell_big_label {
     -fx-font-family: "Avenir Bold";
     -fx-font-size: 18px;
+    -fx-text-fill:#f4f4f4;
+}
+
+/** ChatBot **/
+.cell_medium_label {
+    -fx-font-family: "Calibri";
+    -fx-font-size: 14px;
     -fx-text-fill:#f4f4f4;
 }
 
@@ -197,7 +207,7 @@
 
 /* Menu Bar */
 .menu-bar {
-    -fx-background-color: #ccdfcb;
+    -fx-background-color: #e99695;
 }
 
 .menu-bar .label {
@@ -287,7 +297,7 @@
 
 /* Scroll Bar */
 .scroll-bar {
-    -fx-background-color:#ccdfcb;
+    -fx-background-color:#f9d0c4;
 }
 
 .scroll-bar .thumb {
