@@ -165,9 +165,8 @@ public class AddressBookParserTest {
 
     public void parseCommand_unsave() throws Exception {
         UnsaveCommand command = (UnsaveCommand) parser.parseCommand(
-                UnsaveCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new UnsaveCommand(INDEX_FIRST_PERSON), command);
-
+                UnsaveCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased());
+        assertEquals(new UnsaveCommand(INDEX_FIRST_INTERNSHIP), command);
     }
 
 }

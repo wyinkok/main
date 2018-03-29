@@ -1,15 +1,14 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.UnsaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
+import static seedu.address.testutil.TestUtil.getInternship;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TestUtil.getSecondLastIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import static seedu.address.testutil.TypicalPersonsWithSavedTag.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
@@ -22,11 +21,11 @@ import seedu.address.logic.commands.UnsaveCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
+import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.testutil.TypicalPersonsWithSavedTag;
-import seedu.address.testutil.UnsavedPersonBuilder;
+import seedu.address.testutil.UnsavedInternshipBuilder;
 
 public class UnsaveCommandSystemTest extends AddressBookSystemTest {
 
@@ -47,11 +46,12 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
 
         /* ----------------- Performing save operation while an unfiltered list is being shown -------------------- */
 
-        /* Case: remove the saved first person in the list, command with leading spaces and trailing spaces -> saved */
+        /* Case: remove the saved first internship in the list,
+            command with leading spaces and trailing spaces -> saved */
         Model model = getModel();
-        Index firstindex = INDEX_FIRST_PERSON;
+        Index firstindex = INDEX_FIRST_INTERNSHIP;
         String command = "     " + UnsaveCommand.COMMAND_WORD + "      " + firstindex.getOneBased() + "       ";
-        Person editedInternship = removeSavedTagToInternship(model, firstindex);
+        Internship editedInternship = removeSavedTagToInternship(model, firstindex);
         assertCommandSuccess(command, firstindex, editedInternship);
 
 
@@ -79,34 +79,34 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: filtered internship list, unsave index within bounds of internship book and internship list
          * -> unsave */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
+        Index index = INDEX_FIRST_INTERNSHIP;
+        assertTrue(index.getZeroBased() < getModel().getFilteredInternshipList().size());
         command = UnsaveCommand.COMMAND_WORD + " " + index.getOneBased();
-        Person personWithoutSavedTag = new UnsavedPersonBuilder()
-                .removeTag(getModel().getFilteredPersonList().get(index.getZeroBased()));
+        Internship personWithoutSavedTag = new UnsavedInternshipBuilder()
+                .removeTag(getModel().getFilteredInternshipList().get(index.getZeroBased()));
         assertCommandSuccess(command, index, personWithoutSavedTag);
 
 
         /* Case: filtered internship list,
          * unsave index within bounds of internship book but out of bounds of internship list -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
+        int invalidIndex = getModel().getAddressBook().getInternshipList().size();
         command = UnsaveCommand.COMMAND_WORD + " " + invalidIndex;
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
         /* --------------------- Performing unsave operation while a internship card is selected ------------------- */
 
         /* Case: unsave the selected internship
                     -> internship list panel selects the internship before the unsaved internship */
-        showAllPersons();
+        showAllInternships();
         Model expectedModel = getModel();
         Index selectedIndex = getSecondLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased());
-        selectPerson(selectedIndex);
+        selectInternship(selectedIndex);
         command = UnsaveCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        Person nexteditedInternship = removeSavedTagToInternship(expectedModel, selectedIndex);
+        Internship nexteditedInternship = removeSavedTagToInternship(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, nexteditedInternship);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
@@ -122,18 +122,15 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getPersonList().size() + 1);
+                getModel().getAddressBook().getInternshipList().size() + 1);
         command = UnsaveCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(UnsaveCommand.COMMAND_WORD + " abc", MESSAGE_INVALID_UNSAVE_COMMAND_FORMAT);
 
         /* Case: invalid arguments (extra argument) -> rejected */
         assertCommandFailure(UnsaveCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_UNSAVE_COMMAND_FORMAT);
-
-        /* Case: mixed case command word -> rejected */
-        assertCommandFailure("UNSaVE 1", MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
@@ -141,14 +138,14 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      * in {@code model}'s internship book.
      * @return the internship person without a "saved" tag
      */
-    private Person removeSavedTagToInternship(Model model, Index index) throws CommandException {
-        Person targetInternship = getPerson(model, index);
-        Person editedInternship = new UnsavedPersonBuilder().removeTag(targetInternship);
+    private Internship removeSavedTagToInternship(Model model, Index index) throws CommandException {
+        Internship targetInternship = getInternship(model, index);
+        Internship editedInternship = new UnsavedInternshipBuilder().removeTag(targetInternship);
         try {
-            model.updatePerson(targetInternship, editedInternship);
-        } catch (PersonNotFoundException pnfe) {
+            model.updateInternship(targetInternship, editedInternship);
+        } catch (InternshipNotFoundException pnfe) {
             throw new AssertionError("targetInternship is retrieved from model.");
-        } catch (DuplicatePersonException e) {
+        } catch (DuplicateInternshipException e) {
             throw new AssertionError("editedInternship is a duplicate in expectedModel.");
         }
         return editedInternship;
@@ -158,11 +155,11 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      * Removes the saved internship at {@code toRemove} by creating
      * a default {@code UnsaveCommand} using {@code toRemove} and
      * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
-     * @see UnsaveCommandSystemTest#assertCommandSuccess(String, Index, Person)
+     * @see UnsaveCommandSystemTest#assertCommandSuccess(String, Index, Internship)
      */
     private void assertCommandSuccess(Index toRemove) throws CommandException {
         Model expectedModel = getModel();
-        Person editedInternship = removeSavedTagToInternship(expectedModel, toRemove);
+        Internship editedInternship = removeSavedTagToInternship(expectedModel, toRemove);
         String expectedResultMessage = String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, editedInternship);
 
         assertCommandSuccess(
@@ -176,7 +173,7 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      * browser url and selected card remain unchanged.
      * @see UnsaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
-    private void assertCommandSuccess(String command, Index toUnsave, Person editedInternship) {
+    private void assertCommandSuccess(String command, Index toUnsave, Internship editedInternship) {
         assertCommandSuccess(command, toUnsave, editedInternship, null);
     }
 
@@ -189,14 +186,14 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      * @param toUnsave the index of the current model's filtered list.
      * @see UnsaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
-    private void assertCommandSuccess(String command, Index toUnsave, Person editedInternship,
+    private void assertCommandSuccess(String command, Index toUnsave, Internship editedInternship,
                                       Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         try {
-            expectedModel.updatePerson(
-                    expectedModel.getFilteredPersonList().get(toUnsave.getZeroBased()), editedInternship);
-            expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        } catch (DuplicatePersonException | PersonNotFoundException e) {
+            expectedModel.updateInternship(
+                    expectedModel.getFilteredInternshipList().get(toUnsave.getZeroBased()), editedInternship);
+            expectedModel.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+        } catch (DuplicateInternshipException | InternshipNotFoundException e) {
             throw new IllegalArgumentException(
                     "editedInternship is a duplicate in expectedModel, or it isn't found in the model.");
         }
@@ -233,7 +230,7 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
                                       Index expectedSelectedCardIndex) {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         if (expectedSelectedCardIndex != null) {
             assertSelectedCardChanged(expectedSelectedCardIndex);
         } else {
