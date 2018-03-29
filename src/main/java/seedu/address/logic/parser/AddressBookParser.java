@@ -93,7 +93,6 @@ public class AddressBookParser {
 
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
-            
         case UnsaveCommand.COMMAND_WORD:
             return new UnsaveCommandParser().parse(arguments);
 

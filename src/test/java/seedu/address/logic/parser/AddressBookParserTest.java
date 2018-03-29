@@ -162,7 +162,9 @@ public class AddressBookParserTest {
     public void parseCommand_new() throws Exception {
         assertTrue(parser.parseCommand(NewChatCommand.COMMAND_WORD) instanceof NewChatCommand);
         assertTrue(parser.parseCommand(NewChatCommand.COMMAND_WORD + " 3") instanceof NewChatCommand);
+    }
 
+    @Test
     public void parseCommand_unsave() throws Exception {
         UnsaveCommand command = (UnsaveCommand) parser.parseCommand(
                 UnsaveCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased());
@@ -170,3 +172,4 @@ public class AddressBookParserTest {
     }
 
 }
+
