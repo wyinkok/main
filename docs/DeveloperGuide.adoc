@@ -197,14 +197,14 @@ image::DeletePersonSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelDesign1.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the Internship Book data.
 * exposes an unmodifiable `ObservableList<Internship>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -219,7 +219,7 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Internship Book data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -543,13 +543,15 @@ There are many details in an internship that the applicants are required to know
 * Key takeaways from this internship
 
 All these are attributes that an internship should have and thus must be implemented in `Internship` class which resides
-in `model`.
+in `model`. However, as not all companies are comfortable with giving all of the above mentioned details, some of the
+attributes will be deemed required and cannot be left empty.
 
 ==== Design Considerations
 
 Alternative 1: Adding all the attributes under Internship class
 
-Pros: Easy to implement.
+Pros: Easy to implement. Have a boolean variable named isRequired under each class to ascertain if that attribute can
+be left blank. This method allows for easy manipulation between required and optional attributes.
 
 Cons: Duplicate methods for similar attributes such as Date posted and Application deadline.
 
@@ -563,7 +565,8 @@ Alternative 2: As some of these attributes are similar in nature, we can use enc
  (RequiredInformation, OptionalInformation). There can also be a method to return the entire attributes under
  RequiredInformation class to further abstract it.
 
- Cons: More difficulty when implementing
+ Cons: More difficulty when implementing. When one attribute is no longer required (became optional), significant changes
+ needs to be made on the model segment.
 
 image::Modeldesign2.png[width="800"]
 
