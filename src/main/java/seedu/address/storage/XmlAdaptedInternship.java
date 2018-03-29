@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
+import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Salary;
@@ -31,6 +32,8 @@ public class XmlAdaptedInternship {
     private String email;
     @XmlElement(required = true)
     private String address;
+    @XmlElement(required = true)
+    private String industry;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -44,11 +47,13 @@ public class XmlAdaptedInternship {
     /**
      * Constructs an {@code XmlAdaptedInternship} with the given internship details.
      */
-    public XmlAdaptedInternship(String name, String salary, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedInternship(String name, String salary, String email, String address, String industry,
+                                List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.salary = salary;
         this.email = email;
         this.address = address;
+        this.industry = industry;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -64,6 +69,7 @@ public class XmlAdaptedInternship {
         salary = source.getSalary().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        industry = source.getIndustry().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -113,8 +119,17 @@ public class XmlAdaptedInternship {
         }
         final Address address = new Address(this.address);
 
+        if (this.industry == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Industry.class.getSimpleName()));
+        }
+        if (!Industry.isValidIndustry(this.industry)) {
+            throw new IllegalValueException(Industry.MESSAGE_INDUSTRY_CONSTRAINTS);
+        }
+        final Industry industry = new Industry(this.industry);
+
         final Set<Tag> tags = new HashSet<>(internshipTags);
-        return new Internship(name, salary, email, address, tags);
+        return new Internship(name, salary, email, address, industry, tags);
     }
 
     @Override
@@ -132,6 +147,7 @@ public class XmlAdaptedInternship {
                 && Objects.equals(salary, otherInternship.salary)
                 && Objects.equals(email, otherInternship.email)
                 && Objects.equals(address, otherInternship.address)
+                && Objects.equals(industry, otherInternship.industry)
                 && tagged.equals(otherInternship.tagged);
     }
 }
