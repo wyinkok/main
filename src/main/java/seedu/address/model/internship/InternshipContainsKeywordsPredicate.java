@@ -18,7 +18,7 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
 
     @Override
     public boolean test(Internship internship) {
-        // Check if all keyword can be found in all of an internship's details (e.g name, industry, location)
+        // Check if any of the keyword can be found in all of an internship's details (e.g name, industry, location)
         return keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internshipAttributeString(internship), keyword));
     }
 
