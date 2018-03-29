@@ -66,10 +66,13 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         /* ------------------ Performing save operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered internship list, save index within bounds of internship book and internship list -> save */
-        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_SECOND_INTERNSHIP;
+        showInternshipWithName(KEYWORD_MATCHING_MEIER);
+        Index index = INDEX_FIRST_INTERNSHIP;
         assertTrue(index.getZeroBased() < getModel().getFilteredInternshipList().size());
-
+        command = SaveCommand.COMMAND_WORD + " " + index.getOneBased();
+        Internship internshipWithSavedTag = new SavedPersonBuilder()
+                .addTag(getModel().getFilteredPersonList().get(index.getZeroBased()));
+        assertCommandSuccess(command, index, internshipWithSavedTag);
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
@@ -209,6 +212,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Index expectedSelectedCardIndex) {
         executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         expectedModel.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {

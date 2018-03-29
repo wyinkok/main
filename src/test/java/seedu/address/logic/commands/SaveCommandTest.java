@@ -39,13 +39,14 @@ public class SaveCommandTest {
         Internship internshipWithSavedTag = new SavedPersonBuilder().addTag(model.getFilteredInternshipList().get(0));
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
 
-        String expectedMessage = String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipToSave);
+        String expectedMessage = String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateInternship(internshipToSave, internshipWithSavedTag);
 
         assertCommandSuccess(saveCommand, model, expectedMessage, expectedModel);
     }
+
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredInternshipList().size() + 1);
