@@ -36,8 +36,8 @@ public class SaveCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
         Internship internshipToSave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
-        Internship internshipWithSavedTag = new SavedInternshipBuilder().
-                addTag(model.getFilteredInternshipList().get(0));
+        Internship internshipWithSavedTag = new SavedInternshipBuilder()
+                .addTag(model.getFilteredInternshipList().get(0));
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
 
         String expectedMessage = String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag);
