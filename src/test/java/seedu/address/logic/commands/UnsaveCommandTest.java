@@ -135,7 +135,8 @@ public class UnsaveCommandTest {
         Internship internshipWithoutSavedTag = new UnsavedInternshipBuilder()
                 .removeTag(model.getFilteredInternshipList().get(1));
         expectedModel.updateInternship(internshipToUnsave, internshipWithoutSavedTag);
-        assertNotEquals(internshipToUnsave, model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased()));
+        assertNotEquals(internshipToUnsave, model.getFilteredInternshipList().
+                get(INDEX_FIRST_INTERNSHIP.getZeroBased()));
         // redo -> saves same second person in unfiltered person list
         assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }

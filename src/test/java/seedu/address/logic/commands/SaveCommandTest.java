@@ -36,7 +36,8 @@ public class SaveCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
         Internship internshipToSave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
-        Internship internshipWithSavedTag = new SavedInternshipBuilder().addTag(model.getFilteredInternshipList().get(0));
+        Internship internshipWithSavedTag = new SavedInternshipBuilder().
+                addTag(model.getFilteredInternshipList().get(0));
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
 
         String expectedMessage = String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag);
@@ -85,7 +86,8 @@ public class SaveCommandTest {
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person saved again
-        Internship internshipWithSavedTag = new SavedInternshipBuilder().addTag(model.getFilteredInternshipList().get(0));
+        Internship internshipWithSavedTag = new SavedInternshipBuilder()
+                .addTag(model.getFilteredInternshipList().get(0));
         expectedModel.updateInternship(internshipToSave, internshipWithSavedTag);
         assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -131,7 +133,8 @@ public class SaveCommandTest {
         // undo -> reverts internshiplist back to previous state and filtered internship list to show all internships
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        Internship internshipWithSavedTag = new SavedInternshipBuilder().addTag(model.getFilteredInternshipList().get(1));
+        Internship internshipWithSavedTag = new SavedInternshipBuilder()
+                .addTag(model.getFilteredInternshipList().get(1));
         expectedModel.updateInternship(internshipToSave, internshipWithSavedTag);
         assertNotEquals(internshipToSave, model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased()));
         // redo -> saves same second person in unfiltered person list

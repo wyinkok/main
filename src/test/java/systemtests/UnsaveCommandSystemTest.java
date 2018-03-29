@@ -4,9 +4,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.UnsaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
+import static seedu.address.testutil.TestUtil.getInternship;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getInternship;
 import static seedu.address.testutil.TestUtil.getSecondLastIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import static seedu.address.testutil.TypicalPersonsWithSavedTag.KEYWORD_MATCHING_MEIER;
@@ -46,7 +46,8 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
 
         /* ----------------- Performing save operation while an unfiltered list is being shown -------------------- */
 
-        /* Case: remove the saved first internship in the list, command with leading spaces and trailing spaces -> saved */
+        /* Case: remove the saved first internship in the list,
+            command with leading spaces and trailing spaces -> saved */
         Model model = getModel();
         Index firstindex = INDEX_FIRST_INTERNSHIP;
         String command = "     " + UnsaveCommand.COMMAND_WORD + "      " + firstindex.getOneBased() + "       ";
