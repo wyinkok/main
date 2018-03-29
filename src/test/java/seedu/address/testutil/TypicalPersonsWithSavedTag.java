@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -16,43 +16,43 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Internship} objects to be used in tests.
  */
 public class TypicalPersonsWithSavedTag {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
+    public static final Internship ALICE = new InternshipBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("85355255")
+            .withSalary("85355255")
             .withTags("friends", "saved").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+    public static final Internship BENSON = new InternshipBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com").withSalary("98765432")
             .withTags("owesMoney", "friends", "saved").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+    public static final Internship CARL = new InternshipBuilder().withName("Carl Kurz").withSalary("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+    public static final Internship DANIEL = new InternshipBuilder().withName("Daniel Meier").withSalary("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("saved").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Internship ELLE = new InternshipBuilder().withName("Elle Meyer").withSalary("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Internship FIONA = new InternshipBuilder().withName("Fiona Kunz").withSalary("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").withTags("saved").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+    public static final Internship GEORGE = new InternshipBuilder().withName("George Best").withSalary("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withTags("saved").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Internship HOON = new InternshipBuilder().withName("Hoon Meier").withSalary("8482424")
             .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Internship IDA = new InternshipBuilder().withName("Ida Mueller").withSalary("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+    public static final Internship AMY = new InternshipBuilder().withName(VALID_NAME_AMY).withSalary(VALID_SALARY_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+    public static final Internship BOB = new InternshipBuilder().withName(VALID_NAME_BOB).withSalary(VALID_SALARY_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
@@ -65,17 +65,17 @@ public class TypicalPersonsWithSavedTag {
      */
     public static AddressBook getTypicalAddressBookWithSavedTag() {
         AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersonsWithSavedTag()) {
+        for (Internship internship : getTypicalPersonsWithSavedTag()) {
             try {
-                ab.addPerson(person);
-            } catch (DuplicatePersonException e) {
+                ab.addInternship(internship);
+            } catch (DuplicateInternshipException e) {
                 throw new AssertionError("not possible");
             }
         }
         return ab;
     }
 
-    public static List<Person> getTypicalPersonsWithSavedTag() {
+    public static List<Internship> getTypicalPersonsWithSavedTag() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

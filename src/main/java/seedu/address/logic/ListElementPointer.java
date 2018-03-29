@@ -60,6 +60,17 @@ public class ListElementPointer {
     }
 
     /**
+     * Returns true if calling {@code #hasElement} does not throw an {@code NoSuchElementException}.
+     */
+    public boolean hasElement(String toSearch) {
+        if (list.contains(toSearch)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Returns the next element in the list and advances the cursor position.
      * @throws NoSuchElementException if there is no more next element in the list.
      */
