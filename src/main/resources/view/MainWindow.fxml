@@ -19,7 +19,7 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
+        <URL value="@ChatBotTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
@@ -45,7 +45,7 @@
             </padding>
             <StackPane fx:id="internshipListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
-               <StackPane />
+               <StackPane fx:id="chatBotPanelPlaceholder" />
 
           <StackPane fx:id="browserPlaceholder">
             <padding>

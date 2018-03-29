@@ -56,6 +56,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane internshipListPanelPlaceholder;
 
     @FXML
+    private StackPane chatBotPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
@@ -126,6 +129,9 @@ public class MainWindow extends UiPart<Stage> {
 
         internshipListPanel = new InternshipListPanel(logic.getFilteredInternshipList());
         internshipListPanelPlaceholder.getChildren().add(internshipListPanel.getRoot());
+
+        ChatBotPanel chatBotPanel = new ChatBotPanel(logic);
+        chatBotPanelPlaceholder.getChildren().add(chatBotPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
