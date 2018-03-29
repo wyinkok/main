@@ -24,10 +24,10 @@ import seedu.address.model.internship.exceptions.InternshipNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
+    
+    private static List<String> filterKeywords;
     private final AddressBook addressBook;
     private final FilteredList<Internship> filteredInternships;
-    static private List<String> filterKeywords;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
