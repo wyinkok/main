@@ -15,17 +15,17 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
         this.keywords = keywords;
     }
 
-@Override
+    @Override
     public boolean test(Internship internship) {
-    return keywords.stream()
-            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getName().fullName, keyword))
-            || keywords.stream()
-            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getSalary().value, keyword))
-            || keywords.stream()
-            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getAddress().value, keyword))
-            || keywords.stream()
-            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getEmail().value, keyword));
-}
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getName().fullName, keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getSalary().value, keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getAddress().value, keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getEmail().value, keyword));
+    }
 
     @Override
     public boolean equals(Object other) {

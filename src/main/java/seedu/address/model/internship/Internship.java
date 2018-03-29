@@ -53,7 +53,9 @@ public class Internship {
         return address;
     }
 
-    public Industry getIndustry() { return industry;}
+    public Industry getIndustry() {
+        return industry;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
