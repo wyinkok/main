@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Internship}'s {@code Name, Salary, Address or Email} matches any of the keywords given.
+ * Tests that a {@code Internship}'s {@code Name, Salary, Address, Email or Industry} matches any of the keywords given.
  */
 public class InternshipContainsKeywordsPredicate implements Predicate<Internship> {
     private final List<String> keywords;
@@ -14,7 +14,6 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
     public InternshipContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
-
 
     @Override
     public boolean test(Internship internship) {

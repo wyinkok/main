@@ -8,6 +8,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditInternshipDescriptor;
 import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
+import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Salary;
@@ -37,6 +38,7 @@ public class EditInternshipDescriptorBuilder {
         descriptor.setSalary(internship.getSalary());
         descriptor.setEmail(internship.getEmail());
         descriptor.setAddress(internship.getAddress());
+        descriptor.setIndustry(internship.getIndustry());
         descriptor.setTags(internship.getTags());
     }
 
@@ -69,6 +71,14 @@ public class EditInternshipDescriptorBuilder {
      */
     public EditInternshipDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Industry} of the {@code EditInternshipDescriptor} that we are building.
+     */
+    public EditInternshipDescriptorBuilder withIndustry(String industry) {
+        descriptor.setIndustry(new Industry(industry));
         return this;
     }
 

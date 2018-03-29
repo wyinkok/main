@@ -6,29 +6,24 @@ import java.util.Map;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.internship.Internship;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-
 /**
  * A utility class to help with building Person objects.
  */
-public class SavedPersonBuilder {
+public class UnsavedPersonBuilder {
 
 
-    public static final String MESSAGE_DUPLICATE_TAG = "This internship has been saved";
+    public static final String MESSAGE_DUPLICATE_TAG = "This internship has been removed from Saved Collection";
     public final String savedTagName = "saved";
 
     /**
-     * Initializes the PersonBuilder with the data of {@code internshipToCopy}.
+     * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public Internship addTag(Internship internshipToCopy) throws CommandException {
-        final UniqueTagList personTags = new UniqueTagList(internshipToCopy.getTags());
-        try {
-            personTags.add(new Tag(savedTagName));
-        } catch (UniqueTagList.DuplicateTagException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_TAG);
-        }
+    public Person removeTag(Person personToCopy) throws CommandException {
+        final UniqueTagList personTags = new UniqueTagList(personToCopy.getTags());
+        personTags.delete(new Tag(savedTagName));
 
         // Create map with values = tag object references in the master list
         // used for checking person tag references
@@ -39,15 +34,11 @@ public class SavedPersonBuilder {
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
 
-        return new Internship(
-                internshipToCopy.getName(),
-                internshipToCopy.getSalary(),
-                internshipToCopy.getEmail(),
-                internshipToCopy.getAddress(),
-                internshipToCopy.getIndustry(),
+        return new Person(
+                personToCopy.getName(),
+                personToCopy.getPhone(),
+                personToCopy.getEmail(),
+                personToCopy.getAddress(),
                 correctTagReferences);
-
-
     }
-
 }

@@ -30,6 +30,7 @@ import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.StartCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnsaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
@@ -161,6 +162,12 @@ public class AddressBookParserTest {
     public void parseCommand_new() throws Exception {
         assertTrue(parser.parseCommand(NewChatCommand.COMMAND_WORD) instanceof NewChatCommand);
         assertTrue(parser.parseCommand(NewChatCommand.COMMAND_WORD + " 3") instanceof NewChatCommand);
+
+    public void parseCommand_unsave() throws Exception {
+        UnsaveCommand command = (UnsaveCommand) parser.parseCommand(
+                UnsaveCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnsaveCommand(INDEX_FIRST_PERSON), command);
+
     }
 
 }
