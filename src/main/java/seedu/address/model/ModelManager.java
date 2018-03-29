@@ -3,6 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -22,7 +24,8 @@ import seedu.address.model.internship.exceptions.InternshipNotFoundException;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
+    
+    private static List<String> filterKeywords;
     private final AddressBook addressBook;
     private final FilteredList<Internship> filteredInternships;
 
@@ -37,6 +40,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         filteredInternships = new FilteredList<>(this.addressBook.getInternshipList());
+
+        filterKeywords = new ArrayList<String>();
     }
 
     public ModelManager() {
@@ -79,6 +84,14 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook.updateInternship(target, editedInternship);
         indicateAddressBookChanged();
+    }
+
+    public static void setKeywords(List<String> keywords) {
+        filterKeywords = keywords;
+    }
+
+    public static List<String> getKeywords() {
+        return filterKeywords;
     }
 
     //=========== Filtered Internship List Accessors =============================================================
