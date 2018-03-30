@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
+import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Salary;
@@ -20,12 +21,14 @@ public class InternshipBuilder {
     public static final String DEFAULT_SALARY = "1000";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_INDUSTRY = "Engineering";
     public static final String DEFAULT_TAGS = "friends";
 
     private Name name;
     private Salary salary;
     private Email email;
     private Address address;
+    private Industry industry;
     private Set<Tag> tags;
 
     public InternshipBuilder() {
@@ -33,6 +36,7 @@ public class InternshipBuilder {
         salary = new Salary(DEFAULT_SALARY);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        industry = new Industry(DEFAULT_INDUSTRY);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
     }
 
@@ -44,6 +48,7 @@ public class InternshipBuilder {
         salary = internshipToCopy.getSalary();
         email = internshipToCopy.getEmail();
         address = internshipToCopy.getAddress();
+        industry = internshipToCopy.getIndustry();
         tags = new HashSet<>(internshipToCopy.getTags());
     }
 
@@ -87,8 +92,16 @@ public class InternshipBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Industry} of the {@code Internship} that we are building.
+     */
+    public InternshipBuilder withIndustry(String industry) {
+        this.industry = new Industry(industry);
+        return this;
+    }
+
     public Internship build() {
-        return new Internship(name, salary, email, address, tags);
+        return new Internship(name, salary, email, address, industry, tags);
     }
 
 }

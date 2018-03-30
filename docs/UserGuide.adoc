@@ -17,7 +17,10 @@ By: `Team CS2103-F11-B3`     Since: `Jan 2018`      Licence: `MIT`
 
 == Introduction
 
-JobbiBot is a desktop chatbot application for those who *prefer to use an interactive app to source for development opportunities*. Hence, JobbiBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, JobbiBot can find the most suitable internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+JobbiBot is a desktop chatbot application for those who *prefer to use an interactive app to source for internship
+opportunities*. Hence, JobbiBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while
+still having the benefits of a Graphical User Interface (GUI). If you can type fast, JobbiBot can find the most suitable
+internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -31,7 +34,7 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::new_ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -60,67 +63,34 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a internship: `add`
-
-Adds a internship to the address book +
-Format: `add n/NAME p/SALARY e/EMAIL a/ADDRESS [t/TAG]...`
-
-[TIP]
-A internship can have any number of tags (including 0)
-
-Examples:
-
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
 === Listing all internships : `list`
 
 Shows a list of all internships in the internship database. +
 Format: `list`
 
-=== Editing a internship : `edit`
+=== Find internships : `find`
 
-Edits an existing internship in the address book. +
-Format: `edit INDEX [n/NAME] [p/SALARY] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-****
-* Edits the internship at the specified `INDEX`. The index refers to the index number shown in the last internship listing. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the internship will be removed i.e adding of tags is not cumulative.
-* You can remove all the internship's tags by typing `t/` without specifying any tags after it.
-****
-
-Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the salary number and email address of the 1st internship to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd internship to be `Betsy Crower` and clears all existing tags.
-
-
-Finds internships whose names, salary, email or address contain any of the given keywords. +
+Finds internships which contains any of the keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
 * Internships matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any internship having names `Betsy`, `Tim`, or `John`
-* `find 12345678` +
-Returns any internship having salary number `12345678`
+* `find Data Analyst` +
+Returns any internship with `Data` or `Analyst` in its description.
+* `find Dow Micron Dyson` +
+Returns any internship having names or description matching `Dow`, `Micron`, or `Dyson`
+* `find Engineering` +
+Returns any internship having `Engineering` in its description.
 * `find Betsy@gmail.com` +
 Returns any internship having email `Betsy@gmail.com`
 * `find Serangoon` +
-Returns any internship having address with `Serangoon` in it
+Returns any internship having address or description matching `Serangoon` in it
 
 === Filtering Internship by keyword: `filter`
 
@@ -141,26 +111,6 @@ Examples:
 Returns any entries containing data e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics e.g 'data analytics internship', 'data analytics singapore'
-
-=== Deleting a internship : `delete`
-
-Deletes the specified internship from the address book. +
-Format: `delete INDEX`
-
-****
-* Deletes the internship at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd internship in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st internship in the results of the `find` command.
 
 === Selecting an internship : `select`
 
@@ -199,7 +149,7 @@ Examples:
 Save the 2nd internship in the internship book.
 * `find Betsy` +
 `save 1` +
-Deletes the 1st person in the results of the `find` command.
+Saves the 1st person in the results of the `find` command.
 
 
 === Listing entered commands : `history`
@@ -220,7 +170,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, 'save', `edit` and `clear`).
+Undoable commands: those commands that modify the internship book's content ('save' and `clear`).
 ====
 
 Examples:
@@ -264,8 +214,18 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the internship book. +
 Format: `clear`
+
+=== Start communication with program : `start`
+
+Initiates the message thread of JobbiBot. +
+Format: `start`
+
+=== Restart communication with program : `new`
+
+Restarts a new message thread of JobbiBot and the previous thread is deleted +
+Format: `new`
 
 === Exiting the program : `exit`
 
@@ -275,7 +235,7 @@ Format: `exit`
 === Saving the data
 
 Internships data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+There is no need to save manually
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
@@ -285,18 +245,12 @@ _{explain how the user can enable/disable data encryption}_
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*Q*: How do I update the internship list to the most updated version? +
+*A*: Download the database from the www.dummywebsite.com and replace the addressbook.xml file in main\data.
 
 == Command Summary
 
-* *Add* `add n/NAME p/SALARY e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/SALARY] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Analytics Engineering`
 * *Filter* : `find KEYWORD [MORE_KEYWORDS]` +

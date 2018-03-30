@@ -6,8 +6,11 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INDUSTRY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INDUSTRY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDUSTRY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SALARY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -19,6 +22,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INDUSTRY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -40,6 +44,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
+import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Salary;
@@ -62,9 +67,11 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
          */
         Index index = INDEX_FIRST_INTERNSHIP;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
-                + SALARY_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
+                + SALARY_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + INDUSTRY_DESC_BOB + "  "
+                + TAG_DESC_HUSBAND + " ";
         Internship editedInternship = new InternshipBuilder().withName(VALID_NAME_BOB).withSalary(VALID_SALARY_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withIndustry(VALID_INDUSTRY_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedInternship);
 
         /* Case: undo editing the last internship in the list -> last internship restored */
@@ -82,7 +89,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: edit a internship with new values same as existing values -> edited */
 
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit some fields -> edited */
@@ -128,7 +135,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         selectInternship(index);
 
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + SALARY_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + INDUSTRY_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new internship's name
         assertCommandSuccess(command, index, AMY, index);
@@ -172,6 +179,10 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
                         + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
+        /* Case: invalid industry -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
+                + INVALID_INDUSTRY_DESC, Industry.MESSAGE_INDUSTRY_CONSTRAINTS);
+
         /* Case: invalid tag -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
                         + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -182,14 +193,14 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         index = INDEX_FIRST_INTERNSHIP;
         assertFalse(getModel().getFilteredInternshipList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_INTERNSHIP);
 
         /* Case: edit a internship with new values same as another internship's values but with different tags ->
          * rejected
          */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_INTERNSHIP);
     }
 

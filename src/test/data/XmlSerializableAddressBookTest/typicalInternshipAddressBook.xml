@@ -7,6 +7,7 @@
         <salary>85355255</salary>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
+        <industry>Engineering</industry>
         <tagged>friends</tagged>
     </internships>
     <internships>
@@ -14,6 +15,7 @@
         <salary>98765432</salary>
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
+        <industry>Business</industry>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </internships>
@@ -22,30 +24,35 @@
         <salary>95352563</salary>
         <email>heinz@example.com</email>
         <address>wall street</address>
+        <industry>Finance</industry>
     </internships>
     <internships>
         <name>Daniel Meier</name>
         <salary>87652533</salary>
         <email>cornelia@example.com</email>
         <address>10th street</address>
+        <industry>Consulting</industry>
     </internships>
     <internships>
         <name>Elle Meyer</name>
         <salary>9482224</salary>
         <email>werner@example.com</email>
         <address>michegan ave</address>
+        <industry>Manufacturing</industry>
     </internships>
     <internships>
         <name>Fiona Kunz</name>
         <salary>9482427</salary>
         <email>lydia@example.com</email>
         <address>little tokyo</address>
+        <industry>Services</industry>
     </internships>
     <internships>
         <name>George Best</name>
         <salary>9482442</salary>
         <email>anna@example.com</email>
         <address>4th street</address>
+        <industry>Engineering</industry>
     </internships>
     <tags>friends</tags>
     <tags>owesMoney</tags>
@@ -54,5 +61,6 @@
         <salary>1234567</salary>
         <email>heinz2@example.com</email>
         <address>wall street 2</address>
+        <industry>Business</industry>
     </internships>
 </addressbook>

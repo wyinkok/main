@@ -4,5 +4,6 @@
     <salary>1000</salary>
     <email>hans@example</email>
     <address>4th street</address>
+    <industry>Engineering</industry>
     <tagged>friends</tagged>
 </internship>
