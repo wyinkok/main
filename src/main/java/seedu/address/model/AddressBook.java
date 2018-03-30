@@ -133,7 +133,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
-                internship.getIndustry(), correctTagReferences);
+                internship.getIndustry(), internship.getLocation(), correctTagReferences);
     }
 
     /**
