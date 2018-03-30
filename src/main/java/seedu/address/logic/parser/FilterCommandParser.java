@@ -29,5 +29,4 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         return new FilterCommand(new InternshipContainsAllKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
-
 }

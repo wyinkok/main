@@ -17,14 +17,18 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
 
     @Override
     public boolean test(Internship internship) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getName().fullName, keyword))
-                || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getSalary().value, keyword))
-                || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getAddress().value, keyword))
-                || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(internship.getEmail().value, keyword));
+        // Check if any of the keyword can be found in all of an internship's details (e.g name, industry, location)
+        return keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase
+                (internshipAttributeString(internship), keyword));
+    }
+
+    /**
+     * Helper method to collate all attributes of internship formats it for searching
+     */
+    private String internshipAttributeString(Internship internship) {
+        // tags currently toString as [tagName], replace [] with whitespace for searching.
+        // Also replaces comma with whitespace
+        return new String(internship.toString().replaceAll("[\\[+\\]+\\,]", " "));
     }
 
     @Override
@@ -33,5 +37,4 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
                 || (other instanceof InternshipContainsKeywordsPredicate // instanceof handles nulls
                 && this.keywords.equals(((InternshipContainsKeywordsPredicate) other).keywords)); // state check
     }
-
 }
