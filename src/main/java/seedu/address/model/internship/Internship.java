@@ -10,7 +10,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Represents a Internship in the address book.
+ * Represents a Internship in the internship book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Internship {
@@ -20,19 +20,22 @@ public class Internship {
     private final Email email;
     private final Address address;
     private final Industry industry;
+    private final Location location;
 
     private final UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Internship(Name name, Salary salary, Email email, Address address, Industry industry, Set<Tag> tags) {
-        requireAllNonNull(name, salary, email, address, tags);
+    public Internship(Name name, Salary salary, Email email, Address address, Industry industry, Location location,
+                      Set<Tag> tags) {
+        requireAllNonNull(name, salary, email, address, industry, location, tags);
         this.name = name;
         this.salary = salary;
         this.email = email;
         this.address = address;
         this.industry = industry;
+        this.location = location;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
     }
@@ -57,6 +60,10 @@ public class Internship {
         return industry;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -79,13 +86,15 @@ public class Internship {
         return otherInternship.getName().equals(this.getName())
                 && otherInternship.getSalary().equals(this.getSalary())
                 && otherInternship.getEmail().equals(this.getEmail())
-                && otherInternship.getAddress().equals(this.getAddress());
+                && otherInternship.getAddress().equals(this.getAddress())
+                && otherInternship.getIndustry().equals(this.getIndustry())
+                && otherInternship.getLocation().equals(this.getLocation());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, salary, email, address, tags);
+        return Objects.hash(name, salary, email, address, industry, location, tags);
     }
 
     @Override
@@ -98,6 +107,10 @@ public class Internship {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Industry: ")
+                .append(getIndustry())
+                .append(" Location: ")
+                .append(getLocation())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

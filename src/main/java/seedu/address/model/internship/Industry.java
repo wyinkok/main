@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Internship's address in the address book.
+ * Represents a Internship's industry in the internship book.
  * Guarantees: immutable; is valid as declared in {@link #isValidIndustry(String)}
  */
 public class Industry {
