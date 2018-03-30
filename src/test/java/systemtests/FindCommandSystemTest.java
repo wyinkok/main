@@ -2,11 +2,14 @@ package systemtests;
 
 import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_INTERNSHIPS_LISTED_OVERVIEW;
+import static seedu.address.testutil.TypicalInternships.ALICE;
 import static seedu.address.testutil.TypicalInternships.BENSON;
 import static seedu.address.testutil.TypicalInternships.CARL;
 import static seedu.address.testutil.TypicalInternships.CARL2;
 import static seedu.address.testutil.TypicalInternships.DANIEL;
+import static seedu.address.testutil.TypicalInternships.ELLE;
 import static seedu.address.testutil.TypicalInternships.FIONA;
+import static seedu.address.testutil.TypicalInternships.GEORGE;
 import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
@@ -114,6 +117,13 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
+        /* Case: find tags of internship in address book -> 3 internships found */
+        List<Tag> tags = new ArrayList<>(DANIEL.getTags());
+        command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
+        ModelHelper.setFilteredList(expectedModel, ALICE, CARL, DANIEL, ELLE, FIONA, GEORGE, CARL2);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
         /* Case: find internship in address book, keyword is substring of name -> 0 internships found */
         command = FindCommand.COMMAND_WORD + " Mei";
         ModelHelper.setFilteredList(expectedModel);
@@ -128,12 +138,6 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: find internship not in address book -> 0 internships found */
         command = FindCommand.COMMAND_WORD + " Mark";
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
-
-        /* Case: find tags of internship in address book -> 0 internships found */
-        List<Tag> tags = new ArrayList<>(DANIEL.getTags());
-        command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
