@@ -8,6 +8,7 @@
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <industry>Engineering</industry>
+        <location>Jurong</location>
         <tagged>friends</tagged>
     </internships>
     <internships>
@@ -16,6 +17,7 @@
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
         <industry>Business</industry>
+        <location>Clementi</location>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </internships>
@@ -25,6 +27,7 @@
         <email>heinz@example.com</email>
         <address>wall street</address>
         <industry>Finance</industry>
+        <location>Geylang</location>
     </internships>
     <internships>
         <name>Daniel Meier</name>
@@ -32,6 +35,7 @@
         <email>cornelia@example.com</email>
         <address>10th street</address>
         <industry>Consulting</industry>
+        <location>Serangoon</location>
     </internships>
     <internships>
         <name>Elle Meyer</name>
@@ -39,6 +43,7 @@
         <email>werner@example.com</email>
         <address>michegan ave</address>
         <industry>Manufacturing</industry>
+        <location>Ang Mo Kio</location>
     </internships>
     <internships>
         <name>Fiona Kunz</name>
@@ -46,6 +51,7 @@
         <email>lydia@example.com</email>
         <address>little tokyo</address>
         <industry>Services</industry>
+        <location>Serangoon</location>
     </internships>
     <internships>
         <name>George Best</name>
@@ -53,6 +59,7 @@
         <email>anna@example.com</email>
         <address>4th street</address>
         <industry>Engineering</industry>
+        <location>Tampines</location>
     </internships>
     <tags>friends</tags>
     <tags>owesMoney</tags>
@@ -62,5 +69,6 @@
         <email>heinz2@example.com</email>
         <address>wall street 2</address>
         <industry>Business</industry>
+        <location>Aljunied</location>
     </internships>
 </addressbook>

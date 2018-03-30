@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -32,6 +33,7 @@ public class InternshipUtil {
         sb.append(PREFIX_EMAIL + internship.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + internship.getAddress().value + " ");
         sb.append(PREFIX_INDUSTRY + internship.getIndustry().value + " ");
+        sb.append(PREFIX_LOCATION + internship.getLocation().value + " ");
         internship.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

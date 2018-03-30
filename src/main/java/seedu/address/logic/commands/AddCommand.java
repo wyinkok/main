@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,13 +20,14 @@ public class AddCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a internship to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a internship to the internship book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_SALARY + "SALRAY "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_INDUSTRY + "INDUSTRY"
+            + PREFIX_LOCATION + "LOCATION"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -33,11 +35,12 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_INDUSTRY + "Engineering "
+            + PREFIX_LOCATION + "Serangoon "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New internship added: %1$s";
-    public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the internship book";
 
     private final Internship toAdd;
 
