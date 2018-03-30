@@ -12,7 +12,7 @@ import seedu.address.model.ModelManager;
  */
 public class InternshipContainsAllKeywordsPredicate implements Predicate<Internship> {
     private final List<String> keywords;
-    
+
     public InternshipContainsAllKeywordsPredicate(List<String> keywords) {
         List<String> allKeywords = new ArrayList<String>(keywords);
         allKeywords.addAll(ModelManager.getKeywords());
