@@ -15,6 +15,7 @@ import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Name;
+import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Salary;
 import seedu.address.model.tag.Tag;
 
@@ -37,6 +38,8 @@ public class XmlAdaptedInternship {
     private String industry;
     @XmlElement(required = true)
     private String location;
+    @XmlElement(required = true)
+    private String role;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -51,13 +54,14 @@ public class XmlAdaptedInternship {
      * Constructs an {@code XmlAdaptedInternship} with the given internship details.
      */
     public XmlAdaptedInternship(String name, String salary, String email, String address, String industry,
-                                String location, List<XmlAdaptedTag> tagged) {
+                                String location, String role, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.salary = salary;
         this.email = email;
         this.address = address;
         this.industry = industry;
         this.location = location;
+        this.role = role;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -75,6 +79,7 @@ public class XmlAdaptedInternship {
         address = source.getAddress().value;
         industry = source.getIndustry().value;
         location = source.getLocation().value;
+        role = source.getRole().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -142,8 +147,17 @@ public class XmlAdaptedInternship {
         }
         final Location location = new Location(this.location);
 
+        if (this.role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Role.class.getSimpleName()));
+        }
+        if (!Role.isValidRole(this.role)) {
+            throw new IllegalValueException(Role.MESSAGE_ROLE_CONSTRAINTS);
+        }
+        final Role role = new Role(this.role);
+
         final Set<Tag> tags = new HashSet<>(internshipTags);
-        return new Internship(name, salary, email, address, industry, location, tags);
+        return new Internship(name, salary, email, address, industry, location, role, tags);
     }
 
     @Override
@@ -163,6 +177,7 @@ public class XmlAdaptedInternship {
                 && Objects.equals(address, otherInternship.address)
                 && Objects.equals(industry, otherInternship.industry)
                 && Objects.equals(location, otherInternship.location)
+                && Objects.equals(role, otherInternship.role)
                 && tagged.equals(otherInternship.tagged);
     }
 }
