@@ -26,7 +26,6 @@ import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.InternshipListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
@@ -117,9 +116,9 @@ public abstract class AddressBookSystemTest {
         return mainWindowHandle.getStatusBarFooter();
     }
 
-    public ResultDisplayHandle getResultDisplay() {
-        return mainWindowHandle.getResultDisplay();
-    }
+    //    public ResultDisplayHandle getResultDisplay() {
+    //  return mainWindowHandle.getResultDisplay();
+    //}
 
     /**
      * Executes {@code command} in the application's {@code CommandBox}.
@@ -178,7 +177,7 @@ public abstract class AddressBookSystemTest {
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
-        assertEquals(expectedResultMessage, getResultDisplay().getText());
+        //assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(expectedModel, getModel());
         assertEquals(expectedModel.getAddressBook(), testApp.readStorageAddressBook());
         assertListMatching(getInternshipInternshipListPanel(), expectedModel.getFilteredInternshipList());
@@ -278,7 +277,7 @@ public abstract class AddressBookSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         try {
             assertEquals("", getCommandBox().getInput());
-            assertEquals("", getResultDisplay().getText());
+            //assertEquals("", getResultDisplay().getText());
             assertListMatching(getInternshipInternshipListPanel(), getModel().getFilteredInternshipList());
             assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE),
                     getBrowserPanel().getLoadedUrl());

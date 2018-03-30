@@ -11,16 +11,16 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building saved Internship objects.
  */
-public class SavedPersonBuilder {
+public class SavedInternshipBuilder {
 
 
     public static final String MESSAGE_DUPLICATE_TAG = "This internship has been saved";
     public final String savedTagName = "saved";
 
     /**
-     * Initializes the PersonBuilder with the data of {@code internshipToCopy}.
+     * Initializes the SavedInternshipBuilder with the data of {@code internshipToCopy}.
      */
     public Internship addTag(Internship internshipToCopy) throws CommandException {
         final UniqueTagList personTags = new UniqueTagList(internshipToCopy.getTags());
@@ -44,6 +44,7 @@ public class SavedPersonBuilder {
                 internshipToCopy.getSalary(),
                 internshipToCopy.getEmail(),
                 internshipToCopy.getAddress(),
+                internshipToCopy.getIndustry(),
                 correctTagReferences);
 
 

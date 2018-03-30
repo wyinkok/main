@@ -9,7 +9,6 @@ import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getSecondLastIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP;
 import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
@@ -24,7 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
-import seedu.address.testutil.SavedPersonBuilder;
+import seedu.address.testutil.SavedInternshipBuilder;
 
 public class SaveCommandSystemTest extends AddressBookSystemTest {
 
@@ -67,9 +66,12 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: filtered internship list, save index within bounds of internship book and internship list -> save */
         showInternshipsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_SECOND_INTERNSHIP;
+        Index index = INDEX_FIRST_INTERNSHIP;
         assertTrue(index.getZeroBased() < getModel().getFilteredInternshipList().size());
-
+        command = SaveCommand.COMMAND_WORD + " " + index.getOneBased();
+        Internship internshipWithSavedTag = new SavedInternshipBuilder()
+                .addTag(getModel().getFilteredInternshipList().get(index.getZeroBased()));
+        assertCommandSuccess(command, index, internshipWithSavedTag);
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
@@ -122,7 +124,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
      */
     private Internship addSavedTagToInternship(Model model, Index index) throws CommandException {
         Internship targetInternship = getInternship(model, index);
-        Internship editedInternship = new SavedPersonBuilder().addTag(targetInternship);
+        Internship editedInternship = new SavedInternshipBuilder().addTag(targetInternship);
         try {
             model.updateInternship(targetInternship, editedInternship);
         } catch (InternshipNotFoundException pnfe) {
@@ -209,6 +211,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Index expectedSelectedCardIndex) {
         executeCommand(command);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         expectedModel.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {

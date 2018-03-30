@@ -19,7 +19,7 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
+        <URL value="@ChatBotTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
@@ -38,14 +38,14 @@
           </Menu>
         </MenuBar>
 
-        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.889937106918239, 0.5" VBox.vgrow="ALWAYS">
+        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.889937106918239, 0.5" minHeight="250.0" VBox.vgrow="ALWAYS">
           <VBox fx:id="internshipList" SplitPane.resizableWithParent="false">
             <padding>
               <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
             <StackPane fx:id="internshipListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
-               <StackPane />
+               <StackPane fx:id="chatBotPanelPlaceholder" />
 
           <StackPane fx:id="browserPlaceholder">
             <padding>
@@ -54,13 +54,7 @@
           </StackPane>
         </SplitPane>
 
-        <StackPane fx:id="commandBoxPlaceholder" prefHeight="32.0" prefWidth="320.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </StackPane>
-
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100.0" minHeight="52.0" prefHeight="100.0" prefWidth="320.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="commandBoxPlaceholder" minHeight="70.0" prefHeight="60.0" prefWidth="320.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>

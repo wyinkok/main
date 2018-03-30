@@ -57,7 +57,7 @@ public class SaveCommand extends UndoableCommand {
             throw new AssertionError("The target internship cannot be missing");
         }
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-        return new CommandResult(String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipToSave));
+        return new CommandResult(String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class SaveCommand extends UndoableCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
-        internshipToSave = lastShownList.get(targetIndex.getZeroBased()); //add a tag to this internship!!
+        internshipToSave = lastShownList.get(targetIndex.getZeroBased());
         internshipWithSavedTag = addSavedTagToInternship(internshipToSave);
     }
 
@@ -78,10 +78,11 @@ public class SaveCommand extends UndoableCommand {
      * @return
      * @throws CommandException
      */
+
     private Internship addSavedTagToInternship(Internship internship) throws CommandException {
-        final UniqueTagList personTags = new UniqueTagList(internshipToSave.getTags());
+        final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
         try {
-            personTags.add(new Tag(savedTagName));
+            internshipTags.add(new Tag(savedTagName));
         } catch (UniqueTagList.DuplicateTagException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
@@ -89,14 +90,14 @@ public class SaveCommand extends UndoableCommand {
         // Create map with values = tag object references in the master list
         // used for checking internship tag references
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        personTags.forEach(tag -> masterTagObjects.put(tag, tag));
+        internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
 
         // Rebuild the list of internship tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
-                correctTagReferences);
+                internship.getIndustry(), correctTagReferences);
     }
 
 
@@ -107,3 +108,4 @@ public class SaveCommand extends UndoableCommand {
                 && this.targetIndex.equals(((SaveCommand) other).targetIndex)); // state check
     }
 }
+

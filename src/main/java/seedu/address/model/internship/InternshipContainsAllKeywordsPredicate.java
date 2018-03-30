@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.internship;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,15 +6,14 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.ModelManager;
-import seedu.address.model.internship.Internship;
 
 /**
- * Tests that a {@code Person}'s {@code Name, Salary, Address or Email} matches any of the keywords given.
+ * Tests that a {@code Internship}'s {@code Name, Salary, Address, Email or Industry} matches all of the keywords given.
  */
-public class PersonContainsAllKeywordsPredicate implements Predicate<Internship> {
+public class InternshipContainsAllKeywordsPredicate implements Predicate<Internship> {
     private final List<String> keywords;
-
-    public PersonContainsAllKeywordsPredicate(List<String> keywords) {
+    
+    public InternshipContainsAllKeywordsPredicate(List<String> keywords) {
         List<String> allKeywords = new ArrayList<String>(keywords);
         allKeywords.addAll(ModelManager.getKeywords());
         this.keywords = allKeywords;
@@ -39,7 +38,8 @@ public class PersonContainsAllKeywordsPredicate implements Predicate<Internship>
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof PersonContainsAllKeywordsPredicate // instanceof handles nulls
-                && this.keywords.equals(((PersonContainsAllKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof InternshipContainsAllKeywordsPredicate // instanceof handles nulls
+                && this.keywords.equals(((InternshipContainsAllKeywordsPredicate) other).keywords)); // state check
     }
+
 }
