@@ -85,7 +85,7 @@ public class AddCommandParserTest {
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + SALARY_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + LOCATION_DESC_BOB +TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + LOCATION_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedInternship));
 
         // multiple industries - last industry accepted

@@ -244,8 +244,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid industry -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY +
-                SALARY_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + SALARY_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + INVALID_INDUSTRY_DESC + LOCATION_DESC_AMY;
         assertCommandFailure(command, Industry.MESSAGE_INDUSTRY_CONSTRAINTS);
 
