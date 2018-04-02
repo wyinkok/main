@@ -364,18 +364,19 @@ This table is a non exhaustive list of potential internship roles that users can
                       | Buyer
                       | Merchandiser
                       | Shop Assistant
-.17+| Technology
+.18+| Technology
                      | Android Developer
-                     | Blockchain
                      | Computer Hardware Engineer
-                     | Data Visualisation
-                     | Information Security
+                     | Data Visualisation Engineer
+                     | Data Scientist
+                     | Full Stack Developer
+                     | Information Security Analyst
                      | iOS Developer
                      | IT Support
                      | Machine Learning Researcher
                      | Mobile Developer
                      | .NET Developer
-                     | Network Engineer
+                     | Networks Engineer
                      | Software Engineer
                      | Software Quality Assurance Engineer
                      | Unity3D (AR/VR)
