@@ -249,11 +249,6 @@ Format: `exit`
 Internships data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually
 
-== FAQ
-
-*Q*: How do I update the internship list to the most updated version? +
-*A*: Download the database from the www.dummywebsite.com and replace the addressbook.xml file in main\data.
-
 == Command Summary
 
 * *Help* : `help`
@@ -275,3 +270,150 @@ e.g.`select 3`
 * *Undo* : `undo`
 * *Redo* : `redo`
 * *Exit* : `exit`
+
+== List of Industries
+This serves as a non-exhaustive lists of skills that users can search for
+
+* Arts and Design
+* Automotive
+* Banking and Finance
+* Biomedical Sciences
+* Community and Social Services
+* Education
+* Entrepreneurship and Businesses (General)
+* Fashion and Retail
+* Food and Beverages
+* Healthcare Services
+* Hospitality
+* Legal
+* Media and Communications
+* Military and Protective Services
+* Public Relations
+* Research
+* Social Enterprise
+* Technology
+* Veterinary Services
+
+== List of Internship Roles
+This table is a non exhaustive list of potential internship roles that users can search for. Internship roles are organised by industry but not all industries are listed in this table.
+
+[width="100%",cols="35%,65%",options="header",]
+|=======================================================================
+|Industry | Internship Role
+
+.5+| Arts and Design | Animator
+                     | Film Editor
+                     | Graphic Designer
+                     | Photographer
+                     | Videographer
+.9+| Banking and Finance
+                     | Accountant
+                     | Asset Management Analyst
+                     | Audit Assistant
+                     | Corporate Security Analyst
+                     | Financial Planner/Advisory
+                     | FinTech Analyst
+                     | Private Equity Analyst
+                     | Risk Management
+                     | Wealth Management Analyst
+.2+| Community and Social Service
+                     | Community Relations Management
+                     | Human Services
+.7+| Consultancy
+                     | Education Consultant
+                     | Human Resource Consultant
+                     | Management Consultant
+                     | Operations Consultant
+                     | Public Relations Consultant
+                     | Strategy Consultant
+                     | Technology Consultant
+.2+| Education
+                     | Assessment and Curriculum Program Coordinator
+                     | Creative Writing Teaching
+.4+| Engineering
+                     | Aerospace Engineer
+                     | Electrical Engineer
+                     | Manufacturing Engineer
+                     | Mechanical Engineer
+.6+| General, Business and Entrepreneurship
+                     | Business Analytics
+                     | Business Development
+                     | Market Researcher
+                     | Operations
+                     | Sales
+                     | Product Manager
+.2+| Healthcare
+                     | Patient Support
+                     | Patient Advocate
+.4+| Hospitality and Tourism
+                     | Customer Experience
+                     | Events Planning and Management
+                     | Guest Services and Relations
+                     | Sustainability
+.1+| Legal
+                     | Legal Counsel
+.7+| Media and Communication
+                     | Advertising / Content Creator
+                     | Digital Marketer
+                     | Editor
+                     | Photojournalist
+                     | Public Relation
+                     | Social Media
+                     | Writer
+ .3+| Retail
+                      | Buyer
+                      | Merchandiser
+                      | Shop Assistant
+.17+| Technology
+                     | Android Developer
+                     | Blockchain
+                     | Computer Hardware Engineer
+                     | Data Visualisation
+                     | Information Security
+                     | iOS Developer
+                     | IT Support
+                     | Machine Learning Researcher
+                     | Mobile Developer
+                     | .NET Developer
+                     | Network Engineer
+                     | Software Engineer
+                     | Software Quality Assurance Engineer
+                     | Unity3D (AR/VR)
+                     | User Experience
+                     | User Interface
+                     | Web Development
+|=======================================================================
+
+== List of Skills
+This serves as a non-exhaustive lists of skills that users can list in their conversation with Jobbi.
+
+* Accountancy
+* Business Development
+* Consultancy
+* Data Analytics
+* Design
+* Electrical Engineering
+* Event Planning and Management
+* Finance
+* Full Stack Software Engineering
+* Human Resource
+* Logistics and Procurement
+* Machine Learning
+* Marketing
+* Mechanical Engineering
+* Mobile Development
+* Operations
+* Product Management
+* Public Relations
+* Purchasing
+* Sales
+* Software Engineering
+* User Experience Design
+* User Interface Design
+
+== FAQ
+
+*Q*: How do I update the internship list to the most updated version? +
+*A*: Download the database from the www.dummywebsite.com and replace the addressbook.xml file in main\data.
+
+
