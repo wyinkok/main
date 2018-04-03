@@ -7,6 +7,7 @@
         <address isPrivate="false">4th street</address>
         <industry isPrivate="false">Engineering</industry>
         <location isPrivate="false">Geylang</location>
+        <role isPrivate="false">Safety Officer</role>
     </internships>
     <internships>
         <name>Ruth Mueller</name>
@@ -15,6 +16,7 @@
         <address isPrivate="false">81th street</address>
         <industry isPrivate="false">Business</industry>
         <location isPrivate="false">Serangoon</location>
+        <role isPrivate="false">Business Analyst</role>
     </internships>
     <internships>
         <name>Heinz Kurz</name>
@@ -23,6 +25,7 @@
         <address isPrivate="false">wall street</address>
         <industry isPrivate="false">Finance</industry>
         <location isPrivate="false">Ang Mo Kio</location>
+        <role isPrivate="false">Project Manager</role>
     </internships>
     <internships>
         <name>Cornelia Meier</name>
@@ -31,6 +34,7 @@
         <address isPrivate="false">10th street</address>
         <industry isPrivate="false">Consulting</industry>
         <location isPrivate="false">Serangoon</location>
+        <role isPrivate="false">Consultant Assistant</role>
     </internships>
     <internships>
         <name>Werner Meyer</name>
@@ -39,6 +43,7 @@
         <address isPrivate="false">michegan ave</address>
         <industry isPrivate="false">Manufacturing</industry>
         <location isPrivate="false">Tampines</location>
+        <role isPrivate="false">Quality Inspector</role>
     </internships>
     <internships>
         <name>Lydia Kunz</name>
@@ -47,6 +52,7 @@
         <address isPrivate="false">little tokyo</address>
         <industry isPrivate="false">Services</industry>
         <location isPrivate="false">Aljunied</location>
+        <role isPrivate="false">Customer Service</role>
     </internships>
     <internships>
         <name>Anna Best</name>
@@ -55,6 +61,7 @@
         <address isPrivate="false">4th street</address>
         <industry isPrivate="false">Engineering</industry>
         <location isPrivate="false">Geylang</location>
+        <role isPrivate="false">Safety Officer</role>
     </internships>
     <internships>
         <name>Stefan Meier</name>
@@ -63,6 +70,7 @@
         <address isPrivate="false">little india</address>
         <industry isPrivate="false">Business</industry>
         <location isPrivate="false">Serangoon</location>
+        <role isPrivate="false">Business Analyst</role>
     </internships>
     <internships>
         <name>Martin Mueller</name>
@@ -71,5 +79,6 @@
         <address isPrivate="false">chicago ave</address>
         <industry isPrivate="false">Finance</industry>
         <location isPrivate="false">Tampines</location>
+        <role isPrivate="false">Project Manager</role>
     </internships>
 </addressbook>

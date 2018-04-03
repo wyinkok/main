@@ -11,7 +11,7 @@ public class Salary {
 
 
     public static final String MESSAGE_SALARY_CONSTRAINTS =
-            "Salary numbers can only contain numbers";
+            "Salary numbers can only contain numbers and it should not be blank";
     public static final String SALARY_VALIDATION_REGEX = "\\d+";
     public final String value;
 

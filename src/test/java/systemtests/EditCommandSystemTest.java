@@ -13,12 +13,15 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDUSTRY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LOCATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SALARY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -28,6 +31,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INDUSTRY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -52,6 +56,7 @@ import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Name;
+import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Salary;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
@@ -73,10 +78,10 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         Index index = INDEX_FIRST_INTERNSHIP;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
                 + SALARY_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + INDUSTRY_DESC_BOB + "  "
-                + LOCATION_DESC_BOB + "  " + TAG_DESC_HUSBAND + " ";
+                + LOCATION_DESC_BOB + "  " + ROLE_DESC_BOB + "   " + TAG_DESC_HUSBAND + " ";
         Internship editedInternship = new InternshipBuilder().withName(VALID_NAME_BOB).withSalary(VALID_SALARY_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withIndustry(VALID_INDUSTRY_BOB)
-                .withLocation(VALID_LOCATION_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withLocation(VALID_LOCATION_BOB).withRole(VALID_ROLE_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedInternship);
 
         /* Case: undo editing the last internship in the list -> last internship restored */
@@ -94,8 +99,8 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: edit a internship with new values same as existing values -> edited */
 
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + LOCATION_DESC_BOB + TAG_DESC_FRIEND
-                + TAG_DESC_HUSBAND;
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + LOCATION_DESC_BOB + ROLE_DESC_BOB
+                + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit some fields -> edited */
@@ -141,7 +146,8 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         selectInternship(index);
 
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + SALARY_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + INDUSTRY_DESC_AMY + LOCATION_DESC_AMY + TAG_DESC_FRIEND;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + INDUSTRY_DESC_AMY + LOCATION_DESC_AMY + ROLE_DESC_AMY
+                + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new internship's name
         assertCommandSuccess(command, index, AMY, index);
@@ -193,6 +199,10 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
                 + INVALID_LOCATION_DESC, Location.MESSAGE_LOCATION_CONSTRAINTS);
 
+        /* Case: invalid role -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
+                + INVALID_ROLE_DESC, Role.MESSAGE_ROLE_CONSTRAINTS);
+
         /* Case: invalid tag -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
                         + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
@@ -203,15 +213,16 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         index = INDEX_FIRST_INTERNSHIP;
         assertFalse(getModel().getFilteredInternshipList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + LOCATION_DESC_BOB + TAG_DESC_FRIEND
-                + TAG_DESC_HUSBAND;
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + LOCATION_DESC_BOB + ROLE_DESC_BOB
+                + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_INTERNSHIP);
 
         /* Case: edit a internship with new values same as another internship's values but with different tags ->
          * rejected
          */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + SALARY_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + LOCATION_DESC_BOB + TAG_DESC_HUSBAND;
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + INDUSTRY_DESC_BOB + LOCATION_DESC_BOB + ROLE_DESC_BOB
+                + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_INTERNSHIP);
     }
 

@@ -21,6 +21,7 @@ public class Internship {
     private final Address address;
     private final Industry industry;
     private final Location location;
+    private final Role role;
 
     private final UniqueTagList tags;
 
@@ -28,7 +29,7 @@ public class Internship {
      * Every field must be present and not null.
      */
     public Internship(Name name, Salary salary, Email email, Address address, Industry industry, Location location,
-                      Set<Tag> tags) {
+                      Role role, Set<Tag> tags) {
         requireAllNonNull(name, salary, email, address, industry, location, tags);
         this.name = name;
         this.salary = salary;
@@ -36,6 +37,7 @@ public class Internship {
         this.address = address;
         this.industry = industry;
         this.location = location;
+        this.role = role;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
     }
@@ -64,6 +66,10 @@ public class Internship {
         return location;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -88,13 +94,14 @@ public class Internship {
                 && otherInternship.getEmail().equals(this.getEmail())
                 && otherInternship.getAddress().equals(this.getAddress())
                 && otherInternship.getIndustry().equals(this.getIndustry())
-                && otherInternship.getLocation().equals(this.getLocation());
+                && otherInternship.getLocation().equals(this.getLocation())
+                && otherInternship.getRole().equals(this.getRole());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, salary, email, address, industry, location, tags);
+        return Objects.hash(name, salary, email, address, industry, location, role, tags);
     }
 
     @Override
@@ -111,6 +118,8 @@ public class Internship {
                 .append(getIndustry())
                 .append(" Location: ")
                 .append(getLocation())
+                .append(" Role: ")
+                .append(getRole())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
