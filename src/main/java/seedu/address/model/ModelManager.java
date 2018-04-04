@@ -2,9 +2,15 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_INTERNSHIP;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,9 +20,15 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -96,13 +108,95 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Filtered Internship List Accessors =============================================================
 
+    private static Internship addTagsToInternshipWithMatch(String keyword, Internship internship)
+            throws CommandException {
+        final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
+
+        try {
+            internshipTags.add(new Tag(keyword));
+        } catch (UniqueTagList.DuplicateTagException e){
+            throw new CommandException ("Operation would result in duplicate tags");
+        }
+
+        // Create map with values = tag object references in the master list
+        // used for checking internship tag references
+        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
+
+        // Rebuild the list of internship tags to point to the relevant tags in the master tag list.
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+
+        return new Internship(
+                internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
+                internship.getIndustry(), internship.getLocation(), internship.getRole(), correctTagReferences);
+    }
+
+    public static void addTagsToFilteredList (List<String> filterKeywords,
+                                              ObservableList<Internship> filteredInternships, Model model)
+            throws CommandException{
+
+        for (String keywords : filterKeywords){
+            for (Internship filteredInternship : filteredInternships){
+                if(StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keywords)) {
+                    try {
+                        model.updateInternship(filteredInternship,
+                                addTagsToInternshipWithMatch(keywords, filteredInternship));
+                    }catch (DuplicateInternshipException e) {
+                        throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
+                    } catch (InternshipNotFoundException e) {
+                        throw new AssertionError("The target internship cannot be missing");
+                    }
+                }
+            }
+        }
+        return;
+    }
+
+    private static Internship removeTagsFromInternshipWithMatch(Tag tagToBeRemoved, Internship internship) {
+        final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
+
+            internshipTags.delete(tagToBeRemoved);
+
+        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
+
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+
+        return new Internship(
+                internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
+                internship.getIndustry(), internship.getLocation(), internship.getRole(), correctTagReferences);
+    }
+
+    public static void removeTagsFromFilteredList (ObservableList<Internship> filteredInternships, Model model)
+            throws CommandException{
+
+            for (Internship filteredInternship : filteredInternships){
+                for(Tag tag : filteredInternship.getTags()){
+                if(!tag.toString().equals("saved")) {
+                    try {
+                        model.updateInternship(filteredInternship,
+                                removeTagsFromInternshipWithMatch(tag, filteredInternship));
+                    }catch (DuplicateInternshipException e) {
+                        throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
+                    } catch (InternshipNotFoundException e) {
+                        throw new AssertionError("The target internship cannot be missing");
+                    }
+                }
+            }
+        }
+        return;
+    }
+
+
     /**
      * Returns an unmodifiable view of the list of {@code Internship} backed by the internal list of
      * {@code addressBook}
      */
     @Override
     public ObservableList<Internship> getFilteredInternshipList() {
-        return FXCollections.unmodifiableObservableList(filteredInternships);
+     return FXCollections.unmodifiableObservableList(filteredInternships);
     }
 
     @Override
