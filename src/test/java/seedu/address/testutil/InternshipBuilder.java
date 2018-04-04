@@ -9,6 +9,7 @@ import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Name;
+import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Salary;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -24,6 +25,7 @@ public class InternshipBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_INDUSTRY = "Engineering";
     public static final String DEFAULT_LOCATION = "Geylang";
+    public static final String DEFAULT_ROLE = "Safety Offier";
     public static final String DEFAULT_TAGS = "friends";
 
     private Name name;
@@ -32,6 +34,7 @@ public class InternshipBuilder {
     private Address address;
     private Industry industry;
     private Location location;
+    private Role role;
     private Set<Tag> tags;
 
     public InternshipBuilder() {
@@ -41,6 +44,7 @@ public class InternshipBuilder {
         address = new Address(DEFAULT_ADDRESS);
         industry = new Industry(DEFAULT_INDUSTRY);
         location = new Location(DEFAULT_LOCATION);
+        role = new Role(DEFAULT_ROLE);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
     }
 
@@ -54,6 +58,7 @@ public class InternshipBuilder {
         address = internshipToCopy.getAddress();
         industry = internshipToCopy.getIndustry();
         location = internshipToCopy.getLocation();
+        role = internshipToCopy.getRole();
         tags = new HashSet<>(internshipToCopy.getTags());
     }
 
@@ -113,8 +118,16 @@ public class InternshipBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Role} of the {@code Internship} that we are building.
+     */
+    public InternshipBuilder withRole(String role) {
+        this.role = new Role(role);
+        return this;
+    }
+
     public Internship build() {
-        return new Internship(name, salary, email, address, industry, location, tags);
+        return new Internship(name, salary, email, address, industry, location, role, tags);
     }
 
 }

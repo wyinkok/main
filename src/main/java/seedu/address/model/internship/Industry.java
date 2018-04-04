@@ -16,7 +16,7 @@ public class Industry {
      * The first character of the industry must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String INDUSTRY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String INDUSTRY_VALIDATION_REGEX = "[\\p{Alnum}]+";
 
     public final String value;
 

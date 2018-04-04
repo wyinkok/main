@@ -21,7 +21,7 @@ public class Location {
     public final String value;
 
     /**
-     * Constructs an {@code Industry}.
+     * Constructs an {@code Location}.
      *
      * @param location A valid location.
      */
