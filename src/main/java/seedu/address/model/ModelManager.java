@@ -118,7 +118,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         try {
             internshipTags.add(new Tag(keyword));
-        } catch (UniqueTagList.DuplicateTagException e){
+        } catch (UniqueTagList.DuplicateTagException e) {
             throw new CommandException ("Operation would result in duplicate tags");
         }
 
@@ -142,11 +142,11 @@ public class ModelManager extends ComponentManager implements Model {
      */
     public static void addTagsToFilteredList (List<String> filterKeywords,
                                               ObservableList<Internship> filteredInternships, Model model)
-            throws CommandException{
+            throws CommandException {
 
-        for (String keywords : filterKeywords){
-            for (Internship filteredInternship : filteredInternships){
-                if(StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keywords)) {
+        for (String keywords : filterKeywords) {
+            for (Internship filteredInternship : filteredInternships) {
+                if (StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keywords)) {
                     try {
                         model.updateInternship(filteredInternship,
                                 addTagsToInternshipWithMatch(keywords, filteredInternship));
@@ -190,10 +190,10 @@ public class ModelManager extends ComponentManager implements Model {
      * @throws CommandException
      */
     public static void removeTagsFromInternshipList(ObservableList<Internship> internships, Model model)
-            throws CommandException{
+            throws CommandException {
 
-        for (Internship internship : internships){
-            for (Tag tag : internship.getTags()){
+        for (Internship internship : internships) {
+            for (Tag tag : internship.getTags()) {
                 if (!tag.toString().equals("saved")) {
                     try {
                         model.updateInternship(internship,
@@ -208,7 +208,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return;
     }
-
 
     /**
      * Returns an unmodifiable view of the list of {@code Internship} backed by the internal list of
