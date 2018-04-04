@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INTERNSHIPS_LISTED_OVERVIEW;
 import static seedu.address.testutil.TypicalInternships.CARL;
 import static seedu.address.testutil.TypicalInternships.CARL2;
 import static seedu.address.testutil.TypicalInternships.DANIEL;
@@ -31,6 +30,9 @@ import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
 public class FilterCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    public static final String MESSAGE_FILTER_RESPONSE = "How would you to sort your results by? You may sort by "
+            + "Address, Industry, Location or Role. \nE.g sortby industry role location address";
 
     @Test
     public void equals() {
@@ -61,28 +63,28 @@ public class FilterCommandTest {
 
     @Test
     public void execute_multipleKeywords_zeroInternshipsFound() {
-        String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_FILTER_RESPONSE);
         FilterCommand command = prepareCommand("Carl Daniel Meier");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
     @Test
     public void execute_multipleKeywords_singleInternshipsFound() {
-        String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_FILTER_RESPONSE);
         FilterCommand command = prepareCommand("Kurz Carl");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL));
     }
 
     @Test
     public void execute_singleKeyword_multipleInternshipsFound() {
-        String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_FILTER_RESPONSE);
         FilterCommand command = prepareCommand("Carl");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, CARL2));
     }
 
     @Test
     public void execute_singleKeywordNonNameAttribute_multipleInternshipsFound() {
-        String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 4);
+        String expectedMessage = String.format(MESSAGE_FILTER_RESPONSE);
         FilterCommand command = prepareCommand("Street");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, DANIEL, GEORGE, CARL2));
     }

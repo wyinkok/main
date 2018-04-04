@@ -55,8 +55,8 @@ public class ChatBotPanel extends UiPart<Region> {
      * Creates the first welcome message from Jobbi
      */
     public ObservableList<String> initMessageList(ObservableList<String> initialMessageList) {
-        initialMessageList.add("Hello, I am Jobbi! "
-                + "I am here to help you find your ideal internship today. Please type 'start' to begin your search.");
+        initialMessageList.add("Hello there, I am Jobbi! "
+                + "I am here to help you find your ideal internship today. Type 'start' to begin your search.");
         return initialMessageList;
     }
 
@@ -99,9 +99,15 @@ public class ChatBotPanel extends UiPart<Region> {
         historySnapshot = logic.getHistorySnapshot();
         if (historySnapshot.hasElement("start")) {
             currentMessageList.add(message);
+            if (historySnapshot.current().equals("new")){
+                currentMessageList.clear();
+                initChatBot();
+            }
+
         }
         return currentMessageList;
     }
+
 
     /**
      *  Creates subsequent messages from the user end - Currently have not implemented Jobbi's reply
