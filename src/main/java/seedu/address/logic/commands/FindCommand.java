@@ -36,7 +36,7 @@ public class FindCommand extends Command {
             ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
         } catch (CommandException e) {
             e.printStackTrace();
-        }
+    }
 
         model.updateFilteredInternshipList(predicate);
 

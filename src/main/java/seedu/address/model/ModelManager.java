@@ -150,7 +150,7 @@ public class ModelManager extends ComponentManager implements Model {
                     try {
                         model.updateInternship(filteredInternship,
                                 addTagsToInternshipWithMatch(keywords, filteredInternship));
-                    }catch (DuplicateInternshipException e) {
+                    } catch (DuplicateInternshipException e) {
                         throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
                     } catch (InternshipNotFoundException e) {
                         throw new AssertionError("The target internship cannot be missing");
@@ -170,7 +170,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static Internship removeTagsFromInternship(Tag tagToBeRemoved, Internship internship) {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
-            internshipTags.delete(tagToBeRemoved);
+        internshipTags.delete(tagToBeRemoved);
 
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
@@ -192,13 +192,13 @@ public class ModelManager extends ComponentManager implements Model {
     public static void removeTagsFromInternshipList(ObservableList<Internship> internships, Model model)
             throws CommandException{
 
-            for (Internship internship : internships){
-                for(Tag tag : internship.getTags()){
-                if(!tag.toString().equals("saved")) {
+        for (Internship internship : internships){
+            for (Tag tag : internship.getTags()){
+                if (!tag.toString().equals("saved")) {
                     try {
                         model.updateInternship(internship,
                                 removeTagsFromInternship(tag, internship));
-                    }catch (DuplicateInternshipException e) {
+                    } catch (DuplicateInternshipException e) {
                         throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
                     } catch (InternshipNotFoundException e) {
                         throw new AssertionError("The target internship cannot be missing");
@@ -216,7 +216,7 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public ObservableList<Internship> getFilteredInternshipList() {
-     return FXCollections.unmodifiableObservableList(filteredInternships);
+        return FXCollections.unmodifiableObservableList(filteredInternships);
     }
 
     @Override
