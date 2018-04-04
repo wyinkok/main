@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
-import seedu.address.model.internship.exceptions.SavedTagNotFoundException;
+
 
 /**
  * The API of the Model component.

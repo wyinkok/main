@@ -99,7 +99,7 @@ public class ChatBotPanel extends UiPart<Region> {
         historySnapshot = logic.getHistorySnapshot();
         if (historySnapshot.hasElement("start")) {
             currentMessageList.add(message);
-            if (historySnapshot.current().equals("new")){
+            if (historySnapshot.current().equals("new")) {
                 currentMessageList.clear();
                 initChatBot();
             }
