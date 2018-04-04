@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Internship's address in the address book.
+ * Represents a Internship's industry in the internship book.
  * Guarantees: immutable; is valid as declared in {@link #isValidIndustry(String)}
  */
 public class Industry {
@@ -16,7 +16,7 @@ public class Industry {
      * The first character of the industry must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String INDUSTRY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String INDUSTRY_VALIDATION_REGEX = "[\\p{Alnum}]+";
 
     public final String value;
 

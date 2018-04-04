@@ -45,6 +45,8 @@ public class SavedInternshipBuilder {
                 internshipToCopy.getEmail(),
                 internshipToCopy.getAddress(),
                 internshipToCopy.getIndustry(),
+                internshipToCopy.getLocation(),
+                internshipToCopy.getRole(),
                 correctTagReferences);
 
 

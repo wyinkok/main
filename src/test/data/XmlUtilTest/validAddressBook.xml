@@ -6,6 +6,8 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
         <industry isPrivate="false">Engineering</industry>
+        <location isPrivate="false">Geylang</location>
+        <role isPrivate="false">Safety Officer</role>
     </internships>
     <internships>
         <name>Ruth Mueller</name>
@@ -13,6 +15,8 @@
         <email isPrivate="false">ruth@example.com</email>
         <address isPrivate="false">81th street</address>
         <industry isPrivate="false">Business</industry>
+        <location isPrivate="false">Serangoon</location>
+        <role isPrivate="false">Business Analyst</role>
     </internships>
     <internships>
         <name>Heinz Kurz</name>
@@ -20,6 +24,8 @@
         <email isPrivate="false">heinz@example.com</email>
         <address isPrivate="false">wall street</address>
         <industry isPrivate="false">Finance</industry>
+        <location isPrivate="false">Ang Mo Kio</location>
+        <role isPrivate="false">Project Manager</role>
     </internships>
     <internships>
         <name>Cornelia Meier</name>
@@ -27,6 +33,8 @@
         <email isPrivate="false">cornelia@example.com</email>
         <address isPrivate="false">10th street</address>
         <industry isPrivate="false">Consulting</industry>
+        <location isPrivate="false">Serangoon</location>
+        <role isPrivate="false">Consultant Assistant</role>
     </internships>
     <internships>
         <name>Werner Meyer</name>
@@ -34,6 +42,8 @@
         <email isPrivate="false">werner@example.com</email>
         <address isPrivate="false">michegan ave</address>
         <industry isPrivate="false">Manufacturing</industry>
+        <location isPrivate="false">Tampines</location>
+        <role isPrivate="false">Quality Inspector</role>
     </internships>
     <internships>
         <name>Lydia Kunz</name>
@@ -41,6 +51,8 @@
         <email isPrivate="false">lydia@example.com</email>
         <address isPrivate="false">little tokyo</address>
         <industry isPrivate="false">Services</industry>
+        <location isPrivate="false">Aljunied</location>
+        <role isPrivate="false">Customer Service</role>
     </internships>
     <internships>
         <name>Anna Best</name>
@@ -48,6 +60,8 @@
         <email isPrivate="false">anna@example.com</email>
         <address isPrivate="false">4th street</address>
         <industry isPrivate="false">Engineering</industry>
+        <location isPrivate="false">Geylang</location>
+        <role isPrivate="false">Safety Officer</role>
     </internships>
     <internships>
         <name>Stefan Meier</name>
@@ -55,6 +69,8 @@
         <email isPrivate="false">stefan@example.com</email>
         <address isPrivate="false">little india</address>
         <industry isPrivate="false">Business</industry>
+        <location isPrivate="false">Serangoon</location>
+        <role isPrivate="false">Business Analyst</role>
     </internships>
     <internships>
         <name>Martin Mueller</name>
@@ -62,5 +78,7 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">chicago ave</address>
         <industry isPrivate="false">Finance</industry>
+        <location isPrivate="false">Tampines</location>
+        <role isPrivate="false">Project Manager</role>
     </internships>
 </addressbook>

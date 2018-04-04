@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
@@ -24,14 +26,16 @@ import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
 import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Name;
+import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Salary;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing internship in the address book.
+ * Edits the details of an existing internship in the internship book.
  */
 public class EditCommand extends UndoableCommand {
 
@@ -46,6 +50,8 @@ public class EditCommand extends UndoableCommand {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
+            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SALARY + "1000 "
@@ -53,7 +59,7 @@ public class EditCommand extends UndoableCommand {
 
     public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the internship book.";
 
     private final Index index;
     private final EditInternshipDescriptor editInternshipDescriptor;
@@ -111,9 +117,12 @@ public class EditCommand extends UndoableCommand {
         Email updatedEmail = editInternshipDescriptor.getEmail().orElse(internshipToEdit.getEmail());
         Address updatedAddress = editInternshipDescriptor.getAddress().orElse(internshipToEdit.getAddress());
         Industry updatedIndustry = editInternshipDescriptor.getIndustry().orElse(internshipToEdit.getIndustry());
+        Location updatedLocation = editInternshipDescriptor.getLocation().orElse(internshipToEdit.getLocation());
+        Role updatedRole = editInternshipDescriptor.getRole().orElse(internshipToEdit.getRole());
         Set<Tag> updatedTags = editInternshipDescriptor.getTags().orElse(internshipToEdit.getTags());
 
-        return new Internship(updatedName, updatedSalary, updatedEmail, updatedAddress, updatedIndustry, updatedTags);
+        return new Internship(updatedName, updatedSalary, updatedEmail, updatedAddress, updatedIndustry,
+                updatedLocation, updatedRole, updatedTags);
     }
 
     @Override
@@ -145,6 +154,8 @@ public class EditCommand extends UndoableCommand {
         private Email email;
         private Address address;
         private Industry industry;
+        private Location location;
+        private Role role;
         private Set<Tag> tags;
 
         public EditInternshipDescriptor() {}
@@ -159,6 +170,8 @@ public class EditCommand extends UndoableCommand {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setIndustry(toCopy.industry);
+            setLocation(toCopy.location);
+            setRole(toCopy.role);
             setTags(toCopy.tags);
         }
 
@@ -167,7 +180,7 @@ public class EditCommand extends UndoableCommand {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(this.name, this.salary, this.email, this.address, this.industry,
-                    this.tags);
+                    this.location, this.role, this.tags);
         }
 
         public void setName(Name name) {
@@ -209,6 +222,23 @@ public class EditCommand extends UndoableCommand {
         public Optional<Industry> getIndustry() {
             return Optional.ofNullable(industry);
         }
+
+        public void setLocation(Location location) {
+            this.location = location;
+        }
+
+        public Optional<Location> getLocation() {
+            return Optional.ofNullable(location);
+        }
+
+        public void setRole(Role role) {
+            this.role = role;
+        }
+
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -246,6 +276,8 @@ public class EditCommand extends UndoableCommand {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getIndustry().equals(e.getIndustry())
+                    && getLocation().equals(e.getLocation())
+                    && getRole().equals(e.getRole())
                     && getTags().equals(e.getTags());
         }
     }
