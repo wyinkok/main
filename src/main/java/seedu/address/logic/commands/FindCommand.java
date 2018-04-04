@@ -1,26 +1,9 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.ModelManager;
-import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
-import seedu.address.model.internship.UniqueInternshipList;
-import seedu.address.model.internship.exceptions.DuplicateInternshipException;
-import seedu.address.model.internship.exceptions.InternshipNotFoundException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_INTERNSHIP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 /**
@@ -47,13 +30,13 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
 
-// remove all tags from filtered list except 'saved' tags
-    try {
-        model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-        ModelManager.removeTagsFromFilteredList(model.getFilteredInternshipList(), model);
-    } catch (CommandException e) {
+    // remove all tags from filtered list except 'saved' tags
+        try {
+            model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+            ModelManager.removeTagsFromFilteredList(model.getFilteredInternshipList(), model);
+        } catch (CommandException e) {
             e.printStackTrace();
-        }
+            }
 
         model.updateFilteredInternshipList(predicate);
 
