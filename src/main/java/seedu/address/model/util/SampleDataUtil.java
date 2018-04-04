@@ -11,6 +11,7 @@ import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Name;
+import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Salary;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.tag.Tag;
@@ -23,22 +24,22 @@ public class SampleDataUtil {
         return new Internship[] {
             new Internship(new Name("Alex Yeoh"), new Salary("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Industry("Engineering"), new Location("Geylang"),
-                getTagSet("friends")),
+                    new Role("Safety Officer"), getTagSet("friends")),
             new Internship(new Name("Bernice Yu"), new Salary("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Industry("Business"),
-                    new Location("Serangoon"), getTagSet("colleagues", "friends")),
+                    new Location("Serangoon"), new Role("Business Analyst"), getTagSet("colleagues", "friends")),
             new Internship(new Name("Charlotte Oliveiro"), new Salary("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Industry("Finance"), new Location("Ang Mo Kio"),
-                getTagSet("neighbours")),
+                    new Role("Project Manager"), getTagSet("neighbours")),
             new Internship(new Name("David Li"), new Salary("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Industry("Consulting"),
-                    new Location("Serangoon"), getTagSet("family")),
+                    new Location("Serangoon"), new Role("Consultant Assistant"), getTagSet("family")),
             new Internship(new Name("Irfan Ibrahim"), new Salary("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new Industry("Manufacturing"),
-                    new Location("Tampines"), getTagSet("classmates")),
+                    new Location("Tampines"), new Role("Quality Inspector"), getTagSet("classmates")),
             new Internship(new Name("Roy Balakrishnan"), new Salary("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Industry("Services"), new Location("Aljunied"),
-                getTagSet("colleagues"))
+                    new Role("Customer Service"), getTagSet("colleagues"))
         };
     }
 

@@ -12,6 +12,7 @@ import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Name;
+import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Salary;
 import seedu.address.model.tag.Tag;
 
@@ -41,6 +42,7 @@ public class EditInternshipDescriptorBuilder {
         descriptor.setAddress(internship.getAddress());
         descriptor.setIndustry(internship.getIndustry());
         descriptor.setLocation(internship.getLocation());
+        descriptor.setRole(internship.getRole());
         descriptor.setTags(internship.getTags());
     }
 
@@ -89,6 +91,14 @@ public class EditInternshipDescriptorBuilder {
      */
     public EditInternshipDescriptorBuilder withLocation(String location) {
         descriptor.setLocation(new Location(location));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Role} of the {@code EditInternshipDescriptor} that we are building.
+     */
+    public EditInternshipDescriptorBuilder withRole(String role) {
+        descriptor.setRole(new Role(role));
         return this;
     }
 

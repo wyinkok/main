@@ -8,5 +8,6 @@
         <address isPrivate="false">4th street</address>
         <industry isPrivate="false">Engineering</industry>
         <location isPrivate="false">Geylang</location>
+        <role isPrivate="false">Data Analyst</role>
     </internships>
 </addressbook>
