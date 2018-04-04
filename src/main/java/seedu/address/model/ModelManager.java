@@ -105,6 +105,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Filtered Internship List Accessors =============================================================
 
+    /**
+     * Add keyword tags that matches the individual internship to the internship
+     * @param keyword
+     * @param internship
+     * @return Internship
+     * @throws CommandException
+     */
     private static Internship addTagsToInternshipWithMatch(String keyword, Internship internship)
             throws CommandException {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
@@ -115,12 +122,9 @@ public class ModelManager extends ComponentManager implements Model {
             throw new CommandException ("Operation would result in duplicate tags");
         }
 
-        // Create map with values = tag object references in the master list
-        // used for checking internship tag references
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
 
-        // Rebuild the list of internship tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
 
@@ -129,6 +133,13 @@ public class ModelManager extends ComponentManager implements Model {
                 internship.getIndustry(), internship.getLocation(), internship.getRole(), correctTagReferences);
     }
 
+    /**
+     * Add keyword tags that matches the internship to the list of internships in filteredInternships
+     * @param filterKeywords
+     * @param filteredInternships
+     * @param model
+     * @throws CommandException
+     */
     public static void addTagsToFilteredList (List<String> filterKeywords,
                                               ObservableList<Internship> filteredInternships, Model model)
             throws CommandException{
@@ -150,7 +161,13 @@ public class ModelManager extends ComponentManager implements Model {
         return;
     }
 
-    private static Internship removeTagsFromInternshipWithMatch(Tag tagToBeRemoved, Internship internship) {
+    /**
+     * Remove all tags from individual internship other than 'saved' tags
+     * @param tagToBeRemoved
+     * @param internship
+     * @return
+     */
+    private static Internship removeTagsFromInternship(Tag tagToBeRemoved, Internship internship) {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
             internshipTags.delete(tagToBeRemoved);
@@ -166,15 +183,21 @@ public class ModelManager extends ComponentManager implements Model {
                 internship.getIndustry(), internship.getLocation(), internship.getRole(), correctTagReferences);
     }
 
-    public static void removeTagsFromFilteredList (ObservableList<Internship> filteredInternships, Model model)
+    /**
+     * Remove all tags that are not 'saved' from the internships
+     * @param internships
+     * @param model
+     * @throws CommandException
+     */
+    public static void removeTagsFromInternshipList(ObservableList<Internship> internships, Model model)
             throws CommandException{
 
-            for (Internship filteredInternship : filteredInternships){
-                for(Tag tag : filteredInternship.getTags()){
+            for (Internship internship : internships){
+                for(Tag tag : internship.getTags()){
                 if(!tag.toString().equals("saved")) {
                     try {
-                        model.updateInternship(filteredInternship,
-                                removeTagsFromInternshipWithMatch(tag, filteredInternship));
+                        model.updateInternship(internship,
+                                removeTagsFromInternship(tag, internship));
                     }catch (DuplicateInternshipException e) {
                         throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
                     } catch (InternshipNotFoundException e) {

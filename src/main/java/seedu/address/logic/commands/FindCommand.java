@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
-
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 /**
  * Finds and lists all Internships in address book whose name, address, salary, email or industry contains any of the
@@ -30,13 +30,13 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() {
 
-    // remove all tags from filtered list except 'saved' tags
+        // remove all tags from filtered list except 'saved' tags
         try {
             model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-            ModelManager.removeTagsFromFilteredList(model.getFilteredInternshipList(), model);
+            ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
         } catch (CommandException e) {
             e.printStackTrace();
-            }
+        }
 
         model.updateFilteredInternshipList(predicate);
 
@@ -47,7 +47,7 @@ public class FindCommand extends Command {
             e.printStackTrace();
         }
         return new CommandResult(getMessageForInternshipListShownSummary(model.getFilteredInternshipList().size()));
-        }
+    }
 
     @Override
     public boolean equals(Object other) {
