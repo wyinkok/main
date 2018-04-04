@@ -1,10 +1,8 @@
 package seedu.address.logic.commands;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
@@ -20,7 +18,6 @@ import java.util.Map;
 import java.util.Set;
 
 import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_INTERNSHIP;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 /**
  * Finds and lists all Internships in address book whose name, address, salary, email or industry contains any of the
@@ -44,7 +41,7 @@ public class FindCommand extends Command {
         this.predicate = predicate;
     }
 
-    private Internship addTagsToInternship (String keyword, Internship internship) throws CommandException {
+    private Internship addTagsToInternshipWithMatch(String keyword, Internship internship) throws CommandException {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
         try {
@@ -72,9 +69,8 @@ public class FindCommand extends Command {
 
         for (String keywords : filterKeywords){
             for (Internship filteredInternship : filteredInternships){
-                if(filterKeywords.stream().anyMatch(keyword -> StringUtil.
-                   containsWordIgnoreCase(filteredInternship.toString(), keyword))) {
-                    internshipWithKeywordTags = addTagsToInternship(keywords, filteredInternship);
+                if(StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keywords)) {
+                    internshipWithKeywordTags = addTagsToInternshipWithMatch(keywords, filteredInternship);
                     try {
                         model.updateInternship(filteredInternship, internshipWithKeywordTags);
                     }catch (DuplicateInternshipException e) {
@@ -85,7 +81,6 @@ public class FindCommand extends Command {
                 }
            }
         }
-        model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         return;
     }
 
