@@ -176,7 +176,7 @@ public class ModelManager extends ComponentManager implements Model {
                 try {
                     internshipTags.delete(tagToBeRemoved);
                 } catch (SavedTagNotFoundException e) {
-
+                    System.out.println("Saved tag not found!");
                 }
             }
         }
