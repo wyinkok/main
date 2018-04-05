@@ -111,7 +111,8 @@
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find internship in address book, keyword is same as name but of different case -> 1 internship found */
+//        /* Case: find internship in address book, keyword is same as name but of different case -> 1 internship found
+// */
 //        command = FindCommand.COMMAND_WORD + " MeIeR";
 //        ModelHelper.setFilteredList(expectedModel, DANIEL);
 //        assertCommandSuccess(command, expectedModel);
