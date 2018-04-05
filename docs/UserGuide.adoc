@@ -76,10 +76,10 @@ Restarts a new message thread of JobbiBot and the previous thread is deleted +
 Format: `new`
 
 
-=== Find internships by keyword(s): `find`
+=== Find internships by keyword(s): `find` `search`
 
 Finds internships which contains any of the keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `search KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `analyst` will match `Analyst`
@@ -120,10 +120,10 @@ Returns any entries containing data e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics e.g 'data analytics internship', 'data analytics singapore'
 
-=== Sorting Internship by keywords(s): `sort`
+=== Sorting Internship by keywords(s): `sort` `sortby`
 
 Sort the internship list according to the given keywords. +
-Format: `sort KEYWORD [MORE_KEYWORDS]`
+Format: `sort KEYWORD [MORE_KEYWORDS]` +
 Keywords limited to internship attribute types: Name Salary Email Address Industry Location Role
 
 ****

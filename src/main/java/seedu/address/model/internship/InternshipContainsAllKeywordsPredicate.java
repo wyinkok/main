@@ -37,5 +37,4 @@ public class InternshipContainsAllKeywordsPredicate implements Predicate<Interns
                 || (other instanceof InternshipContainsAllKeywordsPredicate // instanceof handles nulls
                 && this.keywords.equals(((InternshipContainsAllKeywordsPredicate) other).keywords)); // state check
     }
-
 }
