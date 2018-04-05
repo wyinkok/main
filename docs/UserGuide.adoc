@@ -76,7 +76,7 @@ Restarts a new message thread of JobbiBot and the previous thread is deleted +
 Format: `new`
 
 
-=== Find internships : `find`
+=== Find internships by keyword(s): `find`
 
 Finds internships which contains any of the keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -100,7 +100,7 @@ Returns any internship having contact email `Betsy@gmail.com`
 * `find Serangoon` +
 Returns any internship having address or description matching `Serangoon` in it
 
-=== Filtering Internship by keyword: `filter`
+=== Filtering Internship by keyword(s): `filter`
 
 Filter the internship list according to the given keywords. +
 Format: `filter KEYWORD [MORE_KEYWORDS]`
@@ -119,6 +119,25 @@ Examples:
 Returns any entries containing data e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics e.g 'data analytics internship', 'data analytics singapore'
+
+=== Sorting Internship by keywords(s): `sort`
+
+Sort the internship list according to the given keywords. +
+Format: `sort KEYWORD [MORE_KEYWORDS]`
+Keywords limited to internship attribute types: Name Salary Email Address Industry Location Role
+
+****
+* The sort is case insensitive. e.g `name` will match `Name`
+* The order of the keywords matter. e.g `sort Name Salary` will sort name before salary
+* Only the first three keywords will be sorted. Subsequent keywords will be ignored
+****
+
+Examples:
+
+* `sort name` +
+Sort the internship list according to name attribute
+* `sort salary location` +
+Sort the internship list according to salary first then location
 
 === Saving an internship to a Saved Collection : `save`
 Saves the specified internship from the internship book. +
