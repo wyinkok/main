@@ -48,6 +48,12 @@ public interface Model {
     void updateFilteredInternshipList(Predicate<Internship> predicate);
 
     /**
+     * Updates the filter of the searched internship list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateSearchedInternshipList(Predicate<Internship> predicate);
+
+    /**
      * Creates a comparator based on the keyword arguments and apply it to the SortedList of Internship
      */
     void setComparator(List<String> keywords);

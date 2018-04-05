@@ -19,7 +19,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         ModelManager.setKeywords(new ArrayList<String>());
-        model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+        model.updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         // remove all tags from filtered list except 'saved' tags
         try {
             ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);

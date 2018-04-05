@@ -14,9 +14,7 @@ public class InternshipContainsAllKeywordsPredicate implements Predicate<Interns
     private final List<String> keywords;
 
     public InternshipContainsAllKeywordsPredicate(List<String> keywords) {
-        List<String> allKeywords = new ArrayList<String>(keywords);
-        allKeywords.addAll(ModelManager.getKeywords());
-        this.keywords = allKeywords;
+        this.keywords = keywords;
     }
 
     @Override
