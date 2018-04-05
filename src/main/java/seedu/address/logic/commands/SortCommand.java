@@ -1,0 +1,38 @@
+package seedu.address.logic.commands;
+
+import java.util.List;
+
+
+/**
+ * Sort and lists all Internships in the Internship List according to the order of the keywords given
+ * Keyword matching is case insensitive.
+ */
+public class SortCommand extends Command {
+
+    public static final String COMMAND_WORD = "sort";
+    public static final String ALTERNATIVE_COMMAND_WORD = "sortby";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all internships according to the argument(s) given"
+            + "displays them as a list with index numbers.\n"
+            + "Maximum of 3 arguments will be sorted"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " Industry Role Location";
+
+    private final List<String> keywords;
+
+    public SortCommand(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    @Override
+    public CommandResult execute() {
+        model.setComparator(keywords);
+        return new CommandResult(getMessageForInternshipListShownSummary(model.getFilteredInternshipList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortCommand); // instanceof handles nulls
+    }
+}

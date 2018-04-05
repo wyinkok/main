@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -11,9 +12,11 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.util.Sorter;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
@@ -28,6 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static List<String> filterKeywords;
     private final AddressBook addressBook;
     private final FilteredList<Internship> filteredInternships;
+    private SortedList<Internship> sortedFilteredInternships;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,8 +44,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         filteredInternships = new FilteredList<>(this.addressBook.getInternshipList());
+        sortedFilteredInternships = new SortedList<>(filteredInternships);
 
-        filterKeywords = new ArrayList<String>();
+        filterKeywords = new ArrayList<>();
+
     }
 
     public ModelManager() {
@@ -86,6 +92,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void setComparator(List<String> keywords) {
+        Comparator<Internship> comparatorToSet = Sorter.makeComparator(keywords);
+        sortedFilteredInternships.setComparator(comparatorToSet);
+    }
+
     public static void setKeywords(List<String> keywords) {
         filterKeywords = keywords;
     }
@@ -102,7 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
      */
     @Override
     public ObservableList<Internship> getFilteredInternshipList() {
-        return FXCollections.unmodifiableObservableList(filteredInternships);
+        return FXCollections.unmodifiableObservableList(sortedFilteredInternships);
     }
 
     @Override
@@ -128,5 +140,4 @@ public class ModelManager extends ComponentManager implements Model {
         return addressBook.equals(other.addressBook)
                 && filteredInternships.equals(other.filteredInternships);
     }
-
 }
