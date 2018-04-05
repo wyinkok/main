@@ -163,14 +163,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Remove all tags from individual internship other than 'saved' tags
-     * @param tagToBeRemoved
+     * @param tagsToBeRemoved
      * @param internship
      * @return
      */
-    private static Internship removeTagsFromInternship(Tag tagToBeRemoved, Internship internship) {
+    private static Internship removeTagsFromInternship(Set<Tag> tagsToBeRemoved, Internship internship, Model model) {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
-        internshipTags.delete(tagToBeRemoved);
+        for (Tag tagToBeRemoved : tagsToBeRemoved) {
+            if (!tagToBeRemoved.toString().equals("saved")) {
+                internshipTags.delete(tagToBeRemoved);
+            }
+        }
 
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
@@ -193,17 +197,12 @@ public class ModelManager extends ComponentManager implements Model {
             throws CommandException {
 
         for (Internship internship : internships) {
-            for (Tag tag : internship.getTags()) {
-                if (!tag.toString().equals("saved")) {
-                    try {
-                        model.updateInternship(internship,
-                                removeTagsFromInternship(tag, internship));
-                    } catch (DuplicateInternshipException e) {
-                        throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
-                    } catch (InternshipNotFoundException e) {
-                        throw new AssertionError("The target internship cannot be missing");
-                    }
-                }
+            try{
+                model.updateInternship(internship,removeTagsFromInternship(internship.getTags(), internship, model));
+            } catch (DuplicateInternshipException e) {
+                throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
+            } catch (InternshipNotFoundException e) {
+                throw new AssertionError("The target internship cannot be missing");
             }
         }
         return;
