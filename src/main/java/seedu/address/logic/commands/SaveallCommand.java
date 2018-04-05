@@ -1,19 +1,15 @@
+//@@author wyinkok
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ModelManager;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
@@ -62,12 +58,12 @@ public class SaveallCommand extends UndoableCommand {
 
 
     /**
-     * Adds a "saved" tag to the existing tags of an internship
+     * Adds a "saved" tag to the existing tags of a single internship
      * @param internship
      * @return
      * @throws CommandException
      */
-    private Internship addSavedTagToInternship(Internship internship) throws CommandException {
+    private Internship addSavedTagToInternship(Internship internship) {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
         try {
             internshipTags.add(new Tag(savedTagName));
@@ -88,4 +84,3 @@ public class SaveallCommand extends UndoableCommand {
     }
 
 }
-

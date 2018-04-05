@@ -1,7 +1,7 @@
+//@@author wyinkok
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Undo saved internships into a separate collection.
+ * Removes saved internships into a separate collection.
  */
 
 public class UnsaveCommand extends UndoableCommand {
@@ -70,7 +70,7 @@ public class UnsaveCommand extends UndoableCommand {
         }
 
         internshipToUnsave = lastShownList.get(targetIndex.getZeroBased());
-        internshipWithoutSavedTag = removeSavedTagToInternship(internshipToUnsave);
+        internshipWithoutSavedTag = removeSavedTagFromInternship(internshipToUnsave);
     }
 
     /**
@@ -79,22 +79,22 @@ public class UnsaveCommand extends UndoableCommand {
      * @return
      * @throws CommandException
      */
-    private Internship removeSavedTagToInternship(Internship internship) throws CommandException {
-        final UniqueTagList personTags = new UniqueTagList(internshipToUnsave.getTags());
+    private Internship removeSavedTagFromInternship(Internship internship) throws CommandException {
+        final UniqueTagList internshipTags = new UniqueTagList(internshipToUnsave.getTags());
         try {
-            personTags.delete(new Tag(savedTagName));
+            internshipTags.delete(new Tag(savedTagName));
         } catch (SavedTagNotFoundException e) {
             throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
         }
 
         // Create map with values = tag object references in the master list
-        // used for checking person tag references
+        // used for checking internship tag references
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        personTags.forEach(tag -> masterTagObjects.put(tag, tag));
+        internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
 
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
+        // Rebuild the list of internship tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(),
                 internship.getAddress(), internship.getIndustry(), internship.getLocation(), internship.getRole(),

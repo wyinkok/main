@@ -1,3 +1,4 @@
+//@@author wyinkok
 package seedu.address.testutil;
 
 import java.util.HashMap;
@@ -53,7 +54,7 @@ public class SavedInternshipBuilder {
     }
 
     /**
-     * Initializes the SavedInternshipBuilder with the data of {@code internshipToCopy}.
+     * Initializes the SavedInternshipBuilder with the data of {@code internshipToCopy} for Saveall Command Only.
      */
     public Internship addTagForSaveAllCommandOnly(Internship internshipToCopy) throws CommandException {
         final UniqueTagList personTags = new UniqueTagList(internshipToCopy.getTags());

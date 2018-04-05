@@ -3,11 +3,13 @@
     -fx-text-fill: #f46346 !important; /* The error class should always override the default text-fill style */
 }
 
+/** @@author wyinkok **/
 .list-cell:empty {
     /* Empty cells will not have alternating colours */
     -fx-background: #f4f4f4;
 }
 
+/** @@author **/
 .tag-selector {
     -fx-border-width: 1;
     -fx-border-color: white;

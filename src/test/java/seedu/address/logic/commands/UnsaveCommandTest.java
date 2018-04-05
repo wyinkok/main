@@ -1,3 +1,4 @@
+//@@author wyinkok
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
@@ -26,7 +27,7 @@ import seedu.address.testutil.UnsavedInternshipBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code SaveCommand}.
+ * {@code UnsaveCommand}.
  */
 public class UnsaveCommandTest {
 

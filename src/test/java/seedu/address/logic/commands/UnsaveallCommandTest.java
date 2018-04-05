@@ -4,7 +4,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.prepareRedoCommand;
 import static seedu.address.logic.commands.CommandTestUtil.prepareUndoCommand;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersonsWithSavedTag.getTypicalAddressBookWithSavedTag;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,33 +16,34 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.internship.Internship;
-import seedu.address.testutil.SavedInternshipBuilder;
+import seedu.address.testutil.UnsavedInternshipBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code SaveallCommand}.
+ * {@code UnsaveallCommand}.
  */
-public class SaveallCommandTest {
+public class UnsaveallCommandTest {
 
     private Model model;
-    private SaveallCommand saveallCommand;
+    private UnsaveallCommand unsaveallCommand;
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        saveallCommand = new SaveallCommand();
-        saveallCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        model = new ModelManager(getTypicalAddressBookWithSavedTag(), new UserPrefs());
+        unsaveallCommand = new UnsaveallCommand();
+        unsaveallCommand.setData(model, new CommandHistory(), new UndoRedoStack());
     }
 
     @Test
     public void execute_UnfilteredList_success() throws Exception {
-        ObservableList<Internship> internshipsToSave = model.getFilteredInternshipList();
+        ObservableList<Internship> internshipsToUnsave = model.getFilteredInternshipList();
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        for(Internship internshipToSave : internshipsToSave) {
-            Internship internshipWithSavedTag = new SavedInternshipBuilder().addTagForSaveAllCommandOnly(internshipToSave);
-            expectedModel.updateInternship(internshipToSave, internshipWithSavedTag);
-            String expectedMessage = String.format(SaveallCommand.MESSAGE_SAVED_ALL_INTERNSHIP_SUCCESS);
-            assertCommandSuccess(saveallCommand, model, expectedMessage, expectedModel);
+        for(Internship internshipToUnsave : internshipsToUnsave) {
+            Internship internshipWithoutSavedTag = new UnsavedInternshipBuilder()
+                    .removeTagForUnsaveallCommandOnly(internshipToUnsave);
+            expectedModel.updateInternship(internshipToUnsave, internshipWithoutSavedTag);
+            String expectedMessage = String.format(UnsaveallCommand.MESSAGE_UNSAVED_ALL_INTERNSHIP_SUCCESS);
+            assertCommandSuccess(unsaveallCommand, model, expectedMessage, expectedModel);
         }
     }
 
@@ -51,22 +52,21 @@ public class SaveallCommandTest {
         UndoRedoStack undoRedoStack = new UndoRedoStack();
         UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
-        ObservableList<Internship> internshipsToSave = model.getFilteredInternshipList();
+        ObservableList<Internship> internshipsToUnsave = model.getFilteredInternshipList();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         // saveall -> all internships saved
-        saveallCommand.execute();
-        undoRedoStack.push(saveallCommand);
+        unsaveallCommand.execute();
+        undoRedoStack.push(unsaveallCommand);
 
         // undo -> reverts internshiplist back to previous state and filtered internship list to show all internships
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same internships saved again
-        Internship internshipWithSavedTag = new SavedInternshipBuilder()
-                .addTagForSaveAllCommandOnly(model.getFilteredInternshipList().get(0));
-        for(Internship internshipToSave : internshipsToSave) {
-            Internship internshipWithASavedTag = new SavedInternshipBuilder().addTagForSaveAllCommandOnly(internshipToSave);
-            expectedModel.updateInternship(internshipToSave, internshipWithASavedTag);
+        for(Internship internshipToUnsave : internshipsToUnsave) {
+            Internship internshipWithASavedTag = new UnsavedInternshipBuilder().
+                    removeTagForUnsaveallCommandOnly(internshipToUnsave);
+            expectedModel.updateInternship(internshipToUnsave, internshipWithASavedTag);
         }
             assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }

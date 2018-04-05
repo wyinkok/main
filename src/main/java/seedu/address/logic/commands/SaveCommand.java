@@ -1,7 +1,7 @@
+//@@author wyinkok
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Saves personally curated internships into a separate collection to access it again later.
+ * Saves an internship into a separate collection to access it again later.
  */
 
 public class SaveCommand extends UndoableCommand {
@@ -41,8 +41,7 @@ public class SaveCommand extends UndoableCommand {
     private Internship internshipWithSavedTag;
     private Internship internshipToSave;
 
-    public SaveCommand(Index targetIndex) throws UniqueTagList.DuplicateTagException {
-
+    public SaveCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -72,7 +71,7 @@ public class SaveCommand extends UndoableCommand {
     }
 
     /**
-     * Adds a "saved" tag to the existing tags of an internship
+     * Adds a "saved" tag to the existing tags of a single internship
      * @param internship
      * @return
      * @throws CommandException

@@ -1,3 +1,4 @@
+//@@author wyinkok
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -8,7 +9,7 @@ import seedu.address.logic.commands.UnsaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new SaveCommand object
+ * Parses input arguments and creates a new UnsaveCommand object
  */
 public class UnsaveCommandParser implements Parser<UnsaveCommand> {
 

@@ -146,7 +146,7 @@ public class AddressBookParserTest {
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
     }
-
+    //@@author wyinkok
     @Test
     public void parseCommand_save() throws Exception {
         SaveCommand command = (SaveCommand) parser.parseCommand(

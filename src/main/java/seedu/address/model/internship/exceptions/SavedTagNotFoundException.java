@@ -1,3 +1,4 @@
+//@@author wyinkok
 package seedu.address.model.internship.exceptions;
 
 /**
