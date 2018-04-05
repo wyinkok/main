@@ -26,10 +26,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
-import seedu.address.model.util.Sorter;
 import seedu.address.model.internship.exceptions.SavedTagNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.util.Sorter;
 
 /**
  * Represents the in-memory model of the address book data.
