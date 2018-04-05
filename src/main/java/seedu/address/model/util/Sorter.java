@@ -14,6 +14,10 @@ public class Sorter {
     private static String attribute2;
     private static String attribute3;
 
+    /**
+     * Assigns keyword value to attribute
+     * @param keywords
+     */
     public static void assignValuesToAttributes(List<String> keywords) {
         attribute1 = keywords.get(0);
         if (keywords.size() == 2) {
@@ -25,7 +29,11 @@ public class Sorter {
         }
     }
 
-    // Creates a comparator which sort according objects according to three attributes entered by the user
+    /**
+     *  Creates a comparator which sort according objects according to three attributes entered by the user
+     * @param keywords
+     * @return
+     */
     public static Comparator<Internship> makeComparator(List<String> keywords) {
         assignValuesToAttributes(keywords);
         return new Comparator<Internship>() {
