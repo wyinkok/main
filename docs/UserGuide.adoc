@@ -68,6 +68,10 @@ Format: `help`
 Shows a list of all internships in the internship database. +
 Format: `list`
 
+****
+* Tags other than 'saved' tag attached when using find function will be removed when using 'list'
+****
+
 === Find internships : `find`
 
 Finds internships which contains any of the keywords. +
@@ -77,6 +81,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Internships matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Keyword/s matching the internship is added to the internship as a tag/s
+* Keywords tags are reset if user uses find again
 ****
 
 Examples:
