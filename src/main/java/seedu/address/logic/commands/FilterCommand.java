@@ -18,6 +18,9 @@ public class FilterCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + "Marketing";
 
+    public static final String MESSAGE_FILTER_RESPONSE = "How would you to sort your results by? You may sort by "
+            + "Address, Industry, Location or Role. \nE.g sortby industry role location address";
+
     private final InternshipContainsAllKeywordsPredicate predicate;
 
     public FilterCommand(InternshipContainsAllKeywordsPredicate predicate) {
@@ -27,7 +30,7 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredInternshipList(predicate);
-        return new CommandResult(getMessageForInternshipListShownSummary(model.getFilteredInternshipList().size()));
+        return new CommandResult(MESSAGE_FILTER_RESPONSE);
     }
 
     @Override

@@ -10,9 +10,9 @@ public class StartCommand extends Command {
 
     public static final String COMMAND_WORD = "start";
 
-    public static final String MESSAGE_START_ACKNOWLEDGEMENT = "Awesome! What type of internship are you "
-            + "looking for? Please choose to type in 'part time' or 'full time' ";
-
+    public static final String MESSAGE_START_ACKNOWLEDGEMENT = "Next, please key in all the industries and roles"
+            + " that you are interested in.  To view the full list of possible industries and roles "
+            + "key in 'help' \nE.g: search healthcare technology datanalytics humanresource ";
     @Override
     public CommandResult execute() {
         EventsCenter.getInstance().post(new StartAppRequestEvent());

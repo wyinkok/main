@@ -23,11 +23,11 @@ public class AddCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a internship to the internship book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_SALARY + "SALRAY "
+            + PREFIX_SALARY + "SALARY "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_INDUSTRY + "INDUSTRY"
-            + PREFIX_LOCATION + "LOCATION"
+            + PREFIX_INDUSTRY + "INDUSTRY "
+            + PREFIX_LOCATION + "LOCATION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -39,7 +39,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New internship added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Unknown Command";
     public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the internship book";
 
     private final Internship toAdd;
