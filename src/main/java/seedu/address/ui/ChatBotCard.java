@@ -30,14 +30,18 @@ public class ChatBotCard extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-
+    /**
+     * Displays messages alternating between Jobbi and User
+     * @param msg
+     * @param index
+     */
     public void setMessage(String msg, int index) {
         if (index % 2 == 0) {
             username.setText("Jobbi: ");
-            messages.setText(msg); // Display user input into the command box (DONE!)
+            messages.setText(msg);
         } else {
             username.setText("User: ");
-            messages.setText(msg); // Display results of each command + Jobbi's prompts
+            messages.setText(msg);
         }
     }
 }
