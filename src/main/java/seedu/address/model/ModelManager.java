@@ -197,8 +197,8 @@ public class ModelManager extends ComponentManager implements Model {
             throws CommandException {
 
         for (Internship internship : internships) {
-            try{
-                model.updateInternship(internship,removeTagsFromInternship(internship.getTags(), internship, model));
+            try {
+                model.updateInternship(internship, removeTagsFromInternship(internship.getTags(), internship, model));
             } catch (DuplicateInternshipException e) {
                 throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
             } catch (InternshipNotFoundException e) {
