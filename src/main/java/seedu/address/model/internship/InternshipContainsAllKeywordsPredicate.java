@@ -1,11 +1,9 @@
 package seedu.address.model.internship;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.ModelManager;
 
 /**
  * Tests that a {@code Internship}'s {@code Name, Salary, Address, Email or Industry} matches all of the keywords given.
