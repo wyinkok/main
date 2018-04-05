@@ -42,7 +42,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final AddressBook addressBook;
     private final FilteredList<Internship> searchedInternships;
     private final FilteredList<Internship> filteredInternships;
-    private SortedList<Internship> sortedFilteredInternships;
+    private final SortedList<Internship> sortedFilteredInternships;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -54,10 +54,9 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        searchedInternships = new FilteredList<>(this.addressBook.getInternshipList());
-        filteredInternships = new FilteredList<>(searchedInternships);
-        sortedFilteredInternships = new SortedList<>(filteredInternships);
-
+        this.searchedInternships = new FilteredList<>(this.addressBook.getInternshipList());
+        this.filteredInternships = new FilteredList<>(searchedInternships);
+        this.sortedFilteredInternships = new SortedList<>(filteredInternships);
         filterKeywords = new ArrayList<>();
     }
 
