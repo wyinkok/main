@@ -174,7 +174,6 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
         try {
             expectedModel.updateInternship(
                     expectedModel.getFilteredInternshipList().get(toSave.getZeroBased()), editedInternship);
-            expectedModel.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         } catch (DuplicateInternshipException | InternshipNotFoundException e) {
             throw new IllegalArgumentException(
                     "editedInternship is a duplicate in expectedModel, or it isn't found in the model.");
