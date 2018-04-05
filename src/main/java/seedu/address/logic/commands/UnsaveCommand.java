@@ -56,8 +56,8 @@ public class UnsaveCommand extends UndoableCommand {
             throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
         } catch (InternshipNotFoundException e) {
             throw new AssertionError("The target internship cannot be missing");
-       }
-       return new CommandResult(String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, internshipWithoutSavedTag));
+        }
+        return new CommandResult(String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, internshipWithoutSavedTag));
     }
 
     @Override
