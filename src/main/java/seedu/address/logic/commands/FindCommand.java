@@ -32,7 +32,7 @@ public class FindCommand extends Command {
 
         // remove all tags from filtered list except 'saved' tags
         try {
-            model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+            //model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
             ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
         } catch (CommandException e) {
             e.printStackTrace();
@@ -46,6 +46,7 @@ public class FindCommand extends Command {
         } catch (CommandException e) {
             e.printStackTrace();
         }
+
         return new CommandResult(getMessageForInternshipListShownSummary(model.getFilteredInternshipList().size()));
     }
 
