@@ -47,7 +47,6 @@ public class ModelManager extends ComponentManager implements Model {
         sortedFilteredInternships = new SortedList<>(filteredInternships);
 
         filterKeywords = new ArrayList<>();
-
     }
 
     public ModelManager() {
