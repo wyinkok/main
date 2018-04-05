@@ -276,8 +276,8 @@ See diagram below: <Insert Diagram 3 Here>
 
 ===== Aspect: Current Implementation 'Filter Command'
 * Current implementation makes use of the Java FXCollections filteredList.
-We created a separate filteredList<Internship> called SearchedInternshipList and used it together with the existing FilteredInList
-Make use of two filteredList together with addressbook. Thus we have an addressbook , a filteredList (called searchedInternships) which wraps around the addressbook, and a filteredList (called filteredInternships) which wraps around the searchedInternship. See code snippet below
+We created a separate FilteredList<Internship> called SearchedInternshipList and used it together with the existing FilteredList<Internship> FilteredIntership.
+Thus we have an addressbook , a filteredList (called searchedInternships) which wraps around the addressbook, and a filteredList (called filteredInternships) which wraps around the searchedInternship. See code snippet below
 
 ----
 public class ModelManager extends ComponentManager implements Model {
@@ -320,6 +320,8 @@ Additional helper methods were then created to differentiate between updating of
 ---
 
 With this, the search and filter function can now work as intended. `search marketing analytics` and `filter singapore` will return results containing (marketing or analytics) and singapore
+
+<Insert Diagram to show how the propagation works here> 
 
 ** Pros: Design feature solved in relatively "easy" way without having to change the existing code significantly
 ** Cons: Was harder to implement as it required knowledge of how the model interacts and worked as well as how the filteredList Java FXCollection worked.
