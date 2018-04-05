@@ -20,10 +20,10 @@ public class GuiTestAssert {
      */
     public static void assertCardEquals(InternshipCardHandle expectedCard, InternshipCardHandle actualCard) {
         assertEquals(expectedCard.getId(), actualCard.getId());
-        assertEquals(expectedCard.getAddress(), actualCard.getAddress());
-        assertEquals(expectedCard.getEmail(), actualCard.getEmail());
-        assertEquals(expectedCard.getName(), actualCard.getName());
+        assertEquals(expectedCard.getIndustry(), actualCard.getIndustry());
         assertEquals(expectedCard.getSalary(), actualCard.getSalary());
+        assertEquals(expectedCard.getName(), actualCard.getName());
+        assertEquals(expectedCard.getRole(), actualCard.getRole());
         assertEquals(expectedCard.getTags(), actualCard.getTags());
     }
 
@@ -32,9 +32,9 @@ public class GuiTestAssert {
      */
     public static void assertCardDisplaysInternship(Internship expectedInternship, InternshipCardHandle actualCard) {
         assertEquals(expectedInternship.getName().fullName, actualCard.getName());
+        assertEquals(expectedInternship.getRole().value, actualCard.getRole());
         assertEquals(expectedInternship.getSalary().value, actualCard.getSalary());
-        assertEquals(expectedInternship.getEmail().value, actualCard.getEmail());
-        assertEquals(expectedInternship.getAddress().value, actualCard.getAddress());
+        assertEquals(expectedInternship.getIndustry().value, actualCard.getIndustry());
         assertEquals(expectedInternship.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
     }

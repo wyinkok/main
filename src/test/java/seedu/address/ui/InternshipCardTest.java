@@ -55,7 +55,7 @@ public class InternshipCardTest extends GuiUnitTest {
     }
 
     /**
-     * Asserts that {@code personCard} displays the details of {@code expectedInternship} correctly and matches
+     * Asserts that {@code internshipCard} displays the details of {@code expectedInternship} correctly and matches
      * {@code expectedId}.
      */
     private void assertCardDisplay(InternshipCard personCard, Internship expectedInternship, int expectedId) {
