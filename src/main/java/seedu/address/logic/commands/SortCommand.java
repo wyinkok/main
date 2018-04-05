@@ -12,8 +12,8 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String ALTERNATIVE_COMMAND_WORD = "sortby";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all internships according to the argument(s) given"
-            + "displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all internships according "
+            + "to the argument(s) given and displays them as a list with index numbers.\n"
             + "Maximum of 3 arguments will be sorted"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " Industry Role Location";

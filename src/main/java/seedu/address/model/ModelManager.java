@@ -16,10 +16,10 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.util.Sorter;
-import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
+import seedu.address.model.internship.Internship;
+import seedu.address.model.util.Sorter;
 
 /**
  * Represents the in-memory model of the address book data.

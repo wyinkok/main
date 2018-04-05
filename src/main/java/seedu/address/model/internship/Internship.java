@@ -126,32 +126,32 @@ public class Internship {
         return builder.toString();
     }
 
-    public String getValue(String keyword){
-        switch (keyword.toLowerCase()){
-            case "name":
-                return getName().toString();
+    public String getValue(String keyword) {
+        switch (keyword.toLowerCase()) {
+        case "name":
+            return getName().toString();
 
-            case "salary":
-                return getSalary().toString();
+        case "salary":
+            return getSalary().toString();
 
-            case "address":
-                return getAddress().toString();
+        case "address":
+            return getAddress().toString();
 
-            case "industry":
-                return getIndustry().toString();
+        case "industry":
+            return getIndustry().toString();
 
-            case "location":
-                return getLocation().toString();
+        case "location":
+            return getLocation().toString();
 
-            case "role":
-                return getRole().toString();
+        case "role":
+            return getRole().toString();
 
-            case "email":
-                return getEmail().toString();
+        case "email":
+            return getEmail().toString();
 
-            default:
-                assert false; // Keyword already parsed to attribute type. Program should never reach here
-                throw new AssertionError();
+        default:
+            assert false; // Keyword already parsed to attribute type. Program should never reach here
+            throw new AssertionError();
         }
     }
 }
