@@ -8,7 +8,6 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import sun.jvm.hotspot.utilities.AssertionFailure;
 
 /**
  * Represents a Internship in the internship book.
