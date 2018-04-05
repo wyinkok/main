@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -46,4 +47,8 @@ public interface Model {
      */
     void updateFilteredInternshipList(Predicate<Internship> predicate);
 
+    /**
+     * Creates a comparator based on the keyword arguments and apply it to the SortedList of Internship
+     */
+    void setComparator(List<String> keywords);
 }
