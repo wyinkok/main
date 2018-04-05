@@ -5,12 +5,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
@@ -20,12 +18,12 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Undo saved internships into a separate collection.
+ * Undo all saved internships from the Saved collection.
  */
 
-public class UnsaveCommand extends UndoableCommand {
+public class UnsaveallCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "unsave";
+    public static final String COMMAND_WORD = "unsaveall";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes a saved internship to your Saved Collection "
@@ -34,43 +32,37 @@ public class UnsaveCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_UNSAVED_INTERNSHIP_SUCCESS =
-            "New internship removed from Saved Collection: %1$s";
-    public static final String MESSAGE_DUPLICATE_REMOVAL = "This internship already removed from the collection";
+            "All internships removed from Saved Collection";
+    public static final String MESSAGE_DUPLICATE_REMOVAL = "These internships have been removed from the collection already";
 
 
     public final String savedTagName = "saved";
-    private final Index targetIndex;
-    private Internship internshipWithoutSavedTag;
-    private Internship internshipToUnsave;
-
-    public UnsaveCommand(Index targetIndex) {
-
-        this.targetIndex = targetIndex;
-    }
 
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
-        requireNonNull(internshipToUnsave);
-        try {
-            model.updateInternship(internshipToUnsave, internshipWithoutSavedTag);
-        } catch (DuplicateInternshipException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
-        } catch (InternshipNotFoundException e) {
-            throw new AssertionError("The target internship cannot be missing");
-        }
-        return new CommandResult(String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, internshipWithoutSavedTag));
+        removeSavedTagFromAllInternships(model.getFilteredInternshipList());
+        return new CommandResult(String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS));
     }
 
-    @Override
-    protected void preprocessUndoableCommand() throws CommandException {
-        List<Internship> lastShownList = model.getFilteredInternshipList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
+    /**
+     * Removes a "saved" tag from the existing tags of all the filtered internship
+     * @param filteredInternships
+     * @return
+     * @throws CommandException
+     */
+    private ObservableList<Internship> removeSavedTagFromAllInternships(ObservableList<Internship> filteredInternships)
+            throws CommandException {
+        for (Internship internshipToUnsave : filteredInternships) {
+            try {
+                requireNonNull(internshipToUnsave);
+                model.updateInternship(internshipToUnsave, removeSavedTagToInternship(internshipToUnsave));
+            } catch (DuplicateInternshipException e) {
+                throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
+            } catch (InternshipNotFoundException e) {
+                throw new AssertionError("The target internship cannot be missing");
+            }
         }
-
-        internshipToUnsave = lastShownList.get(targetIndex.getZeroBased());
-        internshipWithoutSavedTag = removeSavedTagToInternship(internshipToUnsave);
+        return filteredInternships;
     }
 
     /**
@@ -80,11 +72,10 @@ public class UnsaveCommand extends UndoableCommand {
      * @throws CommandException
      */
     private Internship removeSavedTagToInternship(Internship internship) throws CommandException {
-        final UniqueTagList personTags = new UniqueTagList(internshipToUnsave.getTags());
+        final UniqueTagList personTags = new UniqueTagList(internship.getTags());
         try {
             personTags.delete(new Tag(savedTagName));
         } catch (SavedTagNotFoundException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
         }
 
         // Create map with values = tag object references in the master list
@@ -102,10 +93,4 @@ public class UnsaveCommand extends UndoableCommand {
     }
 
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof UnsaveCommand // instanceof handles nulls
-                && this.targetIndex.equals(((UnsaveCommand) other).targetIndex)); // state check
-    }
 }

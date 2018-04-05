@@ -27,10 +27,12 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NewChatCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SaveCommand;
+import seedu.address.logic.commands.SaveallCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.StartCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnsaveCommand;
+import seedu.address.logic.commands.UnsaveallCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
@@ -169,6 +171,18 @@ public class AddressBookParserTest {
         UnsaveCommand command = (UnsaveCommand) parser.parseCommand(
                 UnsaveCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased());
         assertEquals(new UnsaveCommand(INDEX_FIRST_INTERNSHIP), command);
+    }
+
+    @Test
+    public void parseCommand_unsaveall() throws Exception {
+        assertTrue(parser.parseCommand(UnsaveallCommand.COMMAND_WORD) instanceof UnsaveallCommand);
+        assertTrue(parser.parseCommand(UnsaveallCommand.COMMAND_WORD + " 3") instanceof UnsaveallCommand);
+    }
+
+    @Test
+    public void parseCommand_saveall() throws Exception {
+        assertTrue(parser.parseCommand(SaveallCommand.COMMAND_WORD) instanceof SaveallCommand);
+        assertTrue(parser.parseCommand(SaveallCommand.COMMAND_WORD + " 3") instanceof SaveallCommand);
     }
 
 }

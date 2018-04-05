@@ -65,18 +65,18 @@ Shows more details of each command and a glossary of industries, roles and skill
 
 Format: `help`
 
-=== Start conversation with program : `start`
+=== Starting conversation with program : `start`
 
-Initiates the message thread of JobbiBot. +
+Initiates the message thread of JobbiBot. User can still find internships with Jobbi without typing `start` except that user will not get any prompts or responses from Jobbi +
 Format: `start`
 
-=== Restart conversation with program : `new`
+=== Restarting conversation with program : `new`
 
-Restarts a new message thread of JobbiBot and the previous thread is deleted +
+Restarts a new message thread of JobbiBot and the previous thread is deleted. User does not have to type `start` to restart the conversation again. +
 Format: `new`
 
 
-=== Find internships : `find`
+=== Finding internships : `find`
 
 Finds internships which contains any of the keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -139,7 +139,12 @@ Save the 2nd internship in the internship book.
 `save 1` +
 Saves the 1st person in the results of the `find` command.
 
-=== Remove a Saved internship from a Saved Collection : `unsave`
+=== Saving all internships into Saved Collection : `saveall`
+
+Saves all internships in the Saved Collection. +
+Format: `saveall`
+
+=== Removing a Saved internship from a Saved Collection : `unsave`
 Removes the specified internship from the saved internship collection. +
 Format: `unsave INDEX`
 
@@ -159,7 +164,12 @@ Removes the 2nd internship in the saved internship collection.
 `unsave 1` +
 Removes the 1st person in the results of the `find` command the saved collection.
 
-=== Shows the full Saved Internship Collection : `find saved` or `filter saved`
+=== Removing all saved internships from the Saved Collection : `unsaveall`
+
+Removes all internships in the Saved Collection. +
+Format: `unsaveall`
+
+=== Showing the full Saved Internship Collection : `find saved` or `filter saved`
 Shows all the internships with a `saved` tag. +
 Format: `find saved` or `filter saved`
 
