@@ -8,6 +8,7 @@ import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 
+
 /**
  * The API of the Model component.
  */

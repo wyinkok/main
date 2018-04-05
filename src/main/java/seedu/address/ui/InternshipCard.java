@@ -31,11 +31,11 @@ public class InternshipCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label industry;
+    @FXML
+    private Label role;
+    @FXML
     private Label salary;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
     @FXML
     private FlowPane tags;
 
@@ -44,9 +44,10 @@ public class InternshipCard extends UiPart<Region> {
         this.internship = internship;
         id.setText(displayedIndex + ". ");
         name.setText(internship.getName().fullName);
+        industry.setText(internship.getIndustry().value);
+        role.setText(internship.getRole().value);
         salary.setText(internship.getSalary().value);
-        address.setText(internship.getAddress().value);
-        email.setText(internship.getEmail().value);
+
         internship.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

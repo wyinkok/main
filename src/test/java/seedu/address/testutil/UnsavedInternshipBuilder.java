@@ -7,6 +7,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.exceptions.SavedTagNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 /**
@@ -15,7 +16,7 @@ import seedu.address.model.tag.UniqueTagList;
 public class UnsavedInternshipBuilder {
 
 
-    public static final String MESSAGE_DUPLICATE_TAG = "This internship has been removed from Saved Collection";
+    public static final String MESSAGE_DUPLICATE_REMOVAL = "This internship has been removed from Saved Collection";
     public final String savedTagName = "saved";
 
     /**
@@ -24,7 +25,11 @@ public class UnsavedInternshipBuilder {
      */
     public Internship removeTag(Internship internshipToCopy) throws CommandException {
         final UniqueTagList internshipTags = new UniqueTagList(internshipToCopy.getTags());
-        internshipTags.delete(new Tag(savedTagName));
+        try {
+            internshipTags.delete(new Tag(savedTagName));
+        } catch (SavedTagNotFoundException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
+        }
 
         // Create map with values = tag object references in the master list
         // used for checking internship tag references

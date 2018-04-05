@@ -16,7 +16,6 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.events.ui.ShowGlossaryRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -49,8 +48,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private MenuItem helpMenuItem;
 
-    @FXML
-    private MenuItem glossaryMenuItem;
 
     @FXML
     private StackPane internshipListPanelPlaceholder;
@@ -87,7 +84,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-        setAccelerator(glossaryMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -177,14 +173,6 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.show();
     }
 
-    /**
-     * Opens the glossary window
-     */
-    @FXML
-    public void handleGlossary() {
-        GlossaryWindow glossaryWindow = new GlossaryWindow();
-        glossaryWindow.show();
-    }
 
     void show() {
         primaryStage.show();
@@ -212,9 +200,4 @@ public class MainWindow extends UiPart<Stage> {
         handleHelp();
     }
 
-    @Subscribe
-    private void handleShowGlossaryEvent(ShowGlossaryRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        handleGlossary();
-    }
 }

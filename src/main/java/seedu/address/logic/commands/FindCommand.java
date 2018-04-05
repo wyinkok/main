@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.ModelManager;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 
 /**
@@ -17,6 +21,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
+    public static final String MESSAGE_SEARCH_RESPONSE = "Awesome, would you like to narrow down your search even "
+            + "more? You may filter by location and specific address \nE.g: filter singapore hongkong tanjong pagar";
+
     private final InternshipContainsKeywordsPredicate predicate;
 
     public FindCommand(InternshipContainsKeywordsPredicate predicate) {
@@ -25,8 +32,25 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute() {
+
+        // remove all tags from filtered list except 'saved' tags
+        try {
+            model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+            ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
+
         model.updateFilteredInternshipList(predicate);
-        return new CommandResult(getMessageForInternshipListShownSummary(model.getFilteredInternshipList().size()));
+
+        // add tags that have keywords matching the internship
+        try {
+            ModelManager.addTagsToFilteredList(ModelManager.getKeywords(), model.getFilteredInternshipList(), model);
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
+
+        return new CommandResult(MESSAGE_SEARCH_RESPONSE);
     }
 
     @Override
