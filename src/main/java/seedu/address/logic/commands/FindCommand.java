@@ -21,6 +21,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
+    public static final String MESSAGE_SEARCH_RESPONSE = "Awesome, would you like to narrow down your search even "
+            + "more? You may filter by location and specific address \nE.g: filter singapore hongkong tanjong pagar";
+
     private final InternshipContainsKeywordsPredicate predicate;
 
     public FindCommand(InternshipContainsKeywordsPredicate predicate) {
@@ -47,7 +50,7 @@ public class FindCommand extends Command {
             e.printStackTrace();
         }
 
-        return new CommandResult(getMessageForInternshipListShownSummary(model.getFilteredInternshipList().size()));
+        return new CommandResult(MESSAGE_SEARCH_RESPONSE);
     }
 
     @Override

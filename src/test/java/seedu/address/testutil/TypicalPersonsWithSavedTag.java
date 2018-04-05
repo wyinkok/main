@@ -33,7 +33,7 @@ public class TypicalPersonsWithSavedTag {
             .withEmail("johnd@example.com").withSalary("98765432")
             .withTags("owesMoney", "friends", "saved").build();
     public static final Internship CARL = new InternshipBuilder().withName("Carl Kurz").withSalary("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+            .withEmail("heinz@example.com").withAddress("wall street").withTags("saved").build();
     public static final Internship DANIEL = new InternshipBuilder().withName("Daniel Meier").withSalary("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("saved").build();
     public static final Internship ELLE = new InternshipBuilder().withName("Elle Meyer").withSalary("9482224")
