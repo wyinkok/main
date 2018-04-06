@@ -42,7 +42,7 @@ public class FindCommand extends Command {
             e.printStackTrace();
         }
 
-        model.updateFilteredInternshipList(predicate);
+        model.updateSearchedInternshipList(predicate);
 
         // add tags that have keywords matching the internship
         try {
