@@ -34,7 +34,7 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for your JobbiBot.
 .  Double-click the file to start the app. The GUI like the one below should appear in a few seconds.
 +
-image::new_ui.png[width="790"]
+image::ui.png[width="790"]
 +
 .  Type the command `start` in the command box and press kbd:[Enter] if you would like to begin a conversation with JobbiBot.
 .  Alternatively, if you would like to search for an internship directly. Type your command in the command box and press kbd:[Enter] to execute it. +
