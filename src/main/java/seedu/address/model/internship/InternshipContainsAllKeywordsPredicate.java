@@ -1,11 +1,9 @@
 package seedu.address.model.internship;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.ModelManager;
 
 /**
  * Tests that a {@code Internship}'s {@code Name, Salary, Address, Email or Industry} matches all of the keywords given.
@@ -14,9 +12,7 @@ public class InternshipContainsAllKeywordsPredicate implements Predicate<Interns
     private final List<String> keywords;
 
     public InternshipContainsAllKeywordsPredicate(List<String> keywords) {
-        List<String> allKeywords = new ArrayList<String>(keywords);
-        allKeywords.addAll(ModelManager.getKeywords());
-        this.keywords = allKeywords;
+        this.keywords = keywords;
     }
 
     @Override
@@ -41,5 +37,4 @@ public class InternshipContainsAllKeywordsPredicate implements Predicate<Interns
                 || (other instanceof InternshipContainsAllKeywordsPredicate // instanceof handles nulls
                 && this.keywords.equals(((InternshipContainsAllKeywordsPredicate) other).keywords)); // state check
     }
-
 }

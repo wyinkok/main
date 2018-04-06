@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
@@ -42,8 +42,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_INDUSTRY, PREFIX_LOCATION, PREFIX_ROLE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_SALARY, PREFIX_EMAIL, PREFIX_INDUSTRY,
-                PREFIX_LOCATION, PREFIX_ROLE) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                PREFIX_LOCATION) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND, AddCommand.MESSAGE_USAGE));
         }
 
         try {

@@ -1,7 +1,7 @@
+//@@author wyinkok
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
+import seedu.address.model.internship.exceptions.SavedTagNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -34,7 +35,7 @@ public class UnsaveCommand extends UndoableCommand {
 
     public static final String MESSAGE_UNSAVED_INTERNSHIP_SUCCESS =
             "New internship removed from Saved Collection: %1$s";
-    public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already removed from the collection";
+    public static final String MESSAGE_DUPLICATE_REMOVAL = "This internship already removed from the collection";
 
 
     public final String savedTagName = "saved";
@@ -53,11 +54,10 @@ public class UnsaveCommand extends UndoableCommand {
         try {
             model.updateInternship(internshipToUnsave, internshipWithoutSavedTag);
         } catch (DuplicateInternshipException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
+            throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
         } catch (InternshipNotFoundException e) {
             throw new AssertionError("The target internship cannot be missing");
         }
-        model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         return new CommandResult(String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, internshipWithoutSavedTag));
     }
 
@@ -79,9 +79,13 @@ public class UnsaveCommand extends UndoableCommand {
      * @return
      * @throws CommandException
      */
-    private Internship removeSavedTagToInternship(Internship internship) {
+    private Internship removeSavedTagToInternship(Internship internship) throws CommandException {
         final UniqueTagList personTags = new UniqueTagList(internshipToUnsave.getTags());
-        personTags.delete(new Tag(savedTagName));
+        try {
+            personTags.delete(new Tag(savedTagName));
+        } catch (SavedTagNotFoundException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
+        }
 
         // Create map with values = tag object references in the master list
         // used for checking person tag references

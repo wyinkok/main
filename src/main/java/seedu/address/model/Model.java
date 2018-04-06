@@ -1,11 +1,13 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
+
 
 /**
  * The API of the Model component.
@@ -45,4 +47,14 @@ public interface Model {
      */
     void updateFilteredInternshipList(Predicate<Internship> predicate);
 
+    /**
+     * Updates the filter of the searched internship list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateSearchedInternshipList(Predicate<Internship> predicate);
+
+    /**
+     * Creates a comparator based on the keyword arguments and apply it to the SortedList of Internship
+     */
+    void setComparator(List<String> keywords);
 }

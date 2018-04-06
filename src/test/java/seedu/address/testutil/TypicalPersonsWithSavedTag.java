@@ -1,15 +1,5 @@
+//@@author wyinkok
 package seedu.address.testutil;
-
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +23,7 @@ public class TypicalPersonsWithSavedTag {
             .withEmail("johnd@example.com").withSalary("98765432")
             .withTags("owesMoney", "friends", "saved").build();
     public static final Internship CARL = new InternshipBuilder().withName("Carl Kurz").withSalary("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+            .withEmail("heinz@example.com").withAddress("wall street").withTags("saved").build();
     public static final Internship DANIEL = new InternshipBuilder().withName("Daniel Meier").withSalary("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("saved").build();
     public static final Internship ELLE = new InternshipBuilder().withName("Elle Meyer").withSalary("9482224")
@@ -43,18 +33,6 @@ public class TypicalPersonsWithSavedTag {
     public static final Internship GEORGE = new InternshipBuilder().withName("George Best").withSalary("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withTags("saved").build();
 
-    // Manually added
-    public static final Internship HOON = new InternshipBuilder().withName("Hoon Meier").withSalary("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Internship IDA = new InternshipBuilder().withName("Ida Mueller").withSalary("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").build();
-
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Internship AMY = new InternshipBuilder().withName(VALID_NAME_AMY).withSalary(VALID_SALARY_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Internship BOB = new InternshipBuilder().withName(VALID_NAME_BOB).withSalary(VALID_SALARY_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

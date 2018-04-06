@@ -17,7 +17,7 @@ By: `Team CS2103-F11-B3`     Since: `Jan 2018`      Licence: `MIT`
 
 == Introduction
 
-JobbiBot is a desktop chatbot application for those who *prefer to use an interactive app to source for internship
+JobbiBot is a desktop Chatbot application for those who *prefer to use an interactive app to source for internship
 opportunities*. Hence, JobbiBot is *optimized for those who prefer to work with a Command Line Interface* (CLI) while
 still having the benefits of a Graphical User Interface (GUI). If you can type fast, JobbiBot can find the most suitable
 internship matches faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
@@ -30,22 +30,23 @@ internship matches faster than traditional GUI apps. Interested? Jump to the <<Q
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Download the latest `jobbibot4.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your JobbiBot.
+.  Double-click the file to start the app. The GUI like the one below should appear in a few seconds.
 +
 image::new_ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Type the command `start` in the command box and press kbd:[Enter] if you would like to begin a conversation with JobbiBot.
+.  Alternatively, if you would like to search for an internship directly. Type your command in the command box and press kbd:[Enter] to execute it. +
+
 .  Some example commands you can try:
 
+* *`help`* : open the help window
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* **`save`**`3` : save the 3rd contact shown in the current list to a personal Saved Collection
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+.  Refer to <<Features>> for more details of each command.
 
 [[Features]]
 == Features
@@ -60,27 +61,30 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 
 === Viewing help : `help`
+Shows more details of each command and a glossary of industries, roles and skills that the user may refer to in his or her search
 
 Format: `help`
 
-=== Listing all internships : `list`
+=== Start conversation with program : `start`
 
-Shows a list of all internships in the internship database. +
-Format: `list`
+Initiates the message thread of JobbiBot. +
+Format: `start`
 
-****
-* Tags other than 'saved' tag attached when using find function will be removed when using 'list'
-****
+=== Restart conversation with program : `new`
 
-=== Find internships : `find`
+Restarts a new message thread of JobbiBot and the previous thread is deleted +
+Format: `new`
+
+=== Find internships by keyword(s): `find` `search`
 
 Finds internships which contains any of the keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `search KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Internships matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The find/search is case insensitive. e.g `analyst` will match `Analyst`
+* Tags other than 'saved' tag attached when using find/search function will be removed when using 'list'
+* The order of the keywords does not matter. e.g. `Sales Marketing` will match `Marketing Sales`
+* Internships matching at least one keyword will be returned (i.e. `OR` search). e.g. `Micro Dyson` will return `Dyson Technology`, `Dyson Engineering` `Microsoft`
 * Keyword/s matching the internship is added to the internship as a tag/s
 * Keywords tags are reset if user uses find again
 ****
@@ -94,11 +98,11 @@ Returns any internship having names or description matching `Dow`, `Micron`, or 
 * `find Engineering` +
 Returns any internship having `Engineering` in its description.
 * `find Betsy@gmail.com` +
-Returns any internship having email `Betsy@gmail.com`
+Returns any internship having contact email `Betsy@gmail.com`
 * `find Serangoon` +
 Returns any internship having address or description matching `Serangoon` in it
 
-=== Filtering Internship by keyword: `filter`
+=== Filtering Internship by keyword(s): `filter`
 
 Filter the internship list according to the given keywords. +
 Format: `filter KEYWORD [MORE_KEYWORDS]`
@@ -118,25 +122,24 @@ Returns any entries containing data e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics e.g 'data analytics internship', 'data analytics singapore'
 
-=== Selecting an internship : `select`
+=== Sorting Internship by keywords(s): `sort` `sortby`
 
-Selects the internship identified by the index number used in the last internship listing. +
-Format: `select INDEX`
+Sort the internship list according to the given keywords. +
+Format: `sort KEYWORD [MORE_KEYWORDS]` +
+Keywords limited to internship attribute types: Name Salary Email Address Industry Location Role
 
 ****
-* Selects the internship and loads the Google search page the internship at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* `1, 2, 3, ...`
+* The sort is case insensitive. e.g `name` will match `Name`
+* The order of the keywords matter. e.g `sort Name Salary` will sort name before salary
+* Only the first three keywords will be sorted. Subsequent keywords will be ignored
 ****
 
 Examples:
 
-* `list` +
-`select 2` +
-Selects the 2nd internship in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st internship in the results of the `find` command.
+* `sort name` +
+Sort the internship list according to name attribute
+* `sort salary location` +
+Sort the internship list according to salary first then location
 
 === Saving an internship to a Saved Collection : `save`
 Saves the specified internship from the internship book. +
@@ -153,20 +156,58 @@ Examples:
 * `list` +
 `save 2` +
 Save the 2nd internship in the internship book.
-* `find Betsy` +
+* `find Google` +
 `save 1` +
 Saves the 1st person in the results of the `find` command.
 
+=== Remove a Saved internship from a Saved Collection : `unsave`
+Removes the specified internship from the saved internship collection. +
+Format: `unsave INDEX`
 
-=== Listing entered commands : `history`
+****
+* Removes the internship at the specified `INDEX`.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
 
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+Examples:
 
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
+* `find saved` +
+`unsave 2` +
+Removes the 2nd internship in the saved internship collection.
+* `find Google` +
+`save 1` +
+`unsave 1` +
+Removes the 1st person in the results of the `find` command the saved collection.
+
+=== Shows the full Saved Internship Collection : `find saved` or `filter saved`
+Shows all the internships with a `saved` tag. +
+Format: `find saved` or `filter saved`
+
+=== Selecting an internship : `select`
+
+Selects the internship identified by the index number used in the last internship listing. +
+Format: `select INDEX`
+
+****
+* Selects the internship and loads the Google search page the internship at the specified `INDEX`.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`select 2` +
+Selects the 2nd internship in the address book.
+* `find Singapore Tourism Board` +
+`select 1` +
+Selects the 1st internship in the results of the `find` command.
+
+=== Listing all internships : `list`
+
+Shows a list of all internships in the internship database. +
+Format: `list`
 
 // tag::undoredo[]
 === Undoing previous command : `undo`
@@ -181,19 +222,19 @@ Undoable commands: those commands that modify the internship book's content ('sa
 
 Examples:
 
-* `delete 1` +
+* `save 1` +
 `list` +
-`undo` (reverses the `delete 1` command) +
+`undo` (reverses the `save 1` command) +
 
 * `select 1` +
 `list` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+* `save 1` +
+`unsave 1` +
+`undo` (reverses the `unsave 1` command) +
+`undo` (reverses the `save 1` command) +
 
 === Redoing the previously undone command : `redo`
 
@@ -202,36 +243,22 @@ Format: `redo`
 
 Examples:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+* `save 1` +
+`undo` (reverses the `save 1` command) +
+`redo` (reapplies the `save 1` command) +
 
-* `delete 1` +
+* `select 1` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
+* `save 1` +
+`unsave 1` +
+`undo` (reverses the `unsave 1` command) +
+`undo` (reverses the `save 1` command) +
+`redo` (reapplies the `save 1` command) +
+`redo` (reapplies the `unsave 1` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
-
-Clears all entries from the internship book. +
-Format: `clear`
-
-=== Start communication with program : `start`
-
-Initiates the message thread of JobbiBot. +
-Format: `start`
-
-=== Restart communication with program : `new`
-
-Restarts a new message thread of JobbiBot and the previous thread is deleted +
-Format: `new`
 
 === Exiting the program : `exit`
 
@@ -243,30 +270,172 @@ Format: `exit`
 Internships data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+== Command Summary
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+* *Help* : `help`
+* *Start JobbiBot* : `start`
+* *Refresh JobbiBot Conversation*: `new`
+* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `find Analytics Engineering`
+* *Filter* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `filter Marketing Singapore`
+* *Save* : `save INDEX` +
+e.g. `save 2`
+* *Unsave* : `unsave INDEX` +
+e.g. `unsave 2`
+* *Show Saved Collection* : `find saved` or `filter saved` +
+e.g. `find saved` or `filter saved`
+* *Select* : `select INDEX` +
+e.g.`select 3`
+* *List* : `list`
+* *Undo* : `undo`
+* *Redo* : `redo`
+* *Exit* : `exit`
+
+== List of Industries
+This serves as a non-exhaustive lists of skills that users can search for
+
+* Arts and Design
+* Automotive
+* Banking and Finance
+* Biomedical Sciences
+* Community and Social Services
+* Education
+* Entrepreneurship and Businesses (General)
+* Fashion and Retail
+* Food and Beverages
+* Healthcare Services
+* Hospitality
+* Legal
+* Media and Communications
+* Military and Protective Services
+* Public Relations
+* Research
+* Social Enterprise
+* Technology
+* Veterinary Services
+
+== List of Internship Roles
+This table is a non exhaustive list of potential internship roles that users can search for. Internship roles are organised by industry but not all industries are listed in this table.
+
+[width="100%",cols="35%,65%",options="header",]
+|=======================================================================
+|Industry | Internship Role
+
+.5+| Arts and Design | Animator
+                     | Film Editor
+                     | Graphic Designer
+                     | Photographer
+                     | Videographer
+.9+| Banking and Finance
+                     | Accountant
+                     | Asset Management Analyst
+                     | Audit Assistant
+                     | Corporate Security Analyst
+                     | Financial Planner/Advisory
+                     | FinTech Analyst
+                     | Private Equity Analyst
+                     | Risk Management
+                     | Wealth Management Analyst
+.2+| Community and Social Service
+                     | Community Relations Management
+                     | Human Services
+.7+| Consultancy
+                     | Education Consultant
+                     | Human Resource Consultant
+                     | Management Consultant
+                     | Operations Consultant
+                     | Public Relations Consultant
+                     | Strategy Consultant
+                     | Technology Consultant
+.2+| Education
+                     | Assessment and Curriculum Program Coordinator
+                     | Creative Writing Teaching
+.4+| Engineering
+                     | Aerospace Engineer
+                     | Electrical Engineer
+                     | Manufacturing Engineer
+                     | Mechanical Engineer
+.6+| General, Business and Entrepreneurship
+                     | Business Analytics
+                     | Business Development
+                     | Market Researcher
+                     | Operations
+                     | Sales
+                     | Product Manager
+.2+| Healthcare
+                     | Patient Support
+                     | Patient Advocate
+.4+| Hospitality and Tourism
+                     | Customer Experience
+                     | Events Planning and Management
+                     | Guest Services and Relations
+                     | Sustainability
+.1+| Legal
+                     | Legal Counsel
+.7+| Media and Communication
+                     | Advertising / Content Creator
+                     | Digital Marketer
+                     | Editor
+                     | Photojournalist
+                     | Public Relation
+                     | Social Media
+                     | Writer
+ .3+| Retail
+                      | Buyer
+                      | Merchandiser
+                      | Shop Assistant
+.18+| Technology
+                     | Android Developer
+                     | Computer Hardware Engineer
+                     | Data Visualisation Engineer
+                     | Data Scientist
+                     | Full Stack Developer
+                     | Information Security Analyst
+                     | iOS Developer
+                     | IT Support
+                     | Machine Learning Researcher
+                     | Mobile Developer
+                     | .NET Developer
+                     | Networks Engineer
+                     | Software Engineer
+                     | Software Quality Assurance Engineer
+                     | Unity3D (AR/VR)
+                     | User Experience
+                     | User Interface
+                     | Web Development
+|=======================================================================
+
+== List of Skills
+This serves as a non-exhaustive lists of skills that users can list in their conversation with Jobbi.
+
+* Accountancy
+* Business Development
+* Consultancy
+* Data Analytics
+* Design
+* Electrical Engineering
+* Event Planning and Management
+* Finance
+* Full Stack Software Engineering
+* Human Resource
+* Logistics and Procurement
+* Machine Learning
+* Marketing
+* Mechanical Engineering
+* Mobile Development
+* Operations
+* Product Management
+* Public Relations
+* Purchasing
+* Sales
+* Software Engineering
+* User Experience Design
+* User Interface Design
 
 == FAQ
 
 *Q*: How do I update the internship list to the most updated version? +
 *A*: Download the database from the www.dummywebsite.com and replace the addressbook.xml file in main\data.
 
-== Command Summary
 
-* *Clear* : `clear`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find Analytics Engineering`
-* *Filter* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `filter Marketing Singapore`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *Save* : `save INDEX` +
-e.g.`select 3`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`

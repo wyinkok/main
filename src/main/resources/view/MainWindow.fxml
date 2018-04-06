@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--@@author wyinkok-->
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
@@ -25,11 +25,6 @@
 
       <VBox prefWidth="320.0">
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-               <Menu mnemonicParsing="false" text="Glossary">
-                 <items>
-                     <MenuItem fx:id="glossaryMenuItem" mnemonicParsing="false" onAction="#handleGlossary" text="Glossary" />
-                 </items>
-               </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>

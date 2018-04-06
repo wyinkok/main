@@ -230,53 +230,106 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::RankCommmand[]
-=== Rank Command Feature
-==== Proposed Implementation
+// tag::Filter Command Feature[]
+=== Filter Feature
+==== Implementation
 
-The rank command features will complement with the existing find and filter command function.
+The search and filter command are two complementary features of the JobbiBot.
 
-The rank command features takes in one or more arguments in order to give internship listing a score so as to sort them.
+The search command takes in one or more keywords and returns all internships that contains *ANY* of the keyword(s).
 
-Our proposed implementation is to give a corresponding weight to each argument and sum up the internship listing score.
+The filter command takes in one or more keywords and returns all internships that contains *ALL* of the keyword(s) from the last searched internship list or the full internship list if the users has not used the search command feature.
 
-See Comprehensive Example below
-
-Suppose the user keys in three commands 1. `find a b c` , 2. `filter d`, 3. `rank c b d a`
-The results is as shown below:
-
-image::RankCommandExample.png[width="800"]
-
-Explanation:
-argument c is given the weight 4, b is given the weight 3, and so on
-If the internship contains the argument, then add the argument weight to a ranking score.
-Sort the final list according to this score.
+See diagram below: <Insert Diagram Here>
 
 
 ==== Design Considerations
 
-===== Aspect: Implementation of `Rank Command`
+===== Aspect: Old Implementation of `Filter Command`
 
-* ** Alternative 1 (current choice):** Give weightage to the argument and calculate a ranking score for the internship listing
-** Pros: Give users more functionality / options
-** Cons: Harder to implement, requires modification to ModelComponent to keep track of ranking score and internship list
+* Saved the list searched keyword argument(s) into a List<String> and add these arguments into the filter command arguments.
 
-* **Alternative 2:** Give equal weightage to all arguments, always auto-rank whenever search command is given, with the most match given at the top
-** Pros: More user friendly
-** Cons: Still requires modification to ModelComponent to keep count of matches in the internship list
+** Example: `search marketing`, then `filter singapore` is essentially `filter marketing singapore` since filter only returns arguments that contains all the given keywords
+** Rationale 1: Provides two unique function, one to union find all the keyword arguments, whereas the other is a inner join / intersect find of all the keyword arguments.
+** Rationale 2: More intuitive for the user to only key in `filter singapore` to get `filter singapore marketing` results after he/she have `search marketing`
+** Pros: Easy to implement, only need to create a List<String> to store the last searched arguments and add them to the filter command arguments when filter commmand is executed
+** Cons: Fatal design error in the following example: `search marketing analytics`, then `filter singapore` will only return results that contain marketing analytics and singapore.
+Whereas the desired output should be internships that either contain marketing singapore or analytics singapore. It was not feasible/easy to change the filter command to produce this desired outcome
+
+See diagram below: <Insert Diagram 2 Here>
+
+===== Aspect: Alternative Implementation 'Filter Command'
+
+* Alternative implementation to solve the above problem was to add a tag called CurrentList whatever is being currently searched.
+Regardless of how many search arguments were given in the initial search command, the list will all have the CurrentList tag which allows for easy filtering
+as we can simply add CurrentList tag to the filter keywords.
+
+** Example: `Search marketing analytics data engineering` followed by a `filter singapore` will result in `filter singapore CurrentList`
+which returns all internships that contains (marketing or analytics or data or engineering) and singapore.
+** Pros: Make use of existing Tag Feature. Supposedly easier to implement than changing the model component to save the last searched internship list somewhere and apply filter on it.
+** Cons: Will be distracting as the CurrentList tag is applied to the entire list
+** Cons: Was harder to implement than expected because the tag had to be cleared
+** Note: This add tag feature (done by Ci Kang) is now used to distinguish between search keywords.
+E.g `search marketing analytics` will display marketing tag for internship that contain marketing and display analytics tag for internship that contains analytics.
+
+See diagram below: <Insert Diagram 3 Here>
+
+===== Aspect: Current Implementation 'Filter Command'
+* Current implementation makes use of the Java FXCollections filteredList.
+We created a separate FilteredList<Internship> called SearchedInternshipList and used it together with the existing FilteredList<Internship> FilteredIntership.
+Thus we have an addressbook , a filteredList (called searchedInternships) which wraps around the addressbook, and a filteredList (called filteredInternships) which wraps around the searchedInternship. See code snippet below
+
+----
+public class ModelManager extends ComponentManager implements Model {
+	...
+    private final AddressBook addressBook;
+    private final FilteredList<Internship> searchedInternships;
+    private final FilteredList<Internship> filteredInternships;
+    ...
+
+    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    	....
+    	....
+        this.addressBook = new AddressBook(addressBook);
+        searchedInternships = new FilteredList<>()
+        filteredInternships = new FilteredList<>(searchedInternships);
+        ...
+    }
+
+----
+
+Due to the java wrapper functionality (in the FilteredList<T>), any changes in addressbook is propagated down to searchedInternship and then to filteredInternship. This allows us to maintain two different list of internships according to whatever keyword arguments (predicate) have been applied to it.
+
+Additional helper methods were then created to differentiate between updating of the searchedInternship and filteredInternship. See code snippet 2 below
 
 
-===== Aspect: Implementation of Internship Listing View for Find/Filter/Rank/Sort
+	// For Filter function
+    @Override
+    public void updateFilteredInternshipList(Predicate<Internship> predicate) {
+        requireNonNull(predicate);
+        filteredInternships.setPredicate(predicate);
+    }
 
-* **Alternative 1 (current choice):** Each time command is executed, we keep the internship list that is generated and execute further commands on that
-** Pros: Once implemented, it is easier to understand and follow and to use for future features
-** Cons: Harder to implement as it requires a few changes to the ModelComponent
+    // For Search Function
+    @Override
+    public void updateSearchedInternshipList(Predicate<Internship> predicate) {
+        requireNonNull(predicate);
+        searchedInternships.setPredicate(predicate);
+        filteredInternships.setPredicate(predicate);
+    }
+---
 
-* **Alternative 2:** Generate brand new internship list from full list of internships by saving the arguments and keywords into another data structure and only using existing commands to generate the list
-** Pros: Relies on existing component, allows for easier adding and removing of keyword arguments
-** Cons: Harder to follow, find / filter commands must be improved much further to allow exact searching of particular lists
+With this, the search and filter function can now work as intended. `search marketing analytics` and `filter singapore` will return results containing (marketing or analytics) and singapore
 
-// end::RankCommand[]
+See Diagram below: <Insert Diagram to show how the propagation works here>
+
+** Pros: Design feature solved in relatively "easy" way without having to change the existing code significantly
+** Cons: Was harder to implement as it required knowledge of how the model interacts and worked as well as how the filteredList Java FXCollection worked.
+
+
+See diagram below <Insert Model Manager Diagram>
+
+// end::Search and Filter Command[]
 
 // tag::undoredo[]
 === Undo/Redo feature

@@ -1,3 +1,4 @@
+//@@author wyinkok
 package seedu.address.testutil;
 
 import java.util.HashMap;
@@ -31,11 +32,11 @@ public class SavedInternshipBuilder {
         }
 
         // Create map with values = tag object references in the master list
-        // used for checking person tag references
+        // used for checking internship tag references
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         personTags.forEach(tag -> masterTagObjects.put(tag, tag));
 
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
+        // Rebuild the list of intrenship tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
 

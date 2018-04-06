@@ -21,6 +21,7 @@ import seedu.address.logic.commands.NewChatCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StartCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnsaveCommand;
@@ -92,17 +93,24 @@ public class AddressBookParser {
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
 
+        //@@author wyinkok
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
+
         case UnsaveCommand.COMMAND_WORD:
             return new UnsaveCommandParser().parse(arguments);
 
         case StartCommand.COMMAND_WORD:
             return new StartCommand();
 
+        case SortCommand.COMMAND_WORD:
+        case SortCommand.ALTERNATIVE_COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
         case NewChatCommand.COMMAND_WORD:
             return new NewChatCommand();
 
+        //@@author
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

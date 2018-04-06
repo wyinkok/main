@@ -25,7 +25,7 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
     /**
      * Helper method to collate all attributes of internship formats it for searching
      */
-    private String internshipAttributeString(Internship internship) {
+    public String internshipAttributeString(Internship internship) {
         // tags currently toString as [tagName], replace [] with whitespace for searching.
         // Also replaces comma with whitespace
         return new String(internship.toString().replaceAll("[\\[+\\]+\\,]", " "));

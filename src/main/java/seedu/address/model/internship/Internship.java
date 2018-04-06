@@ -15,6 +15,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Internship {
 
+    public static final String ATTRIBUTES_LIST = "Name Salary Email Address Industry Location Role";
     private final Name name;
     private final Salary salary;
     private final Email email;
@@ -125,4 +126,32 @@ public class Internship {
         return builder.toString();
     }
 
+    public String getValue(String keyword) {
+        switch (keyword.toLowerCase()) {
+        case "name":
+            return getName().toString();
+
+        case "salary":
+            return getSalary().toString();
+
+        case "address":
+            return getAddress().toString();
+
+        case "industry":
+            return getIndustry().toString();
+
+        case "location":
+            return getLocation().toString();
+
+        case "role":
+            return getRole().toString();
+
+        case "email":
+            return getEmail().toString();
+
+        default:
+            assert false; // Keyword already parsed to attribute type. Program should never reach here
+            throw new AssertionError();
+        }
+    }
 }
