@@ -102,6 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    //@@author niloc94
     @Override
     public void setComparator(List<String> keywords) {
         Comparator<Internship> comparatorToSet = Sorter.makeComparator(keywords);

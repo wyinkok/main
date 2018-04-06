@@ -15,6 +15,7 @@ public class InternshipContainsAllKeywordsPredicate implements Predicate<Interns
         this.keywords = keywords;
     }
 
+    //@@author niloc94
     @Override
     public boolean test(Internship internship) {
         // Check if all keyword can be found in all of a person's details (e.g name, contact number, address)
@@ -22,6 +23,7 @@ public class InternshipContainsAllKeywordsPredicate implements Predicate<Interns
                 StringUtil.containsWordIgnoreCase(internshipAttributeString(internship), keyword));
     }
 
+    //@@author niloc94
     /**
      * Helper method to collate all attributes of internship formats it for searching
      */

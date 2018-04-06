@@ -5,6 +5,7 @@ import java.util.List;
 
 import seedu.address.model.internship.Internship;
 
+//@@author niloc94
 /**
  * Takes in keywords for attributes and creates comparator object for sorting
  */
