@@ -16,6 +16,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all internships";
 
+    //@@author TanCiKang
     @Override
     public CommandResult execute() {
         ModelManager.setKeywords(new ArrayList<String>());
