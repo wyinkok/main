@@ -19,7 +19,7 @@ Jobbi Bot is a Chatbot Internship Search Application . Although it has a GUI, mo
 Users will communicate with Jobbi their  via the CLI. In response, Jobbi will intelligently match the most suitable internships to the user's preferences.
 
 == Site Map
-
+* https://github.com/CS2103JAN2018-F11-B3/main/releases[Releases]
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
 * <<AboutUs#, About Us>>
