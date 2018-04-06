@@ -119,6 +119,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Add / Remove Tags Methods =============================================================
 
+    //@@author TanCiKang
     /**
      * Add keyword tags that matches the individual internship to the internship
      * @param keyword
@@ -147,6 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
                 internship.getIndustry(), internship.getLocation(), internship.getRole(), correctTagReferences);
     }
 
+    //@@author TanCiKang
     /**
      * Add keyword tags that matches the internship to the list of internships in filteredInternships
      * @param filterKeywords
@@ -175,6 +177,7 @@ public class ModelManager extends ComponentManager implements Model {
         return;
     }
 
+    //@@author TanCiKang
     /**
      * Remove all tags from individual internship other than 'saved' tags
      * @param tagsToBeRemoved
@@ -205,6 +208,7 @@ public class ModelManager extends ComponentManager implements Model {
                 internship.getIndustry(), internship.getLocation(), internship.getRole(), correctTagReferences);
     }
 
+    //@@author TanCiKang
     /**
      * Remove all tags that are not 'saved' from the internships
      * @param internships

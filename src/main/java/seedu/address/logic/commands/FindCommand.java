@@ -30,7 +30,6 @@ public class FindCommand extends Command {
         this.predicate = predicate;
     }
 
-
     //@@author TanCiKang
     @Override
     public CommandResult execute() {
