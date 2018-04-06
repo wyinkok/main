@@ -40,8 +40,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     private static List<String> filterKeywords;
     private final AddressBook addressBook;
+    private final FilteredList<Internship> searchedInternships;
     private final FilteredList<Internship> filteredInternships;
-    private SortedList<Internship> sortedFilteredInternships;
+    private final SortedList<Internship> sortedFilteredInternships;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -53,9 +54,9 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        filteredInternships = new FilteredList<>(this.addressBook.getInternshipList());
-        sortedFilteredInternships = new SortedList<>(filteredInternships);
-
+        this.searchedInternships = new FilteredList<>(this.addressBook.getInternshipList());
+        this.filteredInternships = new FilteredList<>(searchedInternships);
+        this.sortedFilteredInternships = new SortedList<>(filteredInternships);
         filterKeywords = new ArrayList<>();
     }
 
@@ -115,7 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
         return filterKeywords;
     }
 
-    //=========== Filtered Internship List Accessors =============================================================
+    //=========== Add / Remove Tags Methods =============================================================
 
     /**
      * Add keyword tags that matches the individual internship to the internship
@@ -224,6 +225,8 @@ public class ModelManager extends ComponentManager implements Model {
         return;
     }
 
+    //=========== Filtered Internship List Accessors =============================================================
+
     /**
      * Returns an unmodifiable view of the list of {@code Internship} backed by the internal list of
      * {@code addressBook}
@@ -236,6 +239,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredInternshipList(Predicate<Internship> predicate) {
         requireNonNull(predicate);
+        filteredInternships.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSearchedInternshipList(Predicate<Internship> predicate) {
+        requireNonNull(predicate);
+        searchedInternships.setPredicate(predicate);
         filteredInternships.setPredicate(predicate);
     }
 

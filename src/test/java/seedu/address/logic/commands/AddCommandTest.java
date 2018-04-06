@@ -136,6 +136,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateSearchedInternshipList(Predicate<Internship> predicate) {
+            fail("This method should not be called");
+        }
+
+        @Override
         public void setComparator(List<String> keywords) {
             fail("This method should not be called");
         }
