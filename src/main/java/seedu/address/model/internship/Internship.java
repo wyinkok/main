@@ -126,6 +126,7 @@ public class Internship {
         return builder.toString();
     }
 
+    //@@author niloc94
     public String getValue(String keyword) {
         switch (keyword.toLowerCase()) {
         case "name":

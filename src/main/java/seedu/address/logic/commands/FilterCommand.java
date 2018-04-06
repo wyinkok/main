@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
 
-
+//@@author niloc94
 /**
  * Filter the lists all internships in the internship according to all keyword arguments
  * Keyword matching is case insensitive
