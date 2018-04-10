@@ -30,7 +30,7 @@ internship matches faster than traditional GUI apps. Interested? Jump to the <<Q
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  Download the latest `jobbibot.jar` link:{repoURL}/releases[here].
+.  Download the latest `jobbibot.jar` link:{https://github.com/CS2103JAN2018-F11-B3/main/releases}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your JobbiBot.
 .  Double-click the file to start the app. The GUI like the one below should appear in a few seconds.
 +
@@ -52,7 +52,7 @@ image::ui.png[width="790"]
 == Features
 
 === Viewing help : `help`
-Shows more details of each command and a glossary of industries, roles and skills that the user may refer to in his or her search
+Shows more details of each command and a glossary of industries, roles and skills that the user may refer to in his or her search.
 
 Format: `help`
 
@@ -63,7 +63,7 @@ Format: `start`
 
 === Restart conversation with program : `new`
 
-Restarts a new message thread of JobbiBot and the previous thread is deleted +
+Restarts a new message thread of JobbiBot and the previous thread is deleted. +
 Format: `new`
 
 === Find internships by keyword(s): `find` `search`
@@ -73,11 +73,11 @@ Format: `search KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The find/search is case insensitive. e.g `analyst` will match `Analyst`
-* Tags other than 'saved' tag attached when using find/search function will be removed when using 'list'
+* Tags other than 'saved' tag attached when using find/search function will be removed when using 'list'.
 * The order of the keywords does not matter. e.g. `Sales Marketing` will match `Marketing Sales`
 * Internships matching at least one keyword will be returned (i.e. `OR` search). e.g. `Micro Dyson` will return `Dyson Technology`, `Dyson Engineering` `Microsoft`
-* Keyword/s matching the internship is added to the internship as a tag/s
-* Keywords tags are reset if user uses find again
+* Keyword/s matching the internship is added to the internship as a tag/s.
+* Keywords tags are reset if user uses find again.
 ****
 
 Examples:
@@ -85,13 +85,13 @@ Examples:
 * `find Data Analyst` +
 Returns any internship with `Data` or `Analyst` in its description.
 * `find Dow Micron Dyson` +
-Returns any internship having names or description matching `Dow`, `Micron`, or `Dyson`
+Returns any internship having names or description matching `Dow`, `Micron`, or `Dyson`.
 * `find Engineering` +
 Returns any internship having `Engineering` in its description.
 * `find Betsy@gmail.com` +
-Returns any internship having contact email `Betsy@gmail.com`
+Returns any internship having contact email `Betsy@gmail.com`.
 * `find Serangoon` +
-Returns any internship having address or description matching `Serangoon` in it
+Returns any internship having address or description matching `Serangoon` in it.
 
 === Filtering Internship by keyword(s): `filter`
 
@@ -102,22 +102,22 @@ Format: `filter KEYWORD [MORE_KEYWORDS]`
 * The search is case insensitive. e.g `marketing` will match `Marketing`
 * The order of the keywords does not matter. e.g. `Marketing Analytics` will match `Analytics Marketing`
 * Only full words will be matched e.g. `Market` will not match `Marketing`
-* Only Internships which contain all the keyword will be returned e.g `filter Marketing Analytics` will return only +
+* Only Internships which contain all the keyword will be returned. e.g `filter Marketing Analytics` will return only +
 containing Marketing AND Analytics but not Marketing Research or Data Analyics
 ****
 
 Examples:
 
 * `filter data` +
-Returns any entries containing data e.g Data Analytics, Data Science
+Returns any entries containing data. e.g Data Analytics, Data Science
 * `filter data analytics` +
-Returns only entries containing data and analytics e.g 'data analytics internship', 'data analytics singapore'
+Returns only entries containing data and analytics. e.g 'data analytics internship', 'data analytics singapore'
 
-=== Sorting Internship by keywords(s): `sort` `sortby`
+=== Sorting Internship by keyword(s): `sort` `sortby`
 
-Sort the internship list according to the given keywords. +
+Sorts the internship list according to the given keyword(s). +
 Format: `sort KEYWORD [MORE_KEYWORDS]` +
-Keywords limited to internship attribute types: Name Salary Email Address Industry Location Role
+Keywords are only limited to the following internship attribute types: `Address` `Email` `Industry` `Location` `Name` `Role` `Salary`
 
 ****
 * The sort is case insensitive. e.g `name` will match `Name`
@@ -128,9 +128,9 @@ Keywords limited to internship attribute types: Name Salary Email Address Indust
 Examples:
 
 * `sort name` +
-Sort the internship list according to name attribute
+Sorts the internship list according to name attribute.
 * `sort salary location` +
-Sort the internship list according to salary first then location
+Sorts the internship list according to salary first then location.
 
 === Saving an internship to a Saved Collection : `save`
 Saves the specified internship from the internship book. +
@@ -138,7 +138,7 @@ Format: `save INDEX`
 
 ****
 * Saves the internship at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
+* The index refers to the index number that is shown in the most recent listing.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
@@ -146,10 +146,10 @@ Examples:
 
 * `list` +
 `save 2` +
-Save the 2nd internship in the internship book.
+Saves the 2nd internship in the internship book.
 * `find Google` +
 `save 1` +
-Saves the 1st person in the results of the `find` command.
+Saves the 1st internship in the results of the `find` command.
 
 === Remove a Saved internship from a Saved Collection : `unsave`
 Removes the specified internship from the saved internship collection. +
@@ -169,7 +169,7 @@ Removes the 2nd internship in the saved internship collection.
 * `find Google` +
 `save 1` +
 `unsave 1` +
-Removes the 1st person in the results of the `find` command the saved collection.
+Removes the 1st internship in the results of the `find` command the saved collection.
 
 === Shows the full Saved Internship Collection : `find saved` or `filter saved`
 Shows all the internships with a `saved` tag. +
