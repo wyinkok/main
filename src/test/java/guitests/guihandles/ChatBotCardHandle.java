@@ -18,7 +18,6 @@ public class ChatBotCardHandle extends NodeHandle<Node> {
 
         this.messagesLabel = getChildNode(MESSAGES_FIELD_ID);
     }
-    
     public String getMessages() {
         return messagesLabel.getText();
     }
