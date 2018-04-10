@@ -30,6 +30,10 @@ public class FindCommandTest {
 
     public static final String MESSAGE_SEARCH_RESPONSE = "Awesome, would you like to narrow down your search even "
             + "more? You may filter by location and specific address \nE.g: filter singapore hongkong tanjong pagar";
+
+    public static final String MESSAGE_SEARCH_RESPONSE_NO_INTERNSHIPS = "Woops, no internship found !"
+            + "Try using lesser keywords or entering other keywords  \nE.g: search marketing business";
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -61,7 +65,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noInternshipFound() {
-        String expectedMessage = String.format(MESSAGE_SEARCH_RESPONSE, 0);
+        String expectedMessage = String.format(MESSAGE_SEARCH_RESPONSE_NO_INTERNSHIPS, 0);
         FindCommand command = prepareCommand(" ");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }

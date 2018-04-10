@@ -69,7 +69,7 @@ public class FindCommand extends Command {
      * @return
      */
     private CommandResult getCommandResult() {
-        if (model.getFilteredInternshipList().size() > 1) {
+        if (model.getFilteredInternshipList().size() > 0) {
             return new CommandResult(MESSAGE_SEARCH_RESPONSE);
         } else {
             return new CommandResult(MESSAGE_SEARCH_RESPONSE_NO_INTERNSHIPS);
