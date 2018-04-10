@@ -68,8 +68,8 @@ Format: `new`
 
 === Find internships by keyword(s): `find` `search`
 
-Finds internships which contains any of the keywords. +
-Format: `search KEYWORD [MORE_KEYWORDS]`
+Finds/Searches internships which contains any of the keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]` `search KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The find/search is case insensitive. e.g `analyst` will match `Analyst`
