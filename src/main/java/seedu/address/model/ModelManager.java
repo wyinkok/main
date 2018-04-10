@@ -160,39 +160,39 @@ public class ModelManager extends ComponentManager implements Model {
                                               ObservableList<Internship> filteredInternships, Model model) {
 
         for (String keyword : filterKeywords) {
-            addFilteredInternshipsWithKeywords(filteredInternships, keyword, model);
+            addFilteredInternshipsWithKeywordTags(filteredInternships, keyword, model);
         }
         return;
     }
+
     //@@author TanCiKang
-    private static void addFilteredInternshipsWithKeywords
+    /**
+     * Add individual keyword tag to internships in filteredInternships when the keyword matches those internships
+     * @param filteredInternships
+     * @param keyword
+     * @param model
+     */
+    private static void addFilteredInternshipsWithKeywordTags
     (ObservableList<Internship> filteredInternships, String keyword, Model model){
 
         filteredInternships.forEach(filteredInternship -> {
             if(StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keyword)) {
-                addTagsToInternshipsWithMatch(filteredInternship, keyword, model);
+                try {
+                    model.updateInternship(filteredInternship, addTagsToInternshipWithMatch(keyword,
+                            filteredInternship));
+                } catch (InternshipNotFoundException e) {
+                    throw new AssertionError("The target internship cannot be missing");
+                } catch (DuplicateInternshipException e) {
+                    throw new AssertionError(MESSAGE_DUPLICATE_INTERNSHIP);
+                }
             }
         });
         return;
     }
 
     //@@author TanCiKang
-    private static void addTagsToInternshipsWithMatch
-            (Internship internshipToAdd, String keyword, Model model) {
-
-        try {
-            model.updateInternship(internshipToAdd, addTagsToInternshipWithMatch(keyword, internshipToAdd));
-        } catch (InternshipNotFoundException e) {
-            throw new AssertionError("The target internship cannot be missing");
-        } catch (DuplicateInternshipException e) {
-            throw new AssertionError(MESSAGE_DUPLICATE_INTERNSHIP);
-        }
-    return;
-}
-
-    //@@author TanCiKang
     /**
-     * Remove all tags from individual internship other than 'saved' tags
+     * Remove all tags other than 'saved' tags from individual internship
      * @param tagsToBeRemoved
      * @param internship
      * @return
@@ -223,7 +223,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author TanCiKang
     /**
-     * Remove all tags that are not 'saved' from the internships
+     * Remove all tags that are not 'saved' from the internship list
      * @param internships
      * @param model
      * @throws CommandException
