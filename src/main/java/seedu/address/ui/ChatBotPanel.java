@@ -73,11 +73,11 @@ public class ChatBotPanel extends UiPart<Region> {
 
     public void handleUserResponse(ObservableList<String> listToBuild) {
         ObservableList<String> updatedMessages = addUserResponse(listToBuild);
-            ObservableList<ChatBotCard> mappedList = EasyBind.map(
-                    updatedMessages, (msg) -> new ChatBotCard(msg));
-            chatBotListView.setItems(mappedList);
-            chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
-            chatBotListView.scrollTo(chatBotListView.getItems().size());
+        ObservableList<ChatBotCard> mappedList = EasyBind.map(
+                updatedMessages, (msg) -> new ChatBotCard(msg));
+        chatBotListView.setItems(mappedList);
+        chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
+        chatBotListView.scrollTo(chatBotListView.getItems().size());
     }
 
 
