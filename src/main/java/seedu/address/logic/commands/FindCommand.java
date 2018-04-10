@@ -45,11 +45,7 @@ public class FindCommand extends Command {
         model.updateSearchedInternshipList(predicate);
 
         // add tags that have keywords matching the internship
-        try {
             ModelManager.addTagsToFilteredList(ModelManager.getKeywords(), model.getFilteredInternshipList(), model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
 
         return new CommandResult(MESSAGE_SEARCH_RESPONSE);
     }

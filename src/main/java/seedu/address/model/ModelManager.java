@@ -128,14 +128,13 @@ public class ModelManager extends ComponentManager implements Model {
      * @return Internship
      * @throws CommandException
      */
-    private static Internship addTagsToInternshipWithMatch(String keyword, Internship internship)
-            throws CommandException {
+    private static Internship addTagsToInternshipWithMatch(String keyword, Internship internship) {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
         try {
             internshipTags.add(new Tag(keyword));
         } catch (UniqueTagList.DuplicateTagException e) {
-            throw new CommandException ("Operation would result in duplicate tags");
+            throw new AssertionError ("Operation would result in duplicate tags");
         }
 
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
@@ -158,25 +157,38 @@ public class ModelManager extends ComponentManager implements Model {
      * @throws CommandException
      */
     public static void addTagsToFilteredList (List<String> filterKeywords,
-                                              ObservableList<Internship> filteredInternships, Model model)
-            throws CommandException {
+                                              ObservableList<Internship> filteredInternships, Model model) {
 
-        for (String keywords : filterKeywords) {
-            for (Internship filteredInternship : filteredInternships) {
-                if (StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keywords)) {
-                    try {
-                        model.updateInternship(filteredInternship,
-                                addTagsToInternshipWithMatch(keywords, filteredInternship));
-                    } catch (DuplicateInternshipException e) {
-                        throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
-                    } catch (InternshipNotFoundException e) {
-                        throw new AssertionError("The target internship cannot be missing");
-                    }
-                }
-            }
+        for (String keyword : filterKeywords) {
+            addFilteredInternshipsWithKeywords(filteredInternships, keyword, model);
         }
         return;
     }
+    //@@author TanCiKang
+    private static void addFilteredInternshipsWithKeywords
+    (ObservableList<Internship> filteredInternships, String keyword, Model model){
+
+        filteredInternships.forEach(filteredInternship -> {
+            if(StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keyword)) {
+                addTagsToInternshipsWithMatch(filteredInternship, keyword, model);
+            }
+        });
+        return;
+    }
+
+    //@@author TanCiKang
+    private static void addTagsToInternshipsWithMatch
+            (Internship internshipToAdd, String keyword, Model model) {
+
+        try {
+            model.updateInternship(internshipToAdd, addTagsToInternshipWithMatch(keyword, internshipToAdd));
+        } catch (InternshipNotFoundException e) {
+            throw new AssertionError("The target internship cannot be missing");
+        } catch (DuplicateInternshipException e) {
+            throw new AssertionError(MESSAGE_DUPLICATE_INTERNSHIP);
+        }
+    return;
+}
 
     //@@author TanCiKang
     /**
