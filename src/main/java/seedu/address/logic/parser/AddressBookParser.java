@@ -65,30 +65,9 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
         case FindCommand.ALTERNATIVE_COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
-
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
@@ -100,19 +79,60 @@ public class AddressBookParser {
         case UnsaveCommand.COMMAND_WORD:
             return new UnsaveCommandParser().parse(arguments);
 
-        case StartCommand.COMMAND_WORD:
-            return new StartCommand();
-
         case SortCommand.COMMAND_WORD:
         case SortCommand.ALTERNATIVE_COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
+        //=========== Command without arguments =============================================================
+
+        case ListCommand.COMMAND_WORD:
+            checkIfContainArguments(arguments);
+            return new ListCommand();
+
+        case HistoryCommand.COMMAND_WORD:
+            checkIfContainArguments(arguments);
+            return new HistoryCommand();
+
+        case ExitCommand.COMMAND_WORD:
+            checkIfContainArguments(arguments);
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            checkIfContainArguments(arguments);
+            return new HelpCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            checkIfContainArguments(arguments);
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            checkIfContainArguments(arguments);
+            return new RedoCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            checkIfContainArguments(arguments);
+            return new ClearCommand();
+
+        case StartCommand.COMMAND_WORD:
+            checkIfContainArguments(arguments);
+            return new StartCommand();
+
         case NewChatCommand.COMMAND_WORD:
+            checkIfContainArguments(arguments);
             return new NewChatCommand();
 
-        //@@author
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+    /**
+     *  Helper method to check if commands without arguments have arguments
+     * @throws ParseException
+     */
+    private void checkIfContainArguments(String arguments) throws ParseException {
+        if (!arguments.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
     }
 }

@@ -22,6 +22,8 @@ public class SortCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " Industry Role Location";
 
+    public static final String NOTHING_TO_SORT_MESSAGE = "No internships to sort! ";
+
     private final List<String> keywords;
 
     public SortCommand(List<String> keywords) {
@@ -31,12 +33,24 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute() {
         model.setComparator(keywords);
-        return new CommandResult(SORT_SUCCESSS_MESSAGE);
+        return getCommandResult();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SortCommand); // instanceof handles nulls
+    }
+
+    /**
+     * Helper method to retrieve the correct message for command results
+     * @return
+     */
+    private CommandResult getCommandResult() {
+        if (model.getFilteredInternshipList().size() > 1) {
+            return new CommandResult(SORT_SUCCESSS_MESSAGE);
+        } else {
+            return new CommandResult(NOTHING_TO_SORT_MESSAGE);
+        }
     }
 }
