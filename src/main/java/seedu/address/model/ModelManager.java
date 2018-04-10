@@ -228,14 +228,13 @@ public class ModelManager extends ComponentManager implements Model {
      * @param model
      * @throws CommandException
      */
-    public static void removeTagsFromInternshipList(ObservableList<Internship> internships, Model model)
-            throws CommandException {
+    public static void removeTagsFromInternshipList(ObservableList<Internship> internships, Model model) {
 
         for (Internship internship : internships) {
             try {
                 model.updateInternship(internship, removeTagsFromInternship(internship.getTags(), internship, model));
             } catch (DuplicateInternshipException e) {
-                throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
+                throw new AssertionError(MESSAGE_DUPLICATE_INTERNSHIP);
             } catch (InternshipNotFoundException e) {
                 throw new AssertionError("The target internship cannot be missing");
             }

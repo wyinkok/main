@@ -35,12 +35,8 @@ public class FindCommand extends Command {
     public CommandResult execute() {
 
         // remove all tags from filtered list except 'saved' tags
-        try {
             model.updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
             ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
 
         model.updateSearchedInternshipList(predicate);
 
