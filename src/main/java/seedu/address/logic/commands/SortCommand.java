@@ -11,9 +11,9 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
     public static final String ALTERNATIVE_COMMAND_WORD = "sortby";
-    private static final String SORT_SUCCESSS_MESSAGE = "Sort success! Here is your ideal list of internships. \n"
+    private static final String SORT_SUCCESSS_MESSAGE = "Sort success! Here is your ideal list of internships. \n\n"
             + "If you would like to search, filter or sort again, "
-            + "Type in the respective command word and the new things you want to search/filter/sort by. "
+            + "key in the respective command word(s) and the new thing(s) you would like to search/filter/sort by. "
             + "Please note that redoing the above commands will clear your existing search.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all internships according "
