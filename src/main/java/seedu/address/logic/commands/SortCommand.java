@@ -11,10 +11,7 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
     public static final String ALTERNATIVE_COMMAND_WORD = "sortby";
-    private static final String SORT_SUCCESSS_MESSAGE = "Sort success! Here is your ideal list of internships. \n"
-            + "If you would like to search, filter or sort again, "
-            + "Type in the respective command word and the new things you want to search/filter/sort by. "
-            + "Please note that redoing the above commands will clear your existing search.";
+    public static final String NOTHING_TO_SORT_MESSAGE = "No internships to sort! ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all internships according "
             + "to the argument(s) given and displays them as a list with index numbers.\n"
@@ -22,7 +19,10 @@ public class SortCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " Industry Role Location";
 
-    public static final String NOTHING_TO_SORT_MESSAGE = "No internships to sort! ";
+    private static final String SORT_SUCCESSS_MESSAGE = "Sort success! Here is your ideal list of internships. \n"
+            + "If you would like to search, filter or sort again, "
+            + "Type in the respective command word and the new things you want to search/filter/sort by. "
+            + "Please note that redoing the above commands will clear your existing search.";
 
     private final List<String> keywords;
 
