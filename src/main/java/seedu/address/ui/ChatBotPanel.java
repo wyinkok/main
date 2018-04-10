@@ -61,7 +61,7 @@ public class ChatBotPanel extends UiPart<Region> {
         chatBotListView.setSelectionModel(new DisableSelectionOfListCell<>());
 
         chatBotListView.setItems(initialMappedList);
-        chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
+        chatBotListView.setCellFactory(listView -> new ChatBotListViewCell());
     }
 
     /**
@@ -93,6 +93,7 @@ public class ChatBotPanel extends UiPart<Region> {
                     updatedMessages, (msg) -> new ChatBotCard(msg, index.getAndIncrement()));
             chatBotListView.setItems(mappedList);
             chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
+            chatBotListView.scrollTo(chatBotListView.getItems().size()-1);
         }
     }
 
