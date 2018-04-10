@@ -43,6 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Internship> searchedInternships;
     private final FilteredList<Internship> filteredInternships;
     private final SortedList<Internship> sortedFilteredInternships;
+    private static final String SAVED_TAG_NAME = "[saved]";
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -188,7 +189,7 @@ public class ModelManager extends ComponentManager implements Model {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
         for (Tag tagToBeRemoved : tagsToBeRemoved) {
-            if (!tagToBeRemoved.toString().equals("[saved]")) {
+            if (!tagToBeRemoved.toString().equals(SAVED_TAG_NAME)) {
                 try {
                     internshipTags.delete(tagToBeRemoved);
                 } catch (SavedTagNotFoundException e) {
