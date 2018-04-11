@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -31,24 +31,24 @@
       <FlowPane fx:id="tags" />
          <HBox>
             <children>
-               <Label fx:id="industryTitle" styleClass="cell_small_label_title" text="\$industryTitle" />
+               <Label fx:id="industryTitle" ellipsisString="Industry:" styleClass="cell_small_label_title" text="\$industryTitle" />
             <Label fx:id="industry" styleClass="cell_small_label" text="\$industry" translateY="-2.0" />
             </children>
          </HBox>
          <HBox>
             <children>
-               <Label fx:id="roleTitle" styleClass="cell_small_label_title" text="\$roleTitle" />
+               <Label fx:id="roleTitle" ellipsisString="Role: " styleClass="cell_small_label_title" text="\$roleTitle" />
             <Label fx:id="role" styleClass="cell_small_label" text="\$role" translateY="-2.0" />
             </children></HBox>
          <HBox>
             <children>
-               <Label fx:id="salaryTitle" styleClass="cell_small_label_title" text="\$salaryTitle" />
+               <Label fx:id="salaryTitle" ellipsisString="Stipend: " styleClass="cell_small_label_title" text="\$salaryTitle" />
             <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" translateY="-2.0" />
             </children>
          </HBox>
          <HBox prefHeight="17.2" prefWidth="130.0">
             <children>
-                <Label fx:id="regionTitle" styleClass="cell_small_label_title" text="\$regionTitle" />
+                <Label fx:id="regionTitle" ellipsisString="Region: " styleClass="cell_small_label_title" text="\$regionTitle" />
             <Label fx:id="region" styleClass="cell_small_label" text="\$region" translateY="-2.0" />
             </children>
          </HBox>

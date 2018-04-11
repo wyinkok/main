@@ -291,6 +291,7 @@ This serves as a non-exhaustive lists of skills that users can search for
 * Banking and Finance
 * Biomedical Sciences
 * Community and Social Services
+* Consultancy
 * Education
 * Entrepreneurship and Businesses (General)
 * Fashion and Retail
@@ -318,30 +319,22 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Graphic Designer
                      | Photographer
                      | Videographer
-.9+| Banking and Finance
+.7+| Banking and Finance
                      | Accountant
-                     | Asset Management Analyst
                      | Audit Assistant
                      | Corporate Security Analyst
-                     | Financial Planner/Advisory
-                     | FinTech Analyst
+                     | Financial Planner / Advisory
                      | Private Equity Analyst
                      | Risk Management
                      | Wealth Management Analyst
-.2+| Community and Social Service
-                     | Community Relations Management
-                     | Human Services
-.7+| Consultancy
-                     | Education Consultant
+.5+| Consultancy
                      | Human Resource Consultant
-                     | Management Consultant
                      | Operations Consultant
-                     | Public Relations Consultant
-                     | Strategy Consultant
+                     | Sales Consultant
                      | Technology Consultant
-.2+| Education
-                     | Assessment and Curriculum Program Coordinator
-                     | Creative Writing Teaching
+                     | Wealth Management Consultant
+.1+| Education
+                     | Teacher
 .4+| Engineering
                      | Aerospace Engineer
                      | Electrical Engineer
@@ -392,8 +385,8 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Software Engineer
                      | Software Quality Assurance Engineer
                      | Unity3D (AR/VR)
-                     | User Experience
-                     | User Interface
+                     | User Experience Designer
+                     | User Interface Designer
                      | Web Development
 |=======================================================================
 
