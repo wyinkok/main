@@ -23,7 +23,7 @@ public class SampleDataUtil {
     public static Internship[] getSampleInternships() {
         return new Internship[] {
             new Internship(new Name("Yunomori Onsen Design Advertising Interns"), new Salary("800"),
-                    new Email("phoebe@yunomorionsen.com.sg"),new Address("1 Stadium Place, #02-17/18 Kallang "
+                new Email("phoebe@yunomorionsen.com.sg"), new Address("1 Stadium Place, #02-17/18 Kallang "
                     + "Wave Mall, 397628"), new Industry("ArtsandDesign"), new Region("Central Region"),
                     new Role("Design / Advertising"), getTagSet()),
             new Internship(new Name("Deloitte"), new Salary("750"), new Email("berniceyu@example.com"),
