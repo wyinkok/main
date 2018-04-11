@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalInternships.ALICE;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,30 +19,30 @@ import javafx.collections.ObservableList;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.tag.Tag;
 
-public class AddressBookTest {
+public class JobbiBotTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final JobbiBot jobbiBot = new JobbiBot();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getInternshipList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), jobbiBot.getInternshipList());
+        assertEquals(Collections.emptyList(), jobbiBot.getTagList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.resetData(null);
+        jobbiBot.resetData(null);
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        JobbiBot newData = getTypicalInternshipBook();
+        jobbiBot.resetData(newData);
+        assertEquals(newData, jobbiBot);
     }
 
     @Test
@@ -50,32 +50,32 @@ public class AddressBookTest {
         // Repeat ALICE twice
         List<Internship> newInternships = Arrays.asList(ALICE, ALICE);
         List<Tag> newTags = new ArrayList<>(ALICE.getTags());
-        AddressBookStub newData = new AddressBookStub(newInternships, newTags);
+        JobbiBotStub newData = new JobbiBotStub(newInternships, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        jobbiBot.resetData(newData);
     }
 
     @Test
     public void getInternshipList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getInternshipList().remove(0);
+        jobbiBot.getInternshipList().remove(0);
     }
 
     @Test
     public void getTagList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getTagList().remove(0);
+        jobbiBot.getTagList().remove(0);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose internships and tags lists can violate interface constraints.
+     * A stub ReadOnlyJobbiBot whose internships and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class JobbiBotStub implements ReadOnlyJobbiBot {
         private final ObservableList<Internship> internships = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Internship> internships, Collection<? extends Tag> tags) {
+        JobbiBotStub(Collection<Internship> internships, Collection<? extends Tag> tags) {
             this.internships.setAll(internships);
             this.tags.setAll(tags);
         }

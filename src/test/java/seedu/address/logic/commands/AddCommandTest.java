@@ -19,9 +19,9 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobbiBot;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyJobbiBot;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
@@ -103,12 +103,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlyJobbiBot newData) {
             fail("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyJobbiBot getJobbiBot() {
             fail("This method should not be called.");
             return null;
         }
@@ -156,8 +156,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyJobbiBot getJobbiBot() {
+            return new JobbiBot();
         }
     }
 
@@ -174,8 +174,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyJobbiBot getJobbiBot() {
+            return new JobbiBot();
         }
     }
 

@@ -38,7 +38,7 @@ import seedu.address.testutil.EditInternshipDescriptorBuilder;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.InternshipUtil;
 
-public class AddressBookParserTest {
+public class JobbiBotParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

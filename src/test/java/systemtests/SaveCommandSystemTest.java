@@ -26,7 +26,7 @@ import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.testutil.SavedInternshipBuilder;
 
-public class SaveCommandSystemTest extends AddressBookSystemTest {
+public class SaveCommandSystemTest extends JobbiBotSystemTest {
 
     private static final String MESSAGE_INVALID_SAVE_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE);
@@ -77,7 +77,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
         showInternshipsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getInternshipList().size();
+        int invalidIndex = getModel().getJobbiBot().getInternshipList().size();
         command = SaveCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
@@ -107,7 +107,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getInternshipList().size() + 1);
+                getModel().getJobbiBot().getInternshipList().size() + 1);
         command = SaveCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
@@ -204,9 +204,9 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
      * 5. Asserts that the status bar's sync status changes.<br>
      * 6. Asserts that the command box has the default style class.<br>
      * Verifications 1 to 3 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
+     * {@code JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see JobbiBotSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Index expectedSelectedCardIndex) {
@@ -230,8 +230,8 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 5. Asserts that the command box has the error style.<br>
      * Verifications 1 to 3 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

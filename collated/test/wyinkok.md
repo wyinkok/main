@@ -76,7 +76,7 @@ import static seedu.address.logic.commands.CommandTestUtil.prepareUndoCommand;
 import static seedu.address.logic.commands.CommandTestUtil.showInternshipAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import org.junit.Test;
 
@@ -97,7 +97,7 @@ import seedu.address.testutil.SavedInternshipBuilder;
  */
 public class SaveCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
@@ -108,7 +108,7 @@ public class SaveCommandTest {
 
         String expectedMessage = String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
         expectedModel.updateInternship(internshipToSave, internshipWithSavedTag);
 
         assertCommandSuccess(saveCommand, model, expectedMessage, expectedModel);
@@ -128,7 +128,7 @@ public class SaveCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_INTERNSHIP;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getInternshipList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getJobbiBot().getInternshipList().size());
 
         SaveCommand saveCommand = prepareCommand(outOfBoundIndex);
 
@@ -142,7 +142,7 @@ public class SaveCommandTest {
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         Internship internshipToSave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
         // save -> first internship saved
         saveCommand.execute();
@@ -187,7 +187,7 @@ public class SaveCommandTest {
         UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
         showInternshipAtIndex(model, INDEX_SECOND_INTERNSHIP);
         Internship internshipToSave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
@@ -293,7 +293,7 @@ import static seedu.address.logic.commands.CommandTestUtil.prepareUndoCommand;
 import static seedu.address.logic.commands.CommandTestUtil.showInternshipAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP;
-import static seedu.address.testutil.TypicalPersonsWithSavedTag.getTypicalAddressBookWithSavedTag;
+import static seedu.address.testutil.TypicalPersonsWithSavedTag.getTypicalInternshipBookWithSavedTag;
 
 import org.junit.Test;
 
@@ -313,7 +313,7 @@ import seedu.address.testutil.UnsavedInternshipBuilder;
  */
 public class UnsaveCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithSavedTag(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBookWithSavedTag(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
@@ -324,7 +324,7 @@ public class UnsaveCommandTest {
 
         String expectedMessage = String.format(UnsaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS,
             internshipWithoutSavedTag);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
         expectedModel.updateInternship(internshipToUnsave, internshipWithoutSavedTag);
 
         assertCommandSuccess(unsaveCommand, model, expectedMessage, expectedModel);
@@ -343,7 +343,7 @@ public class UnsaveCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_INTERNSHIP;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getInternshipList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getJobbiBot().getInternshipList().size());
 
         UnsaveCommand unsaveCommand = prepareCommand(outOfBoundIndex);
 
@@ -357,7 +357,7 @@ public class UnsaveCommandTest {
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         Internship internshipToUnsave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
         UnsaveCommand unsaveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
         // save -> first person saved
         unsaveCommand.execute();
@@ -402,7 +402,7 @@ public class UnsaveCommandTest {
         UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         UnsaveCommand unsaveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
         showInternshipAtIndex(model, INDEX_SECOND_INTERNSHIP);
         Internship internshipToUnsave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
@@ -607,7 +607,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobbiBot;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 
@@ -643,7 +643,7 @@ public class TypicalPersonsWithSavedTag {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBookWithSavedTag() {
+    public static AddressBook getTypicalInternshipBookWithSavedTag() {
         AddressBook ab = new AddressBook();
         for (Internship internship : getTypicalPersonsWithSavedTag()) {
             try {
@@ -847,7 +847,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
         showInternshipsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getInternshipList().size();
+        int invalidIndex = getModel().getJobbiBot().getInternshipList().size();
         command = SaveCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
@@ -877,7 +877,7 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getInternshipList().size() + 1);
+                getModel().getJobbiBot().getInternshipList().size() + 1);
         command = SaveCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
@@ -1034,7 +1034,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnsaveCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobbiBot;
 import seedu.address.model.Model;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
@@ -1052,7 +1052,7 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      */
     @Override
     protected AddressBook getInitialData() {
-        return TypicalPersonsWithSavedTag.getTypicalAddressBookWithSavedTag();
+        return TypicalPersonsWithSavedTag.getTypicalInternshipBookWithSavedTag();
     }
 
     @Test
@@ -1107,7 +1107,7 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
          * unsave index within bounds of internship book but out of bounds of internship list -> rejected
          */
         showInternshipsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getInternshipList().size();
+        int invalidIndex = getModel().getJobbiBot().getInternshipList().size();
         command = UnsaveCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
@@ -1137,7 +1137,7 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getInternshipList().size() + 1);
+                getModel().getJobbiBot().getInternshipList().size() + 1);
         command = UnsaveCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 

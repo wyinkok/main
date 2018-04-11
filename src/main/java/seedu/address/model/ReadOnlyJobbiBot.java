@@ -5,9 +5,9 @@ import seedu.address.model.internship.Internship;
 import seedu.address.model.tag.Tag;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an internship list
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyJobbiBot {
 
     /**
      * Returns an unmodifiable view of the internships list.

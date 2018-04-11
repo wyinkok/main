@@ -7,7 +7,7 @@ import static seedu.address.testutil.TypicalInternships.CARL;
 import static seedu.address.testutil.TypicalInternships.CARL2;
 import static seedu.address.testutil.TypicalInternships.DANIEL;
 import static seedu.address.testutil.TypicalInternships.GEORGE;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobbiBot;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -29,7 +29,7 @@ import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
  */
 public class FilterCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -101,14 +101,14 @@ public class FilterCommandTest {
      * Asserts that {@code command} is successfully executed, and<br>
      *     - the command feedback is equal to {@code expectedMessage}<br>
      *     - the {@code FilteredList<Person>} is equal to {@code expectedList}<br>
-     *     - the {@code AddressBook} in model remains the same after executing the {@code command}
+     *     - the {@code JobbiBot} in model remains the same after executing the {@code command}
      */
     private void assertCommandSuccess(FilterCommand command, String expectedMessage, List<Internship> expectedList) {
-        AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
+        JobbiBot expectedJobbiBot = new JobbiBot(model.getJobbiBot());
         CommandResult commandResult = command.executeUndoableCommand();
 
         assertEquals(expectedMessage, commandResult.feedbackToUser);
         assertEquals(expectedList, model.getFilteredInternshipList());
-        assertEquals(expectedAddressBook, model.getAddressBook());
+        assertEquals(expectedJobbiBot, model.getJobbiBot());
     }
 }

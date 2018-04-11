@@ -8,17 +8,17 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobbiBot;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookSystemTest {
+public class SampleDataTest extends JobbiBotSystemTest {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
     @Override
-    protected AddressBook getInitialData() {
+    protected JobbiBot getInitialData() {
         return null;
     }
 

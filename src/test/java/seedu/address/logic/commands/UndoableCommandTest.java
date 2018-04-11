@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 import static seedu.address.logic.commands.CommandTestUtil.deleteFirstInternship;
 import static seedu.address.logic.commands.CommandTestUtil.showInternshipAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import org.junit.Test;
 
@@ -17,10 +17,10 @@ import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 
 public class UndoableCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
     private final DummyCommand dummyCommand = new DummyCommand(model);
 
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
 
     @Test
     public void executeUndo() throws Exception {
@@ -32,7 +32,7 @@ public class UndoableCommandTest {
 
         // undo() should cause the model's filtered list to show all internships
         dummyCommand.undo();
-        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
         assertEquals(expectedModel, model);
     }
 

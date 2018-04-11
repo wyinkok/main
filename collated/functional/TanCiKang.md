@@ -170,7 +170,7 @@
 
     /**
      * Returns an unmodifiable view of the list of {@code Internship} backed by the internal list of
-     * {@code addressBook}
+     * {@code jobbiBot}
      */
     @Override
     public ObservableList<Internship> getFilteredInternshipList() {
@@ -204,7 +204,7 @@
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return jobbiBot.equals(other.jobbiBot)
                 && filteredInternships.equals(other.filteredInternships);
     }
 }
