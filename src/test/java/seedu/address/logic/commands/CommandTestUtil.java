@@ -24,8 +24,9 @@ import seedu.address.model.JobbiBot;
 import seedu.address.model.Model;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
-import seedu.address.testutil.EditInternshipDescriptorBuilder;
+import seedu.address.testutil.SavedInternshipBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -78,19 +79,6 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditInternshipDescriptor DESC_AMY;
-    public static final EditCommand.EditInternshipDescriptor DESC_BOB;
-
-    static {
-        DESC_AMY = new EditInternshipDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withSalary(VALID_SALARY_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withIndustry(VALID_INDUSTRY_AMY).withRegion(VALID_REGION_AMY).withRole(VALID_ROLE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditInternshipDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withSalary(VALID_SALARY_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withIndustry(VALID_INDUSTRY_BOB).withRegion(VALID_REGION_BOB).withRole(VALID_ROLE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -100,7 +88,12 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
         try {
-            CommandResult result = command.execute();
+            CommandResult result = null;
+            try {
+                result = command.execute();
+            } catch (DuplicateInternshipException e) {
+                e.printStackTrace();
+            }
             assertEquals(expectedMessage, result.feedbackToUser);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -127,6 +120,8 @@ public class CommandTestUtil {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedJobbiBot, actualModel.getJobbiBot());
             assertEquals(expectedFilteredList, actualModel.getFilteredInternshipList());
+        } catch (DuplicateInternshipException e) {
+            e.printStackTrace();
         }
     }
 
@@ -145,12 +140,14 @@ public class CommandTestUtil {
     }
 
     /**
-     * Deletes the first internship in {@code model}'s filtered list from {@code model}'s address book.
+     * Saves the first internship in {@code model}'s filtered list from {@code model}'s address book.
      */
-    public static void deleteFirstInternship(Model model) {
-        Internship firstInternship = model.getFilteredInternshipList().get(0);
+    public static void saveFirstInternship(Model model) throws DuplicateInternshipException, CommandException {
+        Internship internshipToSave = model.getFilteredInternshipList().get(0);
+        Internship internshipWithSavedTag = new SavedInternshipBuilder()
+                .addTag(internshipToSave);
         try {
-            model.deleteInternship(firstInternship);
+            model.updateInternship(internshipToSave, internshipWithSavedTag);
         } catch (InternshipNotFoundException pnfe) {
             throw new AssertionError("Internship in filtered list must exist in model.", pnfe);
         }

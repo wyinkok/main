@@ -12,6 +12,7 @@ import seedu.address.logic.parser.InternshipBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.internship.Internship;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 
 /**
  * The main LogicManager of the app.
@@ -37,7 +38,12 @@ public class LogicManager extends ComponentManager implements Logic {
         try {
             Command command = internshipBookParser.parseCommand(commandText);
             command.setData(model, history, undoRedoStack);
-            CommandResult result = command.execute();
+            CommandResult result = null;
+            try {
+                result = command.execute();
+            } catch (DuplicateInternshipException e) {
+                e.printStackTrace();
+            }
             undoRedoStack.push(command);
             return result;
         } finally {

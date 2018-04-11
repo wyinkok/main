@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_INTERNSHIP;
+import static seedu.address.logic.commands.SaveCommand.MESSAGE_DUPLICATE_INTERNSHIP;
 
 import java.util.ArrayList;
 import java.util.Comparator;
