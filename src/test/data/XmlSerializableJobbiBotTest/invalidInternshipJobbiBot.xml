@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<InternshipBook>
     <!-- Internship with invalid email field -->
     <internships>
         <name>Hans Muster</name>
@@ -10,4 +10,4 @@
         <region isPrivate="false">Geylang</region>
         <role isPrivate="false">Data Analyst</role>
     </internships>
-</addressbook>
+</InternshipBook>

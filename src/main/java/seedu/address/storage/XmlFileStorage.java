@@ -9,16 +9,16 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.XmlUtil;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores InternshipBook data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given addressbook data to the specified file.
+     * Saves the given InternshipBook data to the specified file.
      */
-    public static void saveDataToFile(File file, XmlSerializableJobbiBot addressBook)
+    public static void saveDataToFile(File file, XmlSerializableJobbiBot internshipBook)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, addressBook);
+            XmlUtil.saveDataToFile(file, internshipBook);
         } catch (JAXBException e) {
             throw new AssertionError("Unexpected exception " + e.getMessage());
         }

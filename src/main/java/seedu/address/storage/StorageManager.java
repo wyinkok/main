@@ -56,31 +56,31 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyJobbiBot> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(jobbiBotStorage.getJobbiBotFilePath());
+    public Optional<ReadOnlyJobbiBot> readInternshipBook() throws DataConversionException, IOException {
+        return readInternshipBook(jobbiBotStorage.getJobbiBotFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyJobbiBot> readAddressBook(String filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyJobbiBot> readInternshipBook(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return jobbiBotStorage.readAddressBook(filePath);
+        return jobbiBotStorage.readInternshipBook(filePath);
     }
 
     @Override
-    public void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException {
-        saveInternshipBook(addressBook, jobbiBotStorage.getJobbiBotFilePath());
+    public void saveInternshipBook(ReadOnlyJobbiBot internshipBook) throws IOException {
+        saveInternshipBook(internshipBook, jobbiBotStorage.getJobbiBotFilePath());
     }
 
     @Override
-    public void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
+    public void saveInternshipBook(ReadOnlyJobbiBot internshipBook, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        jobbiBotStorage.saveInternshipBook(addressBook, filePath);
+        jobbiBotStorage.saveInternshipBook(internshipBook, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(JobbiBotChangedEvent event) {
+    public void handleInternshipBookChangedEvent(JobbiBotChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveInternshipBook(event.data);

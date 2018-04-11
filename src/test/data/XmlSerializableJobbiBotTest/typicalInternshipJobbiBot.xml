@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- JobbiBot save file which contains the same Internship values as in
 {@code TypicalInternships#getTypicalInternshipBook()}-->
-<addressbook>
+<InternshipBook>
     <internships>
         <name>Alice Pauline</name>
         <salary>85355255</salary>
@@ -79,4 +79,4 @@
         <region>Aljunied</region>
         <role>Business Analyst</role>
     </internships>
-</addressbook>
+</InternshipBook>

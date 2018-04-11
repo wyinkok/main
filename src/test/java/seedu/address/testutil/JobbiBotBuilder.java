@@ -7,7 +7,7 @@ import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building InternshipBook objects.
  * Example usage: <br>
  *     {@code JobbiBot ab = new JobbiBotBuilder().withInternship("John", "Doe").withTag("Friend").build();}
  */

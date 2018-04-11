@@ -12,16 +12,16 @@ import seedu.address.model.ReadOnlyJobbiBot;
  * Represents a command which can be undone and redone.
  */
 public abstract class UndoableCommand extends Command {
-    private ReadOnlyJobbiBot previousAddressBook;
+    private ReadOnlyJobbiBot previousInternshipBook;
 
     protected abstract CommandResult executeUndoableCommand() throws CommandException;
 
     /**
-     * Stores the current state of {@code model#addressBook}.
+     * Stores the current state of {@code model#InternshipBook}.
      */
     private void saveInternshipBookSnapshot() {
         requireNonNull(model);
-        this.previousAddressBook = new JobbiBot(model.getJobbiBot());
+        this.previousInternshipBook = new JobbiBot(model.getJobbiBot());
     }
 
     /**
@@ -36,8 +36,8 @@ public abstract class UndoableCommand extends Command {
      * show all internships.
      */
     protected final void undo() {
-        requireAllNonNull(model, previousAddressBook);
-        model.resetData(previousAddressBook);
+        requireAllNonNull(model, previousInternshipBook);
+        model.resetData(previousInternshipBook);
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
     }
 

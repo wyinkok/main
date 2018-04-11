@@ -39,7 +39,7 @@ public class JobbiBotTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyInternshipBook_replacesData() {
         JobbiBot newData = getTypicalInternshipBook();
         jobbiBot.resetData(newData);
         assertEquals(newData, jobbiBot);

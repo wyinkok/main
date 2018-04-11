@@ -81,7 +81,7 @@ public class UnsaveCommandTest {
         unsaveCommand.execute();
         undoRedoStack.push(unsaveCommand);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
+        // undo -> reverts InternshipBook back to previous state and filtered person list to show all persons
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first perison saved again

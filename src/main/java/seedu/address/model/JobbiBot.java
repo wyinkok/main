@@ -72,7 +72,7 @@ public class JobbiBot implements ReadOnlyJobbiBot {
         try {
             setInternships(syncedInternshipList);
         } catch (DuplicateInternshipException e) {
-            throw new AssertionError("AddressBooks should not have duplicate internships");
+            throw new AssertionError("InternshipBooks should not have duplicate internships");
         }
     }
 

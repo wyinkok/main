@@ -23,23 +23,23 @@ public interface JobbiBotStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyJobbiBot> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyJobbiBot> readInternshipBook() throws DataConversionException, IOException;
 
     /**
      * @see #getJobbiBotFilePath()
      */
-    Optional<ReadOnlyJobbiBot> readAddressBook(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyJobbiBot> readInternshipBook(String filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyJobbiBot} to the storage.
-     * @param addressBook cannot be null.
+     * @param internshipBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException;
+    void saveInternshipBook(ReadOnlyJobbiBot internshipBook) throws IOException;
 
     /**
      * @see #saveInternshipBook(ReadOnlyJobbiBot)
      */
-    void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException;
+    void saveInternshipBook(ReadOnlyJobbiBot internshipBook, String filePath) throws IOException;
 
 }

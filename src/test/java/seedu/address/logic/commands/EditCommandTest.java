@@ -167,7 +167,7 @@ public class EditCommandTest {
         editCommand.execute();
         undoRedoStack.push(editCommand);
 
-        // undo -> reverts addressbook back to previous state and filtered internship list to show all persons
+        // undo -> reverts InternshipBook back to previous state and filtered internship list to show all persons
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first internship edited again
@@ -216,7 +216,7 @@ public class EditCommandTest {
         editCommand.execute();
         undoRedoStack.push(editCommand);
 
-        // undo -> reverts addressbook back to previous state and filtered internship list to show all persons
+        // undo -> reverts InternshipBook back to previous state and filtered internship list to show all persons
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         expectedModel.updateInternship(internshipToEdit, editedInternship);

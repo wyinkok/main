@@ -179,7 +179,7 @@ public abstract class JobbiBotSystemTest {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         //assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(expectedModel, getModel());
-        assertEquals(expectedModel.getJobbiBot(), testApp.readStorageAddressBook());
+        assertEquals(expectedModel.getJobbiBot(), testApp.readStorageInternshipBook());
         assertListMatching(getInternshipInternshipListPanel(), expectedModel.getFilteredInternshipList());
     }
 

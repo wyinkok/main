@@ -32,51 +32,51 @@ public class XmlJobbiBotStorage implements JobbiBotStorage {
     }
 
     @Override
-    public Optional<ReadOnlyJobbiBot> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyJobbiBot> readInternshipBook() throws DataConversionException, IOException {
+        return readInternshipBook(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readInternshipBook()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyJobbiBot> readAddressBook(String filePath) throws DataConversionException,
+    public Optional<ReadOnlyJobbiBot> readInternshipBook(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
-        File addressBookFile = new File(filePath);
+        File internshipBookFile = new File(filePath);
 
-        if (!addressBookFile.exists()) {
-            logger.info("JobbiBot file "  + addressBookFile + " not found");
+        if (!internshipBookFile.exists()) {
+            logger.info("JobbiBot file "  + internshipBookFile + " not found");
             return Optional.empty();
         }
 
-        XmlSerializableJobbiBot xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        XmlSerializableJobbiBot xmlInternshipBook = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
         try {
-            return Optional.of(xmlAddressBook.toModelType());
+            return Optional.of(xmlInternshipBook.toModelType());
         } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + addressBookFile + ": " + ive.getMessage());
+            logger.info("Illegal values found in " + internshipBookFile + ": " + ive.getMessage());
             throw new DataConversionException(ive);
         }
     }
 
     @Override
-    public void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException {
-        saveInternshipBook(addressBook, filePath);
+    public void saveInternshipBook(ReadOnlyJobbiBot internshipBook) throws IOException {
+        saveInternshipBook(internshipBook, filePath);
     }
 
     /**
      * Similar to {@link #saveInternshipBook(ReadOnlyJobbiBot)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveInternshipBook(ReadOnlyJobbiBot internshipBook, String filePath) throws IOException {
+        requireNonNull(internshipBook);
         requireNonNull(filePath);
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableJobbiBot(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableJobbiBot(internshipBook));
     }
 
 }
