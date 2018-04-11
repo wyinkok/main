@@ -71,8 +71,13 @@ public class Internship {
         return role;
     }
 
+    //@@author TanCiKang
     public String getUrl() {
+        return createUrl();
+    }
 
+    //@@author TanCiKang
+    private String createUrl(){
         StringBuilder url = new StringBuilder();
         url.append(getName()).append(' ').append(getRole());
         return url.toString().replace(" ", "-");
