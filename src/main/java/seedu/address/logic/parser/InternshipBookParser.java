@@ -6,11 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -54,17 +50,8 @@ public class InternshipBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -108,17 +95,14 @@ public class InternshipBookParser {
             checkIfContainArguments(arguments);
             return new RedoCommand();
 
-        case ClearCommand.COMMAND_WORD:
-            checkIfContainArguments(arguments);
-            return new ClearCommand();
-
         case StartCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
             if (!hasStarted) {
                 hasStarted = true;
                 return new StartCommand();
             } else {
-                throw new ParseException("Conversation has already started\nUse NEW command to restart conversation");
+                throw new ParseException("Our Conversation has already started"
+                        + "\nType 'new' to restart our conversation");
             }
 
         case NewChatCommand.COMMAND_WORD:

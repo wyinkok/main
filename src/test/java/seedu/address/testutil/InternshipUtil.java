@@ -9,20 +9,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.internship.Internship;
 
 /**
  * A utility class for Internship.
  */
 public class InternshipUtil {
-
-    /**
-     * Returns an add command string for adding the {@code internship}.
-     */
-    public static String getAddCommand(Internship internship) {
-        return AddCommand.COMMAND_WORD + " " + getInternshipDetails(internship);
-    }
 
     /**
      * Returns the part of command string for the given {@code internship}'s details.

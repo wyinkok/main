@@ -31,7 +31,6 @@ import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -159,14 +158,6 @@ public abstract class JobbiBotSystemTest {
     protected void selectInternship(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getInternshipInternshipListPanel().getSelectedCardIndex());
-    }
-
-    /**
-     * Deletes all internships in the address book.
-     */
-    protected void deleteAllInternships() {
-        executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getJobbiBot().getInternshipList().size());
     }
 
     /**

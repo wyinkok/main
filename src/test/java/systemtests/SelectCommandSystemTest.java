@@ -92,10 +92,6 @@ public class SelectCommandSystemTest extends JobbiBotSystemTest {
         assertCommandFailure(SelectCommand.COMMAND_WORD + " 1 abc",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
 
-        /* Case: select from empty address book -> rejected */
-        deleteAllInternships();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased(),
-                MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
     }
 
     /**

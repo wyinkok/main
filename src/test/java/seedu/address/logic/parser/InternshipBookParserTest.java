@@ -15,10 +15,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -32,52 +28,13 @@ import seedu.address.logic.commands.StartCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnsaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
-import seedu.address.testutil.EditInternshipDescriptorBuilder;
-import seedu.address.testutil.InternshipBuilder;
-import seedu.address.testutil.InternshipUtil;
 
-public class JobbiBotParserTest {
+public class InternshipBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private final InternshipBookParser parser = new InternshipBookParser();
-
-    @Test
-    public void parseCommand_add() throws Exception {
-        Internship internship = new InternshipBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(InternshipUtil.getAddCommand(internship));
-        assertEquals(new AddCommand(internship), command);
-    }
-
-    @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        try {
-            parser.parseCommand(ClearCommand.COMMAND_WORD + " 3");
-            fail("The expected ParseException was not thrown.");
-        } catch (ParseException pe) {
-            assertEquals(new String(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE)),
-                    pe.getMessage());
-        }
-    }
-
-    @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_INTERNSHIP), command);
-    }
-
-    @Test
-    public void parseCommand_edit() throws Exception {
-        Internship internship = new InternshipBuilder().build();
-        EditCommand.EditInternshipDescriptor descriptor = new EditInternshipDescriptorBuilder(internship).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_INTERNSHIP.getOneBased() + " " + InternshipUtil.getInternshipDetails(internship));
-        assertEquals(new EditCommand(INDEX_FIRST_INTERNSHIP, descriptor), command);
-    }
 
     @Test
     public void parseCommand_exit() throws Exception {
