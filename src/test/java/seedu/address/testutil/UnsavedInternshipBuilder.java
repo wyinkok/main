@@ -47,7 +47,7 @@ public class UnsavedInternshipBuilder {
                 internshipToCopy.getEmail(),
                 internshipToCopy.getAddress(),
                 internshipToCopy.getIndustry(),
-                internshipToCopy.getLocation(),
+                internshipToCopy.getRegion(),
                 internshipToCopy.getRole(),
                 correctTagReferences);
     }

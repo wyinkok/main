@@ -13,7 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
 import seedu.address.model.internship.Industry;
-import seedu.address.model.internship.Location;
+import seedu.address.model.internship.Region;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Salary;
@@ -167,27 +167,27 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String location} into an {@code Location}.
+     * Parses a {@code String region} into an {@code Region}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws IllegalValueException if the given {@code location} is invalid.
+     * @throws IllegalValueException if the given {@code region} is invalid.
      */
-    public static Location parseLocation(String location) throws IllegalValueException {
-        requireNonNull(location);
-        String trimmedLocation = location.trim();
-        if (!Location.isValidLocation(trimmedLocation)) {
-            throw new IllegalValueException(Location.MESSAGE_LOCATION_CONSTRAINTS);
+    public static Region parseRegion(String region) throws IllegalValueException {
+        requireNonNull(region);
+        String trimmedRegion = region.trim();
+        if (!Region.isValidRegion(trimmedRegion)) {
+            throw new IllegalValueException(Region.MESSAGE_REGION_CONSTRAINTS);
         }
-        return new Location(trimmedLocation);
+        return new Region(trimmedRegion);
     }
 
     /**
-     * Parses a {@code Optional<String> location} into an {@code Optional<Location>} if {@code location} is present.
+     * Parses a {@code Optional<String> region} into an {@code Optional<Region>} if {@code region} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
      */
-    public static Optional<Location> parseLocation(Optional<String> location) throws IllegalValueException {
-        requireNonNull(location);
-        return location.isPresent() ? Optional.of(parseLocation(location.get())) : Optional.empty();
+    public static Optional<Region> parseRegion(Optional<String> region) throws IllegalValueException {
+        requireNonNull(region);
+        return region.isPresent() ? Optional.of(parseRegion(region.get())) : Optional.empty();
     }
 
 
@@ -195,7 +195,7 @@ public class ParserUtil {
      * Parses a {@code String role} into an {@code Role}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws IllegalValueException if the given {@code location} is invalid.
+     * @throws IllegalValueException if the given {@code role} is invalid.
      */
 
     public static Role parseRole(String role) throws IllegalValueException {

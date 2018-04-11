@@ -13,7 +13,7 @@ public class Role {
             "Internship role can take any values and it should not be blank";
 
     /*
-     * The first character of the location must not be a whitespace,
+     * The first character of the role must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String ROLE_VALIDATION_REGEX = "[^\\s].*";

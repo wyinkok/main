@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
@@ -26,7 +26,7 @@ import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
 import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.Location;
+import seedu.address.model.internship.Region;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Salary;
@@ -50,7 +50,7 @@ public class EditCommand extends UndoableCommand {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
-            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_REGION + "LOCATION] "
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -117,12 +117,12 @@ public class EditCommand extends UndoableCommand {
         Email updatedEmail = editInternshipDescriptor.getEmail().orElse(internshipToEdit.getEmail());
         Address updatedAddress = editInternshipDescriptor.getAddress().orElse(internshipToEdit.getAddress());
         Industry updatedIndustry = editInternshipDescriptor.getIndustry().orElse(internshipToEdit.getIndustry());
-        Location updatedLocation = editInternshipDescriptor.getLocation().orElse(internshipToEdit.getLocation());
+        Region updatedRegion = editInternshipDescriptor.getRegion().orElse(internshipToEdit.getRegion());
         Role updatedRole = editInternshipDescriptor.getRole().orElse(internshipToEdit.getRole());
         Set<Tag> updatedTags = editInternshipDescriptor.getTags().orElse(internshipToEdit.getTags());
 
         return new Internship(updatedName, updatedSalary, updatedEmail, updatedAddress, updatedIndustry,
-                updatedLocation, updatedRole, updatedTags);
+                updatedRegion, updatedRole, updatedTags);
     }
 
     @Override
@@ -154,7 +154,7 @@ public class EditCommand extends UndoableCommand {
         private Email email;
         private Address address;
         private Industry industry;
-        private Location location;
+        private Region region;
         private Role role;
         private Set<Tag> tags;
 
@@ -170,7 +170,7 @@ public class EditCommand extends UndoableCommand {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setIndustry(toCopy.industry);
-            setLocation(toCopy.location);
+            setRegion(toCopy.region);
             setRole(toCopy.role);
             setTags(toCopy.tags);
         }
@@ -180,7 +180,7 @@ public class EditCommand extends UndoableCommand {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(this.name, this.salary, this.email, this.address, this.industry,
-                    this.location, this.role, this.tags);
+                    this.region, this.role, this.tags);
         }
 
         public void setName(Name name) {
@@ -223,12 +223,12 @@ public class EditCommand extends UndoableCommand {
             return Optional.ofNullable(industry);
         }
 
-        public void setLocation(Location location) {
-            this.location = location;
+        public void setRegion(Region region) {
+            this.region = region;
         }
 
-        public Optional<Location> getLocation() {
-            return Optional.ofNullable(location);
+        public Optional<Region> getRegion() {
+            return Optional.ofNullable(region);
         }
 
         public void setRole(Role role) {
@@ -276,7 +276,7 @@ public class EditCommand extends UndoableCommand {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getIndustry().equals(e.getIndustry())
-                    && getLocation().equals(e.getLocation())
+                    && getRegion().equals(e.getRegion())
                     && getRole().equals(e.getRole())
                     && getTags().equals(e.getTags());
         }

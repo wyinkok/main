@@ -20,7 +20,7 @@ public class SortCommand extends Command {
             + "to the argument(s) given and displays them as a list with index numbers.\n"
             + "Maximum of 3 arguments will be sorted"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " Industry Role Location";
+            + "Example: " + COMMAND_WORD + " Industry Role Region";
 
     private final List<String> keywords;
 

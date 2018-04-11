@@ -7,7 +7,7 @@ import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
 import seedu.address.model.internship.Industry;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.Location;
+import seedu.address.model.internship.Region;
 import seedu.address.model.internship.Name;
 import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Salary;
@@ -24,7 +24,7 @@ public class InternshipBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_INDUSTRY = "Engineering";
-    public static final String DEFAULT_LOCATION = "Geylang";
+    public static final String DEFAULT_REGION = "Geylang";
     public static final String DEFAULT_ROLE = "Safety Offier";
     public static final String DEFAULT_TAGS = "friends";
 
@@ -33,7 +33,7 @@ public class InternshipBuilder {
     private Email email;
     private Address address;
     private Industry industry;
-    private Location location;
+    private Region region;
     private Role role;
     private Set<Tag> tags;
 
@@ -43,7 +43,7 @@ public class InternshipBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         industry = new Industry(DEFAULT_INDUSTRY);
-        location = new Location(DEFAULT_LOCATION);
+        region = new Region(DEFAULT_REGION);
         role = new Role(DEFAULT_ROLE);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
     }
@@ -57,7 +57,7 @@ public class InternshipBuilder {
         email = internshipToCopy.getEmail();
         address = internshipToCopy.getAddress();
         industry = internshipToCopy.getIndustry();
-        location = internshipToCopy.getLocation();
+        region = internshipToCopy.getRegion();
         role = internshipToCopy.getRole();
         tags = new HashSet<>(internshipToCopy.getTags());
     }
@@ -111,10 +111,10 @@ public class InternshipBuilder {
     }
 
     /**
-     * Sets the {@code Location} of the {@code Internship} that we are building.
+     * Sets the {@code Region} of the {@code Internship} that we are building.
      */
-    public InternshipBuilder withLocation(String location) {
-        this.location = new Location(location);
+    public InternshipBuilder withRegion(String location) {
+        this.region = new Region(location);
         return this;
     }
 
@@ -127,7 +127,7 @@ public class InternshipBuilder {
     }
 
     public Internship build() {
-        return new Internship(name, salary, email, address, industry, location, role, tags);
+        return new Internship(name, salary, email, address, industry, region, role, tags);
     }
 
 }

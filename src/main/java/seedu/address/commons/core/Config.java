@@ -65,7 +65,7 @@ public class Config {
         StringBuilder sb = new StringBuilder();
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
-        sb.append("\nPreference file Location : " + userPrefsFilePath);
+        sb.append("\nPreference file Region : " + userPrefsFilePath);
         return sb.toString();
     }
 

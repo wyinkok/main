@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
@@ -36,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SALARY, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_INDUSTRY, PREFIX_LOCATION, PREFIX_ROLE, PREFIX_TAG);
+                        PREFIX_INDUSTRY, PREFIX_REGION, PREFIX_ROLE, PREFIX_TAG);
 
         Index index;
 
@@ -55,8 +55,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 .ifPresent(editInternshipDescriptor::setAddress);
             ParserUtil.parseIndustry(argMultimap.getValue(PREFIX_INDUSTRY))
                     .ifPresent(editInternshipDescriptor::setIndustry);
-            ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION))
-                    .ifPresent(editInternshipDescriptor::setLocation);
+            ParserUtil.parseRegion(argMultimap.getValue(PREFIX_REGION))
+                    .ifPresent(editInternshipDescriptor::setRegion);
             ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE))
                     .ifPresent(editInternshipDescriptor::setRole);
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editInternshipDescriptor::setTags);
