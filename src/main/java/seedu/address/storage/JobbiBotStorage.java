@@ -15,7 +15,7 @@ public interface JobbiBotStorage {
     /**
      * Returns the file path of the data file.
      */
-    String getAddressBookFilePath();
+    String getJobbiBotFilePath();
 
     /**
      * Returns JobbiBot data as a {@link ReadOnlyJobbiBot}.
@@ -26,7 +26,7 @@ public interface JobbiBotStorage {
     Optional<ReadOnlyJobbiBot> readAddressBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getJobbiBotFilePath()
      */
     Optional<ReadOnlyJobbiBot> readAddressBook(String filePath) throws DataConversionException, IOException;
 

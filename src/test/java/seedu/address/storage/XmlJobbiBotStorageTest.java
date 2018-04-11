@@ -16,11 +16,11 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.JobbiBot;
+import seedu.address.model.ReadOnlyJobbiBot;
 
-public class XmlAddressBookStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
+public class XmlJobbiBotStorageTest {
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlJobbiBotStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -34,8 +34,8 @@ public class XmlAddressBookStorageTest {
         readAddressBook(null);
     }
 
-    private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
-        return new XmlAddressBookStorage(filePath).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyJobbiBot> readAddressBook(String filePath) throws Exception {
+        return new XmlJobbiBotStorage(filePath).readAddressBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -53,7 +53,7 @@ public class XmlAddressBookStorageTest {
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readAddressBook("NotXmlFormatAddressBook.xml");
+        readAddressBook("NotXmlFormatJobbiBot.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
@@ -63,38 +63,38 @@ public class XmlAddressBookStorageTest {
     @Test
     public void readAddressBook_invalidInternshipAddressBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidInternshipAddressBook.xml");
+        readAddressBook("invalidInternshipJobbiBot.xml");
     }
 
     @Test
     public void readAddressBook_invalidAndValidInternshipAddressBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidAndValidInternshipAddressBook.xml");
+        readAddressBook("invalidAndValidInternshipJobbiBot.xml");
     }
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
-        AddressBook original = getTypicalAddressBook();
-        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+        JobbiBot original = getTypicalAddressBook();
+        XmlJobbiBotStorage xmlJobbiBotStorage = new XmlJobbiBotStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyAddressBook readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        xmlJobbiBotStorage.saveAddressBook(original, filePath);
+        ReadOnlyJobbiBot readBack = xmlJobbiBotStorage.readAddressBook(filePath).get();
+        assertEquals(original, new JobbiBot(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addInternship(HOON);
         original.removeInternship(ALICE);
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        xmlJobbiBotStorage.saveAddressBook(original, filePath);
+        readBack = xmlJobbiBotStorage.readAddressBook(filePath).get();
+        assertEquals(original, new JobbiBot(readBack));
 
         //Save and read without specifying file path
         original.addInternship(IDA);
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
-        assertEquals(original, new AddressBook(readBack));
+        xmlJobbiBotStorage.saveAddressBook(original); //file path not specified
+        readBack = xmlJobbiBotStorage.readAddressBook().get(); //file path not specified
+        assertEquals(original, new JobbiBot(readBack));
 
     }
 
@@ -107,9 +107,9 @@ public class XmlAddressBookStorageTest {
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
+    private void saveAddressBook(ReadOnlyJobbiBot addressBook, String filePath) {
         try {
-            new XmlAddressBookStorage(filePath).saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new XmlJobbiBotStorage(filePath).saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -118,7 +118,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() throws IOException {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(new AddressBook(), null);
+        saveAddressBook(new JobbiBot(), null);
     }
 
 

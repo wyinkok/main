@@ -51,13 +51,13 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ JobbiBot methods ==============================
 
     @Override
-    public String getAddressBookFilePath() {
-        return jobbiBotStorage.getAddressBookFilePath();
+    public String getJobbiBotFilePath() {
+        return jobbiBotStorage.getJobbiBotFilePath();
     }
 
     @Override
     public Optional<ReadOnlyJobbiBot> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(jobbiBotStorage.getAddressBookFilePath());
+        return readAddressBook(jobbiBotStorage.getJobbiBotFilePath());
     }
 
     @Override
@@ -68,7 +68,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyJobbiBot addressBook) throws IOException {
-        saveAddressBook(addressBook, jobbiBotStorage.getAddressBookFilePath());
+        saveAddressBook(addressBook, jobbiBotStorage.getJobbiBotFilePath());
     }
 
     @Override

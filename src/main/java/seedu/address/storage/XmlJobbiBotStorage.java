@@ -27,7 +27,7 @@ public class XmlJobbiBotStorage implements JobbiBotStorage {
         this.filePath = filePath;
     }
 
-    public String getAddressBookFilePath() {
+    public String getJobbiBotFilePath() {
         return filePath;
     }
 

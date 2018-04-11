@@ -87,7 +87,7 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public String getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getJobbiBotFilePath();
     }
 
     /**

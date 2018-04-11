@@ -29,7 +29,7 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
-    public String getAddressBookFilePath() {
+    public String getJobbiBotFilePath() {
         return addressBookFilePath;
     }
 
@@ -37,7 +37,7 @@ public class UserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
-    public String getAddressBookName() {
+    public String getJobbiBotName() {
         return addressBookName;
     }
 

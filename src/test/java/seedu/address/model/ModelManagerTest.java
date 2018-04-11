@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.JobbiBotBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -28,7 +28,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        JobbiBot jobbiBot = new AddressBookBuilder().withInternship(ALICE).withInternship(BENSON).build();
+        JobbiBot jobbiBot = new JobbiBotBuilder().withInternship(ALICE).withInternship(BENSON).build();
         JobbiBot differentJobbiBot = new JobbiBot();
         UserPrefs userPrefs = new UserPrefs();
 

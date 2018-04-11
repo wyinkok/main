@@ -9,24 +9,24 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code JobbiBot ab = new AddressBookBuilder().withInternship("John", "Doe").withTag("Friend").build();}
+ *     {@code JobbiBot ab = new JobbiBotBuilder().withInternship("John", "Doe").withTag("Friend").build();}
  */
-public class AddressBookBuilder {
+public class JobbiBotBuilder {
 
     private JobbiBot jobbiBot;
 
-    public AddressBookBuilder() {
+    public JobbiBotBuilder() {
         jobbiBot = new JobbiBot();
     }
 
-    public AddressBookBuilder(JobbiBot jobbiBot) {
+    public JobbiBotBuilder(JobbiBot jobbiBot) {
         this.jobbiBot = jobbiBot;
     }
 
     /**
      * Adds a new {@code Internship} to the {@code JobbiBot} that we are building.
      */
-    public AddressBookBuilder withInternship(Internship internship) {
+    public JobbiBotBuilder withInternship(Internship internship) {
         try {
             jobbiBot.addInternship(internship);
         } catch (DuplicateInternshipException dpe) {
@@ -38,7 +38,7 @@ public class AddressBookBuilder {
     /**
      * Parses {@code tagName} into a {@code Tag} and adds it to the {@code JobbiBot} that we are building.
      */
-    public AddressBookBuilder withTag(String tagName) {
+    public JobbiBotBuilder withTag(String tagName) {
         try {
             jobbiBot.addTag(new Tag(tagName));
         } catch (IllegalValueException ive) {

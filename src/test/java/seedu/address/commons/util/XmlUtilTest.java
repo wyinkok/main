@@ -18,7 +18,7 @@ import seedu.address.model.JobbiBot;
 import seedu.address.storage.XmlAdaptedInternship;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.JobbiBotBuilder;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.TestUtil;
 
@@ -134,7 +134,7 @@ public class XmlUtilTest {
         XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new JobbiBot());
+        JobbiBotBuilder builder = new JobbiBotBuilder(new JobbiBot());
         dataToWrite = new XmlSerializableAddressBook(
                 builder.withInternship(new InternshipBuilder().build()).withTag("Friends").build());
 

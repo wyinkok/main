@@ -30,9 +30,9 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        XmlJobbiBotStorage addressBookStorage = new XmlJobbiBotStorage(getTempFilePath("ab"));
+        XmlJobbiBotStorage jobbiBotStorage = new XmlJobbiBotStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(jobbiBotStorage, userPrefsStorage);
     }
 
     private String getTempFilePath(String fileName) {
@@ -55,10 +55,10 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void JobbiBotReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlAddressBookStorage} class.
+         * {@link XmlJobbiBotStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlJobbiBotStorageTest} class.
          */
         JobbiBot original = getTypicalAddressBook();
@@ -68,12 +68,12 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getJobbiBotFilePath() {
+        assertNotNull(storageManager.getJobbiBotFilePath());
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
+    public void handleJobbiBotChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlJobbiBotStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));

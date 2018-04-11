@@ -61,7 +61,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        JobbiBotStorage jobbiBotStorage = new XmlJobbiBotStorage(userPrefs.getAddressBookFilePath());
+        JobbiBotStorage jobbiBotStorage = new XmlJobbiBotStorage(userPrefs.getJobbiBotFilePath());
         storage = new StorageManager(jobbiBotStorage, userPrefsStorage);
 
         initLogging(config);
@@ -183,14 +183,14 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting JobbiBot " + MainApp.VERSION);
+        logger.info("Starting Jobbi Bot " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Jobbi Bot ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
