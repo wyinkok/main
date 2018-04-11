@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -49,18 +48,6 @@ public class JobbiBotParserTest {
         Internship internship = new InternshipBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(InternshipUtil.getAddCommand(internship));
         assertEquals(new AddCommand(internship), command);
-    }
-
-    @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        try {
-            parser.parseCommand(ClearCommand.COMMAND_WORD + " 3");
-            fail("The expected ParseException was not thrown.");
-        } catch (ParseException pe) {
-            assertEquals(new String(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE)),
-                    pe.getMessage());
-        }
     }
 
     @Test

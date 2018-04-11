@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -108,17 +107,14 @@ public class InternshipBookParser {
             checkIfContainArguments(arguments);
             return new RedoCommand();
 
-        case ClearCommand.COMMAND_WORD:
-            checkIfContainArguments(arguments);
-            return new ClearCommand();
-
         case StartCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
             if (!hasStarted) {
                 hasStarted = true;
                 return new StartCommand();
             } else {
-                throw new ParseException("Conversation has already started\nUse NEW command to restart conversation");
+                throw new ParseException("Our Conversation has already started"
+                        + "\nType 'new' to restart our conversation");
             }
 
         case NewChatCommand.COMMAND_WORD:
