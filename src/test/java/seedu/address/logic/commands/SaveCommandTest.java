@@ -43,7 +43,7 @@ public class SaveCommandTest {
 
         String expectedMessage = String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
         expectedModel.updateInternship(internshipToSave, internshipWithSavedTag);
 
         assertCommandSuccess(saveCommand, model, expectedMessage, expectedModel);
@@ -63,7 +63,7 @@ public class SaveCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_INTERNSHIP;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getInternshipList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getJobbiBot().getInternshipList().size());
 
         SaveCommand saveCommand = prepareCommand(outOfBoundIndex);
 
@@ -77,7 +77,7 @@ public class SaveCommandTest {
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         Internship internshipToSave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
         // save -> first internship saved
         saveCommand.execute();
@@ -122,7 +122,7 @@ public class SaveCommandTest {
         UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
         showInternshipAtIndex(model, INDEX_SECOND_INTERNSHIP);
         Internship internshipToSave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());

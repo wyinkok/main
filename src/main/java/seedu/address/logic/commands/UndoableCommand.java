@@ -5,14 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.JobbiBot;
+import seedu.address.model.ReadOnlyJobbiBot;
 
 /**
  * Represents a command which can be undone and redone.
  */
 public abstract class UndoableCommand extends Command {
-    private ReadOnlyAddressBook previousAddressBook;
+    private ReadOnlyJobbiBot previousAddressBook;
 
     protected abstract CommandResult executeUndoableCommand() throws CommandException;
 
@@ -21,7 +21,7 @@ public abstract class UndoableCommand extends Command {
      */
     private void saveAddressBookSnapshot() {
         requireNonNull(model);
-        this.previousAddressBook = new AddressBook(model.getAddressBook());
+        this.previousAddressBook = new JobbiBot(model.getJobbiBot());
     }
 
     /**
@@ -31,7 +31,7 @@ public abstract class UndoableCommand extends Command {
     protected void preprocessUndoableCommand() throws CommandException {}
 
     /**
-     * Reverts the AddressBook to the state before this command
+     * Reverts the JobbiBot to the state before this command
      * was executed and updates the filtered internship list to
      * show all internships.
      */

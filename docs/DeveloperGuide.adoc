@@ -282,15 +282,15 @@ Thus we have an addressbook , a filteredList (called searchedInternships) which 
 ----
 public class ModelManager extends ComponentManager implements Model {
 	...
-    private final AddressBook addressBook;
+    private final AddressBook jobbiBot;
     private final FilteredList<Internship> searchedInternships;
     private final FilteredList<Internship> filteredInternships;
     ...
 
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook jobbiBot, UserPrefs userPrefs) {
     	....
     	....
-        this.addressBook = new AddressBook(addressBook);
+        this.jobbiBot = new AddressBook(jobbiBot);
         searchedInternships = new FilteredList<>()
         filteredInternships = new FilteredList<>(searchedInternships);
         ...
@@ -968,7 +968,7 @@ Now we have the `Remark` class, we need to actually use it inside link:{repoURL}
 
 . Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/internship/Internship.java[`Internship`].
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the internship will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `addressBook.xml` so that the application will load the sample data when you launch it.)
+. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `jobbiBot.xml` so that the application will load the sample data when you launch it.)
 
 ===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedInternship` class
 We now have `Remark` s for `Internship` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/XmlAdaptedInternship.java[`XmlAdaptedInternship`] to include a `Remark` field so that it will be saved.
@@ -979,7 +979,7 @@ We now have `Remark` s for `Internship` s, but they will be gone when we exit th
 
 **Tests:**
 
-. Fix `invalidAndValidInternshipAddressBook.xml`, `typicalInternshipsAddressBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidInternshipAddressBook.xml`, `typicalInternshipsJobbiBot.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
 ===== [Step 6b] Test: Add withRemark() for `InternshipBuilder`
 Since `Internship` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/InternshipBuilder.java[`InternshipBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/internship/Internship.java[`Internship`].

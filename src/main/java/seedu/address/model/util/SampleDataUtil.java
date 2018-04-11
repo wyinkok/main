@@ -3,8 +3,8 @@ package seedu.address.model.util;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.JobbiBot;
+import seedu.address.model.ReadOnlyJobbiBot;
 import seedu.address.model.internship.Address;
 import seedu.address.model.internship.Email;
 import seedu.address.model.internship.Industry;
@@ -64,9 +64,9 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyJobbiBot getSampleJobbiBot() {
         try {
-            AddressBook sampleAb = new AddressBook();
+            JobbiBot sampleAb = new JobbiBot();
             for (Internship sampleInternship : getSampleInternships()) {
                 sampleAb.addInternship(sampleInternship);
             }

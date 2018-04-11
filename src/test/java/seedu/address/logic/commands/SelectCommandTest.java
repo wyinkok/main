@@ -68,7 +68,7 @@ public class SelectCommandTest {
 
         Index outOfBoundsIndex = INDEX_SECOND_INTERNSHIP;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getAddressBook().getInternshipList().size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getJobbiBot().getInternshipList().size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
     }

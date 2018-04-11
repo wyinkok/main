@@ -28,13 +28,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withInternship(ALICE).withInternship(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        JobbiBot jobbiBot = new AddressBookBuilder().withInternship(ALICE).withInternship(BENSON).build();
+        JobbiBot differentJobbiBot = new JobbiBot();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        ModelManager modelManager = new ModelManager(jobbiBot, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(jobbiBot, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -46,13 +46,13 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different jobbiBot -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentJobbiBot, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredInternshipList(new InternshipContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(jobbiBot, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
@@ -60,6 +60,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookName("differentName");
-        assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertTrue(modelManager.equals(new ModelManager(jobbiBot, differentUserPrefs)));
     }
 }

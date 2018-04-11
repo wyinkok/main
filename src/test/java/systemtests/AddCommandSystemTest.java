@@ -68,7 +68,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.InternshipUtil;
 
-public class AddCommandSystemTest extends AddressBookSystemTest {
+public class AddCommandSystemTest extends JobbiBotSystemTest {
 
     @Test @Ignore
     public void add() throws Exception {
@@ -203,7 +203,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* Case: add a duplicate internship except with different tags -> rejected */
         // "friends" is an existing tag used in the default model, see TypicalInternships#ALICE
         // This test will fail if a new tag that is not in the model is used, see the bug documented in
-        // AddressBook#addInternship(Internship)
+        // JobbiBot#addInternship(Internship)
         command = InternshipUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_INTERNSHIP);
 
@@ -293,8 +293,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Internship toAdd) {
         assertCommandSuccess(InternshipUtil.getAddCommand(toAdd), toAdd);
@@ -341,8 +341,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 4. {@code Model}, {@code Storage} and {@code InternshipListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

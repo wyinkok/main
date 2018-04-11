@@ -20,7 +20,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.JobbiBotChangedEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
@@ -39,56 +39,56 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private static List<String> filterKeywords;
-    private final AddressBook addressBook;
+    private final JobbiBot jobbiBot;
     private final FilteredList<Internship> searchedInternships;
     private final FilteredList<Internship> filteredInternships;
     private final SortedList<Internship> sortedFilteredInternships;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given jobbiBot and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyJobbiBot addressBook, UserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        this.searchedInternships = new FilteredList<>(this.addressBook.getInternshipList());
+        this.jobbiBot = new JobbiBot(addressBook);
+        this.searchedInternships = new FilteredList<>(this.jobbiBot.getInternshipList());
         this.filteredInternships = new FilteredList<>(searchedInternships);
         this.sortedFilteredInternships = new SortedList<>(filteredInternships);
         filterKeywords = new ArrayList<>();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new JobbiBot(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
+    public void resetData(ReadOnlyJobbiBot newData) {
+        jobbiBot.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyJobbiBot getJobbiBot() {
+        return jobbiBot;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+        raise(new JobbiBotChangedEvent(jobbiBot));
     }
 
     @Override
     public synchronized void deleteInternship(Internship target) throws InternshipNotFoundException {
-        addressBook.removeInternship(target);
+        jobbiBot.removeInternship(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public synchronized void addInternship(Internship internship) throws DuplicateInternshipException {
-        addressBook.addInternship(internship);
+        jobbiBot.addInternship(internship);
         updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         indicateAddressBookChanged();
     }
@@ -98,7 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
             throws DuplicateInternshipException, InternshipNotFoundException {
         requireAllNonNull(target, editedInternship);
 
-        addressBook.updateInternship(target, editedInternship);
+        jobbiBot.updateInternship(target, editedInternship);
         indicateAddressBookChanged();
     }
 
@@ -234,7 +234,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Internship} backed by the internal list of
-     * {@code addressBook}
+     * {@code jobbiBot}
      */
     @Override
     public ObservableList<Internship> getFilteredInternshipList() {
@@ -268,7 +268,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return jobbiBot.equals(other.jobbiBot)
                 && filteredInternships.equals(other.filteredInternships);
     }
 }

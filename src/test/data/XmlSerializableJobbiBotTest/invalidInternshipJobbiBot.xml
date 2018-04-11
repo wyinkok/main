@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <!-- Internship with invalid email field -->
+    <internships>
+        <name>Hans Muster</name>
+        <salary isPrivate="false">1000</salary>
+        <email isPrivate="false">hans@exam!32ple</email>
+        <address isPrivate="false">4th street</address>
+        <industry isPrivate="false">Engineering</industry>
+        <location isPrivate="false">Geylang</location>
+        <role isPrivate="false">Data Analyst</role>
+    </internships>
+</addressbook>
