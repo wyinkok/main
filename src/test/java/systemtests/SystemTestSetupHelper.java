@@ -20,7 +20,7 @@ public class SystemTestSetupHelper {
     /**
      * Sets up a new {@code TestApp} and returns it.
      */
-    public TestApp setupApplication(Supplier<ReadOnlyJobbiBot> InternshipBook, String saveFileLocation) {
+    public TestApp setupApplication(Supplier<ReadOnlyJobbiBot> internshipBook, String saveFileLocation) {
         try {
             FxToolkit.registerStage(Stage::new);
             FxToolkit.setupApplication(() -> testApp = new TestApp(InternshipBook, saveFileLocation));
