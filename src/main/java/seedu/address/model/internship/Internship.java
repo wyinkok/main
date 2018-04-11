@@ -76,7 +76,7 @@ public class Internship {
     }
 
     //@@author TanCiKang
-    private String createUrl(){
+    private String createUrl() {
         StringBuilder url = new StringBuilder();
         url.append(getName()).append(' ').append(getRole());
         return url.toString().replace(" ", "-");
