@@ -172,11 +172,11 @@ public class ModelManager extends ComponentManager implements Model {
      * @param keyword
      * @param model
      */
-    private static void addFilteredInternshipsWithKeywordTags
-    (ObservableList<Internship> filteredInternships, String keyword, Model model){
+    private static void addFilteredInternshipsWithKeywordTags(
+            ObservableList<Internship> filteredInternships, String keyword, Model model) {
 
         filteredInternships.forEach(filteredInternship -> {
-            if(StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keyword)) {
+            if (StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keyword)) {
                 try {
                     model.updateInternship(filteredInternship, addTagsToInternshipWithMatch(keyword,
                             filteredInternship));
