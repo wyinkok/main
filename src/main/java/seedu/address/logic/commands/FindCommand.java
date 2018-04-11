@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 
@@ -37,21 +36,13 @@ public class FindCommand extends Command {
     public CommandResult execute() {
 
         // remove all tags from filtered list except 'saved' tags
-        try {
-            model.updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-            ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
+        model.updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+        ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
 
         model.updateSearchedInternshipList(predicate);
 
         // add tags that have keywords matching the internship
-        try {
-            ModelManager.addTagsToFilteredList(ModelManager.getKeywords(), model.getFilteredInternshipList(), model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
+        ModelManager.addTagsToFilteredList(ModelManager.getKeywords(), model.getFilteredInternshipList(), model);
 
         return getCommandResult();
     }

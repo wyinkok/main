@@ -4,7 +4,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import java.util.ArrayList;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
 
 /**
@@ -22,11 +21,7 @@ public class ListCommand extends Command {
         ModelManager.setKeywords(new ArrayList<String>());
         model.updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         // remove all tags from filtered list except 'saved' tags
-        try {
-            ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
+        ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

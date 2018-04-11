@@ -37,12 +37,14 @@ import seedu.address.model.util.Sorter;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final String SAVED_TAG_NAME = "[saved]";
 
     private static List<String> filterKeywords;
     private final AddressBook addressBook;
     private final FilteredList<Internship> searchedInternships;
     private final FilteredList<Internship> filteredInternships;
     private final SortedList<Internship> sortedFilteredInternships;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -127,14 +129,13 @@ public class ModelManager extends ComponentManager implements Model {
      * @return Internship
      * @throws CommandException
      */
-    private static Internship addTagsToInternshipWithMatch(String keyword, Internship internship)
-            throws CommandException {
+    private static Internship addTagsToInternshipWithMatch(String keyword, Internship internship) {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
         try {
             internshipTags.add(new Tag(keyword));
         } catch (UniqueTagList.DuplicateTagException e) {
-            throw new CommandException ("Operation would result in duplicate tags");
+            throw new AssertionError ("Operation would result in duplicate tags");
         }
 
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
@@ -157,29 +158,42 @@ public class ModelManager extends ComponentManager implements Model {
      * @throws CommandException
      */
     public static void addTagsToFilteredList (List<String> filterKeywords,
-                                              ObservableList<Internship> filteredInternships, Model model)
-            throws CommandException {
+                                              ObservableList<Internship> filteredInternships, Model model) {
 
-        for (String keywords : filterKeywords) {
-            for (Internship filteredInternship : filteredInternships) {
-                if (StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keywords)) {
-                    try {
-                        model.updateInternship(filteredInternship,
-                                addTagsToInternshipWithMatch(keywords, filteredInternship));
-                    } catch (DuplicateInternshipException e) {
-                        throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
-                    } catch (InternshipNotFoundException e) {
-                        throw new AssertionError("The target internship cannot be missing");
-                    }
-                }
-            }
+        for (String keyword : filterKeywords) {
+            addFilteredInternshipsWithKeywordTags(filteredInternships, keyword, model);
         }
         return;
     }
 
     //@@author TanCiKang
     /**
-     * Remove all tags from individual internship other than 'saved' tags
+     * Add individual keyword tag to internships in filteredInternships when the keyword matches those internships
+     * @param filteredInternships
+     * @param keyword
+     * @param model
+     */
+    private static void addFilteredInternshipsWithKeywordTags(
+            ObservableList<Internship> filteredInternships, String keyword, Model model) {
+
+        filteredInternships.forEach(filteredInternship -> {
+            if (StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keyword)) {
+                try {
+                    model.updateInternship(filteredInternship, addTagsToInternshipWithMatch(keyword,
+                            filteredInternship));
+                } catch (InternshipNotFoundException e) {
+                    throw new AssertionError("The target internship cannot be missing");
+                } catch (DuplicateInternshipException e) {
+                    throw new AssertionError(MESSAGE_DUPLICATE_INTERNSHIP);
+                }
+            }
+        });
+        return;
+    }
+
+    //@@author TanCiKang
+    /**
+     * Remove all tags other than 'saved' tags from individual internship
      * @param tagsToBeRemoved
      * @param internship
      * @return
@@ -188,7 +202,7 @@ public class ModelManager extends ComponentManager implements Model {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
         for (Tag tagToBeRemoved : tagsToBeRemoved) {
-            if (!tagToBeRemoved.toString().equals("[saved]")) {
+            if (!tagToBeRemoved.toString().equals(SAVED_TAG_NAME)) {
                 try {
                     internshipTags.delete(tagToBeRemoved);
                 } catch (SavedTagNotFoundException e) {
@@ -210,19 +224,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author TanCiKang
     /**
-     * Remove all tags that are not 'saved' from the internships
+     * Remove all tags that are not 'saved' from the internship list
      * @param internships
      * @param model
      * @throws CommandException
      */
-    public static void removeTagsFromInternshipList(ObservableList<Internship> internships, Model model)
-            throws CommandException {
+    public static void removeTagsFromInternshipList(ObservableList<Internship> internships, Model model) {
 
         for (Internship internship : internships) {
             try {
                 model.updateInternship(internship, removeTagsFromInternship(internship.getTags(), internship, model));
             } catch (DuplicateInternshipException e) {
-                throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
+                throw new AssertionError(MESSAGE_DUPLICATE_INTERNSHIP);
             } catch (InternshipNotFoundException e) {
                 throw new AssertionError("The target internship cannot be missing");
             }
