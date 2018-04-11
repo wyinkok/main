@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.prepareUndoCommand;
 import static seedu.address.logic.commands.CommandTestUtil.showInternshipAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP;
-import static seedu.address.testutil.TypicalPersonsWithSavedTag.getTypicalAddressBookWithSavedTag;
+import static seedu.address.testutil.TypicalPersonsWithSavedTag.getTypicalInternshipBookWithSavedTag;
 
 import org.junit.Test;
 
@@ -31,7 +31,7 @@ import seedu.address.testutil.UnsavedInternshipBuilder;
  */
 public class UnsaveCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithSavedTag(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBookWithSavedTag(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
@@ -42,7 +42,7 @@ public class UnsaveCommandTest {
 
         String expectedMessage = String.format(UnsaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS,
             internshipWithoutSavedTag);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
         expectedModel.updateInternship(internshipToUnsave, internshipWithoutSavedTag);
 
         assertCommandSuccess(unsaveCommand, model, expectedMessage, expectedModel);
@@ -61,7 +61,7 @@ public class UnsaveCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_INTERNSHIP;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getInternshipList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getJobbiBot().getInternshipList().size());
 
         UnsaveCommand unsaveCommand = prepareCommand(outOfBoundIndex);
 
@@ -75,7 +75,7 @@ public class UnsaveCommandTest {
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         Internship internshipToUnsave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
         UnsaveCommand unsaveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
         // save -> first person saved
         unsaveCommand.execute();
@@ -120,7 +120,7 @@ public class UnsaveCommandTest {
         UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         UnsaveCommand unsaveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
         showInternshipAtIndex(model, INDEX_SECOND_INTERNSHIP);
         Internship internshipToUnsave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());

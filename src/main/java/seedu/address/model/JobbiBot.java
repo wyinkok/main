@@ -22,7 +22,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class JobbiBot implements ReadOnlyJobbiBot {
 
     private final UniqueInternshipList internships;
     private final UniqueTagList tags;
@@ -39,12 +39,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public JobbiBot() {}
 
     /**
-     * Creates an AddressBook using the Internships and Tags in the {@code toBeCopied}
+     * Creates an JobbiBot using the Internships and Tags in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public JobbiBot(ReadOnlyJobbiBot toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -60,9 +60,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code JobbiBot} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyJobbiBot newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
         List<Internship> syncedInternshipList = newData.getInternshipList().stream()
@@ -95,7 +95,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given internship {@code target} in the list with {@code editedInternship}.
-     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedInternship}.
+     * {@code JobbiBot}'s tag list will be updated with the tags of {@code editedInternship}.
      *
      * @throws DuplicateInternshipException if updating the internship's details causes the internship to be equivalent
      * to another existing internship in the list.
@@ -137,8 +137,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * @throws InternshipNotFoundException if the {@code key} is not in this {@code AddressBook}.
+     * Removes {@code key} from this {@code JobbiBot}.
+     * @throws InternshipNotFoundException if the {@code key} is not in this {@code JobbiBot}.
      */
     public boolean removeInternship(Internship key) throws InternshipNotFoundException {
         if (internships.remove(key)) {
@@ -175,9 +175,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && this.internships.equals(((AddressBook) other).internships)
-                && this.tags.equalsOrderInsensitive(((AddressBook) other).tags));
+                || (other instanceof JobbiBot // instanceof handles nulls
+                && this.internships.equals(((JobbiBot) other).internships)
+                && this.tags.equalsOrderInsensitive(((JobbiBot) other).tags));
     }
 
     @Override

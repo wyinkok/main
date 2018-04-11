@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobbiBot;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 
@@ -39,10 +39,10 @@ public class TypicalPersonsWithSavedTag {
     private TypicalPersonsWithSavedTag() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code JobbiBot} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBookWithSavedTag() {
-        AddressBook ab = new AddressBook();
+    public static JobbiBot getTypicalInternshipBookWithSavedTag() {
+        JobbiBot ab = new JobbiBot();
         for (Internship internship : getTypicalPersonsWithSavedTag()) {
             try {
                 ab.addInternship(internship);

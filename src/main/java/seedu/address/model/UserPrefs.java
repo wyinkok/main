@@ -29,7 +29,7 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
-    public String getAddressBookFilePath() {
+    public String getJobbiBotFilePath() {
         return addressBookFilePath;
     }
 
@@ -37,7 +37,7 @@ public class UserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
-    public String getAddressBookName() {
+    public String getJobbiBotName() {
         return addressBookName;
     }
 
@@ -71,7 +71,7 @@ public class UserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
         sb.append("\nLocal data file location : " + addressBookFilePath);
-        sb.append("\nAddressBook name : " + addressBookName);
+        sb.append("\nJobbiBot name : " + addressBookName);
         return sb.toString();
     }
 

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,14 +24,14 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newInternship_success() throws Exception {
         Internship validInternship = new InternshipBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
         expectedModel.addInternship(validInternship);
 
         assertCommandSuccess(prepareCommand(validInternship, model), model,
@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateInternship_throwsCommandException() {
-        Internship internshipInList = model.getAddressBook().getInternshipList().get(0);
+        Internship internshipInList = model.getJobbiBot().getInternshipList().get(0);
         assertCommandFailure(prepareCommand(internshipInList, model), model, AddCommand.MESSAGE_DUPLICATE_INTERNSHIP);
     }
 
