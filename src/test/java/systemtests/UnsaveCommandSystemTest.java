@@ -9,7 +9,7 @@ import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getSecondLastIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
-import static seedu.address.testutil.TypicalPersonsWithSavedTag.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalInternshipsWithSavedTag.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
-import seedu.address.testutil.TypicalPersonsWithSavedTag;
+import seedu.address.testutil.TypicalInternshipsWithSavedTag;
 import seedu.address.testutil.UnsavedInternshipBuilder;
 
 public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
@@ -37,7 +37,7 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
      */
     @Override
     protected JobbiBot getInitialData() {
-        return TypicalPersonsWithSavedTag.getTypicalInternshipBookWithSavedTag();
+        return TypicalInternshipsWithSavedTag.getTypicalInternshipBookWithSavedTag();
     }
 
     @Test
@@ -205,7 +205,6 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} except that the
      * browser url and selected card remain unchanged.
-     * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
