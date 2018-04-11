@@ -20,29 +20,21 @@ public class ChatBotCard extends UiPart<Region> {
     @FXML
     private HBox messagePane;
     @FXML
-    private Label username;
-    @FXML
     private Label messages;
 
 
-    public ChatBotCard(String msg, int index) {
+    public ChatBotCard(String msg) {
         super(FXML);
-        setMessage(msg, index);
+        setMessage(msg);
         registerAsAnEventHandler(this);
     }
 
     /**
      * Displays messages alternating between Jobbi and User
      * @param msg
-     * @param index
      */
-    public void setMessage(String msg, int index) {
-        if (index % 2 == 0) {
-            username.setText("Jobbi: ");
-            messages.setText(msg);
-        } else {
-            username.setText("User: ");
-            messages.setText(msg);
-        }
+    public void setMessage(String msg) {
+        messages.setText(msg);
+
     }
 }

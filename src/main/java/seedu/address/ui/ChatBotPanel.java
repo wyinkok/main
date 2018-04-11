@@ -1,7 +1,6 @@
 //@@author wyinkok
 package seedu.address.ui;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 import org.fxmisc.easybind.EasyBind;
@@ -11,7 +10,6 @@ import com.google.common.eventbus.Subscribe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -22,7 +20,7 @@ import seedu.address.logic.Logic;
 
 
 /**
- * Panel containing the message thread between chatbot and user.
+ * Panel containing the message thread between the chatbot and user.
  */
 public class ChatBotPanel extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(ChatBotPanel.class);
@@ -30,14 +28,10 @@ public class ChatBotPanel extends UiPart<Region> {
 
     private Logic logic;
     private ListElementPointer historySnapshot;
-    private ObservableList<String> messagelist = FXCollections.observableArrayList();
+    private ObservableList<String> messageList = FXCollections.observableArrayList();
 
     @FXML
     private ListView<ChatBotCard> chatBotListView;
-    @FXML
-    private Label username;
-    @FXML
-    private Label welcome;
 
     /**
      *  Creates the chatbot thread of messages
@@ -50,91 +44,83 @@ public class ChatBotPanel extends UiPart<Region> {
     }
 
     /**
-     * Initiates the chatbot thread of messages with Jobbi's first message
+     * Initiates the chatbot thread of messages with Jobbi's welcome message
      */
     public void initChatBot() {
-        ObservableList<String> initialMessage = createInitialMessage(messagelist);
+        ObservableList<String> initialMessage = createInitialMessage(messageList);
         ObservableList<ChatBotCard> initialMappedList = EasyBind.map(
-                initialMessage, (msg) -> new ChatBotCard(msg, 0));
+                initialMessage, (msg) -> new ChatBotCard(msg));
 
         // prevents user from selecting list cell
         chatBotListView.setSelectionModel(new DisableSelectionOfListCell<>());
 
         chatBotListView.setItems(initialMappedList);
-        chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
+        chatBotListView.setCellFactory(listView -> new ChatBotListViewCell());
     }
 
     /**
      * Creates the first welcome message from Jobbi
      */
     public ObservableList<String> createInitialMessage(ObservableList<String> initialMessage) {
-        initialMessage.add("Hello there, I am Jobbi! "
+        initialMessage.add("JOBBI:   " + "Hello there, I am Jobbi! "
                 + "I am here to help you find your ideal internship today. Type 'start' to begin your search.");
         return initialMessage;
     }
 
     /**
-     *  Creates subsequent message thread between user and Jobbi
+     *  Expands on the message thread between user and Jobbi
      */
 
-    public void buildChat(ObservableList<String> listToBuild) {
+    public void handleUserResponse(ObservableList<String> listToBuild) {
         ObservableList<String> updatedMessages = addUserResponse(listToBuild);
-        // if the user has not started conversation with jobbi using the `start` command
-        if (updatedMessages.size() == (1)) {
-            ObservableList<ChatBotCard> mappedList = EasyBind.map(
-                    updatedMessages, (msg) -> new ChatBotCard(msg, 0));
-            chatBotListView.setItems(mappedList);
-            chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
-
-            // if the conversation has started between user and jobbi
-        } else {
-            AtomicInteger index = new AtomicInteger();
-            ObservableList<ChatBotCard> mappedList = EasyBind.map(
-                    updatedMessages, (msg) -> new ChatBotCard(msg, index.getAndIncrement()));
-            chatBotListView.setItems(mappedList);
-            chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
-        }
+        ObservableList<ChatBotCard> mappedList = EasyBind.map(
+                updatedMessages, (msg) -> new ChatBotCard(msg));
+        chatBotListView.setItems(mappedList);
+        chatBotListView.setCellFactory(listView -> new ChatBotPanel.ChatBotListViewCell());
+        chatBotListView.scrollTo(chatBotListView.getItems().size());
     }
 
+
     /**
-     *  Adds subsequent messages from the user end into the message list
+     *  Checks if the user has initiated conversation with Jobbi and adds User's response if he/she has.
      */
 
-    public ObservableList<String> addUserResponse(ObservableList<String> listToUpdate) {
+    public ObservableList<String> addUserResponse(ObservableList<String> listToUpdateWithUserResponse) {
         historySnapshot = logic.getHistorySnapshot();
         if (historySnapshot.hasElement("start")) {
-            listToUpdate.add(historySnapshot.current());
+            listToUpdateWithUserResponse.add("USER:   " + historySnapshot.current());
             if (historySnapshot.current().equals("new")) {
-                listToUpdate.clear();
+                listToUpdateWithUserResponse.clear();
                 initChatBot();
             }
         }
-        return listToUpdate;
+        return listToUpdateWithUserResponse;
     }
 
     /**
      * Checks if the user has initiated conversation with Jobbi and adds Jobbi's response if he/she has.
-     * @param currentMessageList
+     * @param listToUpdateWithJobbiResponse
      * @param message
      * @return
      */
-    public ObservableList<String> addJobbiResponse(ObservableList<String> currentMessageList, String message) {
+    public ObservableList<String> handleJobbiResponse(ObservableList<String> listToUpdateWithJobbiResponse,
+                                                      String message) {
         historySnapshot = logic.getHistorySnapshot();
         if (historySnapshot.hasElement("start")) {
-            currentMessageList.add(message);
+            listToUpdateWithJobbiResponse.add("JOBBI:  " + message);
             if (historySnapshot.current().equals("new")) {
-                currentMessageList.clear();
+                listToUpdateWithJobbiResponse.clear();
                 initChatBot();
             }
         }
-        return currentMessageList;
+        return listToUpdateWithJobbiResponse;
     }
 
     @Subscribe
     private void handleNewResultAvailableForChatBot(NewResultAvailableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        buildChat(messagelist); // Adds to message thread whenever and whatever user types something in the command box
-        addJobbiResponse(messagelist, event.message);
+        handleUserResponse(messageList);
+        handleJobbiResponse(messageList, event.message);
     }
 
     /**
@@ -142,15 +128,14 @@ public class ChatBotPanel extends UiPart<Region> {
      */
     class ChatBotListViewCell extends ListCell<ChatBotCard> {
         @Override
-        protected void updateItem(ChatBotCard message, boolean empty) {
-            super.updateItem(message, empty);
-            if (empty || message == null) {
+        protected void updateItem(ChatBotCard message, boolean isEmpty) {
+            super.updateItem(message, isEmpty);
+            if (isEmpty || message == null) {
                 setGraphic(null);
                 setText(null);
 
             } else {
                 setGraphic(message.getRoot());
-
             }
         }
     }
