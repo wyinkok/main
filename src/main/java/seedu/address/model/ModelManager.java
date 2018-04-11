@@ -37,13 +37,14 @@ import seedu.address.model.util.Sorter;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final String SAVED_TAG_NAME = "[saved]";
 
     private static List<String> filterKeywords;
     private final AddressBook addressBook;
     private final FilteredList<Internship> searchedInternships;
     private final FilteredList<Internship> filteredInternships;
     private final SortedList<Internship> sortedFilteredInternships;
-    private static final String SAVED_TAG_NAME = "[saved]";
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
