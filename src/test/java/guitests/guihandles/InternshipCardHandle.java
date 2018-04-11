@@ -63,6 +63,17 @@ public class InternshipCardHandle extends NodeHandle<Node> {
         return salaryLabel.getText();
     }
 
+    public String getUrl() {
+        return createUrl();
+    }
+
+    //@@author TanCiKang
+    private String createUrl(){
+        StringBuilder url = new StringBuilder();
+        url.append(nameLabel.getText()).append(' ').append(roleLabel.getText());
+        return url.toString().replace(" ", "-");
+    }
+
     public List<String> getTags() {
         return tagLabels
                 .stream()

@@ -71,7 +71,6 @@ public class Internship {
         return role;
     }
 
-    //@@author TanCiKang
     public String getUrl() {
         return createUrl();
     }

@@ -212,11 +212,11 @@ public abstract class JobbiBotSystemTest {
      * @see InternshipListPanelHandle#isSelectedInternshipCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-        String selectedCardName = getInternshipInternshipListPanel().getHandleToSelectedCard().getName();
+        String selectedCardUrl = getInternshipInternshipListPanel().getHandleToSelectedCard().getUrl();
         URL expectedUrl;
         try {
             expectedUrl =
-                    new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
+                    new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardUrl);
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.");
         }
