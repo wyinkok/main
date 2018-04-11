@@ -65,7 +65,7 @@ public class UndoableCommandTest {
             } catch (InternshipNotFoundException pnfe) {
                 throw new AssertionError("Internship in filtered list must exist in model.", pnfe);
             } catch (DuplicateInternshipException e) {
-                e.printStackTrace();
+                throw new CommandException("Internship already exists in the Collection");
             }
             return new CommandResult("");
         }

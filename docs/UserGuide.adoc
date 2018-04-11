@@ -66,13 +66,13 @@ Format: `start`
 Restarts a new message thread of JobbiBot and the previous thread is deleted. +
 Format: `new`
 
-=== Find internships by keyword(s): `find` `search`
+=== Find internships by keyword(s): `find`
 
-Finds/Searches internships which contains any of the keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]` `search KEYWORD [MORE_KEYWORDS]`
+Finds internships which contains any of the keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The find/search is case insensitive. e.g `analyst` will match `Analyst`
+* The find is case insensitive. e.g `analyst` will match `Analyst`
 * Tags other than 'saved' tag attached when using find/search function will be removed when using 'list'.
 * The order of the keywords does not matter. e.g. `Sales Marketing` will match `Marketing Sales`
 * Internships matching at least one keyword will be returned (i.e. `OR` search). e.g. `Micro Dyson` will return `Dyson Technology`, `Dyson Engineering` `Microsoft`
@@ -113,7 +113,7 @@ Returns any entries containing data. e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics. e.g 'data analytics internship', 'data analytics singapore'
 
-=== Sorting Internship by keyword(s): `sort` `sortby`
+=== Sorting Internship by keyword(s): `sort`
 
 Sorts the internship list according to the given keyword(s). +
 Format: `sort KEYWORD [MORE_KEYWORDS]` +
@@ -199,6 +199,11 @@ Selects the 1st internship in the results of the `find` command.
 
 Shows a list of all internships in the internship database. +
 Format: `list`
+
+=== Listing entered user commands : `history`
+
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
 
 // tag::undoredo[]
 === Undoing previous command : `undo`
