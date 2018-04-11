@@ -45,10 +45,10 @@ public class XmlJobbiBotStorage implements JobbiBotStorage {
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
-        File InternshipBookFile = new File(filePath);
+        File internshipBookFile = new File(filePath);
 
-        if (!InternshipBookFile.exists()) {
-            logger.info("JobbiBot file "  + InternshipBookFile + " not found");
+        if (!internshipBookFile.exists()) {
+            logger.info("JobbiBot file "  + internshipBookFile + " not found");
             return Optional.empty();
         }
 
@@ -56,27 +56,27 @@ public class XmlJobbiBotStorage implements JobbiBotStorage {
         try {
             return Optional.of(xmlInternshipBook.toModelType());
         } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + InternshipBookFile + ": " + ive.getMessage());
+            logger.info("Illegal values found in " + internshipBookFile + ": " + ive.getMessage());
             throw new DataConversionException(ive);
         }
     }
 
     @Override
-    public void saveInternshipBook(ReadOnlyJobbiBot InternshipBook) throws IOException {
-        saveInternshipBook(InternshipBook, filePath);
+    public void saveInternshipBook(ReadOnlyJobbiBot internshipBook) throws IOException {
+        saveInternshipBook(internshipBook, filePath);
     }
 
     /**
      * Similar to {@link #saveInternshipBook(ReadOnlyJobbiBot)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveInternshipBook(ReadOnlyJobbiBot InternshipBook, String filePath) throws IOException {
-        requireNonNull(InternshipBook);
+    public void saveInternshipBook(ReadOnlyJobbiBot internshipBook, String filePath) throws IOException {
+        requireNonNull(internshipBook);
         requireNonNull(filePath);
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableJobbiBot(InternshipBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableJobbiBot(internshipBook));
     }
 
 }

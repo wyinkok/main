@@ -23,7 +23,7 @@ public class SystemTestSetupHelper {
     public TestApp setupApplication(Supplier<ReadOnlyJobbiBot> internshipBook, String saveFileLocation) {
         try {
             FxToolkit.registerStage(Stage::new);
-            FxToolkit.setupApplication(() -> testApp = new TestApp(InternshipBook, saveFileLocation));
+            FxToolkit.setupApplication(() -> testApp = new TestApp(internshipBook, saveFileLocation));
         } catch (TimeoutException te) {
             throw new AssertionError("Application takes too long to set up.");
         }

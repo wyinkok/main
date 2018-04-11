@@ -72,9 +72,9 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveInternshipBook(ReadOnlyJobbiBot InternshipBook, String filePath) throws IOException {
+    public void saveInternshipBook(ReadOnlyJobbiBot internshipBook, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        jobbiBotStorage.saveInternshipBook(InternshipBook, filePath);
+        jobbiBotStorage.saveInternshipBook(internshipBook, filePath);
     }
 
 

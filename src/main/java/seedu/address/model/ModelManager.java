@@ -49,13 +49,13 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given jobbiBot and userPrefs.
      */
-    public ModelManager(ReadOnlyJobbiBot InternshipBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyJobbiBot internshipBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(InternshipBook, userPrefs);
+        requireAllNonNull(internshipBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + InternshipBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with internship book: " + internshipBook + " and user prefs " + userPrefs);
 
-        this.jobbiBot = new JobbiBot(InternshipBook);
+        this.jobbiBot = new JobbiBot(internshipBook);
         this.searchedInternships = new FilteredList<>(this.jobbiBot.getInternshipList());
         this.filteredInternships = new FilteredList<>(searchedInternships);
         this.sortedFilteredInternships = new SortedList<>(filteredInternships);

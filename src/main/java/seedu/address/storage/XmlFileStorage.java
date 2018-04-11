@@ -15,10 +15,10 @@ public class XmlFileStorage {
     /**
      * Saves the given InternshipBook data to the specified file.
      */
-    public static void saveDataToFile(File file, XmlSerializableJobbiBot InternshipBook)
+    public static void saveDataToFile(File file, XmlSerializableJobbiBot internshipBook)
             throws FileNotFoundException {
         try {
-            XmlUtil.saveDataToFile(file, InternshipBook);
+            XmlUtil.saveDataToFile(file, internshipBook);
         } catch (JAXBException e) {
             throw new AssertionError("Unexpected exception " + e.getMessage());
         }
