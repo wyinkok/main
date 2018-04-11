@@ -36,6 +36,7 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static boolean hasStarted = false;
 
     /**
      * Parses user input into command for execution.
@@ -113,8 +114,13 @@ public class AddressBookParser {
 
         case StartCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
-            return new StartCommand();
-
+            if (!hasStarted) {
+                hasStarted = true;
+                return new StartCommand();
+            } else {
+                throw new ParseException("Conversation has already started\nUse NEW command to restart conversation");
+            }
+            
         case NewChatCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
             return new NewChatCommand();
