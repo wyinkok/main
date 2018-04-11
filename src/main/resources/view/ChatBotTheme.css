@@ -137,6 +137,13 @@
     -fx-text-fill:#f4f4f4;
 }
 
+.cell_small_label_title {
+    -fx-font-family: "Calibri";
+    -fx-font-style: italic;
+    -fx-font-size: 12.8px;
+    -fx-opacity: 0.75;
+}
+
 .cell_small_label {
     -fx-font-family: "Avenir Medium";
     -fx-font-size: 13px;

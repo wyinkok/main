@@ -10,6 +10,7 @@ import java.util.List;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
+
     public static final String SORT_SUCCESSS_MESSAGE = "Sort success! Here is your ideal list of internships. \n\n"
             + "If you would like to search, filter or sort again, "
             + "key in the respective command word(s) and the new thing(s) you would like to search/filter/sort by. "

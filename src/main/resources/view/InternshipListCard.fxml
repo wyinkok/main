@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -29,9 +29,23 @@
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="industry" styleClass="cell_small_label" text="\$industry" />
-      <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
-      <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
+         <HBox>
+            <children>
+               <Label fx:id="industryTitle" styleClass="cell_small_label_title" text="\$industryTitle" />
+            <Label fx:id="industry" styleClass="cell_small_label" text="\$industry" />
+            </children>
+         </HBox>
+         <HBox>
+            <children>
+               <Label fx:id="roleTitle" styleClass="cell_small_label_title" text="\$roleTitle" />
+            <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
+            </children></HBox>
+         <HBox>
+            <children>
+               <Label fx:id="salaryTitle" styleClass="cell_small_label_title" text="\$salaryTitle" />
+            <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
+            </children>
+         </HBox>
     </VBox>
       <rowConstraints>
          <RowConstraints />
