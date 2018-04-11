@@ -82,8 +82,8 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(1000, 500, 300, 100);
-        userPrefs.setInternshipBookFilePath("InternshipBook.xml");
-        userPrefs.setInternshipBookName("TypicalInternshipBookName");
+        userPrefs.setInternshipBookFilePath("data/InternshipBook.xml");
+        userPrefs.setInternshipBookName("MyInternshipBook");
         return userPrefs;
     }
 
