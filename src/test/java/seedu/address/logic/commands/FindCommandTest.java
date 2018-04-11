@@ -29,7 +29,7 @@ import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 public class FindCommandTest {
 
     public static final String MESSAGE_SEARCH_RESPONSE = "Awesome, would you like to narrow down your search even "
-            + "more? You may filter by location and specific address \nE.g: filter singapore hongkong tanjong pagar";
+            + "more? You may filter by location and specific address \n\nE.g  filter singapore hongkong tanjong pagar";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
