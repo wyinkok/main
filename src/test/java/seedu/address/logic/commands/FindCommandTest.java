@@ -28,8 +28,6 @@ import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
  */
 public class FindCommandTest {
 
-    public static final String MESSAGE_SEARCH_RESPONSE = "Awesome, would you like to narrow down your search even "
-            + "more? You may filter by location and specific address \n\nE.g  filter singapore hongkong tanjong pagar";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -61,14 +59,14 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noInternshipFound() {
-        String expectedMessage = String.format(MESSAGE_SEARCH_RESPONSE, 0);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SEARCH_RESPONSE_NO_INTERNSHIPS, 0);
         FindCommand command = prepareCommand(" ");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
     @Test
     public void execute_multipleKeywords_multipleInternshipsFound() {
-        String expectedMessage = String.format(MESSAGE_SEARCH_RESPONSE, 3);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SEARCH_RESPONSE, 3);
         FindCommand command = prepareCommand("Kurz Elle Kunz");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, ELLE, FIONA));
     }
