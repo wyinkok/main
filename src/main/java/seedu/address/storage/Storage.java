@@ -24,7 +24,7 @@ public interface Storage extends JobbiBotStorage, UserPrefsStorage {
     String getJobbiBotFilePath();
 
     @Override
-    Optional<ReadOnlyJobbiBot> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyJobbiBot> readInternshipBook() throws DataConversionException, IOException;
 
     @Override
     void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException;

@@ -63,7 +63,7 @@ public class StorageManagerTest {
          */
         JobbiBot original = getTypicalInternshipBook();
         storageManager.saveInternshipBook(original);
-        ReadOnlyJobbiBot retrieved = storageManager.readAddressBook().get();
+        ReadOnlyJobbiBot retrieved = storageManager.readInternshipBook().get();
         assertEquals(original, new JobbiBot(retrieved));
     }
 

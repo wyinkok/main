@@ -89,7 +89,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyJobbiBot> addressBookOptional;
         ReadOnlyJobbiBot initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readInternshipBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample JobbiBot");
             }

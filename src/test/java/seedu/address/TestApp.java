@@ -75,7 +75,7 @@ public class TestApp extends MainApp {
      */
     public JobbiBot readStorageAddressBook() {
         try {
-            return new JobbiBot(storage.readAddressBook().get());
+            return new JobbiBot(storage.readInternshipBook().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the JobbiBot format.");
         } catch (IOException ioe) {

@@ -32,16 +32,16 @@ public class XmlJobbiBotStorage implements JobbiBotStorage {
     }
 
     @Override
-    public Optional<ReadOnlyJobbiBot> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyJobbiBot> readInternshipBook() throws DataConversionException, IOException {
+        return readInternshipBook(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readInternshipBook()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyJobbiBot> readAddressBook(String filePath) throws DataConversionException,
+    public Optional<ReadOnlyJobbiBot> readInternshipBook(String filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
