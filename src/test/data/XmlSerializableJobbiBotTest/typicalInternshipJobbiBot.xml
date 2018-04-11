@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- JobbiBot save file which contains the same Internship values as in
-{@code TypicalInternships#getTypicalAddressBook()}-->
+{@code TypicalInternships#getTypicalInternshipBook()}-->
 <addressbook>
     <internships>
         <name>Alice Pauline</name>

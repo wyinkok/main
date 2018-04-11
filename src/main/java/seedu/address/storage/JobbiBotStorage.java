@@ -35,11 +35,11 @@ public interface JobbiBotStorage {
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyJobbiBot addressBook) throws IOException;
+    void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyJobbiBot)
+     * @see #saveInternshipBook(ReadOnlyJobbiBot)
      */
-    void saveAddressBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException;
+    void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException;
 
 }

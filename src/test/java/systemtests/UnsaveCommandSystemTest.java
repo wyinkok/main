@@ -37,7 +37,7 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
      */
     @Override
     protected JobbiBot getInitialData() {
-        return TypicalPersonsWithSavedTag.getTypicalAddressBookWithSavedTag();
+        return TypicalPersonsWithSavedTag.getTypicalInternshipBookWithSavedTag();
     }
 
     @Test

@@ -17,9 +17,9 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.JobbiBot;
 import seedu.address.storage.XmlAdaptedInternship;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.JobbiBotBuilder;
+import seedu.address.storage.XmlSerializableJobbiBot;
 import seedu.address.testutil.InternshipBuilder;
+import seedu.address.testutil.JobbiBotBuilder;
 import seedu.address.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -73,7 +73,7 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        JobbiBot dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
+        JobbiBot dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableJobbiBot.class).toModelType();
         assertEquals(9, dataFromFile.getInternshipList().size());
         assertEquals(0, dataFromFile.getTagList().size());
     }
@@ -129,17 +129,17 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         TEMP_FILE.createNewFile();
-        XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new JobbiBot());
+        XmlSerializableJobbiBot dataToWrite = new XmlSerializableJobbiBot(new JobbiBot());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        XmlSerializableJobbiBot dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableJobbiBot.class);
         assertEquals(dataToWrite, dataFromFile);
 
         JobbiBotBuilder builder = new JobbiBotBuilder(new JobbiBot());
-        dataToWrite = new XmlSerializableAddressBook(
+        dataToWrite = new XmlSerializableJobbiBot(
                 builder.withInternship(new InternshipBuilder().build()).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableJobbiBot.class);
         assertEquals(dataToWrite, dataFromFile);
     }
 

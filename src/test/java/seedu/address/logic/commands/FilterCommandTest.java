@@ -7,7 +7,7 @@ import static seedu.address.testutil.TypicalInternships.CARL;
 import static seedu.address.testutil.TypicalInternships.CARL2;
 import static seedu.address.testutil.TypicalInternships.DANIEL;
 import static seedu.address.testutil.TypicalInternships.GEORGE;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,7 +29,7 @@ import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
  */
 public class FilterCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
 
     @Test
     public void equals() {

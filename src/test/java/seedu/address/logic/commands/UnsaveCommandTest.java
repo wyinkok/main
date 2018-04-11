@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.prepareUndoCommand;
 import static seedu.address.logic.commands.CommandTestUtil.showInternshipAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP;
-import static seedu.address.testutil.TypicalPersonsWithSavedTag.getTypicalAddressBookWithSavedTag;
+import static seedu.address.testutil.TypicalPersonsWithSavedTag.getTypicalInternshipBookWithSavedTag;
 
 import org.junit.Test;
 
@@ -31,7 +31,7 @@ import seedu.address.testutil.UnsavedInternshipBuilder;
  */
 public class UnsaveCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithSavedTag(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBookWithSavedTag(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {

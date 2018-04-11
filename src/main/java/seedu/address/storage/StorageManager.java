@@ -67,14 +67,14 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyJobbiBot addressBook) throws IOException {
-        saveAddressBook(addressBook, jobbiBotStorage.getJobbiBotFilePath());
+    public void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException {
+        saveInternshipBook(addressBook, jobbiBotStorage.getJobbiBotFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
+    public void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        jobbiBotStorage.saveAddressBook(addressBook, filePath);
+        jobbiBotStorage.saveInternshipBook(addressBook, filePath);
     }
 
 
@@ -83,7 +83,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleAddressBookChangedEvent(JobbiBotChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveInternshipBook(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.io.IOException;
 
@@ -55,14 +55,14 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void JobbiBotReadSave() throws Exception {
+    public void jobbiBotReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlJobbiBotStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlJobbiBotStorageTest} class.
          */
-        JobbiBot original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
+        JobbiBot original = getTypicalInternshipBook();
+        storageManager.saveInternshipBook(original);
         ReadOnlyJobbiBot retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new JobbiBot(retrieved));
     }
@@ -92,7 +92,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
+        public void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

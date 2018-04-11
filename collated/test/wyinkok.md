@@ -76,7 +76,7 @@ import static seedu.address.logic.commands.CommandTestUtil.prepareUndoCommand;
 import static seedu.address.logic.commands.CommandTestUtil.showInternshipAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import org.junit.Test;
 
@@ -97,7 +97,7 @@ import seedu.address.testutil.SavedInternshipBuilder;
  */
 public class SaveCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
@@ -293,7 +293,7 @@ import static seedu.address.logic.commands.CommandTestUtil.prepareUndoCommand;
 import static seedu.address.logic.commands.CommandTestUtil.showInternshipAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP;
-import static seedu.address.testutil.TypicalPersonsWithSavedTag.getTypicalAddressBookWithSavedTag;
+import static seedu.address.testutil.TypicalPersonsWithSavedTag.getTypicalInternshipBookWithSavedTag;
 
 import org.junit.Test;
 
@@ -313,7 +313,7 @@ import seedu.address.testutil.UnsavedInternshipBuilder;
  */
 public class UnsaveCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithSavedTag(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBookWithSavedTag(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
@@ -643,7 +643,7 @@ public class TypicalPersonsWithSavedTag {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBookWithSavedTag() {
+    public static AddressBook getTypicalInternshipBookWithSavedTag() {
         AddressBook ab = new AddressBook();
         for (Internship internship : getTypicalPersonsWithSavedTag()) {
             try {
@@ -1052,7 +1052,7 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      */
     @Override
     protected AddressBook getInitialData() {
-        return TypicalPersonsWithSavedTag.getTypicalAddressBookWithSavedTag();
+        return TypicalPersonsWithSavedTag.getTypicalInternshipBookWithSavedTag();
     }
 
     @Test

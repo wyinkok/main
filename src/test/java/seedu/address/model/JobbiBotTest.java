@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalInternships.ALICE;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +40,7 @@ public class JobbiBotTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        JobbiBot newData = getTypicalAddressBook();
+        JobbiBot newData = getTypicalInternshipBook();
         jobbiBot.resetData(newData);
         assertEquals(newData, jobbiBot);
     }

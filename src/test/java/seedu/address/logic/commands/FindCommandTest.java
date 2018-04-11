@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalInternships.CARL;
 import static seedu.address.testutil.TypicalInternships.ELLE;
 import static seedu.address.testutil.TypicalInternships.FIONA;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,7 +28,7 @@ import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
  */
 public class FindCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
 
     @Test
     public void equals() {

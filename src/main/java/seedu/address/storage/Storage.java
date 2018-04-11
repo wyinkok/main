@@ -27,7 +27,7 @@ public interface Storage extends JobbiBotStorage, UserPrefsStorage {
     Optional<ReadOnlyJobbiBot> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyJobbiBot addressBook) throws IOException;
+    void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException;
 
     /**
      * Saves the current version of the Address Book to the hard disk.

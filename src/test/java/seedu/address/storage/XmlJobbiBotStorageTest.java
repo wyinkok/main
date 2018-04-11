@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalInternships.ALICE;
 import static seedu.address.testutil.TypicalInternships.HOON;
 import static seedu.address.testutil.TypicalInternships.IDA;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.io.IOException;
 
@@ -73,52 +73,52 @@ public class XmlJobbiBotStorageTest {
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndsaveInternshipBook_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
-        JobbiBot original = getTypicalAddressBook();
+        JobbiBot original = getTypicalInternshipBook();
         XmlJobbiBotStorage xmlJobbiBotStorage = new XmlJobbiBotStorage(filePath);
 
         //Save in new file and read back
-        xmlJobbiBotStorage.saveAddressBook(original, filePath);
+        xmlJobbiBotStorage.saveInternshipBook(original, filePath);
         ReadOnlyJobbiBot readBack = xmlJobbiBotStorage.readAddressBook(filePath).get();
         assertEquals(original, new JobbiBot(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addInternship(HOON);
         original.removeInternship(ALICE);
-        xmlJobbiBotStorage.saveAddressBook(original, filePath);
+        xmlJobbiBotStorage.saveInternshipBook(original, filePath);
         readBack = xmlJobbiBotStorage.readAddressBook(filePath).get();
         assertEquals(original, new JobbiBot(readBack));
 
         //Save and read without specifying file path
         original.addInternship(IDA);
-        xmlJobbiBotStorage.saveAddressBook(original); //file path not specified
+        xmlJobbiBotStorage.saveInternshipBook(original); //file path not specified
         readBack = xmlJobbiBotStorage.readAddressBook().get(); //file path not specified
         assertEquals(original, new JobbiBot(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
+    public void saveInternshipBook_nullAddressBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(null, "SomeFile.xml");
+        saveInternshipBook(null, "SomeFile.xml");
     }
 
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyJobbiBot addressBook, String filePath) {
+    private void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) {
         try {
-            new XmlJobbiBotStorage(filePath).saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new XmlJobbiBotStorage(filePath).saveInternshipBook(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() throws IOException {
+    public void saveInternshipBook_nullFilePath_throwsNullPointerException() throws IOException {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(new JobbiBot(), null);
+        saveInternshipBook(new JobbiBot(), null);
     }
 
 

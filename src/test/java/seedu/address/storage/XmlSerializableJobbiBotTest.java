@@ -27,25 +27,25 @@ public class XmlSerializableJobbiBotTest {
 
     @Test
     public void toModelType_typicalInternshipsFile_success() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_INTERNSHIPS_FILE,
-                XmlSerializableAddressBook.class);
+        XmlSerializableJobbiBot dataFromFile = XmlUtil.getDataFromFile(TYPICAL_INTERNSHIPS_FILE,
+                XmlSerializableJobbiBot.class);
         JobbiBot jobbiBotFromFile = dataFromFile.toModelType();
-        JobbiBot typicalInternshipsJobbiBot = TypicalInternships.getTypicalAddressBook();
+        JobbiBot typicalInternshipsJobbiBot = TypicalInternships.getTypicalInternshipBook();
         assertEquals(jobbiBotFromFile, typicalInternshipsJobbiBot);
     }
 
     @Test
     public void toModelType_invalidInternshipFile_throwsIllegalValueException() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_INTERNSHIP_FILE,
-                XmlSerializableAddressBook.class);
+        XmlSerializableJobbiBot dataFromFile = XmlUtil.getDataFromFile(INVALID_INTERNSHIP_FILE,
+                XmlSerializableJobbiBot.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
     }
 
     @Test
     public void toModelType_invalidTagFile_throwsIllegalValueException() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_TAG_FILE,
-                XmlSerializableAddressBook.class);
+        XmlSerializableJobbiBot dataFromFile = XmlUtil.getDataFromFile(INVALID_TAG_FILE,
+                XmlSerializableJobbiBot.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
     }

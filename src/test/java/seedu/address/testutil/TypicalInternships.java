@@ -81,7 +81,7 @@ public class TypicalInternships {
     /**
      * Returns an {@code JobbiBot} with all the typical internships.
      */
-    public static JobbiBot getTypicalAddressBook() {
+    public static JobbiBot getTypicalInternshipBook() {
         JobbiBot ab = new JobbiBot();
         for (Internship internship : getTypicalInternships()) {
             try {

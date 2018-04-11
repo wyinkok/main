@@ -19,7 +19,7 @@ public abstract class UndoableCommand extends Command {
     /**
      * Stores the current state of {@code model#addressBook}.
      */
-    private void saveAddressBookSnapshot() {
+    private void saveInternshipBookSnapshot() {
         requireNonNull(model);
         this.previousAddressBook = new JobbiBot(model.getJobbiBot());
     }
@@ -58,7 +58,7 @@ public abstract class UndoableCommand extends Command {
 
     @Override
     public final CommandResult execute() throws CommandException {
-        saveAddressBookSnapshot();
+        saveInternshipBookSnapshot();
         preprocessUndoableCommand();
         return executeUndoableCommand();
     }

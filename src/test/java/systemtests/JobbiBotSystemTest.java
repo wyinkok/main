@@ -82,7 +82,7 @@ public abstract class JobbiBotSystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected JobbiBot getInitialData() {
-        return TypicalInternships.getTypicalAddressBook();
+        return TypicalInternships.getTypicalInternshipBook();
     }
 
     /**

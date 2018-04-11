@@ -15,7 +15,7 @@ import seedu.address.model.ReadOnlyJobbiBot;
  * An Immutable JobbiBot that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook {
+public class XmlSerializableJobbiBot {
 
     @XmlElement
     private List<XmlAdaptedInternship> internships;
@@ -23,10 +23,10 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableJobbiBot.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableJobbiBot() {
         internships = new ArrayList<>();
         tags = new ArrayList<>();
     }
@@ -34,7 +34,7 @@ public class XmlSerializableAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyJobbiBot src) {
+    public XmlSerializableJobbiBot(ReadOnlyJobbiBot src) {
         this();
         internships.addAll(src.getInternshipList().stream().map(XmlAdaptedInternship::new)
                 .collect(Collectors.toList()));
@@ -64,11 +64,11 @@ public class XmlSerializableAddressBook {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableJobbiBot)) {
             return false;
         }
 
-        XmlSerializableAddressBook otherAb = (XmlSerializableAddressBook) other;
+        XmlSerializableJobbiBot otherAb = (XmlSerializableJobbiBot) other;
         return internships.equals(otherAb.internships) && tags.equals(otherAb.tags);
     }
 }

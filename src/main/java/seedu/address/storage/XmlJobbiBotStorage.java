@@ -52,7 +52,7 @@ public class XmlJobbiBotStorage implements JobbiBotStorage {
             return Optional.empty();
         }
 
-        XmlSerializableAddressBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        XmlSerializableJobbiBot xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
         try {
             return Optional.of(xmlAddressBook.toModelType());
         } catch (IllegalValueException ive) {
@@ -62,21 +62,21 @@ public class XmlJobbiBotStorage implements JobbiBotStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyJobbiBot addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException {
+        saveInternshipBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyJobbiBot)}
+     * Similar to {@link #saveInternshipBook(ReadOnlyJobbiBot)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
+    public void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableJobbiBot(addressBook));
     }
 
 }

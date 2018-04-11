@@ -41,7 +41,7 @@ public class TypicalPersonsWithSavedTag {
     /**
      * Returns an {@code JobbiBot} with all the typical persons.
      */
-    public static JobbiBot getTypicalAddressBookWithSavedTag() {
+    public static JobbiBot getTypicalInternshipBookWithSavedTag() {
         JobbiBot ab = new JobbiBot();
         for (Internship internship : getTypicalPersonsWithSavedTag()) {
             try {
