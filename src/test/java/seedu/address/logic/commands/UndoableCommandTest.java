@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static seedu.address.logic.commands.CommandTestUtil.saveFirstInternship;
 import static seedu.address.logic.commands.CommandTestUtil.showInternshipAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
@@ -49,28 +48,26 @@ public class UndoableCommandTest {
     }
 
     /**
-         * Deletes the first internship in the model's filtered list.
-         */
-        class DummyCommand extends UndoableCommand {
-            DummyCommand(Model model) {
+     * Deletes the first internship in the model's filtered list.
+     */
+    class DummyCommand extends UndoableCommand {
+        DummyCommand(Model model) {
                 this.model = model;
             }
 
-            @Override
-            public CommandResult executeUndoableCommand() throws CommandException {
-                Internship internshipToSave = model.getFilteredInternshipList().get(0);
-                Internship internshipWithSavedTag = new SavedInternshipBuilder()
+        @Override
+        public CommandResult executeUndoableCommand() throws CommandException {
+            Internship internshipToSave = model.getFilteredInternshipList().get(0);
+            Internship internshipWithSavedTag = new SavedInternshipBuilder()
                         .addTag(internshipToSave);
-                try {
-                    try {
-                        model.updateInternship(internshipToSave, internshipWithSavedTag);
-                    } catch (DuplicateInternshipException e) {
-                        e.printStackTrace();
-                    }
-                } catch (InternshipNotFoundException pnfe) {
-                    throw new AssertionError("Internship in filtered list must exist in model.", pnfe);
-                }
-                return new CommandResult("");
+            try {
+                model.updateInternship(internshipToSave, internshipWithSavedTag);
+            } catch (InternshipNotFoundException pnfe) {
+                throw new AssertionError("Internship in filtered list must exist in model.", pnfe);
+            } catch (DuplicateInternshipException e) {
+                e.printStackTrace();
+            }
+            return new CommandResult("");
             }
     }
 }

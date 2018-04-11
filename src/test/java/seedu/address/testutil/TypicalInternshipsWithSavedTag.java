@@ -12,7 +12,7 @@ import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 /**
  * A utility class containing a list of {@code Internship} objects to be used in tests.
  */
-public class TypicalPersonsWithSavedTag {
+public class TypicalInternshipsWithSavedTag {
 
     public static final Internship ALICE = new InternshipBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -36,7 +36,7 @@ public class TypicalPersonsWithSavedTag {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersonsWithSavedTag() {} // prevents instantiation
+    private TypicalInternshipsWithSavedTag() {} // prevents instantiation
 
     /**
      * Returns an {@code JobbiBot} with all the typical persons.
