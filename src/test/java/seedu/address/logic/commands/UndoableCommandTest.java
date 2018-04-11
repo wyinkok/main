@@ -52,8 +52,8 @@ public class UndoableCommandTest {
      */
     class DummyCommand extends UndoableCommand {
         DummyCommand(Model model) {
-                this.model = model;
-            }
+            this.model = model;
+        }
 
         @Override
         public CommandResult executeUndoableCommand() throws CommandException {
@@ -68,6 +68,6 @@ public class UndoableCommandTest {
                 e.printStackTrace();
             }
             return new CommandResult("");
-            }
+        }
     }
 }
