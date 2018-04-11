@@ -10,6 +10,7 @@ import guitests.guihandles.InternshipCardHandle;
 import guitests.guihandles.InternshipListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.internship.Internship;
+import seedu.address.ui.ChatBotCard;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
@@ -39,6 +40,19 @@ public class GuiTestAssert {
                 actualCard.getTags());
     }
 
+    //@@author wyinkok
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedInternship}.
+     */
+    public static void assertCardDisplaysMessage(String expectedMessage, ChatBotCardHandle actualCard) {
+        assertEquals(expectedMessage, actualCard.getMessages());
+    }
+
+    public static void assertCardDisplaysUserMessage(String expectedMessage, String actualMessage) {
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    //@@author
     /**
      * Asserts that the list in {@code internshipListPanelHandle} displays the details of {@code internships} correctly
      * and in the correct order.

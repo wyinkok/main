@@ -43,6 +43,7 @@ public class ChatBotPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+
     /**
      * Initiates the chatbot thread of messages with Jobbi's welcome message
      */
