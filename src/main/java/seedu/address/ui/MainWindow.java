@@ -56,9 +56,6 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane chatBotPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
-
-    @FXML
     private StackPane statusbarPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
