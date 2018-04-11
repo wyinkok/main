@@ -68,7 +68,7 @@ public class InternshipCardHandle extends NodeHandle<Node> {
     }
 
     //@@author TanCiKang
-    private String createUrl(){
+    private String createUrl() {
         StringBuilder url = new StringBuilder();
         url.append(nameLabel.getText()).append(' ').append(roleLabel.getText());
         return url.toString().replace(" ", "-");
