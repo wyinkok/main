@@ -43,6 +43,8 @@ public class InternshipCard extends UiPart<Region> {
     @FXML
     private Label salary;
     @FXML
+    private Label address;
+    @FXML
     private FlowPane tags;
 
     public InternshipCard(Internship internship, int displayedIndex) {
@@ -56,6 +58,7 @@ public class InternshipCard extends UiPart<Region> {
         role.setText(internship.getRole().value);
         salaryTitle.setText("Stipend: $");
         salary.setText(internship.getSalary().value);
+        address.setText(internship.getAddress().value);
 
         internship.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

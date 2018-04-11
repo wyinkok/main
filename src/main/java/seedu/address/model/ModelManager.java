@@ -146,7 +146,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
-                internship.getIndustry(), internship.getLocation(), internship.getRole(), correctTagReferences);
+                internship.getIndustry(), internship.getRegion(), internship.getRole(), correctTagReferences);
     }
 
     //@@author TanCiKang
@@ -219,7 +219,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
-                internship.getIndustry(), internship.getLocation(), internship.getRole(), correctTagReferences);
+                internship.getIndustry(), internship.getRegion(), internship.getRole(), correctTagReferences);
     }
 
     //@@author TanCiKang

@@ -97,7 +97,7 @@ public class UnsaveCommand extends UndoableCommand {
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(),
-                internship.getAddress(), internship.getIndustry(), internship.getLocation(), internship.getRole(),
+                internship.getAddress(), internship.getIndustry(), internship.getRegion(), internship.getRole(),
                 correctTagReferences);
     }
 

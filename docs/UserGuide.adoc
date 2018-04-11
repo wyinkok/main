@@ -117,7 +117,7 @@ Returns only entries containing data and analytics. e.g 'data analytics internsh
 
 Sorts the internship list according to the given keyword(s). +
 Format: `sort KEYWORD [MORE_KEYWORDS]` +
-Keywords are only limited to the following internship attribute types: `Address` `Email` `Industry` `Location` `Name` `Role` `Salary`
+Keywords are only limited to the following internship attribute types: `Address` `Email` `Industry` `Region` `Name` `Role` `Salary`
 
 ****
 * The sort is case insensitive. e.g `name` will match `Name`
@@ -129,8 +129,8 @@ Examples:
 
 * `sort name` +
 Sorts the internship list according to name attribute.
-* `sort salary location` +
-Sorts the internship list according to salary first then location.
+* `sort salary region` +
+Sorts the internship list according to salary first then region.
 
 === Saving an internship to a Saved Collection : `save`
 Saves the specified internship from the internship book. +

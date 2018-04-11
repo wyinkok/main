@@ -20,7 +20,7 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " Marketing Analytics Singapore";
 
     public static final String MESSAGE_SEARCH_RESPONSE = "Awesome, would you like to narrow down your search even "
-            + "more? You may filter by location and specific address \n\nE.g  filter singapore hongkong tanjong pagar";
+            + "more? You may filter by region and specific address \n\nE.g  filter singapore hongkong tanjong pagar";
 
     public static final String MESSAGE_SEARCH_RESPONSE_NO_INTERNSHIPS = "Woops, no internship found ! "
             + "Try using lesser keywords or entering other keywords  \nE.g: search marketing business";
