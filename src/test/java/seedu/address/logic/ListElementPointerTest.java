@@ -42,9 +42,11 @@ public class ListElementPointerTest {
         assertCurrentFailure();
         assertPreviousFailure();
         assertNextFailure();
+        assertHasElementFailure(FIRST_ELEMENT);
 
         pointer.add(FIRST_ELEMENT);
         assertNextSuccess(FIRST_ELEMENT);
+        assertHasElementSuccess(FIRST_ELEMENT);
     }
 
     @Test
@@ -53,6 +55,8 @@ public class ListElementPointerTest {
         list.add(FIRST_ELEMENT);
         pointer = new ListElementPointer(list);
 
+        assertHasElementSuccess(FIRST_ELEMENT);
+        assertHasElementFailure(SECOND_ELEMENT);
         assertCurrentSuccess(FIRST_ELEMENT);
         assertPreviousFailure();
         assertCurrentSuccess(FIRST_ELEMENT);
@@ -61,6 +65,7 @@ public class ListElementPointerTest {
 
         pointer.add(SECOND_ELEMENT);
         assertNextSuccess(SECOND_ELEMENT);
+        assertHasElementSuccess(SECOND_ELEMENT);
     }
 
     @Test
@@ -70,9 +75,12 @@ public class ListElementPointerTest {
         pointer.add(thirdElement);
 
         assertCurrentSuccess(SECOND_ELEMENT);
+        // {@code pointer#hasNext()} is unaffected by the position of the pointer
+        assertHasElementSuccess(thirdElement);
 
         assertNextSuccess(thirdElement);
         assertNextFailure();
+        assertHasElementSuccess(thirdElement);
 
         assertPreviousSuccess(SECOND_ELEMENT);
         assertPreviousSuccess(FIRST_ELEMENT);
@@ -105,6 +113,22 @@ public class ListElementPointerTest {
         assertFalse(firstPointer.equals(firstPointerCopy));
     }
 
+    //@@author wyinkok
+    /**
+     * Asserts that {@code pointer#hasElement()} returns true
+     */
+    private void assertHasElementSuccess(String element) {
+        assertTrue(pointer.hasElement(element));
+    }
+
+    /**
+     * Asserts that {@code pointer#hasElement()} returns false
+     */
+    private void assertHasElementFailure(String element) {
+        assertFalse(pointer.hasElement(element));
+    }
+
+    //@@author
     /**
      * Asserts that {@code pointer#hasNext()} returns true and the return value
      * of {@code pointer#next()} equals to {@code element}.
