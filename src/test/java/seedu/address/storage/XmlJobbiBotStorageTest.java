@@ -20,7 +20,8 @@ import seedu.address.model.JobbiBot;
 import seedu.address.model.ReadOnlyJobbiBot;
 
 public class XmlJobbiBotStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlJobbiBotStorageTest/");
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/" +
+            "data/XmlJobbiBotStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -67,7 +68,8 @@ public class XmlJobbiBotStorageTest {
     }
 
     @Test
-    public void readInternshipBook_invalidAndValidInternshipInternshipBook_throwDataConversionException() throws Exception {
+    public void readInternshipBook_invalidAndValidInternshipInternshipBook_throwDataConversionException()
+            throws Exception {
         thrown.expect(DataConversionException.class);
         readInternshipBook("invalidAndValidInternshipJobbiBot.xml");
     }
@@ -107,9 +109,9 @@ public class XmlJobbiBotStorageTest {
     /**
      * Saves {@code InternshipBook} at the specified {@code filePath}.
      */
-    private void saveInternshipBook(ReadOnlyJobbiBot InternshipBook, String filePath) {
+    private void saveInternshipBook(ReadOnlyJobbiBot internshipBook, String filePath) {
         try {
-            new XmlJobbiBotStorage(filePath).saveInternshipBook(InternshipBook, addToTestDataPathIfNotNull(filePath));
+            new XmlJobbiBotStorage(filePath).saveInternshipBook(internshipBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

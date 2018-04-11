@@ -92,7 +92,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveInternshipBook(ReadOnlyJobbiBot InternshipBook, String filePath) throws IOException {
+        public void saveInternshipBook(ReadOnlyJobbiBot internshipBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
