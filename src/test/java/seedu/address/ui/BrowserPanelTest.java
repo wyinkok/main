@@ -41,7 +41,7 @@ public class BrowserPanelTest extends GuiUnitTest {
         // associated web page of a internship
         postNow(selectionChangedEventStub);
         URL expectedInternshipUrl = new URL(BrowserPanel.SEARCH_PAGE_URL
-                + ALICE.getName().fullName.replaceAll(" ", "%20"));
+                + ALICE.getUrl());
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedInternshipUrl, browserPanelHandle.getLoadedUrl());
