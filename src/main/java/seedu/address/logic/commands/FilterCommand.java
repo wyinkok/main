@@ -9,7 +9,7 @@ import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
  *
  */
 
-public class FilterCommand extends Command {
+public class FilterCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "filter";
 
@@ -21,6 +21,10 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_FILTER_RESPONSE = "How would you to sort your results by? You may sort by "
             + "name industry role etc \nE.g sortby industry role industry";
 
+    public static final String MESSAGE_FILTER_RESPONSE_NO_INTERNSHIP = "No internships found ! You may want to try "
+            + "using lesser keywords or change your keywords \n"
+            + "E.g filter singapore ";
+
     private final InternshipContainsAllKeywordsPredicate predicate;
 
     public FilterCommand(InternshipContainsAllKeywordsPredicate predicate) {
@@ -28,9 +32,9 @@ public class FilterCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult executeUndoableCommand() {
         model.updateFilteredInternshipList(predicate);
-        return new CommandResult(MESSAGE_FILTER_RESPONSE);
+        return getCommandResult();
     }
 
     @Override
@@ -38,5 +42,17 @@ public class FilterCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof FilterCommand // instanceof handles nulls
                 && this.predicate.equals(((FilterCommand) other).predicate)); // state check
+    }
+
+    /**
+     * Helper method to retrieve the correct message for command results
+     * @return
+     */
+    private CommandResult getCommandResult() {
+        if (model.getFilteredInternshipList().size() > 0) {
+            return new CommandResult(MESSAGE_FILTER_RESPONSE);
+        } else {
+            return new CommandResult(MESSAGE_FILTER_RESPONSE_NO_INTERNSHIP);
+        }
     }
 }
