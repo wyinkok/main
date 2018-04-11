@@ -14,17 +14,16 @@ import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final String ALTERNATIVE_COMMAND_WORD = "search";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all internships whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " Marketing Analytics Singapore";
 
     public static final String MESSAGE_SEARCH_RESPONSE = "Awesome, would you like to narrow down your search even "
             + "more? You may filter by location and specific address \nE.g: filter singapore hongkong tanjong pagar";
 
-    public static final String MESSAGE_SEARCH_RESPONSE_NO_INTERNSHIPS = "Woops, no internship found !"
+    public static final String MESSAGE_SEARCH_RESPONSE_NO_INTERNSHIPS = "Woops, no internship found ! "
             + "Try using lesser keywords or entering other keywords  \nE.g: search marketing business";
 
     private final InternshipContainsKeywordsPredicate predicate;

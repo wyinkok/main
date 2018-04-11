@@ -17,6 +17,7 @@ public class Sorter {
 
     /**
      * Assigns keyword value to attribute
+     *
      * @param keywords
      */
     public static void assignValuesToAttributes(List<String> keywords) {
@@ -34,25 +35,76 @@ public class Sorter {
     }
 
     /**
-     *  Creates a comparator which sort according objects according to three attributes entered by the user
+     * Creates a comparator which sort according objects according to three attributes entered by the user
+     *
      * @param keywords
      * @return
      */
     public static Comparator<Internship> makeComparator(List<String> keywords) {
         assignValuesToAttributes(keywords);
-        return new Comparator<Internship>() {
-            @Override
-            public int compare(Internship o1, Internship o2) {
-                if (o1.getValue(attribute1).compareTo(o2.getValue(attribute1)) == 0
-                    && o1.getValue(attribute2).compareTo(o2.getValue(attribute2)) == 0) {
-                    return (o1.getValue(attribute3).compareTo(o2.getValue(attribute3)));
-                } else if (o1.getValue(attribute1).compareTo(o2.getValue(attribute1)) == 0) {
-                    return (o1.getValue(attribute2).compareTo(o2.getValue(attribute2)));
-                } else {
-                    return o1.getValue(attribute1).compareTo(o2.getValue(attribute1));
+        if (attribute1.equalsIgnoreCase("salary")) {
+            return new Comparator<Internship>() {
+                @Override
+                public int compare(Internship o1, Internship o2) {
+                    if (new Integer(Integer.parseInt(o2.getValue(attribute1)))
+                            .compareTo(new Integer(Integer.parseInt(o1.getValue(attribute1)))) == 0
+                            && o1.getValue(attribute2).compareTo(o2.getValue(attribute2)) == 0) {
+                        return (o1.getValue(attribute3).compareTo(o2.getValue(attribute3)));
+                    } else if (new Integer(Integer.parseInt(o1.getValue(attribute1)))
+                            .compareTo(new Integer(Integer.parseInt(o2.getValue(attribute1)))) == 0) {
+                        return (o1.getValue(attribute2).compareTo(o2.getValue(attribute2)));
+                    } else {
+                        return new Integer(Integer.parseInt(o1.getValue(attribute1)))
+                                .compareTo(new Integer(Integer.parseInt(o2.getValue(attribute1))));
+                    }
                 }
-            }
-        };
+            };
+        } else if (attribute2.equalsIgnoreCase("salary")) {
+            return new Comparator<Internship>() {
+                @Override
+                public int compare(Internship o1, Internship o2) {
+                    if (o1.getValue(attribute1).compareTo(o2.getValue(attribute1)) == 0
+                            && new Integer(Integer.parseInt(o2.getValue(attribute2)))
+                            .compareTo(new Integer(Integer.parseInt(o1.getValue(attribute2)))) == 0) {
+                        return (o1.getValue(attribute3).compareTo(o2.getValue(attribute3)));
+                    } else if (o1.getValue(attribute1).compareTo(o2.getValue(attribute1)) == 0) {
+                        return (o1.getValue(attribute2).compareTo(o2.getValue(attribute2)));
+                    } else {
+                        return o1.getValue(attribute1).compareTo(o2.getValue(attribute1));
+                    }
+                }
+            };
+        } else if (attribute3.equalsIgnoreCase("salary")) {
+            return new Comparator<Internship>() {
+                @Override
+                public int compare(Internship o1, Internship o2) {
+                    if (o1.getValue(attribute1).compareTo(o2.getValue(attribute1)) == 0
+                            && o1.getValue(attribute2).compareTo(o2.getValue(attribute2)) == 0) {
+                        return new Integer(Integer.parseInt(o2.getValue(attribute2)))
+                                .compareTo(new Integer(Integer.parseInt(o1.getValue(attribute2))));
+                    } else if (o1.getValue(attribute1).compareTo(o2.getValue(attribute1)) == 0) {
+                        return (o1.getValue(attribute2).compareTo(o2.getValue(attribute2)));
+                    } else {
+                        return o1.getValue(attribute1).compareTo(o2.getValue(attribute1));
+                    }
+                }
+            };
+        } else {
+            return new Comparator<Internship>() {
+                @Override
+                public int compare(Internship o1, Internship o2) {
+                    if (o1.getValue(attribute1).compareTo(o2.getValue(attribute1)) == 0
+                            && o1.getValue(attribute2).compareTo(o2.getValue(attribute2)) == 0) {
+                        return (o1.getValue(attribute3).compareTo(o2.getValue(attribute3)));
+                    } else if (o1.getValue(attribute1).compareTo(o2.getValue(attribute1)) == 0) {
+                        return (o1.getValue(attribute2).compareTo(o2.getValue(attribute2)));
+                    } else {
+                        return o1.getValue(attribute1).compareTo(o2.getValue(attribute1));
+                    }
+                }
+            };
+        }
     }
 }
+
 

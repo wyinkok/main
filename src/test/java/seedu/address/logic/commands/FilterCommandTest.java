@@ -105,7 +105,7 @@ public class FilterCommandTest {
      */
     private void assertCommandSuccess(FilterCommand command, String expectedMessage, List<Internship> expectedList) {
         AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
-        CommandResult commandResult = command.execute();
+        CommandResult commandResult = command.executeUndoableCommand();
 
         assertEquals(expectedMessage, commandResult.feedbackToUser);
         assertEquals(expectedList, model.getFilteredInternshipList());

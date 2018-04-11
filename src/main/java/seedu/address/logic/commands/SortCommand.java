@@ -10,7 +10,6 @@ import java.util.List;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
-    public static final String ALTERNATIVE_COMMAND_WORD = "sortby";
     public static final String NOTHING_TO_SORT_MESSAGE = "No internships to sort! ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all internships according "

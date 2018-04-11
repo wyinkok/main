@@ -66,7 +66,6 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
-        case FindCommand.ALTERNATIVE_COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
@@ -80,7 +79,6 @@ public class AddressBookParser {
             return new UnsaveCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
-        case SortCommand.ALTERNATIVE_COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
         //=========== Command without arguments =============================================================

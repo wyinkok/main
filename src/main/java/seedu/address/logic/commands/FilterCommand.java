@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
 
 //@@author niloc94
@@ -9,7 +11,7 @@ import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
  *
  */
 
-public class FilterCommand extends Command {
+public class FilterCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "filter";
 
@@ -32,7 +34,7 @@ public class FilterCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult executeUndoableCommand() {
         model.updateFilteredInternshipList(predicate);
         return getCommandResult();
     }
