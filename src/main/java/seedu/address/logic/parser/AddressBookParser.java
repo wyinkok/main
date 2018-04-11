@@ -120,7 +120,7 @@ public class AddressBookParser {
             } else {
                 throw new ParseException("Conversation has already started\nUse NEW command to restart conversation");
             }
-            
+
         case NewChatCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
             return new NewChatCommand();
