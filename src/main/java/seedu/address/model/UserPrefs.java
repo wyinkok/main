@@ -10,8 +10,8 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private String addressBookFilePath = "data/addressbook.xml";
-    private String addressBookName = "MyAddressBook";
+    private String InternshipBookFilePath = "data/InternshipBook.xml";
+    private String InternshipBookName = "MyInternshipBook";
 
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
@@ -30,19 +30,19 @@ public class UserPrefs {
     }
 
     public String getJobbiBotFilePath() {
-        return addressBookFilePath;
+        return InternshipBookFilePath;
     }
 
-    public void setAddressBookFilePath(String addressBookFilePath) {
-        this.addressBookFilePath = addressBookFilePath;
+    public void setInternshipBookFilePath(String InternshipBookFilePath) {
+        this.InternshipBookFilePath = InternshipBookFilePath;
     }
 
     public String getJobbiBotName() {
-        return addressBookName;
+        return InternshipBookName;
     }
 
-    public void setAddressBookName(String addressBookName) {
-        this.addressBookName = addressBookName;
+    public void setInternshipBookName(String InternshipBookName) {
+        this.InternshipBookName = InternshipBookName;
     }
 
     @Override
@@ -57,21 +57,21 @@ public class UserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return Objects.equals(guiSettings, o.guiSettings)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath)
-                && Objects.equals(addressBookName, o.addressBookName);
+                && Objects.equals(InternshipBookFilePath, o.InternshipBookFilePath)
+                && Objects.equals(InternshipBookName, o.InternshipBookName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, addressBookName);
+        return Objects.hash(guiSettings, InternshipBookFilePath, InternshipBookName);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
-        sb.append("\nLocal data file location : " + addressBookFilePath);
-        sb.append("\nJobbiBot name : " + addressBookName);
+        sb.append("\nLocal data file location : " + InternshipBookFilePath);
+        sb.append("\nJobbiBot name : " + InternshipBookName);
         return sb.toString();
     }
 

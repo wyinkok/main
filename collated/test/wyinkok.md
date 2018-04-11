@@ -363,7 +363,7 @@ public class UnsaveCommandTest {
         unsaveCommand.execute();
         undoRedoStack.push(unsaveCommand);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
+        // undo -> reverts InternshipBook back to previous state and filtered person list to show all persons
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first perison saved again
@@ -641,10 +641,10 @@ public class TypicalPersonsWithSavedTag {
     private TypicalPersonsWithSavedTag() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code InternshipBook} with all the typical persons.
      */
-    public static AddressBook getTypicalInternshipBookWithSavedTag() {
-        AddressBook ab = new AddressBook();
+    public static InternshipBook getTypicalInternshipBookWithSavedTag() {
+        InternshipBook ab = new InternshipBook();
         for (Internship internship : getTypicalPersonsWithSavedTag()) {
             try {
                 ab.addInternship(internship);
@@ -796,7 +796,7 @@ import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.testutil.SavedInternshipBuilder;
 
-public class SaveCommandSystemTest extends AddressBookSystemTest {
+public class SaveCommandSystemTest extends InternshipBookSystemTest {
 
     private static final String MESSAGE_INVALID_SAVE_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE);
@@ -974,9 +974,9 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
      * 5. Asserts that the status bar's sync status changes.<br>
      * 6. Asserts that the command box has the default style class.<br>
      * Verifications 1 to 3 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
+     * {@code InternshipBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see InternshipBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see InternshipBookSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Index expectedSelectedCardIndex) {
@@ -1000,8 +1000,8 @@ public class SaveCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 5. Asserts that the command box has the error style.<br>
      * Verifications 1 to 3 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code InternshipBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see InternshipBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
@@ -1042,7 +1042,7 @@ import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 import seedu.address.testutil.TypicalPersonsWithSavedTag;
 import seedu.address.testutil.UnsavedInternshipBuilder;
 
-public class UnsaveCommandSystemTest extends AddressBookSystemTest {
+public class UnsaveCommandSystemTest extends InternshipBookSystemTest {
 
     private static final String MESSAGE_INVALID_UNSAVE_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, UnsaveCommand.MESSAGE_USAGE);
@@ -1051,7 +1051,7 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      * Returns the data with saved tags to be loaded into the file in {@link #getDataFileLocation()}.
      */
     @Override
-    protected AddressBook getInitialData() {
+    protected InternshipBook getInitialData() {
         return TypicalPersonsWithSavedTag.getTypicalInternshipBookWithSavedTag();
     }
 
@@ -1236,9 +1236,9 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      * 5. Asserts that the status bar's sync status changes.<br>
      * 6. Asserts that the command box has the default style class.<br>
      * Verifications 1 to 3 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
+     * {@code InternshipBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see InternshipBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see InternshipBookSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
                                       Index expectedSelectedCardIndex) {
@@ -1261,8 +1261,8 @@ public class UnsaveCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 5. Asserts that the command box has the error style.<br>
      * Verifications 1 to 3 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code InternshipBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see InternshipBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

@@ -44,7 +44,7 @@ public class SampleDataTest extends JobbiBotSystemTest {
     }
 
     @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() {
+    public void InternshipBook_dataFileDoesNotExist_loadSampleData() {
         Internship[] expectedList = SampleDataUtil.getSampleInternships();
         assertListMatching(getInternshipInternshipListPanel(), expectedList);
     }

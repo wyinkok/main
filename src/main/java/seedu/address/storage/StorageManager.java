@@ -67,20 +67,20 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException {
-        saveInternshipBook(addressBook, jobbiBotStorage.getJobbiBotFilePath());
+    public void saveInternshipBook(ReadOnlyJobbiBot internshipBook) throws IOException {
+        saveInternshipBook(internshipBook, jobbiBotStorage.getJobbiBotFilePath());
     }
 
     @Override
-    public void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
+    public void saveInternshipBook(ReadOnlyJobbiBot InternshipBook, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        jobbiBotStorage.saveInternshipBook(addressBook, filePath);
+        jobbiBotStorage.saveInternshipBook(InternshipBook, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(JobbiBotChangedEvent event) {
+    public void handleInternshipBookChangedEvent(JobbiBotChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveInternshipBook(event.data);

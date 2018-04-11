@@ -14,7 +14,7 @@ import seedu.address.model.ReadOnlyJobbiBot;
 /**
  * An Immutable JobbiBot that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "InternshipBook")
 public class XmlSerializableJobbiBot {
 
     @XmlElement
@@ -42,7 +42,7 @@ public class XmlSerializableJobbiBot {
     }
 
     /**
-     * Converts this addressbook into the model's {@code JobbiBot} object.
+     * Converts this InternshipBook into the model's {@code JobbiBot} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedInternship} or {@code XmlAdaptedTag}.

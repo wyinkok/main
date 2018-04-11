@@ -86,14 +86,14 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyJobbiBot> addressBookOptional;
+        Optional<ReadOnlyJobbiBot> InternshipBookOptional;
         ReadOnlyJobbiBot initialData;
         try {
-            addressBookOptional = storage.readInternshipBook();
-            if (!addressBookOptional.isPresent()) {
+            InternshipBookOptional = storage.readInternshipBook();
+            if (!InternshipBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample JobbiBot");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleJobbiBot);
+            initialData = InternshipBookOptional.orElseGet(SampleDataUtil::getSampleJobbiBot);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty JobbiBot");
             initialData = new JobbiBot();

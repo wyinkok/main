@@ -59,7 +59,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookName("differentName");
+        differentUserPrefs.setInternshipBookName("differentName");
         assertTrue(modelManager.equals(new ModelManager(jobbiBot, differentUserPrefs)));
     }
 }

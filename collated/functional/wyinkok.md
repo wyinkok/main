@@ -304,7 +304,7 @@ public class UnsaveCommand extends UndoableCommand {
     }
 
 ```
-###### \java\seedu\address\logic\parser\AddressBookParser.java
+###### \java\seedu\address\logic\parser\InternshipBookParser.java
 ``` java
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);

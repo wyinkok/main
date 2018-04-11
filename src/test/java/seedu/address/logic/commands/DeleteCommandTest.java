@@ -94,7 +94,7 @@ public class DeleteCommandTest {
         deleteCommand.execute();
         undoRedoStack.push(deleteCommand);
 
-        // undo -> reverts addressbook back to previous state and filtered internship list to show all internships
+        // undo -> reverts InternshipBook back to previous state and filtered internship list to show all internships
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first internship deleted again

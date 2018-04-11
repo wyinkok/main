@@ -61,20 +61,20 @@ public class XmlJobbiBotStorageTest {
     }
 
     @Test
-    public void readInternshipBook_invalidInternshipAddressBook_throwDataConversionException() throws Exception {
+    public void readInternshipBook_invalidInternshipInternshipBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
         readInternshipBook("invalidInternshipJobbiBot.xml");
     }
 
     @Test
-    public void readInternshipBook_invalidAndValidInternshipAddressBook_throwDataConversionException() throws Exception {
+    public void readInternshipBook_invalidAndValidInternshipInternshipBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
         readInternshipBook("invalidAndValidInternshipJobbiBot.xml");
     }
 
     @Test
     public void readAndsaveInternshipBook_allInOrder_success() throws Exception {
-        String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
+        String filePath = testFolder.getRoot().getPath() + "TempInternshipBook.xml";
         JobbiBot original = getTypicalInternshipBook();
         XmlJobbiBotStorage xmlJobbiBotStorage = new XmlJobbiBotStorage(filePath);
 
@@ -99,17 +99,17 @@ public class XmlJobbiBotStorageTest {
     }
 
     @Test
-    public void saveInternshipBook_nullAddressBook_throwsNullPointerException() {
+    public void saveInternshipBook_nullInternshipBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         saveInternshipBook(null, "SomeFile.xml");
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code InternshipBook} at the specified {@code filePath}.
      */
-    private void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) {
+    private void saveInternshipBook(ReadOnlyJobbiBot InternshipBook, String filePath) {
         try {
-            new XmlJobbiBotStorage(filePath).saveInternshipBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new XmlJobbiBotStorage(filePath).saveInternshipBook(InternshipBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

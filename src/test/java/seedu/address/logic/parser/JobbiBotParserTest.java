@@ -42,7 +42,7 @@ public class JobbiBotParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final InternshipBookParser parser = new InternshipBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {

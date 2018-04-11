@@ -45,38 +45,38 @@ public class XmlJobbiBotStorage implements JobbiBotStorage {
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
-        File addressBookFile = new File(filePath);
+        File InternshipBookFile = new File(filePath);
 
-        if (!addressBookFile.exists()) {
-            logger.info("JobbiBot file "  + addressBookFile + " not found");
+        if (!InternshipBookFile.exists()) {
+            logger.info("JobbiBot file "  + InternshipBookFile + " not found");
             return Optional.empty();
         }
 
-        XmlSerializableJobbiBot xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        XmlSerializableJobbiBot xmlInternshipBook = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
         try {
-            return Optional.of(xmlAddressBook.toModelType());
+            return Optional.of(xmlInternshipBook.toModelType());
         } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + addressBookFile + ": " + ive.getMessage());
+            logger.info("Illegal values found in " + InternshipBookFile + ": " + ive.getMessage());
             throw new DataConversionException(ive);
         }
     }
 
     @Override
-    public void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException {
-        saveInternshipBook(addressBook, filePath);
+    public void saveInternshipBook(ReadOnlyJobbiBot InternshipBook) throws IOException {
+        saveInternshipBook(InternshipBook, filePath);
     }
 
     /**
      * Similar to {@link #saveInternshipBook(ReadOnlyJobbiBot)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveInternshipBook(ReadOnlyJobbiBot InternshipBook, String filePath) throws IOException {
+        requireNonNull(InternshipBook);
         requireNonNull(filePath);
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableJobbiBot(addressBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableJobbiBot(InternshipBook));
     }
 
 }

@@ -427,6 +427,6 @@ This serves as a non-exhaustive lists of skills that users can list in their con
 == FAQ
 
 *Q*: How do I update the internship list to the most updated version? +
-*A*: Download the database from the www.dummywebsite.com and replace the addressbook.xml file in main\data.
+*A*: Download the database from the www.dummywebsite.com and replace the InternshipBook.xml file in main\data.
 
 

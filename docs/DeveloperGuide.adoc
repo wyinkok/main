@@ -68,7 +68,7 @@ Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> docume
 
 ==== Updating documentation to match your fork
 
-After forking the repo, links in the documentation will still point to the `se-edu/addressbook-level4` repo. If you plan to develop this as a separate product (i.e. instead of contributing to the `se-edu/addressbook-level4`) , you should replace the URL in the variable `repoURL` in `DeveloperGuide.adoc` and `UserGuide.adoc` with the URL of your fork.
+After forking the repo, links in the documentation will still point to the `se-edu/InternshipBook-level4` repo. If you plan to develop this as a separate product (i.e. instead of contributing to the `se-edu/InternshipBook-level4`) , you should replace the URL in the variable `repoURL` in `DeveloperGuide.adoc` and `UserGuide.adoc` with the URL of your fork.
 
 ==== Setting up CI
 
@@ -140,7 +140,7 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `InternshipBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
@@ -183,7 +183,7 @@ image::LogicCommandClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `InternshipBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a internship) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -224,7 +224,7 @@ The `Storage` component,
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.InternshipBook.commons` package.
 
 == Implementation
 
@@ -277,20 +277,20 @@ See diagram below: <Insert Diagram 3 Here>
 ===== Aspect: Current Implementation 'Filter Command'
 * Current implementation makes use of the Java FXCollections filteredList.
 We created a separate FilteredList<Internship> called SearchedInternshipList and used it together with the existing FilteredList<Internship> FilteredIntership.
-Thus we have an addressbook , a filteredList (called searchedInternships) which wraps around the addressbook, and a filteredList (called filteredInternships) which wraps around the searchedInternship. See code snippet below
+Thus we have an InternshipBook , a filteredList (called searchedInternships) which wraps around the InternshipBook, and a filteredList (called filteredInternships) which wraps around the searchedInternship. See code snippet below
 
 ----
 public class ModelManager extends ComponentManager implements Model {
 	...
-    private final AddressBook jobbiBot;
+    private final InternshipBook jobbiBot;
     private final FilteredList<Internship> searchedInternships;
     private final FilteredList<Internship> filteredInternships;
     ...
 
-    public ModelManager(ReadOnlyAddressBook jobbiBot, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyInternshipBook jobbiBot, UserPrefs userPrefs) {
     	....
     	....
-        this.jobbiBot = new AddressBook(jobbiBot);
+        this.jobbiBot = new InternshipBook(jobbiBot);
         searchedInternships = new FilteredList<>()
         filteredInternships = new FilteredList<>(searchedInternships);
         ...
@@ -298,7 +298,7 @@ public class ModelManager extends ComponentManager implements Model {
 
 ----
 
-Due to the java wrapper functionality (in the FilteredList<T>), any changes in addressbook is propagated down to searchedInternship and then to filteredInternship. This allows us to maintain two different list of internships according to whatever keyword arguments (predicate) have been applied to it.
+Due to the java wrapper functionality (in the FilteredList<T>), any changes in InternshipBook is propagated down to searchedInternship and then to filteredInternship. This allows us to maintain two different list of internships according to whatever keyword arguments (predicate) have been applied to it.
 
 Additional helper methods were then created to differentiate between updating of the searchedInternship and filteredInternship. See code snippet 2 below
 
@@ -446,7 +446,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 * **Alternative 2:** Include all commands.
 ** Pros: Might be more intuitive for the user.
 ** Cons: User have no way of skipping such commands if he or she just want to reset the state of the address * book and not the view.
-**Additional Info:** See our discussion  https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672[here].
+**Additional Info:** See our discussion  https://github.com/se-edu/InternshipBook-level4/issues/390#issuecomment-298936672[here].
 
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -540,7 +540,7 @@ We chose to use the additional and removal of tags for two main reasons:
 * It is more straightforward in terms of implementation to do a search by a specific tag to display the Saved Collection
 
 ===== Alternative
-Another idea was to create separate AddressBook Model and its own storage for the Saved Collections
+Another idea was to create separate InternshipBook Model and its own storage for the Saved Collections
 
 *** Pros: Able to save in hard disk storage
 *** Cons: May have performance issues in terms of memory usage and may have to significantly change the architecture
@@ -763,12 +763,12 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 ****
 * Hints
 ** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
+** link:{repoURL}/src/main/java/seedu/address/logic/parser/InternshipBookParser.java[`InternshipBookParser`] is responsible for analyzing command words.
 * Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
+** Modify the switch statement in link:{repoURL}/src/main/java/seedu/address/logic/parser/InternshipBookParser.java[`InternshipBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
 ** Add new tests for each of the aliases that you have added.
 ** Update the user guide to document the new aliases.
-** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
+** See this https://github.com/se-edu/InternshipBook-level4/pull/785[PR] for the full solution.
 ****
 
 [discrete]
@@ -783,15 +783,15 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] API need to be updated.
+** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/InternshipBook.java[`InternshipBook`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/internship/Internship.java[`Internship`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a internship, and link:{repoURL}/src/main/java/seedu/address/model/internship/Internship.java[`Internship`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/InternshipBook.java[`InternshipBook`] and link:{repoURL}/src/main/java/seedu/address/model/internship/Internship.java[`Internship`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/InternshipBook.java[`InternshipBook`] allows you to update a internship, and link:{repoURL}/src/main/java/seedu/address/model/internship/Internship.java[`Internship`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each internship, and remove the `tag` from each internship.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/InternshipBook.java[`InternshipBook`]. Loop through each internship, and remove the `tag` from each internship.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `InternshipBook#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
-** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
-*** The current codebase has a flaw in tags management. Tags no longer in use by anyone may still exist on the link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. This may cause some tests to fail. See issue  https://github.com/se-edu/addressbook-level4/issues/753[`#753`] for more information about this flaw.
+** See this https://github.com/se-edu/InternshipBook-level4/pull/790[PR] for the full solution.
+*** The current codebase has a flaw in tags management. Tags no longer in use by anyone may still exist on the link:{repoURL}/src/main/java/seedu/address/model/InternshipBook.java[`InternshipBook`]. This may cause some tests to fail. See issue  https://github.com/se-edu/InternshipBook-level4/issues/753[`#753`] for more information about this flaw.
 *** The solution PR has a temporary fix for the flaw mentioned above in its first commit.
 ****
 
@@ -820,7 +820,7 @@ image::getting-started-ui-tag-after.png[width="300"]
 ** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
 * Solution
 ** You can modify the existing test methods for `InternshipCard` 's to include testing the tag's color as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
+** See this https://github.com/se-edu/InternshipBook-level4/pull/798[PR] for the full solution.
 *** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
 ****
 
@@ -843,8 +843,8 @@ image::getting-started-ui-result-after.png[width="200"]
 ** Modify link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
 ** You can write two different kinds of tests to ensure that the functionality works:
 *** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
-** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
+*** The system tests link:{repoURL}/src/test/java/systemtests/InternshipBookSystemTest.java[`InternshipBookSystemTest#assertCommandBoxShowsDefaultStyle() and InternshipBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
+** See this https://github.com/se-edu/InternshipBook-level4/pull/799[PR] for the full solution.
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
@@ -864,10 +864,10 @@ image::getting-started-ui-status-after.png[width="500"]
 ** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of internships when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of internships whenever there are new changes to the addressbook.
+** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleInternshipBookChangedEvent(InternshipBookChangedEvent)`] to update the number of internships whenever there are new changes to the InternshipBook.
 ** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save region and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of internships status bar.
-** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
+** For system tests, modify link:{repoURL}/src/test/java/systemtests/InternshipBookSystemTest.java[`InternshipBookSystemTest`] to also verify the new total number of internships status bar.
+** See this https://github.com/se-edu/InternshipBook-level4/pull/803[PR] for the full solution.
 ****
 
 [discrete]
@@ -878,14 +878,14 @@ image::getting-started-ui-status-after.png[width="500"]
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the address book can be saved in a fixed temporary region.
+. Add a new method `backupInternshipBook(ReadOnlyInternshipBook)`, so that the address book can be saved in a fixed temporary region.
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/XmlAddressBookStorage.java[`XmlAddressBookStorage`] class.
+** Add the API method in link:{repoURL}/src/main/java/seedu/address/storage/InternshipBookStorage.java[`InternshipBookStorage`] interface.
+** Implement the logic in link:{repoURL}/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/address/storage/XmlInternshipBookStorage.java[`XmlInternshipBookStorage`] class.
 * Solution
-** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
+** See this https://github.com/se-edu/InternshipBook-level4/pull/594[PR] for the full solution.
 ****
 
 [[GetStartedProgramming-RemarkCommand]]
@@ -893,7 +893,7 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 
 By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
+*Scenario:* You are a software maintainer for `InternshipBook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
 Edits the remark for a internship specified in the `INDEX`. +
@@ -914,12 +914,12 @@ Let's start by teaching the application how to parse a `remark` command. We will
 **Main:**
 
 . Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/UndoableCommand.java[`UndoableCommand`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
+. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/InternshipBookParser.java[`InternshipBookParser`] to accept a `RemarkCommand`.
 
 **Tests:**
 
 . Add `RemarkCommandTest` that tests that `executeUndoableCommand()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
+. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/InternshipBookParserTest.java[`InternshipBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
 
 ===== [Step 2] Logic: Teach the app to accept 'remark' arguments
 Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
@@ -928,14 +928,14 @@ Let's teach the application to parse arguments that our `remark` command will ac
 
 . Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
 . Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
+. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/InternshipBookParser.java[`InternshipBookParser`] to use the newly implemented `RemarkCommandParser`.
 
 **Tests:**
 
 . Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
 . Add `RemarkCommandParserTest` that tests different boundary values
 for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
+. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/InternshipBookParserTest.java[`InternshipBookParserTest`] to test that the correct command is generated according to the user input.
 
 ===== [Step 3] Ui: Add a placeholder for remark in `InternshipCard`
 Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/InternshipCard.java[`InternshipCard`] s to display a remark for each internship later.
@@ -979,7 +979,7 @@ We now have `Remark` s for `Internship` s, but they will be gone when we exit th
 
 **Tests:**
 
-. Fix `invalidAndValidInternshipAddressBook.xml`, `typicalInternshipsJobbiBot.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidInternshipInternshipBook.xml`, `typicalInternshipsJobbiBot.xml`, `validInternshipBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
 ===== [Step 6b] Test: Add withRemark() for `InternshipBuilder`
 Since `Internship` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/InternshipBuilder.java[`InternshipBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/internship/Internship.java[`Internship`].
@@ -1013,7 +1013,7 @@ We now have everything set up... but we still can't modify the remarks. Let's fi
 
 ==== Full Solution
 
-See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-by-step solution.
+See this https://github.com/se-edu/InternshipBook-level4/pull/599[PR] for the step-by-step solution.
 
 [appendix]
 == Product Scope
@@ -1031,7 +1031,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 | Ci Kang | Add keyword tags in Find Command | Major | Add tags to internship that matches keywords in find command
 
-| Ci Kang | Morph Model Component | Minor | Morph to store internship / job instead of addressbook
+| Ci Kang | Morph Model Component | Minor | Morph to store internship / job instead of InternshipBook
 
 | Wyin | GUI Revamp | Major | Revamp UI to incorporate a Chatbot in the CLI
 

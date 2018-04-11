@@ -32,14 +32,14 @@ public interface JobbiBotStorage {
 
     /**
      * Saves the given {@link ReadOnlyJobbiBot} to the storage.
-     * @param addressBook cannot be null.
+     * @param InternshipBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveInternshipBook(ReadOnlyJobbiBot addressBook) throws IOException;
+    void saveInternshipBook(ReadOnlyJobbiBot InternshipBook) throws IOException;
 
     /**
      * @see #saveInternshipBook(ReadOnlyJobbiBot)
      */
-    void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException;
+    void saveInternshipBook(ReadOnlyJobbiBot InternshipBook, String filePath) throws IOException;
 
 }

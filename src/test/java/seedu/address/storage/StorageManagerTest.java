@@ -77,7 +77,7 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlJobbiBotStorageExceptionThrowingStub("dummy"),
                                              new JsonUserPrefsStorage("dummy"));
-        storage.handleAddressBookChangedEvent(new JobbiBotChangedEvent(new JobbiBot()));
+        storage.handleInternshipBookChangedEvent(new JobbiBotChangedEvent(new JobbiBot()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -92,7 +92,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveInternshipBook(ReadOnlyJobbiBot addressBook, String filePath) throws IOException {
+        public void saveInternshipBook(ReadOnlyJobbiBot InternshipBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

@@ -49,13 +49,13 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given jobbiBot and userPrefs.
      */
-    public ModelManager(ReadOnlyJobbiBot addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyJobbiBot InternshipBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(InternshipBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + InternshipBook + " and user prefs " + userPrefs);
 
-        this.jobbiBot = new JobbiBot(addressBook);
+        this.jobbiBot = new JobbiBot(InternshipBook);
         this.searchedInternships = new FilteredList<>(this.jobbiBot.getInternshipList());
         this.filteredInternships = new FilteredList<>(searchedInternships);
         this.sortedFilteredInternships = new SortedList<>(filteredInternships);
@@ -69,7 +69,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyJobbiBot newData) {
         jobbiBot.resetData(newData);
-        indicateAddressBookChanged();
+        indicateInternshipBookChanged();
     }
 
     @Override
@@ -78,21 +78,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
+    private void indicateInternshipBookChanged() {
         raise(new JobbiBotChangedEvent(jobbiBot));
     }
 
     @Override
     public synchronized void deleteInternship(Internship target) throws InternshipNotFoundException {
         jobbiBot.removeInternship(target);
-        indicateAddressBookChanged();
+        indicateInternshipBookChanged();
     }
 
     @Override
     public synchronized void addInternship(Internship internship) throws DuplicateInternshipException {
         jobbiBot.addInternship(internship);
         updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-        indicateAddressBookChanged();
+        indicateInternshipBookChanged();
     }
 
     @Override
@@ -101,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedInternship);
 
         jobbiBot.updateInternship(target, editedInternship);
-        indicateAddressBookChanged();
+        indicateInternshipBookChanged();
     }
 
     //@@author niloc94
