@@ -71,6 +71,17 @@ public class Internship {
         return role;
     }
 
+    public String getUrl() {
+        return createUrl();
+    }
+
+    //@@author TanCiKang
+    private String createUrl() {
+        StringBuilder url = new StringBuilder();
+        url.append(getName()).append(' ').append(getRole());
+        return url.toString().replace(" ", "-");
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
