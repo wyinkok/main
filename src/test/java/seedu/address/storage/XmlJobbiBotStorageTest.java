@@ -20,8 +20,8 @@ import seedu.address.model.JobbiBot;
 import seedu.address.model.ReadOnlyJobbiBot;
 
 public class XmlJobbiBotStorageTest {
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/" +
-            "data/XmlJobbiBotStorageTest/");
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/"
+            + "data/XmlJobbiBotStorageTest/");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
