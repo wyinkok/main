@@ -9,7 +9,7 @@ import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getSecondLastIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
-import static seedu.address.testutil.TypicalInternshipsWithSavedTag.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalInternshipsWithSavedTag.KEYWORD_MATCHING_SAFETY;
 
 import org.junit.Test;
 
@@ -79,7 +79,7 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
 
         /* Case: filtered internship list, unsave index within bounds of internship book and internship list
          * -> unsave */
-        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
+        showInternshipsWithName(KEYWORD_MATCHING_SAFETY);
         Index index = INDEX_FIRST_INTERNSHIP;
         assertTrue(index.getZeroBased() < getModel().getFilteredInternshipList().size());
         command = UnsaveCommand.COMMAND_WORD + " " + index.getOneBased();
@@ -92,7 +92,7 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
         /* Case: filtered internship list,
          * unsave index within bounds of internship book but out of bounds of internship list -> rejected
          */
-        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
+        showInternshipsWithName(KEYWORD_MATCHING_SAFETY);
         int invalidIndex = getModel().getJobbiBot().getInternshipList().size();
         command = UnsaveCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
@@ -107,8 +107,8 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased());
         selectInternship(selectedIndex);
         command = UnsaveCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        Internship nexteditedInternship = removeSavedTagToInternship(expectedModel, selectedIndex);
-        expectedResultMessage = String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, nexteditedInternship);
+        Internship nextEditedInternship = removeSavedTagToInternship(expectedModel, selectedIndex);
+        expectedResultMessage = String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, nextEditedInternship);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
         /* --------------------------------- Performing invalid unsave operation ---------------------------------- */

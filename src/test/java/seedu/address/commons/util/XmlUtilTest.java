@@ -42,7 +42,7 @@ public class XmlUtilTest {
     private static final String VALID_INDUSTRY = "Engineering";
     private static final String VALID_REGION = "Geylang";
     private static final String VALID_ROLE = "Safety Officer";
-    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("saved"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

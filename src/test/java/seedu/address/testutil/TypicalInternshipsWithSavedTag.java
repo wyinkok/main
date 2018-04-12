@@ -14,27 +14,29 @@ import seedu.address.model.internship.exceptions.DuplicateInternshipException;
  */
 public class TypicalInternshipsWithSavedTag {
 
-    public static final Internship ALICE = new InternshipBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withSalary("85355255")
-            .withTags("friends", "saved").build();
-    public static final Internship BENSON = new InternshipBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withSalary("98765432")
-            .withTags("owesMoney", "friends", "saved").build();
-    public static final Internship CARL = new InternshipBuilder().withName("Carl Kurz").withSalary("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").withTags("saved").build();
-    public static final Internship DANIEL = new InternshipBuilder().withName("Daniel Meier").withSalary("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("saved").build();
-    public static final Internship ELLE = new InternshipBuilder().withName("Elle Meyer").withSalary("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Internship FIONA = new InternshipBuilder().withName("Fiona Kunz").withSalary("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").withTags("saved").build();
-    public static final Internship GEORGE = new InternshipBuilder().withName("George Best").withSalary("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").withTags("saved").build();
+    public static final Internship DATASCIENCE = new InternshipBuilder().withName("Grab").withSalary("1500")
+            .withEmail("Grab@example.com").withAddress("Grab Building").withTags("saved")
+            .withIndustry("Tech").withRegion("Town").withRole("Data Scientist").build();
+    public static final Internship ENGINEERING1 = new InternshipBuilder().withName("ST Engineering").withSalary("1000")
+            .withEmail("STEngineering@example.com").withAddress("123, Jurong West Ave 6, #08-111").withTags("saved")
+            .withIndustry("Manufacturing").withRegion("Jurong").withRole("Safety Officer").build();
+    public static final Internship ENGINEERING2 = new InternshipBuilder().withName("ABC Engineering").withSalary("999")
+            .withEmail("ABCEngineering@example.com").withAddress("311, Jurong Ave 2").withTags("saved")
+            .withIndustry("Manufacturing").withRegion("Jurong").withRole("Product Engineer").build();
+    public static final Internship ENGINEERING3 = new InternshipBuilder().withName("Sembcorp").withSalary("1001")
+            .withEmail("Sembcorp@example.com").withAddress("111 Tuas Street").withTags("saved")
+            .withIndustry("Engineering").withRegion("Tuas").withRole("Project Manager").build();
+    public static final Internship BUSINESS1 = new InternshipBuilder().withName("PwC").withSalary("1200")
+            .withEmail("AdvisoryIntern@example.com").withAddress("Raffles Place")
+            .withIndustry("Business").withRegion("Raffles Place").withRole("Advisory Intern").build();
+    public static final Internship BUSINESS2 = new InternshipBuilder().withName("Deloitte").withSalary("750")
+            .withEmail("AuditIntern@Deloitte.com").withAddress("Tanjong Pagar").withTags("saved")
+            .withIndustry("Business").withRegion("Tanjong Pagar").withRole("Audit Intern").build();
+    public static final Internship BUSINESS3 = new InternshipBuilder().withName("KPMG").withSalary("1000")
+            .withEmail("ConsultingIntern@example.com").withAddress("Raffles Boulevard").withTags("saved")
+            .withIndustry("Business").withRegion("Raffles Place").withRole("Consulting Intern").build();
 
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_SAFETY = "Safety"; // A keyword that matches MEIER
 
     private TypicalInternshipsWithSavedTag() {} // prevents instantiation
 
@@ -54,6 +56,7 @@ public class TypicalInternshipsWithSavedTag {
     }
 
     public static List<Internship> getTypicalInternshipsWithSavedTag() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(DATASCIENCE, ENGINEERING1, ENGINEERING2, ENGINEERING3,
+                BUSINESS1, BUSINESS2, BUSINESS3));
     }
 }
