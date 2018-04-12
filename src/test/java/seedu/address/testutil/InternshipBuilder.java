@@ -19,14 +19,13 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class InternshipBuilder {
 
-    public static final String DEFAULT_NAME = "Alice Pauline";
+    public static final String DEFAULT_NAME = "QYZ Company";
     public static final String DEFAULT_SALARY = "1000";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_INDUSTRY = "Engineering";
     public static final String DEFAULT_REGION = "Geylang";
     public static final String DEFAULT_ROLE = "Safety Offier";
-    public static final String DEFAULT_TAGS = "friends";
 
     private Name name;
     private Salary salary;
@@ -45,7 +44,7 @@ public class InternshipBuilder {
         industry = new Industry(DEFAULT_INDUSTRY);
         region = new Region(DEFAULT_REGION);
         role = new Role(DEFAULT_ROLE);
-        tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
+        tags = SampleDataUtil.getTagSet();
     }
 
     /**

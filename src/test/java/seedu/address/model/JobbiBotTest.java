@@ -1,7 +1,7 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.TypicalInternships.ALICE;
+import static seedu.address.testutil.TypicalInternships.ENGINEERING1;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.util.ArrayList;
@@ -47,9 +47,9 @@ public class JobbiBotTest {
 
     @Test
     public void resetData_withDuplicateInternships_throwsAssertionError() {
-        // Repeat ALICE twice
-        List<Internship> newInternships = Arrays.asList(ALICE, ALICE);
-        List<Tag> newTags = new ArrayList<>(ALICE.getTags());
+        // Repeat ENGINEERING1 twice
+        List<Internship> newInternships = Arrays.asList(ENGINEERING1, ENGINEERING1);
+        List<Tag> newTags = new ArrayList<>(ENGINEERING1.getTags());
         JobbiBotStub newData = new JobbiBotStub(newInternships, newTags);
 
         thrown.expect(AssertionError.class);

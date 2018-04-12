@@ -3,9 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalInternships.CARL;
-import static seedu.address.testutil.TypicalInternships.ELLE;
-import static seedu.address.testutil.TypicalInternships.FIONA;
+import static seedu.address.testutil.TypicalInternships.BUSINESS3;
+import static seedu.address.testutil.TypicalInternships.DATASCIENCE;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.util.Arrays;
@@ -27,9 +26,6 @@ import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-
-    public static final String MESSAGE_SEARCH_RESPONSE = "Awesome, would you like to narrow down your search even "
-            + "more? You may filter by region and specific address \nE.g: filter singapore hongkong tanjong pagar";
 
     private Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
 
@@ -68,10 +64,17 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_singleKeywords_singleInternshipFound() {
+        String expectedMessage = String.format(FindCommand.MESSAGE_SEARCH_RESPONSE, 1);
+        FindCommand command = prepareCommand("Data");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(DATASCIENCE));
+    }
+
+    @Test
     public void execute_multipleKeywords_multipleInternshipsFound() {
-        String expectedMessage = String.format(FindCommand.MESSAGE_SEARCH_RESPONSE, 3);
-        FindCommand command = prepareCommand("Kurz Elle Kunz");
-        assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, ELLE, FIONA));
+        String expectedMessage = String.format(FindCommand.MESSAGE_SEARCH_RESPONSE, 2);
+        FindCommand command = prepareCommand("Data Consulting");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(DATASCIENCE, BUSINESS3));
     }
 
     /**

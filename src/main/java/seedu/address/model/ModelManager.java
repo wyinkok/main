@@ -83,19 +83,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteInternship(Internship target) throws InternshipNotFoundException {
-        jobbiBot.removeInternship(target);
-        indicateInternshipBookChanged();
-    }
-
-    @Override
-    public synchronized void addInternship(Internship internship) throws DuplicateInternshipException {
-        jobbiBot.addInternship(internship);
-        updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-        indicateInternshipBookChanged();
-    }
-
-    @Override
     public void updateInternship(Internship target, Internship editedInternship)
             throws DuplicateInternshipException, InternshipNotFoundException {
         requireAllNonNull(target, editedInternship);
@@ -260,6 +247,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredInternshipList(Predicate<Internship> predicate) {
         requireNonNull(predicate);
         filteredInternships.setPredicate(predicate);
+        logger.info("Updating only Filtered Internship List");
     }
 
     @Override
@@ -267,6 +255,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         searchedInternships.setPredicate(predicate);
         filteredInternships.setPredicate(predicate);
+        logger.info("Updating both Searched Internship List and Filtered Internship List");
     }
 
     @Override

@@ -2,10 +2,10 @@
 <!-- Internship with missing name field -->
 <internship>
     <salary>1000</salary>
-    <email>hans@example</email>
+    <email>ABC@example</email>
     <address>4th street</address>
     <industry>Engineering</industry>
     <region>Geylang</region>
     <role>Safety Officer</role>
-    <tagged>friends</tagged>
+    <tagged>saved</tagged>
 </internship>

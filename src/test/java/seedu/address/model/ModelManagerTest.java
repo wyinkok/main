@@ -3,8 +3,9 @@ package seedu.address.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
-import static seedu.address.testutil.TypicalInternships.ALICE;
-import static seedu.address.testutil.TypicalInternships.BENSON;
+import static seedu.address.testutil.TypicalInternships.DATASCIENCE;
+import static seedu.address.testutil.TypicalInternships.ENGINEERING1;
+import static seedu.address.testutil.TypicalInternships.ENGINEERING2;
 
 import java.util.Arrays;
 
@@ -28,7 +29,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        JobbiBot jobbiBot = new JobbiBotBuilder().withInternship(ALICE).withInternship(BENSON).build();
+        JobbiBot jobbiBot = new JobbiBotBuilder().withInternship(ENGINEERING1).withInternship(ENGINEERING2).build();
         JobbiBot differentJobbiBot = new JobbiBot();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -50,7 +51,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentJobbiBot, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = DATASCIENCE.getRole().value.split("\\s+");
         modelManager.updateFilteredInternshipList(new InternshipContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(jobbiBot, userPrefs)));
 

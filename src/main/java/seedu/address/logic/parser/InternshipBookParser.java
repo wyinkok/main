@@ -66,7 +66,7 @@ public class InternshipBookParser {
         case UnsaveCommand.COMMAND_WORD:
             return new UnsaveCommandParser().parse(arguments);
 
-        //@@author
+        //@@author niloc94
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
@@ -117,6 +117,7 @@ public class InternshipBookParser {
         }
     }
 
+    //@@author niloc94
     /**
      *  Helper method to check if commands without arguments have arguments added to it
      * @throws ParseException

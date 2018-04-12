@@ -10,7 +10,7 @@ import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getSecondLastIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
-import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_AUDIT;
 
 import org.junit.Test;
 
@@ -66,7 +66,7 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
         /* ------------------ Performing save operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered internship list, save index within bounds of internship book and internship list -> save */
-        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
+        showInternshipsWithName(KEYWORD_MATCHING_AUDIT);
         Index index = INDEX_FIRST_INTERNSHIP;
         assertTrue(index.getZeroBased() < getModel().getFilteredInternshipList().size());
         command = SaveCommand.COMMAND_WORD + " " + index.getOneBased();
@@ -77,7 +77,7 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
-        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
+        showInternshipsWithName(KEYWORD_MATCHING_AUDIT);
         int invalidIndex = getModel().getJobbiBot().getInternshipList().size();
         command = SaveCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);

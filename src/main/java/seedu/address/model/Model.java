@@ -22,12 +22,6 @@ public interface Model {
     /** Returns the JobbiBot */
     ReadOnlyJobbiBot getJobbiBot();
 
-    /** Deletes the given internship. */
-    void deleteInternship(Internship target) throws InternshipNotFoundException;
-
-    /** Adds the given internship */
-    void addInternship(Internship internship) throws DuplicateInternshipException;
-
     /**
      * Replaces the given internship {@code target} with {@code editedInternship}.
      *
