@@ -138,10 +138,9 @@ public class ModelManager extends ComponentManager implements Model {
             if (hasAlphaNumeric(keyword)) {
                 internshipTags.add(new Tag(keyword));
             }
+        } catch (UniqueTagList.DuplicateTagException e) {
+            throw new AssertionError("Operation would result in duplicate tags");
         }
-        catch (UniqueTagList.DuplicateTagException e){
-                throw new AssertionError("Operation would result in duplicate tags");
-            }
 
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
@@ -156,7 +155,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author TanCiKang
     // Checks if the tag contains alphanumeric words
-    private static boolean hasAlphaNumeric (String keyword){
+    private static boolean hasAlphaNumeric (String keyword) {
         return keyword.matches("[a-zA-Z0-9]+") ? true : false;
     }
 
