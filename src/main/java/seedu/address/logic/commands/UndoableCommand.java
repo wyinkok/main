@@ -5,23 +5,24 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.JobbiBot;
+import seedu.address.model.ReadOnlyJobbiBot;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 
 /**
  * Represents a command which can be undone and redone.
  */
 public abstract class UndoableCommand extends Command {
-    private ReadOnlyAddressBook previousAddressBook;
+    private ReadOnlyJobbiBot previousInternshipBook;
 
     protected abstract CommandResult executeUndoableCommand() throws CommandException;
 
     /**
-     * Stores the current state of {@code model#addressBook}.
+     * Stores the current state of {@code model#InternshipBook}.
      */
-    private void saveAddressBookSnapshot() {
+    private void saveInternshipBookSnapshot() {
         requireNonNull(model);
-        this.previousAddressBook = new AddressBook(model.getAddressBook());
+        this.previousInternshipBook = new JobbiBot(model.getJobbiBot());
     }
 
     /**
@@ -31,13 +32,13 @@ public abstract class UndoableCommand extends Command {
     protected void preprocessUndoableCommand() throws CommandException {}
 
     /**
-     * Reverts the AddressBook to the state before this command
+     * Reverts the JobbiBot to the state before this command
      * was executed and updates the filtered internship list to
      * show all internships.
      */
     protected final void undo() {
-        requireAllNonNull(model, previousAddressBook);
-        model.resetData(previousAddressBook);
+        requireAllNonNull(model, previousInternshipBook);
+        model.resetData(previousInternshipBook);
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
     }
 
@@ -57,8 +58,8 @@ public abstract class UndoableCommand extends Command {
     }
 
     @Override
-    public final CommandResult execute() throws CommandException {
-        saveAddressBookSnapshot();
+    public final CommandResult execute() throws CommandException, DuplicateInternshipException {
+        saveInternshipBookSnapshot();
         preprocessUndoableCommand();
         return executeUndoableCommand();
     }

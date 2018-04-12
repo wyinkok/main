@@ -35,27 +35,27 @@ public class TestUtil {
      * Returns the middle index of the internship in the {@code model}'s internship list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getAddressBook().getInternshipList().size() / 2);
+        return Index.fromOneBased(model.getJobbiBot().getInternshipList().size() / 2);
     }
 
     /**
      * Returns the last index of the internship in the {@code model}'s internship list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getAddressBook().getInternshipList().size());
+        return Index.fromOneBased(model.getJobbiBot().getInternshipList().size());
     }
 
     /**
      * Returns the second last index of the internship in the {@code model}'s internship list.
      */
     public static Index getSecondLastIndex(Model model) {
-        return Index.fromOneBased(model.getAddressBook().getInternshipList().size() - 1);
+        return Index.fromOneBased(model.getJobbiBot().getInternshipList().size() - 1);
     }
 
     /**
      * Returns the internship in the {@code model}'s internship list at {@code index}.
      */
     public static Internship getInternship(Model model, Index index) {
-        return model.getAddressBook().getInternshipList().get(index.getZeroBased());
+        return model.getJobbiBot().getInternshipList().get(index.getZeroBased());
     }
 }

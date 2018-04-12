@@ -2,7 +2,7 @@ package seedu.address.model.internship;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
+//@@author TanCiKang
 /**
  * Represents a Internship's role in the internship book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRole(String)}
@@ -13,7 +13,7 @@ public class Role {
             "Internship role can take any values and it should not be blank";
 
     /*
-     * The first character of the location must not be a whitespace,
+     * The first character of the role must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String ROLE_VALIDATION_REGEX = "[^\\s].*";

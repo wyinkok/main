@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
 
 /**
- * Selects a internship identified using it's last displayed index from the address book.
+ * Selects a internship identified using it's last displayed index from the internship book.
  */
 public class SelectCommand extends Command {
 

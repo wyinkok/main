@@ -22,7 +22,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+            "https://www.internsg.com/job/";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -42,7 +42,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void loadInternshipPage(Internship internship) {
-        loadPage(SEARCH_PAGE_URL + internship.getName().fullName);
+        loadPage(SEARCH_PAGE_URL + internship.getUrl());
     }
 
     public void loadPage(String url) {

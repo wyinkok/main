@@ -14,12 +14,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobbiBot;
 import seedu.address.storage.XmlAdaptedInternship;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.storage.XmlSerializableJobbiBot;
 import seedu.address.testutil.InternshipBuilder;
+import seedu.address.testutil.JobbiBotBuilder;
 import seedu.address.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -27,11 +27,11 @@ public class XmlUtilTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlUtilTest/");
     private static final File EMPTY_FILE = new File(TEST_DATA_FOLDER + "empty.xml");
     private static final File MISSING_FILE = new File(TEST_DATA_FOLDER + "missing.xml");
-    private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validAddressBook.xml");
+    private static final File VALID_FILE = new File(TEST_DATA_FOLDER + "validInternshipBook.xml");
     private static final File MISSING_INTERNSHIP_FIELD_FILE = new File(TEST_DATA_FOLDER + "missingInternshipField.xml");
     private static final File INVALID_INTERNSHIP_FIELD_FILE = new File(TEST_DATA_FOLDER + "invalidInternshipField.xml");
     private static final File VALID_INTERNSHIP_FILE = new File(TEST_DATA_FOLDER + "validInternship.xml");
-    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml"));
+    private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempInternshipBook.xml"));
 
     private static final String INVALID_SALARY = "9482asf424";
 
@@ -40,7 +40,7 @@ public class XmlUtilTest {
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
     private static final String VALID_INDUSTRY = "Engineering";
-    private static final String VALID_LOCATION = "Geylang";
+    private static final String VALID_REGION = "Geylang";
     private static final String VALID_ROLE = "Safety Officer";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
@@ -50,7 +50,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.getDataFromFile(null, AddressBook.class);
+        XmlUtil.getDataFromFile(null, JobbiBot.class);
     }
 
     @Test
@@ -62,18 +62,18 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.getDataFromFile(MISSING_FILE, AddressBook.class);
+        XmlUtil.getDataFromFile(MISSING_FILE, JobbiBot.class);
     }
 
     @Test
     public void getDataFromFile_emptyFile_dataFormatMismatchException() throws Exception {
         thrown.expect(JAXBException.class);
-        XmlUtil.getDataFromFile(EMPTY_FILE, AddressBook.class);
+        XmlUtil.getDataFromFile(EMPTY_FILE, JobbiBot.class);
     }
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
+        JobbiBot dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableJobbiBot.class).toModelType();
         assertEquals(9, dataFromFile.getInternshipList().size());
         assertEquals(0, dataFromFile.getTagList().size());
     }
@@ -83,7 +83,7 @@ public class XmlUtilTest {
         XmlAdaptedInternship actualInternship = XmlUtil.getDataFromFile(
                 MISSING_INTERNSHIP_FIELD_FILE, XmlAdaptedInternshipWithRootElement.class);
         XmlAdaptedInternship expectedInternship = new XmlAdaptedInternship(
-                null, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_INDUSTRY, VALID_LOCATION,
+                null, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_INDUSTRY, VALID_REGION,
                 VALID_ROLE, VALID_TAGS);
         assertEquals(expectedInternship, actualInternship);
     }
@@ -93,7 +93,7 @@ public class XmlUtilTest {
         XmlAdaptedInternship actualInternship = XmlUtil.getDataFromFile(
                 INVALID_INTERNSHIP_FIELD_FILE, XmlAdaptedInternshipWithRootElement.class);
         XmlAdaptedInternship expectedInternship = new XmlAdaptedInternship(
-                VALID_NAME, INVALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_INDUSTRY, VALID_LOCATION, VALID_ROLE,
+                VALID_NAME, INVALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_INDUSTRY, VALID_REGION, VALID_ROLE,
                 VALID_TAGS);
         assertEquals(expectedInternship, actualInternship);
     }
@@ -103,7 +103,7 @@ public class XmlUtilTest {
         XmlAdaptedInternship actualInternship = XmlUtil.getDataFromFile(
                 VALID_INTERNSHIP_FILE, XmlAdaptedInternshipWithRootElement.class);
         XmlAdaptedInternship expectedInternship = new XmlAdaptedInternship(
-                VALID_NAME, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_INDUSTRY, VALID_LOCATION, VALID_ROLE,
+                VALID_NAME, VALID_SALARY, VALID_EMAIL, VALID_ADDRESS, VALID_INDUSTRY, VALID_REGION, VALID_ROLE,
                 VALID_TAGS);
         assertEquals(expectedInternship, actualInternship);
     }
@@ -111,7 +111,7 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.saveDataToFile(null, new AddressBook());
+        XmlUtil.saveDataToFile(null, new JobbiBot());
     }
 
     @Test
@@ -123,23 +123,23 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.saveDataToFile(MISSING_FILE, new AddressBook());
+        XmlUtil.saveDataToFile(MISSING_FILE, new JobbiBot());
     }
 
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         TEMP_FILE.createNewFile();
-        XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());
+        XmlSerializableJobbiBot dataToWrite = new XmlSerializableJobbiBot(new JobbiBot());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        XmlSerializableJobbiBot dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableJobbiBot.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
-        dataToWrite = new XmlSerializableAddressBook(
+        JobbiBotBuilder builder = new JobbiBotBuilder(new JobbiBot());
+        dataToWrite = new XmlSerializableJobbiBot(
                 builder.withInternship(new InternshipBuilder().build()).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableJobbiBot.class);
         assertEquals(dataToWrite, dataFromFile);
     }
 

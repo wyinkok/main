@@ -30,7 +30,8 @@ public class ChatBotCard extends UiPart<Region> {
     }
 
     /**
-     * Displays messages alternating between Jobbi and User
+     * Displays messages from Jobbi or User.
+     *
      * @param msg
      */
     public void setMessage(String msg) {
