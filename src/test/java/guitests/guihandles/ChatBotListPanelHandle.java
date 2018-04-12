@@ -31,6 +31,5 @@ public class ChatBotListPanelHandle extends NodeHandle<ListView<ChatBotCard>> {
         }
         return new ChatBotCardHandle(chatBotCardList.get(0).getRoot());
     }
-    
 }
 
