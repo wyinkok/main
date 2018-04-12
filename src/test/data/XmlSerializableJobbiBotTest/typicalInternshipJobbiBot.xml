@@ -20,8 +20,6 @@
         <industry>Business</industry>
         <region>Clementi</region>
         <role>Business Analyst</role>
-        <tagged>owesMoney</tagged>
-        <tagged>friends</tagged>
     </internships>
     <internships>
         <name>Carl Kurz</name>
@@ -68,8 +66,6 @@
         <region>Tampines</region>
         <role>Safety Officer</role>
     </internships>
-    <tags>friends</tags>
-    <tags>owesMoney</tags>
     <internships>
         <name>Carl</name>
         <salary>1234567</salary>

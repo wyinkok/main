@@ -26,7 +26,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
-import seedu.address.model.internship.exceptions.SavedTagNotFoundException;
+import seedu.address.model.internship.exceptions.TagNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.util.Sorter;
@@ -207,7 +207,7 @@ public class ModelManager extends ComponentManager implements Model {
             if (!tagToBeRemoved.toString().equals(SAVED_TAG_NAME)) {
                 try {
                     internshipTags.delete(tagToBeRemoved);
-                } catch (SavedTagNotFoundException e) {
+                } catch (TagNotFoundException e) {
                     System.out.println("Saved tag not found!");
                 }
             }

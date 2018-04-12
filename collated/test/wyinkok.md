@@ -671,7 +671,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.exceptions.SavedTagNotFoundException;
+import seedu.address.model.internship.exceptions.TagNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 /**

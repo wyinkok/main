@@ -11,7 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.internship.exceptions.SavedTagNotFoundException;
+import seedu.address.model.internship.exceptions.TagNotFoundException;
 
 /**
  * A list of tags that enforces no nulls and uniqueness between its elements.
@@ -97,10 +97,10 @@ public class UniqueTagList implements Iterable<Tag> {
      * Removes a Tag to the list.
      *
      */
-    public void delete(Tag toDelete) throws SavedTagNotFoundException {
+    public void delete(Tag toDelete) throws TagNotFoundException {
         requireNonNull(toDelete);
         if (!contains(toDelete)) {
-            throw new SavedTagNotFoundException();
+            throw new TagNotFoundException();
         }
         internalList.remove(toDelete);
         assert CollectionUtil.elementsAreUnique(internalList);
