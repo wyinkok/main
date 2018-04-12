@@ -34,7 +34,7 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for your JobbiBot.
 .  Double-click the file to start the app. The GUI like the one below should appear in a few seconds.
 +
-image::ui.png[width="790"]
+image::uiv1.5.png[width="790"]
 +
 .  Type the command `start` in the command box and press kbd:[Enter] if you would like to begin a conversation with JobbiBot.
 .  Alternatively, if you would like to search for an internship directly. Type your command in the command box and press kbd:[Enter] to execute it. +
@@ -56,19 +56,21 @@ Shows more details of each command and a glossary of industries, roles and skill
 
 Format: `help`
 
-=== Start conversation with program : `start`
+// tag::startnew[]
+=== Start conversation with program : `start` [since v1.3]
 
 Initiates the message thread of JobbiBot. +
 Format: `start`
 
-=== Restart conversation with program : `new`
+=== Restart conversation with program : `new` [since v1.3]
 
 Restarts a new message thread of JobbiBot and the previous thread is deleted. +
 Format: `new`
+// end::startnew[]
 
 // tag::findwithfeature[]
 
-=== Find internships by keyword(s): `find`
+=== Find internships by keyword(s): `find` [since v1.2]
 
 Finds internships which contains any of the keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -97,7 +99,7 @@ Returns any internship having address or description matching `Serangoon` in it.
 
 // end::findwithfeature[]
 
-=== Filtering Internship by keyword(s): `filter`
+=== Filtering Internship by keyword(s): `filter` [since v1.3]
 
 Filter the internship list according to the given keywords. +
 Format: `filter KEYWORD [MORE_KEYWORDS]`
@@ -117,7 +119,7 @@ Returns any entries containing data. e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics. e.g 'data analytics internship', 'data analytics singapore'
 
-=== Sorting Internship by keyword(s): `sort`
+=== Sorting Internship by keyword(s): `sort` [since v1.4]
 
 Sorts the internship list according to the given keyword(s). +
 Format: `sort KEYWORD [MORE_KEYWORDS]` +
@@ -136,7 +138,8 @@ Sorts the internship list according to name attribute.
 * `sort salary region` +
 Sorts the internship list according to salary first then region.
 
-=== Saving an internship to a Saved Collection : `save`
+// tag::saveunsave[]
+=== Saving an internship to a Saved Collection : `save` [since v1.2]
 Saves the specified internship from the internship book. +
 Format: `save INDEX`
 
@@ -155,7 +158,7 @@ Saves the 2nd internship in the internship book.
 `save 1` +
 Saves the 1st internship in the results of the `find` command.
 
-=== Remove a Saved internship from a Saved Collection : `unsave`
+=== Remove a Saved internship from a Saved Collection : `unsave` [since v1.2]
 Removes the specified internship from the saved internship collection. +
 Format: `unsave INDEX`
 
@@ -175,9 +178,10 @@ Removes the 2nd internship in the saved internship collection.
 `unsave 1` +
 Removes the 1st internship in the results of the `find` command the saved collection.
 
-=== Shows the full Saved Internship Collection : `find saved` or `filter saved`
+=== Shows the full Saved Internship Collection : `find saved` or `filter saved` [since v1.3]
 Shows all the internships with a `saved` tag. +
 Format: `find saved` or `filter saved`
+// end::saveunsave[]
 
 === Selecting an internship : `select`
 
@@ -270,6 +274,11 @@ Format: `exit`
 Internships data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually
 
+=== Adding a command alias: `alias` [coming in v2.0]
+
+Customise aliases for any valid command, find or filter attribute
+Format: `alias [COMMAND] [ALIAS]`
+
 == Command Summary
 
 * *Help* : `help`
@@ -292,6 +301,7 @@ e.g.`select 3`
 * *Redo* : `redo`
 * *Exit* : `exit`
 
+// tag::glossary[]
 == List of Industries
 This serves as a non-exhaustive lists of skills that users can search for
 
@@ -328,17 +338,15 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Graphic Designer
                      | Photographer
                      | Videographer
-.7+| Banking and Finance
+.6+| Banking and Finance
                      | Accountant
                      | Audit Assistant
                      | Corporate Security Analyst
-                     | Financial Planner / Advisory
                      | Private Equity Analyst
                      | Risk Management
                      | Wealth Management Analyst
-.5+| Consultancy
+.4+| Consultancy
                      | Human Resource Consultant
-                     | Operations Consultant
                      | Sales Consultant
                      | Technology Consultant
                      | Wealth Management Consultant
@@ -399,32 +407,7 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Web Development
 |=======================================================================
 
-== List of Skills
-This serves as a non-exhaustive lists of skills that users can list in their conversation with Jobbi.
-
-* Accountancy
-* Business Development
-* Consultancy
-* Data Analytics
-* Design
-* Electrical Engineering
-* Event Planning and Management
-* Finance
-* Full Stack Software Engineering
-* Human Resource
-* Logistics and Procurement
-* Machine Learning
-* Marketing
-* Mechanical Engineering
-* Mobile Development
-* Operations
-* Product Management
-* Public Relations
-* Purchasing
-* Sales
-* Software Engineering
-* User Experience Design
-* User Interface Design
+// end::glossary[]
 
 == FAQ
 
