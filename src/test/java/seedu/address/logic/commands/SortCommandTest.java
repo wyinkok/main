@@ -7,7 +7,6 @@ import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -19,7 +18,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.internship.Internship;
 
-
+//@@author niloc94
 /**
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.
  */
