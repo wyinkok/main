@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.InternshipBuilder;
 
+//@@author niloc94
 public class InternshipContainsAllKeywordsPredicateTest {
 
     public static final Internship PREDICATE_TEST_INTERNSHIP = new InternshipBuilder()

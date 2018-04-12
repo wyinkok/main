@@ -94,8 +94,6 @@ public class FilterCommandTest {
         assertCommandSuccess(command, expectedMessage, Arrays.asList(BUSINESS2, BUSINESS4));
     }
 
-
-
     /**
      * Parses {@code userInput} into a {@code FilterCommand}.
      */
