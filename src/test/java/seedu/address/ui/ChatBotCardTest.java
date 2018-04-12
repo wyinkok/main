@@ -9,29 +9,37 @@ public class ChatBotCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // non undoable command
+        // non undoable command (user input)
         String listCommand = "list";
         ChatBotCard chatBotCard = new ChatBotCard("list");
         uiPartRule.setUiPart(chatBotCard);
         assertCardDisplay(chatBotCard, listCommand);
 
-        // undoable command
-        String deleteCommand = "delete 1";
-        ChatBotCard chatBotCardForUndoableCommand = new ChatBotCard("delete 1");
+        // undoable command (user input)
+        String saveCommand = "save 1";
+        ChatBotCard chatBotCardForUndoableCommand = new ChatBotCard("save 1");
         uiPartRule.setUiPart(chatBotCardForUndoableCommand);
-        assertCardDisplay(chatBotCardForUndoableCommand, deleteCommand);
+        assertCardDisplay(chatBotCardForUndoableCommand, saveCommand);
 
-        // select command
+        // select command (user input)
         String selectCommand = "select 1";
         ChatBotCard chatBotCardForSelectCommand = new ChatBotCard("select 1");
         uiPartRule.setUiPart(chatBotCardForSelectCommand);
         assertCardDisplay(chatBotCardForSelectCommand, selectCommand);
 
-        // command with typo error
+        // command with typo error (user input)
         String errorCommand = "sdekhgfajf 1";
         ChatBotCard chatBotCardForErrorCommand = new ChatBotCard("sdekhgfajf 1");
         uiPartRule.setUiPart(chatBotCardForErrorCommand);
         assertCardDisplay(chatBotCardForErrorCommand, errorCommand);
+
+        // Jobbi Welcome Message
+        String welcomeMessage = "Hello there, I am Jobbi! "
+                + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
+        ChatBotCard chatBotCardForWelcomeMessage = new ChatBotCard("Hello there, I am Jobbi! "
+                + "I am here to help you find your ideal internship today. Type 'start' to begin your search.");
+        uiPartRule.setUiPart(chatBotCardForWelcomeMessage);
+        assertCardDisplay(chatBotCardForWelcomeMessage, welcomeMessage);
     }
 
     /**
@@ -44,6 +52,7 @@ public class ChatBotCardTest extends GuiUnitTest {
         ChatBotCardHandle chatBotCardHandle = new ChatBotCardHandle(chatBotCard.getRoot());
 
         // verify internship details are displayed correctly
-        GuiTestAssert.assertChatBotUserMessage(chatBotCardHandle, expectedUserInput);
+        GuiTestAssert.assertCardDisplaysMessage(expectedUserInput, chatBotCardHandle);
     }
 }
+
