@@ -8,7 +8,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.exceptions.SavedTagNotFoundException;
+import seedu.address.model.internship.exceptions.TagNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 /**
@@ -28,7 +28,7 @@ public class UnsavedInternshipBuilder {
         final UniqueTagList internshipTags = new UniqueTagList(internshipToCopy.getTags());
         try {
             internshipTags.delete(new Tag(savedTagName));
-        } catch (SavedTagNotFoundException e) {
+        } catch (TagNotFoundException e) {
             throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
         }
 

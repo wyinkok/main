@@ -37,7 +37,7 @@ public class TypicalInternships {
     public static final Internship BENSON = new InternshipBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withSalary("98765432").withIndustry("Business").withRegion("Clementi")
-            .withRole("Business Analyst").withTags("owesMoney", "friends").build();
+            .withRole("Business Analyst").build();
     public static final Internship CARL = new InternshipBuilder().withName("Carl Kurz").withSalary("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withIndustry("Finance").withRegion("Geylang")
             .withRole("Project Manager").build();

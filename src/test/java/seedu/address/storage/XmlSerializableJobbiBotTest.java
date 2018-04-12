@@ -31,6 +31,8 @@ public class XmlSerializableJobbiBotTest {
                 XmlSerializableJobbiBot.class);
         JobbiBot jobbiBotFromFile = dataFromFile.toModelType();
         JobbiBot typicalInternshipsJobbiBot = TypicalInternships.getTypicalInternshipBook();
+        System.out.println(jobbiBotFromFile.getTagList().toString());
+        System.out.println(typicalInternshipsJobbiBot.getTagList().toString());
         assertEquals(jobbiBotFromFile, typicalInternshipsJobbiBot);
     }
 

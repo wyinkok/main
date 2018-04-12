@@ -169,6 +169,8 @@ public abstract class JobbiBotSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         //assertEquals(expectedResultMessage, getResultDisplay().getText());
+        System.out.println(expectedModel.getFilteredInternshipList().toString());
+        System.out.println(getModel().getFilteredInternshipList().toString());
         assertEquals(expectedModel, getModel());
         assertEquals(expectedModel.getJobbiBot(), testApp.readStorageInternshipBook());
         assertListMatching(getInternshipInternshipListPanel(), expectedModel.getFilteredInternshipList());
