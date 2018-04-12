@@ -139,6 +139,7 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredInternshipList().size());
     }
 
+    //@@author wyinkok
     /**
      * Saves the first internship in {@code model}'s filtered list from {@code model}'s address book.
      */
@@ -153,6 +154,7 @@ public class CommandTestUtil {
         }
     }
 
+    //@@author
     /**
      * Returns an {@code UndoCommand} with the given {@code model} and {@code undoRedoStack} set.
      */

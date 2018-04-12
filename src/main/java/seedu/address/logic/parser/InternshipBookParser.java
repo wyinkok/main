@@ -66,6 +66,7 @@ public class InternshipBookParser {
         case UnsaveCommand.COMMAND_WORD:
             return new UnsaveCommandParser().parse(arguments);
 
+        //@@author
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
@@ -101,21 +102,23 @@ public class InternshipBookParser {
                 hasStarted = true;
                 return new StartCommand();
             } else {
-                throw new ParseException("Our Conversation has already started"
+                throw new ParseException("Our conversation has already started"
                         + "\nType 'new' to restart our conversation");
             }
 
+        //@@author wyinkok
         case NewChatCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
             return new NewChatCommand();
 
+        //@@author
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
     /**
-     *  Helper method to check if commands without arguments have arguments
+     *  Helper method to check if commands without arguments have arguments added to it
      * @throws ParseException
      */
     private void checkIfContainArguments(String arguments) throws ParseException {

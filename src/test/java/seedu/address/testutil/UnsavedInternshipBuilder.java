@@ -17,15 +17,16 @@ import seedu.address.model.tag.UniqueTagList;
 public class UnsavedInternshipBuilder {
 
 
-    public static final String MESSAGE_DUPLICATE_REMOVAL = "This internship has been removed from Saved Collection";
-    public final String savedTagName = "saved";
+    private static final String MESSAGE_DUPLICATE_REMOVAL = "This internship has been removed from Saved Collection";
+    private static final String SAVED_TAG_NAME = "saved";
 
     /**
-     * Initializes the UnsavedInternshipBuilder with the data of {@code internshipToCopy}.
-     * @param internshipToCopy
+     * Initializes the UnsavedInternshipBuilder with the data of {@code internshipToRemoveSavedTag}.
+     *
+     * @param internshipToRemoveSavedTag
      */
-    public Internship removeTag(Internship internshipToCopy) throws CommandException {
-        final UniqueTagList internshipTags = new UniqueTagList(internshipToCopy.getTags());
+    public Internship removeTag(Internship internshipToRemoveSavedTag) throws CommandException {
+        final UniqueTagList internshipTags = new UniqueTagList(internshipToRemoveSavedTag.getTags());
         try {
             internshipTags.delete(new Tag(savedTagName));
         } catch (TagNotFoundException e) {
@@ -42,13 +43,13 @@ public class UnsavedInternshipBuilder {
         internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
 
         return new Internship(
-                internshipToCopy.getName(),
-                internshipToCopy.getSalary(),
-                internshipToCopy.getEmail(),
-                internshipToCopy.getAddress(),
-                internshipToCopy.getIndustry(),
-                internshipToCopy.getRegion(),
-                internshipToCopy.getRole(),
+                internshipToRemoveSavedTag.getName(),
+                internshipToRemoveSavedTag.getSalary(),
+                internshipToRemoveSavedTag.getEmail(),
+                internshipToRemoveSavedTag.getAddress(),
+                internshipToRemoveSavedTag.getIndustry(),
+                internshipToRemoveSavedTag.getRegion(),
+                internshipToRemoveSavedTag.getRole(),
                 correctTagReferences);
     }
 }
