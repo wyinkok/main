@@ -80,7 +80,7 @@ public class UnsaveCommand extends UndoableCommand {
     private Internship removeSavedTagToInternship(Internship internship) throws CommandException {
         final UniqueTagList personTags = new UniqueTagList(internshipToUnsave.getTags());
         try {
-            personTags.delete(new Tag(savedTagName));
+            personTags.delete(new Tag(SAVED_TAG));
         } catch (TagNotFoundException e) {
             throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
         }
