@@ -135,9 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
         try {
-            if (hasAlphaNumeric(keyword)) {
-                internshipTags.add(new Tag(keyword));
-            }
+            internshipTags.add(new Tag(keyword));
         } catch (UniqueTagList.DuplicateTagException e) {
             throw new AssertionError("Operation would result in duplicate tags");
         }
@@ -151,12 +149,6 @@ public class ModelManager extends ComponentManager implements Model {
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
                 internship.getIndustry(), internship.getRegion(), internship.getRole(), correctTagReferences);
-    }
-
-    //@@author TanCiKang
-    // Checks if the tag contains alphanumeric words
-    private static boolean hasAlphaNumeric (String keyword) {
-        return keyword.matches("[a-zA-Z0-9]+") ? true : false;
     }
 
     //@@author TanCiKang
