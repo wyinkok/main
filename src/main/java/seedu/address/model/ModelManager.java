@@ -123,20 +123,25 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author TanCiKang
     /**
-     * Add keyword tags that matches the individual internship to the internship
+     * Adds keyword tags that matches the individual internship to the internship except keywords with only
+     * non-alphanumeric characters
      * @param keyword
      * @param internship
      * @return Internship
      * @throws CommandException
      */
     private static Internship addTagsToInternshipWithMatch(String keyword, Internship internship) {
+
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
         try {
-            internshipTags.add(new Tag(keyword));
-        } catch (UniqueTagList.DuplicateTagException e) {
-            throw new AssertionError ("Operation would result in duplicate tags");
+            if (hasAlphaNumeric(keyword)) {
+                internshipTags.add(new Tag(keyword));
+            }
         }
+        catch (UniqueTagList.DuplicateTagException e){
+                throw new AssertionError("Operation would result in duplicate tags");
+            }
 
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
@@ -147,6 +152,12 @@ public class ModelManager extends ComponentManager implements Model {
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
                 internship.getIndustry(), internship.getRegion(), internship.getRole(), correctTagReferences);
+    }
+
+    //@@author TanCiKang
+    // Checks if the tag contains alphanumeric words
+    private static boolean hasAlphaNumeric (String keyword){
+        return keyword.matches("[a-zA-Z0-9]+") ? true : false;
     }
 
     //@@author TanCiKang

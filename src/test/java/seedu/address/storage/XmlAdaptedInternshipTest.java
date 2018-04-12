@@ -28,7 +28,7 @@ public class XmlAdaptedInternshipTest {
     private static final String INVALID_INDUSTRY = "_Engineering";
     private static final String INVALID_REGION = " Geylang";
     private static final String INVALID_ROLE = " ";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = " ";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_SALARY = BENSON.getSalary().toString();
