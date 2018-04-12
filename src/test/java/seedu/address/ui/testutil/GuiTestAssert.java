@@ -66,7 +66,10 @@ public class GuiTestAssert {
         assertEquals(size, numberOfPeople);
     }
 
-
+    //@@author wyinkok
+    /**
+     * Asserts the message in {@code chatBotCardHandle} equals to {@code expected} input.
+     */
     public static void assertChatBotUserMessage(ChatBotCardHandle chatBotCardHandle, String expected) {
         assertEquals(expected, chatBotCardHandle.getMessages());
     }

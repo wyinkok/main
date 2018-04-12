@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Saves personally curated internships into a separate collection to access it again later.
+ * Saves internships into a separate Saved collection to access it again later.
  */
 
 public class SaveCommand extends UndoableCommand {
@@ -33,16 +33,14 @@ public class SaveCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SAVED_INTERNSHIP_SUCCESS = "New internship saved: %1$s";
-    public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This internship already exists in the collection";
-    public static final String MESSAGE_DUPLICATE_TAG = "This internship has been saved";
+    public static final String MESSAGE_DUPLICATE_SAVED_INTERNSHIP = "This internship has been saved";
 
-    public final String savedTagName = "saved";
+    private static final String SAVED_TAG = "saved";
     private final Index targetIndex;
     private Internship internshipWithSavedTag;
     private Internship internshipToSave;
 
-    public SaveCommand(Index targetIndex) throws UniqueTagList.DuplicateTagException {
-
+    public SaveCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -52,7 +50,7 @@ public class SaveCommand extends UndoableCommand {
         try {
             model.updateInternship(internshipToSave, internshipWithSavedTag);
         } catch (DuplicateInternshipException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
+            throw new CommandException(MESSAGE_DUPLICATE_SAVED_INTERNSHIP);
         } catch (InternshipNotFoundException e) {
             throw new AssertionError("The target internship cannot be missing");
         }
@@ -72,22 +70,22 @@ public class SaveCommand extends UndoableCommand {
     }
 
     /**
-     * Adds a "saved" tag to the existing tags of an internship
+     * Adds a "saved" tag to the existing tags of an internship.
+     *
      * @param internship
-     * @return
+     * @return internship with a saved tag.
      * @throws CommandException
      */
-
     private Internship addSavedTagToInternship(Internship internship) throws CommandException {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
         try {
-            internshipTags.add(new Tag(savedTagName));
+            internshipTags.add(new Tag(SAVED_TAG));
         } catch (UniqueTagList.DuplicateTagException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+            throw new CommandException(MESSAGE_DUPLICATE_SAVED_INTERNSHIP);
         }
 
         // Create map with values = tag object references in the master list
-        // used for checking internship tag references
+        // used for checking internship tag references.
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
         internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
 
@@ -99,7 +97,7 @@ public class SaveCommand extends UndoableCommand {
                 internship.getIndustry(), internship.getRegion(), internship.getRole(), correctTagReferences);
     }
 
-
+    //@@author
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

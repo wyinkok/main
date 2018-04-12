@@ -39,21 +39,21 @@ public class TypicalInternshipsWithSavedTag {
     private TypicalInternshipsWithSavedTag() {} // prevents instantiation
 
     /**
-     * Returns an {@code JobbiBot} with all the typical persons.
+     * Returns an {@code JobbiBot} with all the typical internships and some with saved tags.
      */
     public static JobbiBot getTypicalInternshipBookWithSavedTag() {
-        JobbiBot ab = new JobbiBot();
-        for (Internship internship : getTypicalPersonsWithSavedTag()) {
+        JobbiBot jobbiBot = new JobbiBot();
+        for (Internship internship : getTypicalInternshipsWithSavedTag()) {
             try {
-                ab.addInternship(internship);
+                jobbiBot.addInternship(internship);
             } catch (DuplicateInternshipException e) {
                 throw new AssertionError("not possible");
             }
         }
-        return ab;
+        return jobbiBot;
     }
 
-    public static List<Internship> getTypicalPersonsWithSavedTag() {
+    public static List<Internship> getTypicalInternshipsWithSavedTag() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

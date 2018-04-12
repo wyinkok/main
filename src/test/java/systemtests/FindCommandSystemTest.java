@@ -160,7 +160,7 @@
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: mixed case command word -> 1 person found */
+//        /* Case: mixed case command word -> 1 internship found */
 //        command = "FiNd Meier";
 //        ModelHelper.setFilteredList(expectedModel, DANIEL);
 //        assertCommandSuccess(command, expectedModel);

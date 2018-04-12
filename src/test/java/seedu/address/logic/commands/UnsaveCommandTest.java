@@ -27,7 +27,7 @@ import seedu.address.testutil.UnsavedInternshipBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code SaveCommand}.
+ * {@code UnsaveCommand}.
  */
 public class UnsaveCommandTest {
 
@@ -41,7 +41,7 @@ public class UnsaveCommandTest {
         UnsaveCommand unsaveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
 
         String expectedMessage = String.format(UnsaveCommand.MESSAGE_UNSAVED_INTERNSHIP_SUCCESS,
-            internshipWithoutSavedTag);
+                                                internshipWithoutSavedTag);
         ModelManager expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
         expectedModel.updateInternship(internshipToUnsave, internshipWithoutSavedTag);
 
@@ -60,7 +60,7 @@ public class UnsaveCommandTest {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
         Index outOfBoundIndex = INDEX_SECOND_INTERNSHIP;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of internship book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getJobbiBot().getInternshipList().size());
 
         UnsaveCommand unsaveCommand = prepareCommand(outOfBoundIndex);
@@ -77,14 +77,15 @@ public class UnsaveCommandTest {
         UnsaveCommand unsaveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
         Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
-        // save -> first person saved
+        // save -> first internship saved
         unsaveCommand.execute();
         undoRedoStack.push(unsaveCommand);
 
-        // undo -> reverts InternshipBook back to previous state and filtered person list to show all persons
+        // undo -> reverts internship book list back to previous state and filtered internship list
+        // to show all internships
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // redo -> same first perison saved again
+        // redo -> same first internship saved again
         Internship internshipWithoutSavedTag = new UnsavedInternshipBuilder()
                 .removeTag(model.getFilteredInternshipList().get(0));
         expectedModel.updateInternship(internshipToUnsave, internshipWithoutSavedTag);
@@ -108,14 +109,15 @@ public class UnsaveCommandTest {
     }
 
     /**
-     * 1. Remove a saved {@code Person} from a filtered list.
+     * 1. Remove a saved {@code Internship} from a filtered list.
      * 2. Undo the unsave command.
-     * 3. The unfiltered list should be shown now. Verify that the index of the previously unsaved person in the
+     * 3. The unfiltered list should be shown now. Verify that the index of the previously unsaved internship in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the unsave command. This ensures {@code RedoCommand} removes the person object regardless of indexing.
+     * 4. Redo the unsave command. This ensures {@code RedoCommand} removes the internship object
+     * regardless of indexing.
      */
     @Test
-    public void executeUndoRedo_validIndexFilteredList_samePersonUnsaved() throws Exception {
+    public void executeUndoRedo_validIndexFilteredList_sameInternshipUnsaved() throws Exception {
         UndoRedoStack undoRedoStack = new UndoRedoStack();
         UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
@@ -124,7 +126,8 @@ public class UnsaveCommandTest {
 
         showInternshipAtIndex(model, INDEX_SECOND_INTERNSHIP);
         Internship internshipToUnsave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
-        // unsave -> removes second person in unfiltered person list / first person in filtered person list
+        // unsave -> removes second internship in unfiltered internship list
+        // or first internship in filtered internship list
         unsaveCommand.execute();
 
         undoRedoStack.push(unsaveCommand);
@@ -138,7 +141,8 @@ public class UnsaveCommandTest {
         expectedModel.updateInternship(internshipToUnsave, internshipWithoutSavedTag);
         assertNotEquals(internshipToUnsave, model.getFilteredInternshipList()
                 .get(INDEX_FIRST_INTERNSHIP.getZeroBased()));
-        // redo -> saves same second person in unfiltered person list
+
+        // redo -> saves same second internship in unfiltered internship list
         assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -156,7 +160,7 @@ public class UnsaveCommandTest {
 
         // one command preprocessed when previously equal -> returns false
         unsaveFirstCommandCopy.preprocessUndoableCommand();
-        assertTrue(unsaveFirstCommand.equals(unsaveFirstCommandCopy)); //not sure!!
+        assertTrue(unsaveFirstCommand.equals(unsaveFirstCommandCopy));
 
         // different types -> returns false
         assertFalse(unsaveFirstCommand.equals(1));
@@ -164,7 +168,7 @@ public class UnsaveCommandTest {
         // null -> returns false
         assertFalse(unsaveFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different internship -> returns false
         assertFalse(unsaveFirstCommand.equals(unsaveSecondCommand));
     }
 
@@ -175,14 +179,5 @@ public class UnsaveCommandTest {
         UnsaveCommand unsaveCommand = new UnsaveCommand(index);
         unsaveCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return unsaveCommand;
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredInternshipList(p -> false);
-
-        assertTrue(model.getFilteredInternshipList().isEmpty());
     }
 }
