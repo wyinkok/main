@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import org.junit.Test;
 
 import seedu.address.logic.commands.UnsaveCommand;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -33,7 +32,7 @@ public class UnsaveCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_notAlphanumeric_throwsParseException() {
+    public void parse_invalidAlphanumericArgs_throwsParseException() {
         assertParseFailure(parser, "!", String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnsaveCommand.MESSAGE_USAGE));
     }
 }

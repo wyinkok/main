@@ -32,7 +32,7 @@ public class SaveCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_notAlphanumeric_throwsParseException() {
+    public void parse_invalidAlphanumericArgs_throwsParseException() {
         assertParseFailure(parser, "!", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
     }
 }
