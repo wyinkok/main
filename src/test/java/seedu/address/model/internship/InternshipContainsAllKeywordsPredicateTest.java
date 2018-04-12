@@ -48,7 +48,7 @@ public class InternshipContainsAllKeywordsPredicateTest {
     }
 
     @Test
-    public void test_ContainsAllKeywords_returnsTrue() {
+    public void test_containsAllKeywords_returnsTrue() {
         // One keyword
         InternshipContainsAllKeywordsPredicate predicate =
                 new InternshipContainsAllKeywordsPredicate(Collections.singletonList("Charlie"));
@@ -89,7 +89,7 @@ public class InternshipContainsAllKeywordsPredicateTest {
     }
 
     @Test
-    public void test_DoesNotContainAllKeywords_returnsFalse() {
+    public void test_doesNotContainAllKeywords_returnsFalse() {
         // One non-matching keyword
         InternshipContainsAllKeywordsPredicate predicate =
                 new InternshipContainsAllKeywordsPredicate(Arrays.asList("NonMatchingKeyword"));

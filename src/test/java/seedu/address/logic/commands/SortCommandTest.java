@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.JobbiBot;
@@ -52,21 +53,21 @@ public class SortCommandTest {
     }
 
     @Test
-    public void sort_OneKeyword() {
+    public void sort_oneKeyword() {
         String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
         SortCommand command = prepareCommand("role");
         assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());
     }
 
     @Test
-    public void sort_TwoKeyword() {
+    public void sort_twoKeyword() {
         String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
         SortCommand command = prepareCommand("role", "industry");
         assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());
     }
 
     @Test
-    public void sort_ThreeKeyword() {
+    public void sort_threeKeyword() {
         String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
         SortCommand command = prepareCommand("role", "industry", "name");
         assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());

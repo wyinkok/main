@@ -2,9 +2,9 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static seedu.address.testutil.TypicalInternships.CONSULTING;
 import static seedu.address.testutil.TypicalInternships.ENGINEERING1;
 import static seedu.address.testutil.TypicalInternships.HEALTHCARE;
-import static seedu.address.testutil.TypicalInternships.CONSULTING;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.io.IOException;

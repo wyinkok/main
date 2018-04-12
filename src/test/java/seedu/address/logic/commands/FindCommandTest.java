@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalInternships.BUSINESS2;
 import static seedu.address.testutil.TypicalInternships.BUSINESS3;
 import static seedu.address.testutil.TypicalInternships.DATASCIENCE;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
