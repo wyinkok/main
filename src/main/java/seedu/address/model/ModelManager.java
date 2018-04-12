@@ -260,6 +260,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredInternshipList(Predicate<Internship> predicate) {
         requireNonNull(predicate);
         filteredInternships.setPredicate(predicate);
+        logger.info("Updating only Filtered Internship List");
     }
 
     @Override
@@ -267,6 +268,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         searchedInternships.setPredicate(predicate);
         filteredInternships.setPredicate(predicate);
+        logger.info("Updating both Searched Internship List and Filtered Internship List");
     }
 
     @Override
