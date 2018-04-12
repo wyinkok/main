@@ -7,7 +7,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,9 +53,10 @@ public class InternshipBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        ArrayList<String> uniqueKeywords = new ArrayList<>(new HashSet<>(keywords));
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new InternshipContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new InternshipContainsKeywordsPredicate(uniqueKeywords)), command);
     }
 
     @Test
