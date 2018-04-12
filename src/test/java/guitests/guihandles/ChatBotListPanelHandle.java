@@ -31,16 +31,6 @@ public class ChatBotListPanelHandle extends NodeHandle<ListView<ChatBotCard>> {
         }
         return new ChatBotCardHandle(chatBotCardList.get(0).getRoot());
     }
-
-    public boolean hasConversationStarted() {
-        List<ChatBotCard> chatBotCardList = getRootNode().getItems();
-
-        if (chatBotCardList.size() == 1) {
-            return false;
-        } else if (chatBotCardList.size() < 0){
-            throw new AssertionError("Chatbot message thread out of bounds");
-        }
-        return true;
-    }
+    
 }
 
