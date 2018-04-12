@@ -109,8 +109,8 @@ public class ModelManager extends ComponentManager implements Model {
         sortedFilteredInternships.setComparator(comparatorToSet);
     }
 
-    public static void setKeywords(List<String> keywords) {
-        filterKeywords = keywords;
+    public static void setKeywords(List<String> uniqueKeywords) {
+        filterKeywords = uniqueKeywords;
     }
 
     public static List<String> getKeywords() {

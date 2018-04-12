@@ -11,8 +11,8 @@ import seedu.address.commons.util.StringUtil;
 public class InternshipContainsKeywordsPredicate implements Predicate<Internship> {
     private final List<String> keywords;
 
-    public InternshipContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public InternshipContainsKeywordsPredicate(List<String> uniqueKeywords) {
+        this.keywords = uniqueKeywords;
     }
 
     //@@author niloc94
