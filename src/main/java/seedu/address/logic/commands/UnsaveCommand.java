@@ -20,9 +20,8 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Undo saved internships into a separate collection.
+ * Removes saved internships from the saved collection.
  */
-
 public class UnsaveCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "unsave";
@@ -35,16 +34,14 @@ public class UnsaveCommand extends UndoableCommand {
 
     public static final String MESSAGE_UNSAVED_INTERNSHIP_SUCCESS =
             "New internship removed from Saved Collection: %1$s";
-    public static final String MESSAGE_DUPLICATE_REMOVAL = "This internship already removed from the collection";
+    public static final String MESSAGE_DUPLICATE_REMOVAL = "This internship has been removed from the collection";
 
-
-    public final String savedTagName = "saved";
+    private static final String SAVED_TAG = "saved";
     private final Index targetIndex;
     private Internship internshipWithoutSavedTag;
     private Internship internshipToUnsave;
 
     public UnsaveCommand(Index targetIndex) {
-
         this.targetIndex = targetIndex;
     }
 
@@ -74,7 +71,8 @@ public class UnsaveCommand extends UndoableCommand {
     }
 
     /**
-     * Removes a "saved" tag to the existing tags of an internship
+     * Removes a "saved" tag to the existing tags of an internship.
+     *
      * @param internship
      * @return
      * @throws CommandException
@@ -101,7 +99,7 @@ public class UnsaveCommand extends UndoableCommand {
                 correctTagReferences);
     }
 
-
+    //@@author
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -19,5 +19,4 @@ public class StartCommand extends Command {
         EventsCenter.getInstance().post(new StartAppRequestEvent());
         return new CommandResult(MESSAGE_START_ACKNOWLEDGEMENT);
     }
-
 }

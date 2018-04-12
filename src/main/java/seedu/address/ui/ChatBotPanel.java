@@ -39,14 +39,14 @@ public class ChatBotPanel extends UiPart<Region> {
     public ChatBotPanel(Logic logic) {
         super(FXML);
         this.logic = logic;
-        initChatBot();
+        initiateChatBot();
         registerAsAnEventHandler(this);
     }
 
     /**
      * Initiates the chatbot thread of messages with Jobbi's welcome message
      */
-    public void initChatBot() {
+    public void initiateChatBot() {
         ObservableList<String> initialMessage = createInitialMessage(messageList);
         ObservableList<ChatBotCard> initialMappedList = EasyBind.map(
                 initialMessage, (msg) -> new ChatBotCard(msg));
@@ -71,8 +71,8 @@ public class ChatBotPanel extends UiPart<Region> {
      *  Expands on the message thread between user and Jobbi
      */
 
-    public void handleUserResponse(ObservableList<String> listToBuild) {
-        ObservableList<String> updatedMessages = addUserResponse(listToBuild);
+    public void buildConversationWithUserResponse(ObservableList<String> listToBuild) {
+        ObservableList<String> updatedMessages = handleUserResponse(listToBuild);
         ObservableList<ChatBotCard> mappedList = EasyBind.map(
                 updatedMessages, (msg) -> new ChatBotCard(msg));
         chatBotListView.setItems(mappedList);
@@ -85,13 +85,13 @@ public class ChatBotPanel extends UiPart<Region> {
      *  Checks if the user has initiated conversation with Jobbi and adds User's response if he/she has.
      */
 
-    public ObservableList<String> addUserResponse(ObservableList<String> listToUpdateWithUserResponse) {
+    public ObservableList<String> handleUserResponse(ObservableList<String> listToUpdateWithUserResponse) {
         historySnapshot = logic.getHistorySnapshot();
         if (historySnapshot.hasElement("start")) {
             listToUpdateWithUserResponse.add("USER:   " + historySnapshot.current());
             if (historySnapshot.current().equals("new")) {
                 listToUpdateWithUserResponse.clear();
-                initChatBot();
+                initiateChatBot();
             }
         }
         return listToUpdateWithUserResponse;
@@ -110,7 +110,7 @@ public class ChatBotPanel extends UiPart<Region> {
             listToUpdateWithJobbiResponse.add("JOBBI:  " + message);
             if (historySnapshot.current().equals("new")) {
                 listToUpdateWithJobbiResponse.clear();
-                initChatBot();
+                initiateChatBot();
             }
         }
         return listToUpdateWithJobbiResponse;
@@ -119,10 +119,11 @@ public class ChatBotPanel extends UiPart<Region> {
     @Subscribe
     private void handleNewResultAvailableForChatBot(NewResultAvailableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        handleUserResponse(messageList);
+        buildConversationWithUserResponse(messageList);
         handleJobbiResponse(messageList, event.message);
     }
 
+    //@@author
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code ChatBotCard}.
      */

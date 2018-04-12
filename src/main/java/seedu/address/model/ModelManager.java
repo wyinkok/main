@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.SaveCommand.MESSAGE_DUPLICATE_INTERNSHIP;
+import static seedu.address.logic.commands.SaveCommand.MESSAGE_DUPLICATE_SAVED_INTERNSHIP;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -186,7 +186,7 @@ public class ModelManager extends ComponentManager implements Model {
                 } catch (InternshipNotFoundException e) {
                     throw new AssertionError("The target internship cannot be missing");
                 } catch (DuplicateInternshipException e) {
-                    throw new AssertionError(MESSAGE_DUPLICATE_INTERNSHIP);
+                    throw new AssertionError(MESSAGE_DUPLICATE_SAVED_INTERNSHIP);
                 }
             }
         });
@@ -237,7 +237,7 @@ public class ModelManager extends ComponentManager implements Model {
             try {
                 model.updateInternship(internship, removeTagsFromInternship(internship.getTags(), internship, model));
             } catch (DuplicateInternshipException e) {
-                throw new AssertionError(MESSAGE_DUPLICATE_INTERNSHIP);
+                throw new AssertionError(MESSAGE_DUPLICATE_SAVED_INTERNSHIP);
             } catch (InternshipNotFoundException e) {
                 throw new AssertionError("The target internship cannot be missing");
             }
