@@ -560,52 +560,56 @@ Another idea was to create separate Internship Book Model and its own storage fo
 
 // end::saveunsave[]
 
-=== Model
+// tag::dataencryption[]
+=== [Proposed] Data Encryption
+
+_{Explain here how the data encryption feature will be implemented}_
+
+// end::dataencryption[]
+
+// tag::findwithfeatures[]
+
+=== Find Command with adding tag feature
+
 ==== Rationale
+As the current find command work like a union search, users are able to key in multiple keywords at one go and JobbiBot will show
+all the internships that matches at least one of the keywords. However, users will not be able to differentiate which
+internships matches which keywords they have keyed in. As such this new feature enables them to have a clearer picture of
+which internship suits them more and enable them to further filter from the list.
 
-There are many details in an internship that the applicants are required to know. Below are the details:
+==== Current Implementation
 
-* Company Name
-* Industry
-* Type of opportunity
-* Position
-* Salary
-* Date posted
-* Application deadline
-* Spots available
-* Company description
-* Skills required for this internship and the reasons behind it
-* Skills that are good to have and the reasons behind it
-* Job scope
-* Key takeaways from this internship
+The add tag feature is implemented as part of the find command. However, as models will be change due to the addition of tags,
+some codes are implemented within ModelManager.
 
-All these are attributes that an internship should have and thus must be implemented in `Internship` class which resides
-in `model`. However, as not all companies are comfortable with giving all of the above mentioned details, some of the
-attributes will be deemed required and cannot be left empty.
+image::FindCommandSequenceDiagram.png[width="1200"]
+
+As it can be seen from the diagram, `Logic` uses the `InternshipBookParser` class to parse the user command.
+After which, `FindCommandParser` is created and use to parse the keyword. The keyword is then set in `ModelManager` via the
+setKeywords() method. A `FindCommand` object is then created followed by the `internshipContainsKeywordsPredicate`.
+
+In the second phase, the command is being executed in `FindCommand`. The first updateSearchedInternshipList() update the
+searchedInternship with all the internships available and remove all tags from them apart from `saved` tags. Following which
+the second updateSearchedInternshipList() update the searchedInternshipList with the internships that matches the keywords
+use as the argument in `FindCommand`. Those keywords are then added to the respective internships that matches it through the
+addTagsToFilteredList(). `FindCommand` then execute getCommandResult() and return the result of the command execution encapsulated
+as a `CommandResult` object and returns it to the `LogicManager` and subsequently to the UI and displayed to the user.
 
 ==== Design Considerations
 
-Alternative 1: Adding all the attributes under Internship class
+Location of the functions
 
-Pros: Easy to implement. Have a boolean variable named isRequired under each class to ascertain if that attribute can
-be left blank. This method allows for easy manipulation between required and optional attributes.
+Alternative 1:
 
-Cons: Duplicate methods for similar attributes such as Date posted and Application deadline.
+Alternative 2:
 
-image::Modeldesign1.png[width="800"]
+Implementation of the codes
 
-Alternative 2: As some of these attributes are similar in nature, we can use encapsulation and group some of them up
- and implementing inheritance. For instance, when checking for null attributes, RequiredInformation attributes will
- return and error if it is true.
+Alternative 1:
 
- Pros: Reduce the need to change similar methods in every attribute as they are inherited from a superclass
- (RequiredInformation, OptionalInformation). There can also be a method to return the entire attributes under
- RequiredInformation class to further abstract it.
+Alternative 2:
 
- Cons: More difficulty when implementing. When one attribute is no longer required (became optional), significant changes
- needs to be made on the model segment.
-
-image::Modeldesign2.png[width="800"]
+// end::findwithfeatures[]
 
 === Logging
 
@@ -752,9 +756,9 @@ b. Require developers to download those libraries manually (this creates extra w
 
 | Colin | Save Command | Minor | Enable users to view their Saved Collection
 
-| Ci Kang | Add keyword tags in Find Command | Major | Add tags to internship that matches keywords in find command
+| Ci Kang | Enhance Find Command | Major | Add tags to internship that matches keywords in find command and enable find command to search for multiple attributes
 
-| Ci Kang | Morph Model Component | Minor | Morph to store internship / job instead of InternshipBook
+| Ci Kang | Preview and Enhance view | Minor | Show preview of the important attributes of the internship on the left panel and full details on the right panel
 
 | Wyin | GUI Revamp | Major | Revamp UI to incorporate a Chatbot in the CLI
 

@@ -68,6 +68,8 @@ Restarts a new message thread of JobbiBot and the previous thread is deleted. +
 Format: `new`
 // end::startnew[]
 
+// tag::findwithfeature[]
+
 === Find internships by keyword(s): `find` [since v1.2]
 
 Finds internships which contains any of the keywords. +
@@ -94,6 +96,8 @@ Returns any internship having `Engineering` in its description.
 Returns any internship having contact email `Betsy@gmail.com`.
 * `find Serangoon` +
 Returns any internship having address or description matching `Serangoon` in it.
+
+// end::findwithfeature[]
 
 === Filtering Internship by keyword(s): `filter` [since v1.3]
 
