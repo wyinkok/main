@@ -10,7 +10,6 @@ import seedu.address.model.internship.Internship;
  * Takes in keywords for attributes and creates comparator object for sorting
  */
 public class Sorter {
-
     private static String attribute1;
     private static String attribute2;
     private static String attribute3;
