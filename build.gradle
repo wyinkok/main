@@ -57,7 +57,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = "addressbook.jar"
+    archiveName = "InternshipBook.jar"
 
     destinationDir = file("${buildDir}/jar/")
 }
@@ -194,11 +194,6 @@ task deployOfflineDocs(type: Copy) {
         include 'images/*'
         include 'UserGuide.html'
     }
-}
-
-task copyDummySearchPage(type: Copy) {
-    from 'docs/DummySearchPage.html'
-    into "${buildDir}/docs/html5"
 }
 
 deployOfflineDocs.dependsOn asciidoctor

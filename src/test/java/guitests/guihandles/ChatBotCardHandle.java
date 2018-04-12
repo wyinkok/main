@@ -5,9 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 
 /**
- * Provides a handle to a chatbot card in the chat bot panel.
+ * Provides a handle to a chatbot card in the chat bot message panel.
  */
-
 public class ChatBotCardHandle extends NodeHandle<Node> {
     private static final String MESSAGES_FIELD_ID = "#messages";
 

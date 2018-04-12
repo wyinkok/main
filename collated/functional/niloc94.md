@@ -17,7 +17,7 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + "Marketing";
 
     public static final String MESSAGE_FILTER_RESPONSE = "How would you to sort your results by? You may sort by "
-            + "Address, Industry, Location or Role. \nE.g sortby industry role location address";
+            + "Address, Industry, Location or Role. \nE.g sortby industry role region address";
 
     private final InternshipContainsAllKeywordsPredicate predicate;
 
@@ -130,7 +130,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         case "industry":
             return getIndustry().toString();
 
-        case "location":
+        case "region":
             return getLocation().toString();
 
         case "role":
@@ -179,7 +179,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 ``` java
     @Override
     public boolean test(Internship internship) {
-        // Check if any of the keyword can be found in all of an internship's details (e.g name, industry, location)
+        // Check if any of the keyword can be found in all of an internship's details (e.g name, industry, region)
         return keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase
                 (internshipAttributeString(internship), keyword));
     }

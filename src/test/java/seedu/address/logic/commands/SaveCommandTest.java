@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.prepareUndoCommand;
 import static seedu.address.logic.commands.CommandTestUtil.showInternshipAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import org.junit.Test;
 
@@ -32,18 +32,18 @@ import seedu.address.testutil.SavedInternshipBuilder;
  */
 public class SaveCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
         Internship internshipToSave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
         Internship internshipWithSavedTag = new SavedInternshipBuilder()
-                .addTag(model.getFilteredInternshipList().get(0));
+                                                    .addTag(model.getFilteredInternshipList().get(0));
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
 
         String expectedMessage = String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
         expectedModel.updateInternship(internshipToSave, internshipWithSavedTag);
 
         assertCommandSuccess(saveCommand, model, expectedMessage, expectedModel);
@@ -63,7 +63,7 @@ public class SaveCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_INTERNSHIP;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getInternshipList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getJobbiBot().getInternshipList().size());
 
         SaveCommand saveCommand = prepareCommand(outOfBoundIndex);
 
@@ -77,18 +77,18 @@ public class SaveCommandTest {
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         Internship internshipToSave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
         // save -> first internship saved
         saveCommand.execute();
         undoRedoStack.push(saveCommand);
 
-        // undo -> reverts internshiplist back to previous state and filtered internship list to show all internships
+        // undo -> reverts internship list back to previous state and filtered internship list to show all internships
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // redo -> same first person saved again
+        // redo -> same first internship saved again
         Internship internshipWithSavedTag = new SavedInternshipBuilder()
-                .addTag(model.getFilteredInternshipList().get(0));
+                                                    .addTag(model.getFilteredInternshipList().get(0));
         expectedModel.updateInternship(internshipToSave, internshipWithSavedTag);
         assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -110,7 +110,7 @@ public class SaveCommandTest {
     }
 
     /**
-     * 1. Save a {@code Person} from a filtered list.
+     * 1. Save a {@code Internship} from a filtered list.
      * 2. Undo the saved command.
      * 3. The unfiltered list should be shown now. Verify that the index of the previously saved internship in the
      * unfiltered list is different from the index at the filtered list.
@@ -122,7 +122,7 @@ public class SaveCommandTest {
         UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
         SaveCommand saveCommand = prepareCommand(INDEX_FIRST_INTERNSHIP);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobbiBot(), new UserPrefs());
 
         showInternshipAtIndex(model, INDEX_SECOND_INTERNSHIP);
         Internship internshipToSave = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
@@ -131,14 +131,15 @@ public class SaveCommandTest {
 
         undoRedoStack.push(saveCommand);
 
-        // undo -> reverts internshiplist back to previous state and filtered internship list to show all internships
+        // undo -> reverts internship list back to previous state and filtered internship list to show all internships
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         Internship internshipWithSavedTag = new SavedInternshipBuilder()
-                .addTag(model.getFilteredInternshipList().get(1));
+                                                    .addTag(model.getFilteredInternshipList().get(1));
         expectedModel.updateInternship(internshipToSave, internshipWithSavedTag);
         assertNotEquals(internshipToSave, model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased()));
-        // redo -> saves same second person in unfiltered person list
+
+        // redo -> saves same second internship in unfiltered internship list
         assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -164,25 +165,17 @@ public class SaveCommandTest {
         // null -> returns false
         assertFalse(saveFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different internship -> returns false
         assertFalse(saveFirstCommand.equals(saveSecondCommand));
     }
 
     /**
      * Returns a {@code SaveCommand} with the parameter {@code index}.
      */
-    private SaveCommand prepareCommand(Index index) throws UniqueTagList.DuplicateTagException {
+    private SaveCommand prepareCommand(Index index) {
         SaveCommand saveCommand = new SaveCommand(index);
         saveCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return saveCommand;
     }
 
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoInternship(Model model) {
-        model.updateFilteredInternshipList(p -> false);
-
-        assertTrue(model.getFilteredInternshipList().isEmpty());
-    }
 }

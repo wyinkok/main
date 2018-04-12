@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INTERNSHIPS;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 
@@ -21,7 +20,7 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " Marketing Analytics Singapore";
 
     public static final String MESSAGE_SEARCH_RESPONSE = "Awesome, would you like to narrow down your search even "
-            + "more? You may filter by location and specific address \n\nE.g  filter singapore hongkong tanjong pagar";
+            + "more? You may filter by region and specific address \n\nE.g  filter singapore hongkong tanjong pagar";
 
     public static final String MESSAGE_SEARCH_RESPONSE_NO_INTERNSHIPS = "Woops, no internship found ! "
             + "Try using lesser keywords or entering other keywords  \nE.g: search marketing business";
@@ -37,21 +36,13 @@ public class FindCommand extends Command {
     public CommandResult execute() {
 
         // remove all tags from filtered list except 'saved' tags
-        try {
-            model.updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-            ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
+        model.updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+        ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
 
         model.updateSearchedInternshipList(predicate);
 
         // add tags that have keywords matching the internship
-        try {
-            ModelManager.addTagsToFilteredList(ModelManager.getKeywords(), model.getFilteredInternshipList(), model);
-        } catch (CommandException e) {
-            e.printStackTrace();
-        }
+        ModelManager.addTagsToFilteredList(ModelManager.getKeywords(), model.getFilteredInternshipList(), model);
 
         return getCommandResult();
     }

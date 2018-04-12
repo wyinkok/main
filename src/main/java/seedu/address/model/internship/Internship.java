@@ -15,13 +15,13 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Internship {
 
-    public static final String ATTRIBUTES_LIST = "Name Salary Email Address Industry Location Role";
+    public static final String ATTRIBUTES_LIST = "Name Salary Email Address Industry Region Role";
     private final Name name;
     private final Salary salary;
     private final Email email;
     private final Address address;
     private final Industry industry;
-    private final Location location;
+    private final Region region;
     private final Role role;
 
     private final UniqueTagList tags;
@@ -29,15 +29,15 @@ public class Internship {
     /**
      * Every field must be present and not null.
      */
-    public Internship(Name name, Salary salary, Email email, Address address, Industry industry, Location location,
+    public Internship(Name name, Salary salary, Email email, Address address, Industry industry, Region region,
                       Role role, Set<Tag> tags) {
-        requireAllNonNull(name, salary, email, address, industry, location, tags);
+        requireAllNonNull(name, salary, email, address, industry, region, tags);
         this.name = name;
         this.salary = salary;
         this.email = email;
         this.address = address;
         this.industry = industry;
-        this.location = location;
+        this.region = region;
         this.role = role;
         // protect internal tags from changes in the arg list
         this.tags = new UniqueTagList(tags);
@@ -63,12 +63,23 @@ public class Internship {
         return industry;
     }
 
-    public Location getLocation() {
-        return location;
+    public Region getRegion() {
+        return region;
     }
 
     public Role getRole() {
         return role;
+    }
+
+    public String getUrl() {
+        return createUrl();
+    }
+
+    //@@author TanCiKang
+    private String createUrl() {
+        StringBuilder url = new StringBuilder();
+        url.append(getName()).append(' ').append(getRole());
+        return url.toString().replace(" ", "-");
     }
 
     /**
@@ -95,14 +106,14 @@ public class Internship {
                 && otherInternship.getEmail().equals(this.getEmail())
                 && otherInternship.getAddress().equals(this.getAddress())
                 && otherInternship.getIndustry().equals(this.getIndustry())
-                && otherInternship.getLocation().equals(this.getLocation())
+                && otherInternship.getRegion().equals(this.getRegion())
                 && otherInternship.getRole().equals(this.getRole());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, salary, email, address, industry, location, role, tags);
+        return Objects.hash(name, salary, email, address, industry, region, role, tags);
     }
 
     @Override
@@ -117,8 +128,8 @@ public class Internship {
                 .append(getAddress())
                 .append(" Industry: ")
                 .append(getIndustry())
-                .append(" Location: ")
-                .append(getLocation())
+                .append(" Region: ")
+                .append(getRegion())
                 .append(" Role: ")
                 .append(getRole())
                 .append(" Tags: ");
@@ -141,8 +152,8 @@ public class Internship {
         case "industry":
             return getIndustry().toString();
 
-        case "location":
-            return getLocation().toString();
+        case "region":
+            return getRegion().toString();
 
         case "role":
             return getRole().toString();

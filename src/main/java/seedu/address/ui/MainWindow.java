@@ -16,6 +16,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.ShowGlossaryRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -48,15 +49,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private MenuItem helpMenuItem;
 
+    @FXML
+    private MenuItem glossaryMenuItem;
 
     @FXML
     private StackPane internshipListPanelPlaceholder;
 
     @FXML
     private StackPane chatBotPanelPlaceholder;
-
-    @FXML
-    private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -129,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
         ChatBotPanel chatBotPanel = new ChatBotPanel(logic);
         chatBotPanelPlaceholder.getChildren().add(chatBotPanel.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getJobbiBotFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
@@ -173,7 +173,17 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.show();
     }
 
+    //@@author wyinkok-unused
+    /**
+     * Opens the glossary window
+     */
+    @FXML
+    public void handleGlossary() {
+        GlossaryWindow glossaryWindow = new GlossaryWindow();
+        glossaryWindow.show();
+    }
 
+    //@@author
     void show() {
         primaryStage.show();
     }
@@ -198,6 +208,13 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    //@@author wyinkok-unused
+    @Subscribe
+    private void handleShowGlossaryEvent(ShowGlossaryRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleGlossary();
     }
 
 }
