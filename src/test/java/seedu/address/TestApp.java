@@ -95,7 +95,7 @@ public class TestApp extends MainApp {
      */
     public Model getModel() {
         Model copy = new ModelManager((model.getJobbiBot()), new UserPrefs());
-        ModelHelper.setFilteredList(copy, model.getFilteredInternshipList());
+        ModelHelper.setSearchedList(copy, model.getFilteredInternshipList());
         return copy;
     }
 

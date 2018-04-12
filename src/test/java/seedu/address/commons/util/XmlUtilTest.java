@@ -35,9 +35,9 @@ public class XmlUtilTest {
 
     private static final String INVALID_SALARY = "9482asf424";
 
-    private static final String VALID_NAME = "Hans Muster";
+    private static final String VALID_NAME = "ABC Company";
     private static final String VALID_SALARY = "1000";
-    private static final String VALID_EMAIL = "hans@example";
+    private static final String VALID_EMAIL = "ABC@example";
     private static final String VALID_ADDRESS = "4th street";
     private static final String VALID_INDUSTRY = "Engineering";
     private static final String VALID_REGION = "Geylang";

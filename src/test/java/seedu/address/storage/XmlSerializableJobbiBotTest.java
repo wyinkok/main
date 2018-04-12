@@ -16,10 +16,12 @@ import seedu.address.testutil.TypicalInternships;
 
 public class XmlSerializableJobbiBotTest {
 
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlSerializableJobbiBotTest/");
+    private static final String TEST_DATA_FOLDER =
+            FileUtil.getPath("src/test/data/XmlSerializableJobbiBotTest/");
     private static final File TYPICAL_INTERNSHIPS_FILE =
             new File(TEST_DATA_FOLDER + "typicalInternshipJobbiBot.xml");
-    private static final File INVALID_INTERNSHIP_FILE = new File(TEST_DATA_FOLDER + "invalidInternshipJobbiBot.xml");
+    private static final File INVALID_INTERNSHIP_FILE =
+            new File(TEST_DATA_FOLDER + "invalidInternshipJobbiBot.xml");
     private static final File INVALID_TAG_FILE = new File(TEST_DATA_FOLDER + "invalidTagJobbiBot.xml");
 
     @Rule

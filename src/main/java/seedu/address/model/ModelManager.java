@@ -83,19 +83,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deleteInternship(Internship target) throws InternshipNotFoundException {
-        jobbiBot.removeInternship(target);
-        indicateInternshipBookChanged();
-    }
-
-    @Override
-    public synchronized void addInternship(Internship internship) throws DuplicateInternshipException {
-        jobbiBot.addInternship(internship);
-        updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-        indicateInternshipBookChanged();
-    }
-
-    @Override
     public void updateInternship(Internship target, Internship editedInternship)
             throws DuplicateInternshipException, InternshipNotFoundException {
         requireAllNonNull(target, editedInternship);

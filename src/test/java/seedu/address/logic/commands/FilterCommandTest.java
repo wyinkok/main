@@ -3,10 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalInternships.CARL;
-import static seedu.address.testutil.TypicalInternships.CARL2;
-import static seedu.address.testutil.TypicalInternships.DANIEL;
-import static seedu.address.testutil.TypicalInternships.GEORGE;
+import static seedu.address.testutil.TypicalInternships.BUSINESS1;
+import static seedu.address.testutil.TypicalInternships.BUSINESS2;
+import static seedu.address.testutil.TypicalInternships.BUSINESS3;
+import static seedu.address.testutil.TypicalInternships.BUSINESS4;
+import static seedu.address.testutil.TypicalInternships.DATASCIENCE;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.util.Arrays;
@@ -59,32 +60,40 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_zeroInternshipsFound() {
+    public void execute_singleKeywords_zeroInternshipsFound() {
         String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_RESPONSE_NO_INTERNSHIP);
         FilterCommand command = prepareCommand("TryFindingThis");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
     @Test
+    public void execute_multipleKeywords_zeroInternshipsFound() {
+        String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_RESPONSE_NO_INTERNSHIP);
+        FilterCommand command = prepareCommand("ENGINEERING BUSINESS");
+        assertCommandSuccess(command, expectedMessage, Collections.emptyList());
+    }
+
+    @Test
     public void execute_singleKeyword_multipleInternshipsFound() {
         String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_RESPONSE);
-        FilterCommand command = prepareCommand("Carl");
-        assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, CARL2));
+        FilterCommand command = prepareCommand("Business");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(BUSINESS1, BUSINESS2, BUSINESS3, BUSINESS4));
     }
 
     @Test
     public void execute_multipleKeywords_singleInternshipsFound() {
         String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_RESPONSE);
-        FilterCommand command = prepareCommand("Carl Kurz");
-        assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL));
+        FilterCommand command = prepareCommand("Data Scientist");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(DATASCIENCE));
     }
 
     @Test
-    public void execute_singleKeywordNonNameAttribute_multipleInternshipsFound() {
+    public void execute_multipleKeywords_multipleInternshipsFound() {
         String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_RESPONSE);
-        FilterCommand command = prepareCommand("Street");
-        assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, DANIEL, GEORGE, CARL2));
+        FilterCommand command = prepareCommand("Audit Intern");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(BUSINESS2, BUSINESS4));
     }
+
 
 
     /**
@@ -92,7 +101,8 @@ public class FilterCommandTest {
      */
     private FilterCommand prepareCommand(String userInput) {
         FilterCommand command =
-                new FilterCommand(new InternshipContainsAllKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
+                new FilterCommand(
+                        new InternshipContainsAllKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }

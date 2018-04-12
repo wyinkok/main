@@ -3,7 +3,7 @@ package seedu.address.ui;
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalInternships.ALICE;
+import static seedu.address.testutil.TypicalInternships.ENGINEERING1;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 
@@ -24,7 +24,7 @@ public class BrowserPanelTest extends GuiUnitTest {
 
     @Before
     public void setUp() {
-        selectionChangedEventStub = new InternshipPanelSelectionChangedEvent(new InternshipCard(ALICE, 0));
+        selectionChangedEventStub = new InternshipPanelSelectionChangedEvent(new InternshipCard(ENGINEERING1, 0));
 
         guiRobot.interact(() -> browserPanel = new BrowserPanel());
         uiPartRule.setUiPart(browserPanel);
@@ -41,7 +41,7 @@ public class BrowserPanelTest extends GuiUnitTest {
         // associated web page of a internship
         postNow(selectionChangedEventStub);
         URL expectedInternshipUrl = new URL(BrowserPanel.SEARCH_PAGE_URL
-                + ALICE.getUrl());
+                + ENGINEERING1.getUrl());
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedInternshipUrl, browserPanelHandle.getLoadedUrl());

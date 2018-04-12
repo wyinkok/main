@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedInternship.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalInternships.BENSON;
+import static seedu.address.testutil.TypicalInternships.ENGINEERING2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,21 +30,21 @@ public class XmlAdaptedInternshipTest {
     private static final String INVALID_ROLE = " ";
     private static final String INVALID_TAG = " ";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_SALARY = BENSON.getSalary().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final String VALID_INDUSTRY = BENSON.getIndustry().toString();
-    private static final String VALID_REGION = BENSON.getRegion().toString();
-    private static final String VALID_ROLE = BENSON.getRole().toString();
-    private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = ENGINEERING2.getName().toString();
+    private static final String VALID_SALARY = ENGINEERING2.getSalary().toString();
+    private static final String VALID_EMAIL = ENGINEERING2.getEmail().toString();
+    private static final String VALID_ADDRESS = ENGINEERING2.getAddress().toString();
+    private static final String VALID_INDUSTRY = ENGINEERING2.getIndustry().toString();
+    private static final String VALID_REGION = ENGINEERING2.getRegion().toString();
+    private static final String VALID_ROLE = ENGINEERING2.getRole().toString();
+    private static final List<XmlAdaptedTag> VALID_TAGS = ENGINEERING2.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validInternshipDetails_returnsInternship() throws Exception {
-        XmlAdaptedInternship internship = new XmlAdaptedInternship(BENSON);
-        assertEquals(BENSON, internship.toModelType());
+        XmlAdaptedInternship internship = new XmlAdaptedInternship(ENGINEERING2);
+        assertEquals(ENGINEERING2, internship.toModelType());
     }
 
     @Test

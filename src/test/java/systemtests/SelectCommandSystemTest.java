@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_INTERNSHIP_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
-import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_AUDIT;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternships;
 
 import org.junit.Test;
@@ -58,7 +58,7 @@ public class SelectCommandSystemTest extends JobbiBotSystemTest {
         /* Case: filtered internship list, select index within bounds of address book but out of bounds of internship
          * list -> rejected
          */
-        showInternshipsWithName(KEYWORD_MATCHING_MEIER);
+        showInternshipsWithName(KEYWORD_MATCHING_AUDIT);
         int invalidIndex = getModel().getJobbiBot().getInternshipList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " "
                 + invalidIndex, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);

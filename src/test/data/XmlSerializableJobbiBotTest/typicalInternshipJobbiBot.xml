@@ -3,76 +3,75 @@
 {@code TypicalInternships#getTypicalInternshipBook()}-->
 <InternshipBook>
     <internships>
-        <name>Alice Pauline</name>
-        <salary>85355255</salary>
-        <email>alice@example.com</email>
+        <name>Grab</name>
+        <salary>1500</salary>
+        <email>Grab@example.com</email>
+        <address>Grab Building</address>
+        <industry>Tech</industry>
+        <region>Town</region>
+        <role>Data Scientist</role>
+    </internships>
+    <internships>
+        <name>ST Engineering</name>
+        <salary>1000</salary>
+        <email>STEngineering@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
-        <industry>Engineering</industry>
+        <industry>Manufacturing</industry>
         <region>Jurong</region>
         <role>Safety Officer</role>
-        <tagged>friends</tagged>
     </internships>
     <internships>
-        <name>Benson Meier</name>
-        <salary>98765432</salary>
-        <email>johnd@example.com</email>
-        <address>311, Clementi Ave 2, #02-25</address>
-        <industry>Business</industry>
-        <region>Clementi</region>
-        <role>Business Analyst</role>
+        <name>ABC Engineering</name>
+        <salary>999</salary>
+        <email>ABCEngineering@example.com</email>
+        <address>311, Jurong Ave 2</address>
+        <industry>Manufacturing</industry>
+        <region>Jurong</region>
+        <role>Product Engineer</role>
     </internships>
     <internships>
-        <name>Carl Kurz</name>
-        <salary>95352563</salary>
-        <email>heinz@example.com</email>
-        <address>wall street</address>
-        <industry>Finance</industry>
-        <region>Geylang</region>
+        <name>Sembcorp</name>
+        <salary>1001</salary>
+        <email>Sembcorp@example.com</email>
+        <address>111 Tuas Street</address>
+        <industry>Engineering</industry>
+        <region>Tuas</region>
         <role>Project Manager</role>
     </internships>
     <internships>
-        <name>Daniel Meier</name>
-        <salary>87652533</salary>
-        <email>cornelia@example.com</email>
-        <address>10th street</address>
-        <industry>Consulting</industry>
-        <region>Serangoon</region>
-        <role>Consultant Assistant</role>
-    </internships>
-    <internships>
-        <name>Elle Meyer</name>
-        <salary>9482224</salary>
-        <email>werner@example.com</email>
-        <address>michegan ave</address>
-        <industry>Manufacturing</industry>
-        <region>Ang Mo Kio</region>
-        <role>Quality Inspector</role>
-    </internships>
-    <internships>
-        <name>Fiona Kunz</name>
-        <salary>9482427</salary>
-        <email>lydia@example.com</email>
-        <address>little tokyo</address>
-        <industry>Services</industry>
-        <region>Serangoon</region>
-        <role>Customer Service</role>
-    </internships>
-    <internships>
-        <name>George Best</name>
-        <salary>9482442</salary>
-        <email>anna@example.com</email>
-        <address>4th street</address>
-        <industry>Engineering</industry>
-        <region>Tampines</region>
-        <role>Safety Officer</role>
-    </internships>
-    <internships>
-        <name>Carl</name>
-        <salary>1234567</salary>
-        <email>heinz2@example.com</email>
-        <address>wall street 2</address>
+        <name>PwC</name>
+        <salary>1200</salary>
+        <email>AdvisoryIntern@example.com</email>
+        <address>Raffles Place</address>
         <industry>Business</industry>
-        <region>Aljunied</region>
-        <role>Business Analyst</role>
+        <region>Raffles Place</region>
+        <role>Advisory Intern</role>
+    </internships>
+    <internships>
+        <name>Deloitte</name>
+        <salary>750</salary>
+        <email>AuditIntern@Deloitte.com</email>
+        <address>Tanjong Pagar</address>
+        <industry>Business</industry>
+        <region>Tanjong Pagar</region>
+        <role>Audit Intern</role>
+    </internships>
+    <internships>
+        <name>KPMG</name>
+        <salary>1000</salary>
+        <email>ConsultingIntern@example.com</email>
+        <address>Raffles Boulevard</address>
+        <industry>Business</industry>
+        <region>Raffles Place</region>
+        <role>Consulting Intern</role>
+    </internships>
+    <internships>
+        <name>PwC</name>
+        <salary>761</salary>
+        <email>AuditIntern@PwC.com</email>
+        <address>Raffles Place</address>
+        <industry>Business</industry>
+        <region>Raffles Place</region>
+        <role>Audit Intern</role>
     </internships>
 </InternshipBook>

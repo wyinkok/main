@@ -780,7 +780,7 @@ import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getSecondLastIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
-import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
+import static KEYWORD_MATCHING_BUSINESS1;
 
 import org.junit.Test;
 

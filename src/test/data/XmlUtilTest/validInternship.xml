@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <internship>
-    <name>Hans Muster</name>
     <salary>1000</salary>
-    <email>hans@example</email>
+    <name>ABC Company</name>
+    <email>ABC@example</email>
     <address>4th street</address>
     <industry>Engineering</industry>
     <region>Geylang</region>
     <role>Safety Officer</role>
-    <tagged>friends</tagged>
 </internship>
