@@ -1,46 +1,48 @@
-= John Doe - Project Portfolio
+= Ci Kang - Project Portfolio
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: InternshipBook - Level 4
+== PROJECT: JobbiBot
 
 ---
 
 == Overview
 
-InternshipBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+JobbiBot is an interactive application that aims to guide university students in their search for internships. JobbiBot is a Command
+Line Interface application where most of the functions are accessed through typing the commands. Through JobbiBot,
+users would be able to narrow down the overwhelming amount of internship opportunities by different attributes such as salary and industry with
+the help of JobbiBot which will guide the user slowly through the process with prompts and useful tips.
+Afterwhich they can either save the list of internships while making the decision, select the internship and obtain comprehensive details about
+the internship or they may restart the process and filter the internships differently.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: modified the find function *to enable user to do a distinct union search*
+** What it does: Allows users to search for multiple keywords and all internships containing ANY of the keywords will be listed.
+the internship in the list are then tagged with tags containing keywords which it matches.
+** Justification: This feature improves the product significantly because a user can narrow down their internships opportunities
+yet at the same time keep their options open by selecting multiple keywords to search for.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+** Highlights: Enable the search of multiple keywords in all the attributes of the internships and can repeat the find command indefinitely until
+a suitable list of internships are obtained for further filtering.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Minor enhancement*: Modified the preview list on the left to show important attributes and full details on the right panel if internship is selected.
+
+* *Code contributed*: [https://github.com/CS2103JAN2018-F11-B3/main/blob/master/collated/functional/TanCiKang.md[Functional Code]]
+ [https://github.com[Test code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed release `v1.3` on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Implemented Role https://github.com/CS2103JAN2018-F11-B3/main/issues/54[#52], Salary https://github.com/CS2103JAN2018-F11-B3/main/issues/64[#64], Industry https://github.com/CS2103JAN2018-F11-B3/main/issues/66[#66] and Region https://github.com/CS2103JAN2018-F11-B3/main/issues/67[#67] attributes
+*** Morph Person Class to Internship Class https://github.com/CS2103JAN2018-F11-B3/main/issues/65[#65]
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Collate codes for team https://github.com/CS2103JAN2018-F11-B3/main/pull/102[#102]
+*** Setting up of Travis Auto Publishing for the team
 
 == Contributions to the User Guide
 
@@ -49,7 +51,7 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=findwithfeature]
 
 //include::../UserGuide.adoc[tag=dataencryption]
 
@@ -59,12 +61,10 @@ include::../UserGuide.adoc[tag=undoredo]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=findwithfeatures]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+//include::../DeveloperGuide.adoc[]
 
-
-== PROJECT: PowerPointLabs
 
 ---
 

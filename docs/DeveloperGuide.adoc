@@ -575,6 +575,8 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+// tag::findwithfeatures[]
+
 === Find Command with adding tag feature
 
 ==== Rationale
@@ -590,19 +592,32 @@ some codes are implemented within ModelManager.
 
 image::FindCommandSequenceDiagram.png[width="1200"]
 
-As it can be seen from the diagram, Logic uses the InternshipBookParser class to parse the user command.
-After which, FindCommandParser is created and use to parse the keyword. The keyword is then set in ModelManager via the
-setKeywords() method. A FindCommand object is then created followed by the internshipContainsKeywordsPredicate.
+As it can be seen from the diagram, `Logic` uses the `InternshipBookParser` class to parse the user command.
+After which, `FindCommandParser` is created and use to parse the keyword. The keyword is then set in `ModelManager` via the
+setKeywords() method. A `FindCommand` object is then created followed by the `internshipContainsKeywordsPredicate`.
 
-In the second phase, the command is being executed in Find Command. The first updateSearchedInternshipList() update the
+In the second phase, the command is being executed in `FindCommand`. The first updateSearchedInternshipList() update the
 searchedInternship with all the internships available and remove all tags from them apart from `saved` tags. Following which
 the second updateSearchedInternshipList() update the searchedInternshipList with the internships that matches the keywords
-use as the argument in Find Command. Those keywords are then added to the respective internships that matches it through the
-addTagsToFilteredList(). Find Command then execute getCommandResult() and return the result of the command execution encapsulated
-as a CommandResult object and returns it to the LogicManager and subsequently to the UI and displayed to the user.
+use as the argument in `FindCommand`. Those keywords are then added to the respective internships that matches it through the
+addTagsToFilteredList(). `FindCommand` then execute getCommandResult() and return the result of the command execution encapsulated
+as a `CommandResult` object and returns it to the `LogicManager` and subsequently to the UI and displayed to the user.
 
 ==== Design Considerations
 
+Location of the functions
+
+Alternative 1:
+
+Alternative 2:
+
+Implementation of the codes
+
+Alternative 1:
+
+Alternative 2:
+
+// end::findwithfeatures[]
 
 == Documentation
 
@@ -1010,9 +1025,9 @@ See this https://github.com/se-edu/InternshipBook-level4/pull/599[PR] for the st
 
 | Colin | Save Command | Minor | Enable users to view their Saved Collection
 
-| Ci Kang | Add keyword tags in Find Command | Major | Add tags to internship that matches keywords in find command
+| Ci Kang | Enhance Find Command | Major | Add tags to internship that matches keywords in find command and enable find command to search for multiple attributes
 
-| Ci Kang | Morph Model Component | Minor | Morph to store internship / job instead of InternshipBook
+| Ci Kang | Preview and Enhance view | Minor | Show preview of the important attributes of the internship on the left panel and full details on the right panel
 
 | Wyin | GUI Revamp | Major | Revamp UI to incorporate a Chatbot in the CLI
 
