@@ -123,19 +123,21 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author TanCiKang
     /**
-     * Add keyword tags that matches the individual internship to the internship
+     * Adds keyword tags that matches the individual internship to the internship except keywords with only
+     * non-alphanumeric characters
      * @param keyword
      * @param internship
      * @return Internship
      * @throws CommandException
      */
     private static Internship addTagsToInternshipWithMatch(String keyword, Internship internship) {
+
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
         try {
             internshipTags.add(new Tag(keyword));
         } catch (UniqueTagList.DuplicateTagException e) {
-            throw new AssertionError ("Operation would result in duplicate tags");
+            throw new AssertionError("Operation would result in duplicate tags");
         }
 
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
