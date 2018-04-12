@@ -1,4 +1,3 @@
-/* @@author wyinkok */
 .background {
     -fx-background-color:  #f4f4f4;
     background-color: #f4f4f4; /* Used in the default.html file */
@@ -113,8 +112,6 @@
     -fx-border-width: 0;
 }
 
-
-
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #ffd57a;
     -fx-border-width: 0;
@@ -130,7 +127,8 @@
     -fx-text-fill:#f4f4f4;
 }
 
-/** ChatBot **/
+/* @@author wyinkok */
+/** CSS changes for ChatBot and Internship Panel **/
 .cell_medium_label {
     -fx-font-family: "Calibri";
     -fx-font-size: 14px;
@@ -149,6 +147,8 @@
     -fx-font-size: 13px;
     -fx-text-fill: #f4f4f4;
 }
+
+/* @@author */
 
 /* Command Line */
 .anchor-pane {

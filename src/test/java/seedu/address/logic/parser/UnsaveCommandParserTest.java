@@ -23,12 +23,17 @@ public class UnsaveCommandParserTest {
     private UnsaveCommandParser parser = new UnsaveCommandParser();
 
     @Test
-    public void parse_validArgs_returnsUnaveCommand() throws UniqueTagList.DuplicateTagException {
+    public void parse_validArgs_returnsUnaveCommand() {
         assertParseSuccess(parser, "1", new UnsaveCommand(INDEX_FIRST_INTERNSHIP));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnsaveCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgs_nonAlphanumeric_throwsParseException() {
+        assertParseFailure(parser, "!", String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnsaveCommand.MESSAGE_USAGE));
     }
 }

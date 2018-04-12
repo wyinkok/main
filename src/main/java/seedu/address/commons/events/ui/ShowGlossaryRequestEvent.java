@@ -1,8 +1,9 @@
+//@@author wyinkok-unused
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
 
-//@@author wyinkok-unused
+
 /**
  * An event requesting to view the Glossary page.
  */

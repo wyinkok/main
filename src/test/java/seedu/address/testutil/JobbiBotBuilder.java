@@ -9,7 +9,7 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building InternshipBook objects.
  * Example usage: <br>
- *     {@code JobbiBot ab = new JobbiBotBuilder().withInternship("John", "Doe").withTag("Friend").build();}
+ *     {@code JobbiBot ab = new JobbiBotBuilder().withInternship("Google", "Singapore").build();}
  */
 public class JobbiBotBuilder {
 

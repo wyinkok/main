@@ -23,12 +23,17 @@ public class SaveCommandParserTest {
     private SaveCommandParser parser = new SaveCommandParser();
 
     @Test
-    public void parse_validArgs_returnsSaveCommand() throws UniqueTagList.DuplicateTagException {
+    public void parse_validArgs_returnsSaveCommand() {
         assertParseSuccess(parser, "1", new SaveCommand(INDEX_FIRST_INTERNSHIP));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgs_nonAlphanumeric_throwsParseException() {
+        assertParseFailure(parser, "!", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
     }
 }

@@ -39,14 +39,14 @@ public class ChatBotPanel extends UiPart<Region> {
     public ChatBotPanel(Logic logic) {
         super(FXML);
         this.logic = logic;
-        initChatBot();
+        initiateChatBot();
         registerAsAnEventHandler(this);
     }
 
     /**
      * Initiates the chatbot thread of messages with Jobbi's welcome message
      */
-    public void initChatBot() {
+    public void initiateChatBot() {
         ObservableList<String> initialMessage = createInitialMessage(messageList);
         ObservableList<ChatBotCard> initialMappedList = EasyBind.map(
                 initialMessage, (msg) -> new ChatBotCard(msg));
@@ -91,7 +91,7 @@ public class ChatBotPanel extends UiPart<Region> {
             listToUpdateWithUserResponse.add("USER:   " + historySnapshot.current());
             if (historySnapshot.current().equals("new")) {
                 listToUpdateWithUserResponse.clear();
-                initChatBot();
+                initiateChatBot();
             }
         }
         return listToUpdateWithUserResponse;
@@ -110,7 +110,7 @@ public class ChatBotPanel extends UiPart<Region> {
             listToUpdateWithJobbiResponse.add("JOBBI:  " + message);
             if (historySnapshot.current().equals("new")) {
                 listToUpdateWithJobbiResponse.clear();
-                initChatBot();
+                initiateChatBot();
             }
         }
         return listToUpdateWithJobbiResponse;
@@ -123,6 +123,7 @@ public class ChatBotPanel extends UiPart<Region> {
         handleJobbiResponse(messageList, event.message);
     }
 
+    //@@author
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code ChatBotCard}.
      */

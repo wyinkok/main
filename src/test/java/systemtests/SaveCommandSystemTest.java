@@ -36,7 +36,7 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
 
         /* ----------------- Performing save operation while an unfiltered list is being shown -------------------- */
 
-        /* Case: save the first person in the list, command with leading spaces and trailing spaces -> saved */
+        /* Case: save the first internship in the list, command with leading spaces and trailing spaces -> saved */
         Model expectedmodel = getModel();
         Index firstIndex = INDEX_FIRST_INTERNSHIP;
         String command = "     " + SaveCommand.COMMAND_WORD + "      " + firstIndex.getOneBased() + "       ";
@@ -73,6 +73,7 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
         Internship internshipWithSavedTag = new SavedInternshipBuilder()
                 .addTag(getModel().getFilteredInternshipList().get(index.getZeroBased()));
         assertCommandSuccess(command, index, internshipWithSavedTag);
+
         /* Case: filtered internship list,
          * save index within bounds of internship book but out of bounds of internship list -> rejected
          */
@@ -105,6 +106,10 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
         command = SaveCommand.COMMAND_WORD + " -1";
         assertCommandFailure(command, MESSAGE_INVALID_SAVE_COMMAND_FORMAT);
 
+        /* Case: invalid non alphanumerical index (!) -> rejected */
+        command = SaveCommand.COMMAND_WORD + " !";
+        assertCommandFailure(command, MESSAGE_INVALID_SAVE_COMMAND_FORMAT);
+
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
                 getModel().getJobbiBot().getInternshipList().size() + 1);
@@ -120,8 +125,9 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
     }
 
     /**
-     * Update the {@code Person} at the specified {@code index} in {@code model}'s internship book.
-     * @return the internship person with a "saved" tag
+     * Update the {@code Internship} at the specified {@code index} in {@code model}'s internship book.
+     *
+     * @return the internship with a "saved" tag
      */
     private Internship addSavedTagToInternship(Model model, Index index) throws CommandException {
         Internship targetInternship = getInternship(model, index);
@@ -139,56 +145,56 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
     /**
      * Saves the internship at {@code toSave} by creating a default {@code SaveCommand} using {@code toSave} and
      * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
+     *
      * @see SaveCommandSystemTest#assertCommandSuccess(String, Index, Internship)
      */
     private void assertCommandSuccess(Index toSave) throws CommandException {
         Model expectedModel = getModel();
-        Internship editedInternship = addSavedTagToInternship(expectedModel, toSave);
-        String expectedResultMessage = String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, editedInternship);
+        Internship internshipWithSavedTag = addSavedTagToInternship(expectedModel, toSave);
+        String expectedResultMessage = String.format(MESSAGE_SAVED_INTERNSHIP_SUCCESS, internshipWithSavedTag);
 
         assertCommandSuccess(
                 SaveCommand.COMMAND_WORD + " " + toSave.getOneBased(), expectedModel, expectedResultMessage);
     }
 
-
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} except that the
      * browser url and selected card remain unchanged.
+     *
      * @see SaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
-    private void assertCommandSuccess(String command, Index toSave, Internship editedInternship) {
-        assertCommandSuccess(command, toSave, editedInternship, null);
+    private void assertCommandSuccess(String command, Index toSave, Internship savedInternship) {
+        assertCommandSuccess(command, toSave, savedInternship, null);
     }
-
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
-     * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
+     * 1. Asserts that chat bot panel displays the success message of executing {@code SaveCommand}.<br>
      * 2. Asserts that the model related components are updated to reflect the internship at index {@code toSave} being
-     * updated to values specified {@code editedInternship}.<br>
+     * updated to values specified {@code savedInternship}.<br>
+     *
      * @param toSave the index of the current model's filtered list.
      * @see SaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
-    private void assertCommandSuccess(String command, Index toSave, Internship editedInternship,
+    private void assertCommandSuccess(String command, Index toSave, Internship savedInternship,
                                       Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         try {
             expectedModel.updateInternship(
-                    expectedModel.getFilteredInternshipList().get(toSave.getZeroBased()), editedInternship);
+                    expectedModel.getFilteredInternshipList().get(toSave.getZeroBased()), savedInternship);
         } catch (DuplicateInternshipException | InternshipNotFoundException e) {
             throw new IllegalArgumentException(
                     "editedInternship is a duplicate in expectedModel, or it isn't found in the model.");
         }
 
         assertCommandSuccess(command, expectedModel,
-                String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, editedInternship),
+                String.format(SaveCommand.MESSAGE_SAVED_INTERNSHIP_SUCCESS, savedInternship),
                     expectedSelectedCardIndex);
     }
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} except that the
      * browser url and selected card remain unchanged.
-     * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
@@ -197,7 +203,7 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
     /**
      * Executes {@code command} and in addition,<br>
      * 1. Asserts that the command box displays an empty string.<br>
-     * 2. Asserts that the result display box displays {@code expectedResultMessage}.<br>
+     * 2. Asserts that the chat bot panel displays {@code expectedResultMessage}.<br>
      * 3. Asserts that the model related components equal to {@code expectedModel}.<br>
      * 4. Asserts that the browser url and selected card update accordingly depending on the card at
      * {@code expectedSelectedCardIndex}.<br>
@@ -225,7 +231,7 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
     /**
      * Executes {@code command} and in addition,<br>
      * 1. Asserts that the command box displays {@code command}.<br>
-     * 2. Asserts that result display box displays {@code expectedResultMessage}.<br>
+     * 2. Asserts that chat bot panel displays {@code expectedResultMessage}.<br>
      * 3. Asserts that the model related components equal to the current model.<br>
      * 4. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 5. Asserts that the command box has the error style.<br>

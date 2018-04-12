@@ -1,3 +1,4 @@
+//@@author wyinkok-unused
 package guitests.guihandles;
 
 import java.net.URL;
@@ -5,7 +6,6 @@ import java.net.URL;
 import guitests.GuiRobot;
 import javafx.stage.Stage;
 
-//@@author wyinkok-unused
 /**
  * A handle to the {@code GlossaryWindow} of the application.
  */

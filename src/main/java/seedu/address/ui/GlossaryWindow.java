@@ -1,3 +1,4 @@
+//@@author wyinkok-unused
 package seedu.address.ui;
 
 import java.util.logging.Logger;
@@ -7,8 +8,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
-
-//@@author wyinkok-unused
 /**
  * Controller for a glossary page
  */
@@ -29,7 +28,6 @@ public class GlossaryWindow extends UiPart<Stage> {
      */
     public GlossaryWindow(Stage root) {
         super(FXML, root);
-
         String userGuideUrl = getClass().getResource(USERGUIDE_FILE_PATH).toString();
         browser.getEngine().load(userGuideUrl);
     }
