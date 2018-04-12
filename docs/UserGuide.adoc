@@ -334,14 +334,14 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Graphic Designer
                      | Photographer
                      | Videographer
-.7+| Banking and Finance
+.6+| Banking and Finance
                      | Accountant
                      | Audit Assistant
                      | Corporate Security Analyst
                      | Private Equity Analyst
                      | Risk Management
                      | Wealth Management Analyst
-.5+| Consultancy
+.4+| Consultancy
                      | Human Resource Consultant
                      | Sales Consultant
                      | Technology Consultant

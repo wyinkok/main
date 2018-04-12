@@ -16,7 +16,7 @@ opportunities. The user interacts with Jobbi using a CLI, and it has a GUI creat
 * *Major enhancement*: Revamp the GUI into a chat application
 ** What it does: It provides the end user with an interactive interface to search for their ideal internships
 ** Justification: This feature caters to users who prefer to use an interactive application or require step by step guidance in searching for internships.
-** Highlights: This enhancement enhances the existing user interface. It required a firm understanding of user profile in order to create a chatbot persona that is realistic and approachable. The implementaion was too challenging as it required an understanding of JavaFX components to revamp the GUI. The GUI was also beautified make JobbiBot more aesthetically appealing to young students.
+** Highlights: This enhancement enhances the existing user interface. It required a firm understanding of user profile in order to create a chatbot persona that is realistic and approachable. The implementation was too challenging as it required an understanding of JavaFX components to revamp the GUI. The GUI was also beautified make JobbiBot more aesthetically appealing to young students.
 
 * *Minor enhancement*: Added Save and Unsave commands that allows user to add and remove specific internships to their personal Saved Collection.
 
