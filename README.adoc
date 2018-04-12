@@ -8,15 +8,17 @@ https://coveralls.io/github/se-edu/InternshipBook-level4?branch=master[image:htt
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 ifdef::env-github[]
-image::docs/images/ui.png[width="600"]
+image::docs/images/uiv1.5.png[width="600"]
 endif::[]
 
 ifndef::env-github[]
-image::images/ui.png[width="600"]
+image::images/uiv1.5.png[width="600"]
 endif::[]
 
 Jobbi Bot is a Chatbot Internship Search Application . Although it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
-Users will communicate with Jobbi their  via the CLI. In response, Jobbi will intelligently match the most suitable internships to the user's preferences.
+Users will communicate with Jobbi their via the CLI. In response, Jobbi will intelligently match the most suitable internships to the user's preferences.
+
+Enjoy!
 
 == Site Map
 * https://github.com/CS2103JAN2018-F11-B3/main/releases[Download the Latest Releases here]

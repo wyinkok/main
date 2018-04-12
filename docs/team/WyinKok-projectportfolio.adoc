@@ -1,0 +1,69 @@
+= Wyin Kok - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: JobbiBot
+
+---
+
+== Overview
+
+JobbiBot is a desktop Chatbot application for those who prefer to use an interactive app to source for internship
+opportunities. The user interacts with Jobbi using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: Revamp the GUI into a chat application
+** What it does: It provides the end user with an interactive interface to search for their ideal internships
+** Justification: This feature caters to users who prefer to use an interactive application or require step by step guidance in searching for internships.
+** Highlights: This enhancement enhances the existing user interface. It required a firm understanding of user profile in order to create a chatbot persona that is realistic and approachable. The implementaion was too challenging as it required an understanding of JavaFX components to revamp the GUI. The GUI was also beautified make JobbiBot more aesthetically appealing to young students.
+
+* *Minor enhancement*: Added Save and Unsave commands that allows user to add and remove specific internships to their personal Saved Collection.
+
+* *Code contributed*: [https://github.com/CS2103JAN2018-F11-B3/main/blob/master/collated/functional/wyinkok.md[Functional code]] [https://github.com/CS2103JAN2018-F11-B3/main/blob/master/collated/test/wyinkok.md[Test code]] [https://github.com/CS2103JAN2018-F11-B3/main/blob/master/collated/unused/wyinkok-unused.md[Unused code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Set up the team repository
+*** Managed releases `v1.4` - `v1.5rc` (2 releases) on GitHub
+** Planning and design:
+*** Designed the wireframe of the new JobbiBot GUI
+*** Planned attributes to be displayed on individual Internship Cards and Browser Panel
+*** Created multiple interations of chatbot conversation scenarios
+
+** Enhancements to existing features:
+*** Populated database of internships (Pull requests https://github.com/CS2103JAN2018-F11-B3/main/pull/155[#155])
+*** Removed unused commands and features provided by Address Book version 4 (Pull requests https://github.com/CS2103JAN2018-F11-B3/main/pull/153[#153])
+*** Updated the GUI color scheme and font (Pull requests https://github.com/CS2103JAN2018-F11-B3/main/pull/9[#9])
+
+** Documentation:
+*** Edited the ReadMe document (Pull request https://github.com/CS2103JAN2018-F11-B3/main/pull/99[#99], https://github.com/CS2103JAN2018-F11-B3/main/pull/103[#103])
+*** Did cosmetic tweaks to existing contents of the User Guide: (Pull request https://github.com/CS2103JAN2018-F11-B3/main/pull/89[#89])
+
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103JAN2018-W11-B4/main/issues/180[1], https://github.com/CS2103JAN2018-W11-B4/main/issues/199[2], https://github.com/CS2103JAN2018-W11-B4/main/issues/183[3])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=startnew]
+
+include::../UserGuide.adoc[tag=saveunsave]
+
+include::../UserGuide.adoc[tag=glossary]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=ui]
+
+include::../DeveloperGuide.adoc[tag=saveunsave]
