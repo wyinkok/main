@@ -36,7 +36,7 @@ public class UnsaveCommand extends UndoableCommand {
             "New internship removed from Saved Collection: %1$s";
     public static final String MESSAGE_DUPLICATE_REMOVAL = "This internship has been removed from the collection";
 
-    private final String SAVED_TAG = "saved";
+    private static final String SAVED_TAG = "saved";
     private final Index targetIndex;
     private Internship internshipWithoutSavedTag;
     private Internship internshipToUnsave;

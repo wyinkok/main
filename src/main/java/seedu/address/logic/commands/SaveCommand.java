@@ -35,7 +35,7 @@ public class SaveCommand extends UndoableCommand {
     public static final String MESSAGE_SAVED_INTERNSHIP_SUCCESS = "New internship saved: %1$s";
     public static final String MESSAGE_DUPLICATE_SAVED_INTERNSHIP = "This internship has been saved";
 
-    private final String SAVED_TAG = "saved";
+    private static final String SAVED_TAG = "saved";
     private final Index targetIndex;
     private Internship internshipWithSavedTag;
     private Internship internshipToSave;
