@@ -28,7 +28,7 @@ public class UnsavedInternshipBuilder {
     public Internship removeTag(Internship internshipToRemoveSavedTag) throws CommandException {
         final UniqueTagList internshipTags = new UniqueTagList(internshipToRemoveSavedTag.getTags());
         try {
-            internshipTags.delete(new Tag(savedTagName));
+            internshipTags.delete(new Tag(SAVED_TAG_NAME));
         } catch (TagNotFoundException e) {
             throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
         }

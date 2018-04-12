@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalInternships.CARL2;
 import static seedu.address.testutil.TypicalInternships.DANIEL;
 import static seedu.address.testutil.TypicalInternships.FIONA;
 import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_MEIER;
-import static seedu.address.testutil.UnsavedInternshipBuilder.MESSAGE_DUPLICATE_REMOVAL;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -224,7 +223,7 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
             try {
                 internshipTags.delete(new Tag(nameTag.getTagName()));
             } catch (TagNotFoundException e) {
-                throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
+                throw new CommandException("Tag to be deleted not found");
             }
         }
 
