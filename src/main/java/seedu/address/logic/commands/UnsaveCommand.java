@@ -36,7 +36,7 @@ public class UnsaveCommand extends UndoableCommand {
             "New internship removed from Saved Collection: %1$s";
     public static final String MESSAGE_DUPLICATE_REMOVAL = "This internship has been removed from the collection";
 
-    private final String SAVED_TAG_NAME = "saved";
+    private final String SAVED_TAG = "saved";
     private final Index targetIndex;
     private Internship internshipWithoutSavedTag;
     private Internship internshipToUnsave;
@@ -80,7 +80,7 @@ public class UnsaveCommand extends UndoableCommand {
     private Internship removeSavedTagToInternship(Internship internship) throws CommandException {
         final UniqueTagList personTags = new UniqueTagList(internshipToUnsave.getTags());
         try {
-            personTags.delete(new Tag(SAVED_TAG_NAME));
+            personTags.delete(new Tag(SAVED_TAG));
         } catch (SavedTagNotFoundException e) {
             throw new CommandException(MESSAGE_DUPLICATE_REMOVAL);
         }

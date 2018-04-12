@@ -35,7 +35,7 @@ public class SaveCommand extends UndoableCommand {
     public static final String MESSAGE_SAVED_INTERNSHIP_SUCCESS = "New internship saved: %1$s";
     public static final String MESSAGE_DUPLICATE_SAVED_INTERNSHIP = "This internship has been saved";
 
-    private final String SAVED_TAG_NAME = "saved";
+    private final String SAVED_TAG = "saved";
     private final Index targetIndex;
     private Internship internshipWithSavedTag;
     private Internship internshipToSave;
@@ -79,7 +79,7 @@ public class SaveCommand extends UndoableCommand {
     private Internship addSavedTagToInternship(Internship internship) throws CommandException {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
         try {
-            internshipTags.add(new Tag(SAVED_TAG_NAME));
+            internshipTags.add(new Tag(SAVED_TAG));
         } catch (UniqueTagList.DuplicateTagException e) {
             throw new CommandException(MESSAGE_DUPLICATE_SAVED_INTERNSHIP);
         }

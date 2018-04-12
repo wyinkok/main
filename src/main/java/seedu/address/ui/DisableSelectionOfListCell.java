@@ -5,7 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.MultipleSelectionModel;
 
 //@@author wyinkok-reused
-// Reused from https://stackoverflow.com/questions/20621752/javafx-make-listview-not-selectable-via-mouse with minor modifications
+// Reused from https://stackoverflow.com/questions/20621752/javafx-make-listview-not-selectable-via-mouse
+// with minor modifications
 
 /**
  * Disables list cell from being selected but enables scrolling of list view. Used in ChatBotPanel
