@@ -33,7 +33,7 @@ public class UnsaveCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_nonAlphanumeric_throwsParseException() {
+    public void parse_invalidArgs_notAlphanumeric_throwsParseException() {
         assertParseFailure(parser, "!", String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnsaveCommand.MESSAGE_USAGE));
     }
 }

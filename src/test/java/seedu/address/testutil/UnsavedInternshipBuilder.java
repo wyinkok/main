@@ -17,8 +17,8 @@ import seedu.address.model.tag.UniqueTagList;
 public class UnsavedInternshipBuilder {
 
 
-    public static final String MESSAGE_DUPLICATE_REMOVAL = "This internship has been removed from Saved Collection";
-    public final String SAVED_TAG_NAME = "saved";
+    private static final String MESSAGE_DUPLICATE_REMOVAL = "This internship has been removed from Saved Collection";
+    private static final String SAVED_TAG_NAME = "saved";
 
     /**
      * Initializes the UnsavedInternshipBuilder with the data of {@code internshipToRemoveSavedTag}.

@@ -16,8 +16,8 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class SavedInternshipBuilder {
 
-    public static final String MESSAGE_DUPLICATE_TAG = "This internship has been saved";
-    public final String SAVED_TAG_NAME = "saved";
+    private static final String MESSAGE_DUPLICATE_TAG = "This internship has been saved";
+    private static final String SAVED_TAG_NAME = "saved";
 
     /**
      * Initializes the SavedInternshipBuilder with the data of {@code internshipToAddSavedTag}.
