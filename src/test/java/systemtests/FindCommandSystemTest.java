@@ -25,7 +25,7 @@
 //import seedu.address.model.Model;
 //import seedu.address.model.tag.Tag;
 //
-//public class FindCommandSystemTest extends AddressBookSystemTest {
+//public class FindCommandSystemTest extends JobbiBotSystemTest {
 //
 //    @Test
 //    public void find() {
@@ -88,7 +88,7 @@
 //
 //        /* Case: find same internships in address book after deleting 1 of them -> 1 internship found */
 //        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-//        assertFalse(getModel().getAddressBook().getInternshipList().contains(BENSON));
+//        assertFalse(getModel().getJobbiBot().getInternshipList().contains(BENSON));
 //        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
 //        expectedModel = getModel();
 //        ModelHelper.setFilteredList(expectedModel, DANIEL);
@@ -160,7 +160,7 @@
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: mixed case command word -> 1 person found */
+//        /* Case: mixed case command word -> 1 internship found */
 //        command = "FiNd Meier";
 //        ModelHelper.setFilteredList(expectedModel, DANIEL);
 //        assertCommandSuccess(command, expectedModel);
@@ -172,10 +172,10 @@
 //     * box displays {@code Messages#MESSAGE_INTERNSHIPS_LISTED_OVERVIEW} with the number of internship in the filtered
 //     * list, and the model related components equal to {@code expectedModel}.
 //     * These verifications are done by
-//     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+//     * {@code JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
 //     * Also verifies that the status bar remains unchanged, and the command box has the default style class, and the
 //     * selected card updated accordingly, depending on {@code cardStatus}.
-//     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+//     * @see JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)
 //     */
 //    private void assertCommandSuccess(String command, Model expectedModel) {
 //        String expectedResultMessage = String.format(
@@ -191,10 +191,10 @@
 //     * Executes {@code command} and verifies that the command box displays {@code command}, the result display
 //     * box displays {@code expectedResultMessage} and the model related components equal to the current model.
 //     * These verifications are done by
-//     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+//     * {@code JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
 //     * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
 //     * error style.
-//     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+//     * @see JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)
 //     */
 //    private void assertCommandFailure(String command, String expectedResultMessage) {
 //        Model expectedModel = getModel();

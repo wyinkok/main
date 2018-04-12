@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_INTERNSHIP;
+import static seedu.address.logic.commands.SaveCommand.MESSAGE_DUPLICATE_SAVED_INTERNSHIP;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,7 +20,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.JobbiBotChangedEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
@@ -37,60 +37,62 @@ import seedu.address.model.util.Sorter;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final String SAVED_TAG_NAME = "[saved]";
 
     private static List<String> filterKeywords;
-    private final AddressBook addressBook;
+    private final JobbiBot jobbiBot;
     private final FilteredList<Internship> searchedInternships;
     private final FilteredList<Internship> filteredInternships;
     private final SortedList<Internship> sortedFilteredInternships;
 
+
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given jobbiBot and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyJobbiBot internshipBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(internshipBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with internship book: " + internshipBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
-        this.searchedInternships = new FilteredList<>(this.addressBook.getInternshipList());
+        this.jobbiBot = new JobbiBot(internshipBook);
+        this.searchedInternships = new FilteredList<>(this.jobbiBot.getInternshipList());
         this.filteredInternships = new FilteredList<>(searchedInternships);
         this.sortedFilteredInternships = new SortedList<>(filteredInternships);
         filterKeywords = new ArrayList<>();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new JobbiBot(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyJobbiBot newData) {
+        jobbiBot.resetData(newData);
+        indicateInternshipBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyJobbiBot getJobbiBot() {
+        return jobbiBot;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+    private void indicateInternshipBookChanged() {
+        raise(new JobbiBotChangedEvent(jobbiBot));
     }
 
     @Override
     public synchronized void deleteInternship(Internship target) throws InternshipNotFoundException {
-        addressBook.removeInternship(target);
-        indicateAddressBookChanged();
+        jobbiBot.removeInternship(target);
+        indicateInternshipBookChanged();
     }
 
     @Override
     public synchronized void addInternship(Internship internship) throws DuplicateInternshipException {
-        addressBook.addInternship(internship);
+        jobbiBot.addInternship(internship);
         updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-        indicateAddressBookChanged();
+        indicateInternshipBookChanged();
     }
 
     @Override
@@ -98,8 +100,8 @@ public class ModelManager extends ComponentManager implements Model {
             throws DuplicateInternshipException, InternshipNotFoundException {
         requireAllNonNull(target, editedInternship);
 
-        addressBook.updateInternship(target, editedInternship);
-        indicateAddressBookChanged();
+        jobbiBot.updateInternship(target, editedInternship);
+        indicateInternshipBookChanged();
     }
 
     //@@author niloc94
@@ -121,20 +123,21 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author TanCiKang
     /**
-     * Add keyword tags that matches the individual internship to the internship
+     * Adds keyword tags that matches the individual internship to the internship except keywords with only
+     * non-alphanumeric characters
      * @param keyword
      * @param internship
      * @return Internship
      * @throws CommandException
      */
-    private static Internship addTagsToInternshipWithMatch(String keyword, Internship internship)
-            throws CommandException {
+    private static Internship addTagsToInternshipWithMatch(String keyword, Internship internship) {
+
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
         try {
             internshipTags.add(new Tag(keyword));
         } catch (UniqueTagList.DuplicateTagException e) {
-            throw new CommandException ("Operation would result in duplicate tags");
+            throw new AssertionError("Operation would result in duplicate tags");
         }
 
         final Map<Tag, Tag> masterTagObjects = new HashMap<>();
@@ -145,7 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
-                internship.getIndustry(), internship.getLocation(), internship.getRole(), correctTagReferences);
+                internship.getIndustry(), internship.getRegion(), internship.getRole(), correctTagReferences);
     }
 
     //@@author TanCiKang
@@ -157,29 +160,42 @@ public class ModelManager extends ComponentManager implements Model {
      * @throws CommandException
      */
     public static void addTagsToFilteredList (List<String> filterKeywords,
-                                              ObservableList<Internship> filteredInternships, Model model)
-            throws CommandException {
+                                              ObservableList<Internship> filteredInternships, Model model) {
 
-        for (String keywords : filterKeywords) {
-            for (Internship filteredInternship : filteredInternships) {
-                if (StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keywords)) {
-                    try {
-                        model.updateInternship(filteredInternship,
-                                addTagsToInternshipWithMatch(keywords, filteredInternship));
-                    } catch (DuplicateInternshipException e) {
-                        throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
-                    } catch (InternshipNotFoundException e) {
-                        throw new AssertionError("The target internship cannot be missing");
-                    }
-                }
-            }
+        for (String keyword : filterKeywords) {
+            addFilteredInternshipsWithKeywordTags(filteredInternships, keyword, model);
         }
         return;
     }
 
     //@@author TanCiKang
     /**
-     * Remove all tags from individual internship other than 'saved' tags
+     * Add individual keyword tag to internships in filteredInternships when the keyword matches those internships
+     * @param filteredInternships
+     * @param keyword
+     * @param model
+     */
+    private static void addFilteredInternshipsWithKeywordTags(
+            ObservableList<Internship> filteredInternships, String keyword, Model model) {
+
+        filteredInternships.forEach(filteredInternship -> {
+            if (StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keyword)) {
+                try {
+                    model.updateInternship(filteredInternship, addTagsToInternshipWithMatch(keyword,
+                            filteredInternship));
+                } catch (InternshipNotFoundException e) {
+                    throw new AssertionError("The target internship cannot be missing");
+                } catch (DuplicateInternshipException e) {
+                    throw new AssertionError(MESSAGE_DUPLICATE_SAVED_INTERNSHIP);
+                }
+            }
+        });
+        return;
+    }
+
+    //@@author TanCiKang
+    /**
+     * Remove all tags other than 'saved' tags from individual internship
      * @param tagsToBeRemoved
      * @param internship
      * @return
@@ -188,7 +204,7 @@ public class ModelManager extends ComponentManager implements Model {
         final UniqueTagList internshipTags = new UniqueTagList(internship.getTags());
 
         for (Tag tagToBeRemoved : tagsToBeRemoved) {
-            if (!tagToBeRemoved.toString().equals("[saved]")) {
+            if (!tagToBeRemoved.toString().equals(SAVED_TAG_NAME)) {
                 try {
                     internshipTags.delete(tagToBeRemoved);
                 } catch (SavedTagNotFoundException e) {
@@ -205,24 +221,23 @@ public class ModelManager extends ComponentManager implements Model {
 
         return new Internship(
                 internship.getName(), internship.getSalary(), internship.getEmail(), internship.getAddress(),
-                internship.getIndustry(), internship.getLocation(), internship.getRole(), correctTagReferences);
+                internship.getIndustry(), internship.getRegion(), internship.getRole(), correctTagReferences);
     }
 
     //@@author TanCiKang
     /**
-     * Remove all tags that are not 'saved' from the internships
+     * Remove all tags that are not 'saved' from the internship list
      * @param internships
      * @param model
      * @throws CommandException
      */
-    public static void removeTagsFromInternshipList(ObservableList<Internship> internships, Model model)
-            throws CommandException {
+    public static void removeTagsFromInternshipList(ObservableList<Internship> internships, Model model) {
 
         for (Internship internship : internships) {
             try {
                 model.updateInternship(internship, removeTagsFromInternship(internship.getTags(), internship, model));
             } catch (DuplicateInternshipException e) {
-                throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
+                throw new AssertionError(MESSAGE_DUPLICATE_SAVED_INTERNSHIP);
             } catch (InternshipNotFoundException e) {
                 throw new AssertionError("The target internship cannot be missing");
             }
@@ -234,7 +249,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Internship} backed by the internal list of
-     * {@code addressBook}
+     * {@code jobbiBot}
      */
     @Override
     public ObservableList<Internship> getFilteredInternshipList() {
@@ -268,7 +283,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return jobbiBot.equals(other.jobbiBot)
                 && filteredInternships.equals(other.filteredInternships);
     }
 }

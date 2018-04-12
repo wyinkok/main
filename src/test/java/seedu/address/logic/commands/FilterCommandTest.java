@@ -7,7 +7,7 @@ import static seedu.address.testutil.TypicalInternships.CARL;
 import static seedu.address.testutil.TypicalInternships.CARL2;
 import static seedu.address.testutil.TypicalInternships.DANIEL;
 import static seedu.address.testutil.TypicalInternships.GEORGE;
-import static seedu.address.testutil.TypicalInternships.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobbiBot;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -29,10 +29,7 @@ import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
  */
 public class FilterCommandTest {
 
-    public static final String MESSAGE_FILTER_RESPONSE = "How would you to sort your results by? You may sort by "
-            + "name industry role etc \n\nE.g sortby industry role industry";
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -63,28 +60,28 @@ public class FilterCommandTest {
 
     @Test
     public void execute_multipleKeywords_zeroInternshipsFound() {
-        String expectedMessage = String.format(MESSAGE_FILTER_RESPONSE);
-        FilterCommand command = prepareCommand("Carl Daniel Meier");
+        String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_RESPONSE_NO_INTERNSHIP);
+        FilterCommand command = prepareCommand("TryFindingThis");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
     @Test
-    public void execute_multipleKeywords_singleInternshipsFound() {
-        String expectedMessage = String.format(MESSAGE_FILTER_RESPONSE);
-        FilterCommand command = prepareCommand("Kurz Carl");
-        assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL));
-    }
-
-    @Test
     public void execute_singleKeyword_multipleInternshipsFound() {
-        String expectedMessage = String.format(MESSAGE_FILTER_RESPONSE);
+        String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_RESPONSE);
         FilterCommand command = prepareCommand("Carl");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, CARL2));
     }
 
     @Test
+    public void execute_multipleKeywords_singleInternshipsFound() {
+        String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_RESPONSE);
+        FilterCommand command = prepareCommand("Carl Kurz");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL));
+    }
+
+    @Test
     public void execute_singleKeywordNonNameAttribute_multipleInternshipsFound() {
-        String expectedMessage = String.format(MESSAGE_FILTER_RESPONSE);
+        String expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_RESPONSE);
         FilterCommand command = prepareCommand("Street");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, DANIEL, GEORGE, CARL2));
     }
@@ -104,14 +101,14 @@ public class FilterCommandTest {
      * Asserts that {@code command} is successfully executed, and<br>
      *     - the command feedback is equal to {@code expectedMessage}<br>
      *     - the {@code FilteredList<Person>} is equal to {@code expectedList}<br>
-     *     - the {@code AddressBook} in model remains the same after executing the {@code command}
+     *     - the {@code JobbiBot} in model remains the same after executing the {@code command}
      */
     private void assertCommandSuccess(FilterCommand command, String expectedMessage, List<Internship> expectedList) {
-        AddressBook expectedAddressBook = new AddressBook(model.getAddressBook());
-        CommandResult commandResult = command.execute();
+        JobbiBot expectedJobbiBot = new JobbiBot(model.getJobbiBot());
+        CommandResult commandResult = command.executeUndoableCommand();
 
         assertEquals(expectedMessage, commandResult.feedbackToUser);
         assertEquals(expectedList, model.getFilteredInternshipList());
-        assertEquals(expectedAddressBook, model.getAddressBook());
+        assertEquals(expectedJobbiBot, model.getJobbiBot());
     }
 }

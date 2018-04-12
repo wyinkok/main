@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<InternshipBook>
+    <internships>
+        <name>Hans Muster</name>
+        <salary isPrivate="false">1000</salary>
+        <email isPrivate="false">hans@example.com</email>
+        <address isPrivate="false">4th street</address>
+        <industry isPrivate="false">Engineering</industry>
+        <region isPrivate="false">Geylang</region>
+        <role isPrivate="false">Safety Officer</role>
+    </internships>
+    <internships>
+        <name>Ruth Mueller</name>
+        <salary isPrivate="false">87249245</salary>
+        <email isPrivate="false">ruth@example.com</email>
+        <address isPrivate="false">81th street</address>
+        <industry isPrivate="false">Business</industry>
+        <region isPrivate="false">Serangoon</region>
+        <role isPrivate="false">Business Analyst</role>
+    </internships>
+    <internships>
+        <name>Heinz Kurz</name>
+        <salary isPrivate="false">95352563</salary>
+        <email isPrivate="false">heinz@example.com</email>
+        <address isPrivate="false">wall street</address>
+        <industry isPrivate="false">Finance</industry>
+        <region isPrivate="false">Ang Mo Kio</region>
+        <role isPrivate="false">Project Manager</role>
+    </internships>
+    <internships>
+        <name>Cornelia Meier</name>
+        <salary isPrivate="false">87652533</salary>
+        <email isPrivate="false">cornelia@example.com</email>
+        <address isPrivate="false">10th street</address>
+        <industry isPrivate="false">Consulting</industry>
+        <region isPrivate="false">Serangoon</region>
+        <role isPrivate="false">Consultant Assistant</role>
+    </internships>
+    <internships>
+        <name>Werner Meyer</name>
+        <salary isPrivate="false">9482224</salary>
+        <email isPrivate="false">werner@example.com</email>
+        <address isPrivate="false">michegan ave</address>
+        <industry isPrivate="false">Manufacturing</industry>
+        <region isPrivate="false">Tampines</region>
+        <role isPrivate="false">Quality Inspector</role>
+    </internships>
+    <internships>
+        <name>Lydia Kunz</name>
+        <salary isPrivate="false">9482427</salary>
+        <email isPrivate="false">lydia@example.com</email>
+        <address isPrivate="false">little tokyo</address>
+        <industry isPrivate="false">Services</industry>
+        <region isPrivate="false">Aljunied</region>
+        <role isPrivate="false">Customer Service</role>
+    </internships>
+    <internships>
+        <name>Anna Best</name>
+        <salary isPrivate="false">9482442</salary>
+        <email isPrivate="false">anna@example.com</email>
+        <address isPrivate="false">4th street</address>
+        <industry isPrivate="false">Engineering</industry>
+        <region isPrivate="false">Geylang</region>
+        <role isPrivate="false">Safety Officer</role>
+    </internships>
+    <internships>
+        <name>Stefan Meier</name>
+        <salary isPrivate="false">8482424</salary>
+        <email isPrivate="false">stefan@example.com</email>
+        <address isPrivate="false">little india</address>
+        <industry isPrivate="false">Business</industry>
+        <region isPrivate="false">Serangoon</region>
+        <role isPrivate="false">Business Analyst</role>
+    </internships>
+    <internships>
+        <name>Martin Mueller</name>
+        <salary isPrivate="false">8482131</salary>
+        <email isPrivate="false">hans@example.com</email>
+        <address isPrivate="false">chicago ave</address>
+        <industry isPrivate="false">Finance</industry>
+        <region isPrivate="false">Tampines</region>
+        <role isPrivate="false">Project Manager</role>
+    </internships>
+</InternshipBook>

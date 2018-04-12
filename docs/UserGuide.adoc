@@ -66,13 +66,13 @@ Format: `start`
 Restarts a new message thread of JobbiBot and the previous thread is deleted. +
 Format: `new`
 
-=== Find internships by keyword(s): `find` `search`
+=== Find internships by keyword(s): `find`
 
 Finds internships which contains any of the keywords. +
-Format: `search KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The find/search is case insensitive. e.g `analyst` will match `Analyst`
+* The find is case insensitive. e.g `analyst` will match `Analyst`
 * Tags other than 'saved' tag attached when using find/search function will be removed when using 'list'.
 * The order of the keywords does not matter. e.g. `Sales Marketing` will match `Marketing Sales`
 * Internships matching at least one keyword will be returned (i.e. `OR` search). e.g. `Micro Dyson` will return `Dyson Technology`, `Dyson Engineering` `Microsoft`
@@ -113,11 +113,11 @@ Returns any entries containing data. e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics. e.g 'data analytics internship', 'data analytics singapore'
 
-=== Sorting Internship by keyword(s): `sort` `sortby`
+=== Sorting Internship by keyword(s): `sort`
 
 Sorts the internship list according to the given keyword(s). +
 Format: `sort KEYWORD [MORE_KEYWORDS]` +
-Keywords are only limited to the following internship attribute types: `Address` `Email` `Industry` `Location` `Name` `Role` `Salary`
+Keywords are only limited to the following internship attribute types: `Address` `Email` `Industry` `Region` `Name` `Role` `Salary`
 
 ****
 * The sort is case insensitive. e.g `name` will match `Name`
@@ -129,8 +129,8 @@ Examples:
 
 * `sort name` +
 Sorts the internship list according to name attribute.
-* `sort salary location` +
-Sorts the internship list according to salary first then location.
+* `sort salary region` +
+Sorts the internship list according to salary first then region.
 
 === Saving an internship to a Saved Collection : `save`
 Saves the specified internship from the internship book. +
@@ -199,6 +199,11 @@ Selects the 1st internship in the results of the `find` command.
 
 Shows a list of all internships in the internship database. +
 Format: `list`
+
+=== Listing entered user commands : `history`
+
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
 
 // tag::undoredo[]
 === Undoing previous command : `undo`
@@ -291,6 +296,7 @@ This serves as a non-exhaustive lists of skills that users can search for
 * Banking and Finance
 * Biomedical Sciences
 * Community and Social Services
+* Consultancy
 * Education
 * Entrepreneurship and Businesses (General)
 * Fashion and Retail
@@ -318,30 +324,22 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Graphic Designer
                      | Photographer
                      | Videographer
-.9+| Banking and Finance
+.7+| Banking and Finance
                      | Accountant
-                     | Asset Management Analyst
                      | Audit Assistant
                      | Corporate Security Analyst
-                     | Financial Planner/Advisory
-                     | FinTech Analyst
+                     | Financial Planner / Advisory
                      | Private Equity Analyst
                      | Risk Management
                      | Wealth Management Analyst
-.2+| Community and Social Service
-                     | Community Relations Management
-                     | Human Services
-.7+| Consultancy
-                     | Education Consultant
+.5+| Consultancy
                      | Human Resource Consultant
-                     | Management Consultant
                      | Operations Consultant
-                     | Public Relations Consultant
-                     | Strategy Consultant
+                     | Sales Consultant
                      | Technology Consultant
-.2+| Education
-                     | Assessment and Curriculum Program Coordinator
-                     | Creative Writing Teaching
+                     | Wealth Management Consultant
+.1+| Education
+                     | Teacher
 .4+| Engineering
                      | Aerospace Engineer
                      | Electrical Engineer
@@ -392,8 +390,8 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Software Engineer
                      | Software Quality Assurance Engineer
                      | Unity3D (AR/VR)
-                     | User Experience
-                     | User Interface
+                     | User Experience Designer
+                     | User Interface Designer
                      | Web Development
 |=======================================================================
 
@@ -427,6 +425,6 @@ This serves as a non-exhaustive lists of skills that users can list in their con
 == FAQ
 
 *Q*: How do I update the internship list to the most updated version? +
-*A*: Download the database from the www.dummywebsite.com and replace the addressbook.xml file in main\data.
+*A*: Download the database from the www.dummywebsite.com and replace the InternshipBook.xml file in main\data.
 
 

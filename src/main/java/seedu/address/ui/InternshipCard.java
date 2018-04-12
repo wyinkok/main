@@ -19,7 +19,7 @@ public class InternshipCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/InternshipBook-level4/issues/336">The issue on JobbiBot level 4</a>
      */
 
     public final Internship internship;
@@ -31,11 +31,21 @@ public class InternshipCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label industryTitle;
+    @FXML
     private Label industry;
+    @FXML
+    private Label roleTitle;
     @FXML
     private Label role;
     @FXML
+    private Label salaryTitle;
+    @FXML
     private Label salary;
+    @FXML
+    private Label regionTitle;
+    @FXML
+    private Label region;
     @FXML
     private FlowPane tags;
 
@@ -44,9 +54,14 @@ public class InternshipCard extends UiPart<Region> {
         this.internship = internship;
         id.setText(displayedIndex + ". ");
         name.setText(internship.getName().fullName);
+        industryTitle.setText("Industry: ");
         industry.setText(internship.getIndustry().value);
+        roleTitle.setText("Role: ");
         role.setText(internship.getRole().value);
+        salaryTitle.setText("Stipend: $");
         salary.setText(internship.getSalary().value);
+        regionTitle.setText("Region: ");
+        region.setText(internship.getRegion().value);
 
         internship.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

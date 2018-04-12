@@ -2,7 +2,7 @@ package seedu.address.model.internship;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
+//@@author TanCiKang
 /**
  * Represents a Internship's location in the internship book.
  * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}

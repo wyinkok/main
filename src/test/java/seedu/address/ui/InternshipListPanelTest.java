@@ -28,10 +28,10 @@ public class InternshipListPanelTest extends GuiUnitTest {
 
     @Before
     public void setUp() {
-        InternshipListPanel personListPanel = new InternshipListPanel(TYPICAL_INTERNSHIPS);
-        uiPartRule.setUiPart(personListPanel);
+        InternshipListPanel internshipListPanel = new InternshipListPanel(TYPICAL_INTERNSHIPS);
+        uiPartRule.setUiPart(internshipListPanel);
 
-        internshipListPanelHandle = new InternshipListPanelHandle(getChildNode(personListPanel.getRoot(),
+        internshipListPanelHandle = new InternshipListPanelHandle(getChildNode(internshipListPanel.getRoot(),
                 InternshipListPanelHandle.INTERNSHIP_LIST_VIEW_ID));
     }
 

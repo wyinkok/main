@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import guitests.guihandles.ChatBotCardHandle;
 import guitests.guihandles.InternshipCardHandle;
 import guitests.guihandles.InternshipListPanelHandle;
-import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.internship.Internship;
 import seedu.address.ui.ChatBotCard;
 
@@ -81,13 +80,10 @@ public class GuiTestAssert {
         assertEquals(size, numberOfPeople);
     }
 
+    //@@author wyinkok
     /**
-     * Asserts the message shown in {@code resultDisplayHandle} equals to {@code expected}.
+     * Asserts the message in {@code chatBotCardHandle} equals to {@code expected} input.
      */
-    public static void assertResultMessage(ResultDisplayHandle resultDisplayHandle, String expected) {
-        assertEquals(expected, resultDisplayHandle.getText());
-    }
-
     public static void assertChatBotUserMessage(ChatBotCardHandle chatBotCardHandle, String expected) {
         assertEquals(expected, chatBotCardHandle.getMessages());
     }

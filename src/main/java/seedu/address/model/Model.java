@@ -17,10 +17,10 @@ public interface Model {
     Predicate<Internship> PREDICATE_SHOW_ALL_INTERNSHIPS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyJobbiBot newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the JobbiBot */
+    ReadOnlyJobbiBot getJobbiBot();
 
     /** Deletes the given internship. */
     void deleteInternship(Internship target) throws InternshipNotFoundException;

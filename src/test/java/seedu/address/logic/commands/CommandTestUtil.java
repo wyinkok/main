@@ -6,8 +6,8 @@ import static org.junit.Assert.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -20,12 +20,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobbiBot;
 import seedu.address.model.Model;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
+import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
-import seedu.address.testutil.EditInternshipDescriptorBuilder;
+import seedu.address.testutil.SavedInternshipBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -42,8 +43,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_INDUSTRY_AMY = "Engineering";
     public static final String VALID_INDUSTRY_BOB = "Finance";
-    public static final String VALID_LOCATION_AMY = "Geylang";
-    public static final String VALID_LOCATION_BOB = "Serangoon";
+    public static final String VALID_REGION_AMY = "Geylang";
+    public static final String VALID_REGION_BOB = "Serangoon";
     public static final String VALID_ROLE_AMY = "Safety Officer";
     public static final String VALID_ROLE_BOB = "Business Analyst";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -59,8 +60,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String INDUSTRY_DESC_AMY = " " + PREFIX_INDUSTRY + VALID_INDUSTRY_AMY;
     public static final String INDUSTRY_DESC_BOB = " " + PREFIX_INDUSTRY + VALID_INDUSTRY_BOB;
-    public static final String LOCATION_DESC_AMY = " " + PREFIX_LOCATION + VALID_LOCATION_AMY;
-    public static final String LOCATION_DESC_BOB = " " + PREFIX_LOCATION + VALID_LOCATION_BOB;
+    public static final String REGION_DESC_AMY = " " + PREFIX_REGION + VALID_REGION_AMY;
+    public static final String REGION_DESC_BOB = " " + PREFIX_REGION + VALID_REGION_BOB;
     public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
     public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -71,26 +72,13 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_INDUSTRY_DESC = " " + PREFIX_INDUSTRY + "_Media"; //'_' not allowed for industry
-    public static final String INVALID_LOCATION_DESC = " " + PREFIX_LOCATION; // empty string not allowed for location
+    public static final String INVALID_REGION_DESC = " " + PREFIX_REGION; // empty string not allowed for region
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE; // empty string not allowed for role
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditInternshipDescriptor DESC_AMY;
-    public static final EditCommand.EditInternshipDescriptor DESC_BOB;
-
-    static {
-        DESC_AMY = new EditInternshipDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withSalary(VALID_SALARY_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withIndustry(VALID_INDUSTRY_AMY).withLocation(VALID_LOCATION_AMY).withRole(VALID_ROLE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditInternshipDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withSalary(VALID_SALARY_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withIndustry(VALID_INDUSTRY_BOB).withLocation(VALID_LOCATION_BOB).withRole(VALID_ROLE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -100,7 +88,12 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
         try {
-            CommandResult result = command.execute();
+            CommandResult result = null;
+            try {
+                result = command.execute();
+            } catch (DuplicateInternshipException e) {
+                e.printStackTrace();
+            }
             assertEquals(expectedMessage, result.feedbackToUser);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -117,7 +110,7 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        JobbiBot expectedJobbiBot = new JobbiBot(actualModel.getJobbiBot());
         List<Internship> expectedFilteredList = new ArrayList<>(actualModel.getFilteredInternshipList());
 
         try {
@@ -125,8 +118,10 @@ public class CommandTestUtil {
             fail("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedJobbiBot, actualModel.getJobbiBot());
             assertEquals(expectedFilteredList, actualModel.getFilteredInternshipList());
+        } catch (DuplicateInternshipException e) {
+            e.printStackTrace();
         }
     }
 
@@ -144,18 +139,22 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredInternshipList().size());
     }
 
+    //@@author wyinkok
     /**
-     * Deletes the first internship in {@code model}'s filtered list from {@code model}'s address book.
+     * Saves the first internship in {@code model}'s filtered list from {@code model}'s address book.
      */
-    public static void deleteFirstInternship(Model model) {
-        Internship firstInternship = model.getFilteredInternshipList().get(0);
+    public static void saveFirstInternship(Model model) throws DuplicateInternshipException, CommandException {
+        Internship internshipToSave = model.getFilteredInternshipList().get(0);
+        Internship internshipWithSavedTag = new SavedInternshipBuilder()
+                .addTag(internshipToSave);
         try {
-            model.deleteInternship(firstInternship);
+            model.updateInternship(internshipToSave, internshipWithSavedTag);
         } catch (InternshipNotFoundException pnfe) {
             throw new AssertionError("Internship in filtered list must exist in model.", pnfe);
         }
     }
 
+    //@@author
     /**
      * Returns an {@code UndoCommand} with the given {@code model} and {@code undoRedoStack} set.
      */
