@@ -80,9 +80,9 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
 
 
         /* Case: find multiple internships in address book, 2 keywords with 1 repeat -> 2 internships found */
-        /*command = FindCommand.COMMAND_WORD + " Daniel Benson Daniel";
+        command = FindCommand.COMMAND_WORD + " Daniel Benson Daniel";
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();*/
+        assertSelectedCardUnchanged();
 
         /* Case: find multiple internships in address book, 2 matching keywords and 1 non-matching keyword
          * -> 2 internships found
