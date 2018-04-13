@@ -557,12 +557,6 @@ Another idea was to create separate Internship Book Model and its own storage fo
 
 // end::saveunsave[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
 
 // tag::findwithfeatures[]
 

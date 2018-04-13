@@ -313,22 +313,18 @@ e.g.`select 3`
 == List of Industries
 This serves as a non-exhaustive lists of skills that users can search for
 
-* Arts and Design
+* Arts Design
 * Automotive
-* Banking and Finance
 * Biomedical Sciences
-* Community and Social Services
+* Business
 * Consultancy
 * Education
-* Entrepreneurship and Businesses (General)
-* Fashion and Retail
-* Food and Beverages
-* Healthcare Services
+* Finance
+* Healthcare
 * Hospitality
 * Legal
-* Media and Communications
-* Military and Protective Services
-* Public Relations
+* Media
+* Retail
 * Research
 * Social Enterprise
 * Technology
@@ -341,18 +337,18 @@ This table is a non exhaustive list of potential internship roles that users can
 |=======================================================================
 |Industry | Internship Role
 
-.5+| Arts and Design | Animator
+.5+| Arts / Design | Animator
                      | Film Editor
                      | Graphic Designer
                      | Photographer
                      | Videographer
-.6+| Banking and Finance
-                     | Accountant
-                     | Audit Assistant
-                     | Corporate Security Analyst
-                     | Private Equity Analyst
-                     | Risk Management
-                     | Wealth Management Analyst
+.6+| Business
+                     | Business Analytics
+                     | Business Development
+                     | Market Researcher
+                     | Operations
+                     | Sales
+                     | Product Manager
 .4+| Consultancy
                      | Human Resource Consultant
                      | Sales Consultant
@@ -365,24 +361,24 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Electrical Engineer
                      | Manufacturing Engineer
                      | Mechanical Engineer
-.6+| General, Business and Entrepreneurship
-                     | Business Analytics
-                     | Business Development
-                     | Market Researcher
-                     | Operations
-                     | Sales
-                     | Product Manager
+.6+| Finance
+                     | Accountant
+                     | Audit Assistant
+                     | Corporate Security Analyst
+                     | Private Equity Analyst
+                     | Risk Management
+                     | Wealth Management Analyst
 .2+| Healthcare
                      | Patient Support
                      | Patient Advocate
-.4+| Hospitality and Tourism
+.4+| Hospitality
                      | Customer Experience
                      | Events Planning and Management
                      | Guest Services and Relations
                      | Sustainability
 .1+| Legal
                      | Legal Counsel
-.7+| Media and Communication
+.7+| Media
                      | Advertising / Content Creator
                      | Digital Marketer
                      | Editor
