@@ -26,7 +26,7 @@ Users will communicate with Jobbi their via the CLI. In response, Jobbi will int
 
 ** Project management:
 *** Set up the team repository
-*** Managed releases `v1.4` - `v1.5rc` (2 releases) on GitHub
+*** Managed releases `v1.4` on GitHub
 ** Planning and design:
 *** Designed the wireframe of the new JobbiBot GUI
 *** Planned attributes to be displayed on individual Internship Cards and Browser Panel
