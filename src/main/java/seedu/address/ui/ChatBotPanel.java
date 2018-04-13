@@ -71,7 +71,7 @@ public class ChatBotPanel extends UiPart<Region> {
      *  Expands on the message thread between user and Jobbi
      */
 
-    public void buildConversationWithUserResponse(ObservableList<String> listToBuild) {
+    public void buildConversation(ObservableList<String> listToBuild) {
         ObservableList<String> updatedMessages = handleUserResponse(listToBuild);
         ObservableList<ChatBotCard> mappedList = EasyBind.map(
                 updatedMessages, (msg) -> new ChatBotCard(msg));
@@ -119,7 +119,7 @@ public class ChatBotPanel extends UiPart<Region> {
     @Subscribe
     private void handleNewResultAvailableForChatBot(NewResultAvailableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        buildConversationWithUserResponse(messageList);
+        buildConversation(messageList);
         handleJobbiResponse(messageList, event.message);
     }
 

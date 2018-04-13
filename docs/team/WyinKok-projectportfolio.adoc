@@ -66,4 +66,6 @@ include::../UserGuide.adoc[tag=glossary]
 
 include::../DeveloperGuide.adoc[tag=ui]
 
+include::../DeveloperGuide.adoc[tag=chatbot]
+
 include::../DeveloperGuide.adoc[tag=saveunsave]
