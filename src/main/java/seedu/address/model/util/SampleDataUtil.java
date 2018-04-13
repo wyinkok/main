@@ -22,10 +22,10 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Internship[] getSampleInternships() {
         return new Internship[] {
-            new Internship(new Name("Yunomori Onsen Design Advertising Interns"), new Salary("800"),
+            new Internship(new Name("Yunomori Onsen"), new Salary("800"),
                 new Email("phoebe@yunomorionsen.com.sg"), new Address("1 Stadium Place, #02-17/18 Kallang "
                     + "Wave Mall, 397628"), new Industry("ArtsandDesign"), new Region("Central Region"),
-                    new Role("Design / Advertising"), getTagSet()),
+                    new Role("Design Advertising Interns"), getTagSet()),
             new Internship(new Name("Deloitte"), new Salary("750"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Industry("Business"),
                     new Region("Serangoon"), new Role("Business Development"), getTagSet()),
@@ -61,7 +61,7 @@ public class SampleDataUtil {
                 new Role("UI Designer"), getTagSet()),
             new Internship(new Name("Quantcast"), new Salary("3000"), new Email("jennie@example.com"),
                 new Address("Blk 45 Tampines Street 85, #11-31"), new Industry("Technology"), new Region("Tampines"),
-                new Role("Software Engineer"), getTagSet()),
+                new Role("Software Engineer"), getTagSet())
         };
     }
 
