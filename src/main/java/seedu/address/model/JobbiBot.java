@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the Internship-book level
  * Duplicates are not allowed (by .equals comparison)
  */
 public class JobbiBot implements ReadOnlyJobbiBot {
