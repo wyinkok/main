@@ -47,7 +47,7 @@ public class TypicalInternships {
             .withRegion("One North").withRole("Business Analyst").build();
 
 
-    public static final String KEYWORD_MATCHING_AUDIT = "Audit"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_AUDIT = "Audit"; // A keyword that matches AUDIT
 
     private TypicalInternships() {} // prevents instantiation
 

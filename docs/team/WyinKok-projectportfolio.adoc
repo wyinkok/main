@@ -8,8 +8,8 @@
 
 == Overview
 
-JobbiBot is a desktop Chatbot application for those who prefer to use an interactive app to source for internship
-opportunities. The user interacts with Jobbi using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Jobbi Bot is a Chatbot Internship Search Application . Although it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+Users will communicate with Jobbi their via the CLI. In response, Jobbi will intelligently match the most suitable internships to the user's preferences.
 
 == Summary of contributions
 
