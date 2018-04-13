@@ -114,7 +114,13 @@ public class SampleDataUtil {
                 new Role("Accounts Intern"), getTagSet()),
             new Internship(new Name("Macs Music School Pte Ltd"), new Salary("800"), new Email("jennie@example.com"),
                 new Address("Blk 45 Tampines Street 85, #11-31"), new Industry("Education"), new Region("Orchard"),
-                new Role("Intern Violin Teacher"), getTagSet())
+                new Role("Intern Violin Teacher"), getTagSet()),
+            new Internship(new Name("Pan Asia Logistics Investments Pte Ltd"), new Salary("800"), new Email("roybcd@example.com"),
+                new Address("21 Changi North Way, Singapore 498774"), new Industry("Transportation"), new Region("Changi"),
+                new Role("Finance Intern"), getTagSet()),
+            new Internship(new Name("PACE OD Consulting Pte Ltd"), new Salary("400"), new Email("jennie@example.com"),
+                new Address("Blk 45 Tampines Street 85, #11-31"), new Industry("Arts"), new Region("Oueenstown"),
+                new Role("Content Curation Intern"), getTagSet())
         };
     }
 
