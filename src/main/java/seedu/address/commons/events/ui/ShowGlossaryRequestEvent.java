@@ -1,12 +1,12 @@
 //@@author wyinkok-unused
-package seedu.address.commons.events.ui;
+//package seedu.address.commons.events.ui;
 
-import seedu.address.commons.events.BaseEvent;
+//import seedu.address.commons.events.BaseEvent;
 
 
 /**
  * An event requesting to view the Glossary page.
- */
+
 public class ShowGlossaryRequestEvent extends BaseEvent {
 
     @Override
@@ -15,3 +15,4 @@ public class ShowGlossaryRequestEvent extends BaseEvent {
     }
 
 }
+ */

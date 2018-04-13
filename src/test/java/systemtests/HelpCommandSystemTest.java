@@ -37,7 +37,7 @@ public class HelpCommandSystemTest extends JobbiBotSystemTest {
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowOpen();
 
-        getInternshipInternshipListPanel().click();
+        getInternshipListPanel().click();
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowOpen();
 
@@ -63,7 +63,7 @@ public class HelpCommandSystemTest extends JobbiBotSystemTest {
         assertCommandBoxShowsDefaultStyle();
         //assertNotEquals(HelpCommand.SHOWING_HELP_MESSAGE, getResultDisplay().getText());
         assertNotEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
-        assertListMatching(getInternshipInternshipListPanel(), getModel().getFilteredInternshipList());
+        assertListMatching(getInternshipListPanel(), getModel().getFilteredInternshipList());
     }
 
     /**

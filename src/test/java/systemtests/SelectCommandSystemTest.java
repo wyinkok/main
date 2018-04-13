@@ -112,7 +112,7 @@ public class SelectCommandSystemTest extends JobbiBotSystemTest {
         Model expectedModel = getModel();
         String expectedResultMessage = String.format(
                 MESSAGE_SELECT_INTERNSHIP_SUCCESS, expectedSelectedCardIndex.getOneBased());
-        int preExecutionSelectedCardIndex = getInternshipInternshipListPanel().getSelectedCardIndex();
+        int preExecutionSelectedCardIndex = getInternshipListPanel().getSelectedCardIndex();
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

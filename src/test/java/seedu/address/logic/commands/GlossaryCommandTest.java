@@ -1,5 +1,7 @@
 //@@author wyinkok-unused
+/*
 package seedu.address.logic.commands;
+
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -24,3 +26,4 @@ public class GlossaryCommandTest {
         assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
     }
 }
+ */

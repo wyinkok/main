@@ -1094,21 +1094,51 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and region is retained.
 
-_{ more test cases ... }_
+=== Starting a conversation with JobbiBot
+.. Test case: `start`
+    Expected: JobbiBot prints a response message in the message thread.
+.. Test case: `start x` (where x is an integer, alphabet or non alphanumerical character)
+    Expected: Conversation not started. Error details shown in the message thread.
+.. Test case: Subsequent `start` commands after entering the initial `start` commands
+    Expected: JobbiBot says that the conversation has already started and subsequent `start` commands has no effect on initiating the conversation again.
 
-=== Deleting a internship
+=== Clearing a previous conversation with JobbiBot
+.. Test case: `new`
+    Expected: Clears entire previous message thread and user only sees the JobbiBot welcome message left.
+.. Test case: `new x` (where x is an integer, alphabet or non alphanumerical character)
+    Expected: Previous conversation is not cleared. Error details shown in the message thread.
 
-. Deleting a internship while all internships are listed
+=== Saving an internship to Saved Collection
+
+. Saving an internship while all internships are listed
 
 .. Prerequisites: List all internships using the `list` command. Multiple internships in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No internship is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Test case: `save 1` +
+   Expected: First internship is saved from the list as visible from the `saved` tag added to the internship. Details of the successful saved internship shown as a JobbiBot response in the message thread.
+.. Test case: `save 1` to save the same internship from the same list again
+    Expected: Internship cannot be saved twice. Error details shown in the message thread.
+.. Test case: `save 0` +
+   Expected: No internship is saved. Error details shown in the message thread.
+.. Test case: `save -2` +
+  Expected: No internship is saved. Error details shown in the message thread.
+.. Other incorrect save commands to try: `save`, `save x` or `x save` (where x is larger than the list size or x is not an alphanumerical character
+ or x is a mathematical expression that evaluates to an positive integer),  +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+=== Removing an internship to Saved Collection
+
+. Removing an internship while all internships are listed
+
+.. Prerequisites: List all internships from the Saved Internship Collection using the `find saved` or `filter saved` command. Multiple internships in the Saved Collection.
+.. Test case: `unsave 1` +
+   Expected: First internship is removed from the Saved Collection as visible from the `saved` tag being removed from the internship and the internship is removed from the Saved Collection. Details of the successful removal is shown as a JobbiBot response in the message thread.
+.. Test case: `unsave 0` +
+   Expected: No internship is removed from Saved Collection. Error details shown in the message thread.
+.. Test case: `save -2` +
+  Expected: No internship is removed from Saved Collection. Error details shown in the message thread.
+.. Other incorrect save commands to try: `unsave`, `unsave x` or `x unsave` (where x is larger than the list size or x is not an alphanumerical character
+ or x is a mathematical expression that evaluates to an positive integer),  +
+   Expected: Similar to previous.
 
 === Saving data
 

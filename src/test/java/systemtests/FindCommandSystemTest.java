@@ -160,7 +160,7 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         /* Case: find while a internship is selected -> selected card deselected */
         showAllInternships();
         selectInternship(Index.fromOneBased(1));
-        assertFalse(getInternshipInternshipListPanel().getHandleToSelectedCard()
+        assertFalse(getInternshipListPanel().getHandleToSelectedCard()
             .getName().equals(BUSINESS3.getName().fullName));
         command = FindCommand.COMMAND_WORD + " Consulting";
         expectedModel.updateInternship(BUSINESS3, addTag(removeAllTag(BUSINESS3), "Consulting"));

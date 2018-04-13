@@ -22,6 +22,7 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.ChatBotListPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.InternshipListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -99,8 +100,12 @@ public abstract class JobbiBotSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public InternshipListPanelHandle getInternshipInternshipListPanel() {
+    public InternshipListPanelHandle getInternshipListPanel() {
         return mainWindowHandle.getInternshipListPanel();
+    }
+
+    public ChatBotListPanelHandle getChatBotListPanel() {
+        return mainWindowHandle.getChatBotListPanel();
     }
 
     public MainMenuHandle getMainMenu() {
@@ -115,9 +120,6 @@ public abstract class JobbiBotSystemTest {
         return mainWindowHandle.getStatusBarFooter();
     }
 
-    //    public ResultDisplayHandle getResultDisplay() {
-    //  return mainWindowHandle.getResultDisplay();
-    //}
 
     /**
      * Executes {@code command} in the application's {@code CommandBox}.
@@ -135,7 +137,7 @@ public abstract class JobbiBotSystemTest {
     }
 
     /**
-     * Displays all internships in the address book.
+     * Displays all internships in the internship book.
      */
     protected void showAllInternships() {
         executeCommand(ListCommand.COMMAND_WORD);
@@ -157,7 +159,7 @@ public abstract class JobbiBotSystemTest {
      */
     protected void selectInternship(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getInternshipInternshipListPanel().getSelectedCardIndex());
+        assertEquals(index.getZeroBased(), getInternshipListPanel().getSelectedCardIndex());
     }
 
     /**
@@ -171,7 +173,7 @@ public abstract class JobbiBotSystemTest {
         //assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(expectedModel, getModel());
         assertEquals(expectedModel.getJobbiBot(), testApp.readStorageInternshipBook());
-        assertListMatching(getInternshipInternshipListPanel(), expectedModel.getFilteredInternshipList());
+        assertListMatching(getInternshipListPanel(), expectedModel.getFilteredInternshipList());
     }
 
     /**
@@ -183,7 +185,7 @@ public abstract class JobbiBotSystemTest {
         getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
-        getInternshipInternshipListPanel().rememberSelectedInternshipCard();
+        getInternshipListPanel().rememberSelectedInternshipCard();
     }
 
     /**
@@ -193,7 +195,7 @@ public abstract class JobbiBotSystemTest {
      */
     protected void assertSelectedCardDeselected() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getInternshipInternshipListPanel().isAnyCardSelected());
+        assertFalse(getInternshipListPanel().isAnyCardSelected());
     }
 
     /**
@@ -203,7 +205,7 @@ public abstract class JobbiBotSystemTest {
      * @see InternshipListPanelHandle#isSelectedInternshipCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-        String selectedCardUrl = getInternshipInternshipListPanel().getHandleToSelectedCard().getUrl();
+        String selectedCardUrl = getInternshipListPanel().getHandleToSelectedCard().getUrl();
         URL expectedUrl;
         try {
             expectedUrl =
@@ -214,7 +216,7 @@ public abstract class JobbiBotSystemTest {
         assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(),
-                getInternshipInternshipListPanel().getSelectedCardIndex());
+                getInternshipListPanel().getSelectedCardIndex());
     }
 
     /**
@@ -224,7 +226,7 @@ public abstract class JobbiBotSystemTest {
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getInternshipInternshipListPanel().isSelectedInternshipCardChanged());
+        assertFalse(getInternshipListPanel().isSelectedInternshipCardChanged());
     }
 
     /**
@@ -268,8 +270,7 @@ public abstract class JobbiBotSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         try {
             assertEquals("", getCommandBox().getInput());
-            //assertEquals("", getResultDisplay().getText());
-            assertListMatching(getInternshipInternshipListPanel(), getModel().getFilteredInternshipList());
+            assertListMatching(getInternshipListPanel(), getModel().getFilteredInternshipList());
             assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE),
                     getBrowserPanel().getLoadedUrl());
             assertEquals("./" + testApp.getStorageSaveLocation(), getStatusBarFooter().getSaveLocation());
