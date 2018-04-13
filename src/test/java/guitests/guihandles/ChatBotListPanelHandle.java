@@ -7,7 +7,7 @@ import javafx.scene.control.ListView;
 import seedu.address.ui.ChatBotCard;
 
 /**
- * Provides a handle for {@code InternshipListPanel} containing the list of {@code InternshipCard}.
+ * Provides a handle for {@code ChatBotListPanel} containing the list of {@code ChatBotCard}.
  */
 public class ChatBotListPanelHandle extends NodeHandle<ListView<ChatBotCard>> {
     public static final String CHAT_BOT_LIST_VIEW_ID = "#chatBotListView";

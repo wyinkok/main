@@ -12,7 +12,7 @@ and https://www.yale-nus.edu.sg[Yale-NUS College].
 
 == Project Team
 
-=== Wyin Kok
+=== Kok Wyin
 image::Wyin.jpg[width="150", align="left"]
 {empty}[http://github.com/wyinkok[github]]
 

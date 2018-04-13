@@ -333,6 +333,214 @@ See diagram below <Insert Model Manager Diagram>
 
 // end::filter[]
 
+// tag::chatbot[]
+=== Chatbot Feature
+The Chatbot is the key UI feature of this application. Through the Chatbot, JobbiBot, students will receive guidance
+and step-by-step prompts on how to narrow down their internship search. They are able to communicate with JobbiBot using the CLI.
+This is an important feature for our target users because they may not always know how to begin their search or what to look for.
+
+==== Current (Main) Implementation
+Each message is contained within a ListCell, otherwise named as a `ChatBotCard` in JobbiBot. A `ChatBotCard` is made up of a JavaFX HBox class that contains a Label class.
+The Label is used to display the text either from Jobbi's response to user input or vice versa.
+
+When a new event is raised, typically when a user keys in a command, there are three methods that handle Jobbi and user responses in order to render the conversation between Jobbi and the user on the ListView.
+
+The first method to handle each user input in the command box is `handleUserResponse`.
+----
+    public ObservableList<String> handleUserResponse(ObservableList<String> listToUpdateWithUserResponse) {
+        historySnapshot = logic.getHistorySnapshot();
+        // Checks if user has typed the `start` command and adds the current element in the history snapshot list to the ObservableList<String>
+        if (historySnapshot.hasElement("start")) {
+            listToUpdateWithUserResponse.add("USER:   " + historySnapshot.current());
+
+            // ... Checks if user has restarted conversation if Jobbi ...
+
+        // Returns the updated list which is used in `buildConversation` method to render the updated ListView
+        return listToUpdateWithUserResponse;
+    }
+----
+The second method to handle each Jobbi's response is `handleJobbiResponse`.
+
+----
+    public ObservableList<String> handleJobbiResponse(ObservableList<String> listToUpdateWithJobbiResponse,
+                                                      String message) {
+        historySnapshot = logic.getHistorySnapshot();
+        // Checks if the user has typed in `start` command to initiate conversation and add the message returned from the EventBus
+        if (historySnapshot.hasElement("start")) {
+            listToUpdateWithJobbiResponse.add("JOBBI:  " + message);
+
+            // ... Checks if user has restarted conversation if Jobbi ...
+
+          // Returns the updated list which is used in `buildConversation` method to render the updated ListView
+        return listToUpdateWithJobbiResponse;
+    }
+----
+
+Finally, the last method takes an ObservableList of strings which has been updated with the latest Jobbi and user response to an event
+and renders the ListView of the message thread.
+----
+    public void buildConversation(ObservableList<String> listToBuild) {
+        // Calls handleUserResponse() method with a ObservableList<String> that stores all the previous String messages between Jobbi and User
+        ObservableList<String> updatedMessages = handleUserResponse(listToBuild);
+
+        // Maps each message in the updated ObservableList<String> to a ChatBotCard
+        ObservableList<ChatBotCard> mappedList = EasyBind.map(
+                updatedMessages, (msg) -> new ChatBotCard(msg));
+
+        // ... Recreates the ListView with the new user input ...
+    }
+----
+
+==== Design Considerations
+A JavaFX ListView class was specifically chosen because it allows for the vertical display of items, such a message thread.
+A ListView instance is buildable with many ListCell objects so a message thread between Jobbi and user can grow extensively.
+It also enables scrolling so that the user is able to scroll up and down to view his or her chat history.
+
+However, two main aspects of the ListView class was altered:
+
+* The ability to select a list cell was disabled since users would not need to select individual messages
+* Auto scrolling to the latest message was added so that users will always see the latest message response first.
+
+// end::chatbot[]
+
+// tag::saveunsave[]
+=== Save/Unsave Feature
+==== Current Implementation
+
+The save/unsave mechanism is facilitated by the addition of a `saved` tag or removal of the `saved` tag
+respectively. Inspired by the Instagram saved feature, it allows our users to personally curate specific
+internships that they would like to save for a quick reference in the future as opposed to re-searching for
+a particular internship again.
+
+However, the special part of this feature is that users do not add or remove the `saved` tags in the CLI.
+Instead, they simply type in the command `save` or `unsave` with an index number and the command internally
+add a new "saved" tag to the internship or remove the tag. This mechanism inherits from `UndoableCommand` and is
+executed by the `LogicManager`.
+
+To achieve the internal addition of a saved tag, we added a `addSavedTagToInternship` method
+within the SaveCommand object. This method is self-invocated by the object's other methods, such as `preprocessUndoableCommand`.
+----
+private Internship addSavedTagToInternship(Internship internship) throws CommandException {
+        //Creates a UniqueTagList of the specific internship's tags only
+        final UniqueTagList internshipTags = new UniqueTagList(internshipToSave.getTags());
+
+
+        //Adds a 'saved' tag only to internships that do not already possess the 'saved' tag or else an exception is thrown
+        try {
+            personTags.add(new Tag(SAVED_TAG));
+        } catch (UniqueTagList.DuplicateTagException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_SAVED_INTERNSHIP);
+        }
+
+        // ... rebuilds the updated list of tags ...
+
+        // returns an internship with all the same information except for an additional "saved" tag
+        return new Internship(
+                internship.getName(), internship.getPhone(), internship.getEmail(), internship.getAddress(), correctTagReferences);
+    }
+----
+The execution of this method in the `SaveCommand` object affects
+the `Model` and `UI` by adding a visible `saved` tag to a specific internship. The result of the `SaveCommand`
+execution is encapsulated as a `CommandResult` object which is passed back to UI.
+
+Below is a Sequence Diagram that demonstrates the interaction within the `Logic` component for the
+`execute("saved 1")`.
+
+image::SaveCommandSequenceDiagram.png[width="800"]
+
+Similarly, to achieve the internal removal of a saved tag, we added a `removeSavedTagToInternship` method
+within the UnsaveCommand object. The implementation of this method and its concept is exactly the opposite of
+the SaveCommand.
+
+----
+    private Internship removeSavedTagToInternship(Internship internship) {
+        //Creates a UniqueTagList of the specific internship's tags only
+        final UniqueTagList internshipTags = new UniqueTagList(internshipToUnsave.getTags());
+
+
+        //Checks for an existing "saved" tag and removes it from the UniqueTagList
+        internshipTags.delete(new Tag(SAVED_TAG));
+
+
+        // ... rebuilds the new list of tags and returns same person object without "saved" tag  ...
+    }
+
+----
+
+==== Design Considerations
+
+With the `saved` tag, users are able to identify the internships they have saved in their personal collection in the `InternshipCardPanel`.
+When users want to remove the internship from their collection, they can type the `unsave` command to remove the tag.
+To view the entire collection, they can type `find saved` or `filter saved` into the CLI that basically searches for all the
+internships with "saved" tags and displays the filtered list.
+
+We chose to use the additional and removal of tags for two main reasons:
+
+* It is visible to the user which internship has been saved or unsaved
+* It is more straightforward in terms of implementation to do a search by a specific tag to display the Saved Collection
+* Users are able to further narrow down on their search from the Saved Collection. For example, `find saved business` will return a filtered list of internships
+in the Saved Collection that are related to the business industry.
+
+===== Alternative Solution 1: Readapt the existing Implementation of the `edit` Command
+The `edit` command allowed users to edit the tags of a specific internship. We could have potentially used it to add the `saved` tag to specific internships
+
+*** Pros: Much simpler implementation since the `edit` command has been provided by the Address Book 4.
+*** Cons 1: Editing tags with the `edit` command erases previous tags from the internship but we want to add the `saved` tag to the existing tags.
+*** Cons 2: The command line input is relatively less user friendly. For example, user had to input `edit 1 t/saved` to add `saved` tag to the first internship of the filtered list.
+On the other hand, the `save` command only requires the user to type in `save 1` for the same outcome.
+
+===== Alternative Solution 2: Create an additional model
+Another idea was to create separate Internship Book Model and its own storage for the Saved Collections
+
+*** Pros: Able to save in hard disk storage
+*** Cons: May have performance issues in terms of memory usage and may have to significantly change the architecture
+
+// end::saveunsave[]
+
+
+// tag::findwithfeatures[]
+
+=== Find Command with Adding Tag Feature
+
+==== Rationale
+As the current find command work like a union search, users are able to key in multiple keywords at one go and JobbiBot will show
+all the internships that matches at least one of the keywords. However, users will not be able to differentiate which
+internships matches which keywords they have keyed in. As such this new feature enables them to have a clearer picture of
+which internship suits them more and enable them to further filter from the list.
+
+==== Current Implementation
+
+The add tag feature is implemented as part of the find command. However, as models will be change due to the addition of tags,
+some codes are implemented within ModelManager.
+
+image::FindCommandSequenceDiagram.png[width="1200"]
+
+As it can be seen from the diagram, `Logic` uses the `InternshipBookParser` class to parse the user command.
+After which, `FindCommandParser` is created and use to parse the keyword. The keyword is then set in `ModelManager` via the
+setKeywords() method. A `FindCommand` object is then created followed by the `internshipContainsKeywordsPredicate`.
+
+In the second phase, the command is being executed in `FindCommand`. The first updateSearchedInternshipList() update the
+searchedInternship with all the internships available and remove all tags from them apart from `saved` tags. Following which
+the second updateSearchedInternshipList() update the searchedInternshipList with the internships that matches the keywords
+use as the argument in `FindCommand`. Those keywords are then added to the respective internships that matches it through the
+addTagsToFilteredList(). `FindCommand` then execute getCommandResult() and return the result of the command execution encapsulated
+as a `CommandResult` object and returns it to the `LogicManager` and subsequently to the UI and displayed to the user.
+
+==== Design Considerations
+
+Location of the functions
+
+Alternative 1:
+
+Alternative 2:
+
+Implementation of the codes
+
+Alternative 1:
+
+Alternative 2:
+
+// end::findwithfeatures[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -461,146 +669,6 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate stack, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two * different things.
 // end::undoredo[]
-
-
-// tag::saveunsave[]
-=== Save/Unsave feature
-==== Current Implementation
-
-The save/unsave mechanism is facilitated by the addition of a `saved` tag or removal of the `saved` tag
-respectively. Inspired by the Instagram saved feature, it allows our users to personally curate specific
-internships that they would like to save for a quick reference in the future as opposed to re-searching for
-a particular internship again.
-
-However, the special part of this feature is that users do not add or remove the `saved` tags in the CLI.
-Instead, they simply type in the command `save` or `unsave` with an index number and the command internally
-add a new "saved" tag to the internship or remove the tag. This mechanism inherits from `UndoableCommand` and is
-executed by the `LogicManager`.
-
-To achieve the internal addition of a saved tag, we added a `addSavedTagToInternship` method
-within the SaveCommand object. This method is self-invocated by the object's other methods, such as `preprocessUndoableCommand`.
-----
-private Internship addSavedTagToInternship(Internship internship) throws CommandException {
-        //Creates a UniqueTagList of the specific internship's tags only
-        final UniqueTagList internshipTags = new UniqueTagList(internshipToSave.getTags());
-
-
-        //Adds a 'saved' tag only to internships that do not already possess the 'saved' tag or else an exception is thrown
-        try {
-            personTags.add(new Tag(SAVED_TAG));
-        } catch (UniqueTagList.DuplicateTagException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_SAVED_INTERNSHIP);
-        }
-
-        // ... rebuilds the updated list of tags ...
-
-        // returns an internship with all the same information except for an additional "saved" tag
-        return new Internship(
-                internship.getName(), internship.getPhone(), internship.getEmail(), internship.getAddress(), correctTagReferences);
-    }
-----
-The execution of this method in the `SaveCommand` object affects
-the `Model` and `UI` by adding a visible `saved` tag to a specific internship. The result of the `SaveCommand`
-execution is encapsulated as a `CommandResult` object which is passed back to UI.
-
-Below is a Sequence Diagram that demonstrates the interaction within the `Logic` component for the
-`execute("saved 1")`.
-
-image::SaveCommandSequenceDiagram.png[width="800"]
-
-Similarly, to achieve the internal removal of a saved tag, we added a `removeSavedTagToInternship` method
-within the UnsaveCommand object. The implementation of this method and its concept is exactly the opposite of
-the SaveCommand.
-
-----
-    private Internship removeSavedTagToInternship(Internship internship) {
-        //Creates a UniqueTagList of the specific internship's tags only
-        final UniqueTagList internshipTags = new UniqueTagList(internshipToUnsave.getTags());
-
-
-        //Checks for an existing "saved" tag and removes it from the UniqueTagList
-        internshipTags.delete(new Tag(SAVED_TAG));
-
-
-        // ... rebuilds the new list of tags and returns same person object without "saved" tag  ...
-    }
-
-----
-
-==== Design Considerations
-
-With the `saved` tag, users are able to identify the internships they have saved in their personal collection in the `InternshipCardPanel`.
-When users want to remove the internship from their collection, they can type the `unsave` command to remove the tag.
-To view the entire collection, they can type `find saved` or `filter saved` into the CLI that basically searches for all the
-internships with "saved" tags and displays the filtered list.
-
-We chose to use the additional and removal of tags for two main reasons:
-
-* It is visible to the user which internship has been saved or unsaved
-* It is more straightforward in terms of implementation to do a search by a specific tag to display the Saved Collection
-* Users are able to further narrow down on their search from the Saved Collection. For example, `find saved business` will return a filtered list of internships
-in the Saved Collection that are related to the business industry.
-
-===== Alternative Solution 1: Readapt the existing Implementation of the `edit` Command
-The `edit` command allowed users to edit the tags of a specific internship. We could have potentially used it to add the `saved` tag to specific internships
-
-*** Pros: Much simpler implementation since the `edit` command has been provided by the Address Book 4.
-*** Cons 1: Editing tags with the `edit` command erases previous tags from the internship but we want to add the `saved` tag to the existing tags.
-*** Cons 2: The command line input is relatively less user friendly. For example, user had to input `edit 1 t/saved` to add `saved` tag to the first internship of the filtered list.
-On the other hand, the `save` command only requires the user to type in `save 1` for the same outcome.
-
-===== Alternative Solution 2: Create an additional model
-Another idea was to create separate Internship Book Model and its own storage for the Saved Collections
-
-*** Pros: Able to save in hard disk storage
-*** Cons: May have performance issues in terms of memory usage and may have to significantly change the architecture
-
-// end::saveunsave[]
-
-
-// tag::findwithfeatures[]
-
-=== Find Command with adding tag feature
-
-==== Rationale
-As the current find command work like a union search, users are able to key in multiple keywords at one go and JobbiBot will show
-all the internships that matches at least one of the keywords. However, users will not be able to differentiate which
-internships matches which keywords they have keyed in. As such this new feature enables them to have a clearer picture of
-which internship suits them more and enable them to further filter from the list.
-
-==== Current Implementation
-
-The add tag feature is implemented as part of the find command. However, as models will be change due to the addition of tags,
-some codes are implemented within ModelManager.
-
-image::FindCommandSequenceDiagram.png[width="1200"]
-
-As it can be seen from the diagram, `Logic` uses the `InternshipBookParser` class to parse the user command.
-After which, `FindCommandParser` is created and use to parse the keyword. The keyword is then set in `ModelManager` via the
-setKeywords() method. A `FindCommand` object is then created followed by the `internshipContainsKeywordsPredicate`.
-
-In the second phase, the command is being executed in `FindCommand`. The first updateSearchedInternshipList() update the
-searchedInternship with all the internships available and remove all tags from them apart from `saved` tags. Following which
-the second updateSearchedInternshipList() update the searchedInternshipList with the internships that matches the keywords
-use as the argument in `FindCommand`. Those keywords are then added to the respective internships that matches it through the
-addTagsToFilteredList(). `FindCommand` then execute getCommandResult() and return the result of the command execution encapsulated
-as a `CommandResult` object and returns it to the `LogicManager` and subsequently to the UI and displayed to the user.
-
-==== Design Considerations
-
-Location of the functions
-
-Alternative 1:
-
-Alternative 2:
-
-Implementation of the codes
-
-Alternative 1:
-
-Alternative 2:
-
-// end::findwithfeatures[]
 
 === Logging
 
@@ -758,10 +826,10 @@ b. Require developers to download those libraries manually (this creates extra w
 === Target user profile
 
 * are university students looking for internships
-* but not sure where to start or what to look for
+* but not sure how to start or what to look for
+* prefers to an interactive application to source for internships rather than a normal and static web application
+* wants to narrow down the list of internships with guidance
 * prefers typing rather than clicking on internship portals
-* prefers to an interactive application to search for internships rather than a normal list
-* wants to narrow down the list of internships in an intuitive manner
 * can type fast
 * is reasonably comfortable using CLI apps
 
@@ -1026,7 +1094,51 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and region is retained.
 
-_{ more test cases ... }_
+=== Starting a conversation with JobbiBot
+.. Test case: `start`
+    Expected: JobbiBot prints a response message in the message thread.
+.. Test case: `start x` (where x is an integer, alphabet or non alphanumerical character)
+    Expected: Conversation not started. Error details shown in the message thread.
+.. Test case: Subsequent `start` commands after entering the initial `start` commands
+    Expected: JobbiBot says that the conversation has already started and subsequent `start` commands has no effect on initiating the conversation again.
+
+=== Clearing a previous conversation with JobbiBot
+.. Test case: `new`
+    Expected: Clears entire previous message thread and user only sees the JobbiBot welcome message left.
+.. Test case: `new x` (where x is an integer, alphabet or non alphanumerical character)
+    Expected: Previous conversation is not cleared. Error details shown in the message thread.
+
+=== Saving an internship to Saved Collection
+
+. Saving an internship while all internships are listed
+
+.. Prerequisites: List all internships using the `list` command. Multiple internships in the list.
+.. Test case: `save 1` +
+   Expected: First internship is saved from the list as visible from the `saved` tag added to the internship. Details of the successful saved internship shown as a JobbiBot response in the message thread.
+.. Test case: `save 1` to save the same internship from the same list again
+    Expected: Internship cannot be saved twice. Error details shown in the message thread.
+.. Test case: `save 0` +
+   Expected: No internship is saved. Error details shown in the message thread.
+.. Test case: `save -2` +
+  Expected: No internship is saved. Error details shown in the message thread.
+.. Other incorrect save commands to try: `save`, `save x` or `x save` (where x is larger than the list size or x is not an alphanumerical character
+ or x is a mathematical expression that evaluates to an positive integer),  +
+   Expected: Similar to previous.
+
+=== Removing an internship to Saved Collection
+
+. Removing an internship while all internships are listed
+
+.. Prerequisites: List all internships from the Saved Internship Collection using the `find saved` or `filter saved` command. Multiple internships in the Saved Collection.
+.. Test case: `unsave 1` +
+   Expected: First internship is removed from the Saved Collection as visible from the `saved` tag being removed from the internship and the internship is removed from the Saved Collection. Details of the successful removal is shown as a JobbiBot response in the message thread.
+.. Test case: `unsave 0` +
+   Expected: No internship is removed from Saved Collection. Error details shown in the message thread.
+.. Test case: `save -2` +
+  Expected: No internship is removed from Saved Collection. Error details shown in the message thread.
+.. Other incorrect save commands to try: `unsave`, `unsave x` or `x unsave` (where x is larger than the list size or x is not an alphanumerical character
+ or x is a mathematical expression that evaluates to an positive integer),  +
+   Expected: Similar to previous.
 
 === Saving data
 
