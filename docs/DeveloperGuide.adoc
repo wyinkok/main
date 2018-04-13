@@ -194,10 +194,6 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The command execution can affect the `Model` (e.g. adding a internship) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
-
-.Interactions Inside the Logic Component for the `delete 1` Command
-image::DeletePersonSdForLogic.png[width="800"]
 
 [[Design-Model]]
 === Model component
@@ -236,7 +232,7 @@ Classes used by multiple components are in the `seedu.InternshipBook.commons` pa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::Filter Command Feature[]
+// tag::filter[]
 === Filter Feature
 ==== Implementation
 
@@ -335,7 +331,8 @@ See Diagram below: <Insert Diagram to show how the propagation works here>
 
 See diagram below <Insert Model Manager Diagram>
 
-// end::Search and Filter Command[]
+// end::filter[]
+
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -750,11 +747,9 @@ b. Require developers to download those libraries manually (this creates extra w
 [width="59%",cols="22%,<23%,<15%,<50%",options="header",]
 |=======================================================================
 |Contributor |Feature | Major/Minor | Remarks
-| Colin | Ranking/Filtering| Major | Implement a complete set of ranking/filtering/searching commands
+| Colin | Sorting/Filtering| Major | Designed and implemented a complete set of sorting/filtering/searching commands. Searching implemented by TanCiKang
 
-| Colin | Model Enhancement | Minor | Modify list view to work with new commands. Allow Refiltering / Searching / Finding from existing list instead of new list
-
-| Colin | Save Command | Minor | Enable users to view their Saved Collection
+| Colin | Model Enhancement | Minor | Modify list view to work with new commands. Allow filtering / sorting from existing list instead of new list
 
 | Ci Kang | Enhance Find Command | Major | Add tags to internship that matches keywords in find command and enable find command to search for multiple attributes
 
@@ -901,79 +896,70 @@ Use case ends.
 [none]
 ** 4a1. JobbiBot shows an error message
 ** Use case resumes at step 2.
+
 [discrete]
-
-
 === Use case: Finding Internship
 
-*System*: Chat Bot
+*System*: JobbiBot
 
 *MSS*
 
-1. User keys in command to start finding internship
-2. Chat Bot gives user a list of prompts ( e.g. Salary, Industry )
-3. User follows the prompts and key in the relevant details
-4. Chat Bot replies with a list of internship companies and provide filter prompts
-5. User views the list and further filter using the prompts given by the Chat Bot
-6. Repeat steps 3-5 until the user is satisfied
+1. User keys in a list of keywords to search  for internship byby
+2. JobbiBot returns user the list of internships which contains the keywords
+3. User can choose to re-search again if not satisfied
+
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 3a. User key in invalid inputs or prompts.
+* 2a. JobbiBot returns no found internships
 +
 [none]
-** 3a1. Chat Bot detects error and shows user the error.
+** 2a1. JobbiBot will recommend user to re-search using other keywords
 +
-Use case resumes at step 2.
-
-[none]
-* 3b. User chooses to terminate conversation with Chat Bot.
-+
-[none]
-** 3b1. Chat Bot requests confirmation.
-** 3b2. User confirms termination.
-+
-Use case ends.
+Use case resumes at step 3.
 
 [discrete]
-=== Use case: Explore Internship
+=== Use case: Filtering Internship
 
-*System*: Chat Bot
+*System*: JobbiBot
 
 *MSS*
 
-1. User keys in command to explore internship
-2. Chat Bot gives user a list of prompts
-3. User fills in a prompt or a list of prompts
-4. Chat Bot replies with a list of internship companies and provide filter prompts
-5. User views the list and further filter using the prompts given by the Chat Bot
-6. Repeats steps 3-5 until user is satisfied
+1. User keys in a list of keywords to filter the currently searched internship list (from the finding internship use case above)
+2. JobbiBot returns user the list of internships which contains all the keywords entered from the searched list
+3. User can choose to re-filter in another set of keywords to narrow the searched internship list (from the finding internship use case)
+
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 3a. User key in invalid inputs or prompts.
+* 2a. JobbiBot returns no found internships
 +
 [none]
-** 3a1. Chat Bot detects error and shows user the error.
-+
-Use case resumes at step 2.
+** 2a1. JobbiBot will recommend user to re-filter using other keywords
+** 2a2. User can also use undo function to return back to last searched or filtered internship list
 
-[none]
-* 3b. User chooses to terminate conversation with Chat Bot.
-+
-[none]
-** 3b1. Chat Bot requests confirmation.
-** 3b2. User confirms termination.
+
+[discrete]
+=== Use case: Sorting Internship
+
+*System*: JobbiBot
+
+*MSS*
+
+1. User keys in keywords to sort the currently searched or filtered internship list by
+2. JobbiBot returns user the list of internships sorted according to the keyword matching the internship attributes (e.g name, industry, role).
+3. User can choose to sort up to three keyword attributes
+4. JobbiBot will sort the internship by the first keyword attribute, followed by the next two keyword attribute
+
 +
 Use case ends.
 
-_{More to be added}_
 
 [appendix]
 == Non Functional Requirements

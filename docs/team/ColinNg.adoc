@@ -1,0 +1,59 @@
+= Colin Ng - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: JobbiBot
+
+---
+
+== Overview
+
+JobbiBot is an interactive application that aims to guide university students in their search for internships. JobbiBot is a Command
+Line Interface application where most of the functions are accessed through typing the commands. Through JobbiBot,
+users would be able to narrow down the overwhelming amount of internship opportunities by different attributes such as salary and industry with
+the help of JobbiBot which will guide the user slowly through the process with prompts and useful tips.
+Afterwhich they can either save the list of internships while making the decision, select the internship and obtain comprehensive details about
+the internship or they may restart the process and filter the internships differently.
+
+== Summary of contributions
+
+* *Major enhancement*: Implement and designed the filter and sort feature
+** What it does: Together with the find (implemented by Ci Kang) and save (implemented by Wyin) features, it provides the complete set of functionality to allows user to find, filter sort and subsequently save internships for exploring and viewing purposes.
+** Justification: The filter and sort feature (together with find) are essential tools for users to narrow down and view internships
+** Highlights: This enhancement enhances the existing user interface. It required a firm understanding of user profile in order to create a chatbot persona that is realistic and approachable. The implementation was too challenging as it required an understanding of JavaFX components to revamp the GUI. The GUI was also beautified make JobbiBot more aesthetically appealing to young students.
+
+* *Minor enhancement*: Added another data structure to model manager to allow for filtering and sorting
+
+* *Code contributed*: [https://github.com/CS2103JAN2018-F11-B3/main/blob/master/collated/functional/niloc94.md[Functional code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Suggested and designed the implementation of various features for the team (Example using addressbook tag feature to implement save and unsave, and find tag features)
+*** Updated test cases (under TypicalInternships class) to fit the JobbiBot types https://github.com/CS2103JAN2018-F11-B3/main/pull/169[#169]
+
+** Enhancements to existing features:
+*** Fix bug for InternshipBook Parser https://github.com/CS2103JAN2018-F11-B3/main/pull/161[#161]
+
+** Documentation:
+*** Documented the Major and Minor Components for the team
+
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples: https://github.com/CS2103JAN2018-T16-B2/main/issues/139 , https://github.com/CS2103JAN2018-T16-B2/main/issues/141 , https://github.com/CS2103JAN2018-T16-B2/main/issues/152 )
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=filterSort]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=filter]
+

@@ -79,6 +79,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The find is case insensitive. e.g `analyst` will match `Analyst`
 * Tags other than 'saved' tag attached when using find/search function will be removed when using 'list'.
 * The order of the keywords does not matter. e.g. `Sales Marketing` will match `Marketing Sales`
+* Duplicate keywords does not matter e.g `Sales Marketing Sales` is simply `Sales Marketing`
 * Internships matching at least one keyword will be returned (i.e. `OR` search). e.g. `Micro Dyson` will return `Dyson Technology`, `Dyson Engineering` `Microsoft`
 * Keyword/s matching the internship is added to the internship as a tag/s.
 * Keywords tags are reset if user uses find again.
@@ -99,17 +100,17 @@ Returns any internship having address or description matching `Serangoon` in it.
 
 // end::findwithfeature[]
 
+// tag::filterSort[]
 === Filtering Internship by keyword(s): `filter` [since v1.3]
 
 Filter the internship list according to the given keywords. +
 Format: `filter KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `marketing` will match `Marketing`
+* The keywords is case insensitive. e.g `marketing` will match `Marketing`
 * The order of the keywords does not matter. e.g. `Marketing Analytics` will match `Analytics Marketing`
 * Only full words will be matched e.g. `Market` will not match `Marketing`
-* Only Internships which contain all the keyword will be returned. e.g `filter Marketing Analytics` will return only +
-containing Marketing AND Analytics but not Marketing Research or Data Analyics
+* Only Internships which contain all the keyword will be returned. e.g `filter Marketing Analytics` will return only internships containing Marketing AND Analytics but not Marketing Research or Data Analytics
 ****
 
 Examples:
@@ -117,7 +118,7 @@ Examples:
 * `filter data` +
 Returns any entries containing data. e.g Data Analytics, Data Science
 * `filter data analytics` +
-Returns only entries containing data and analytics. e.g 'data analytics internship', 'data analytics singapore'
+Returns only entries containing data and analytics. e.g `data analytics internship`, `data analytics singapore`
 
 === Sorting Internship by keyword(s): `sort` [since v1.4]
 
@@ -127,7 +128,7 @@ Keywords are only limited to the following internship attribute types: `Address`
 
 ****
 * The sort is case insensitive. e.g `name` will match `Name`
-* The order of the keywords matter. e.g `sort Name Salary` will sort name before salary
+* The ordering of the keywords matters. e.g `sort Name Salary` will sort name before salary
 * Only the first three keywords will be sorted. Subsequent keywords will be ignored
 ****
 
@@ -137,6 +138,13 @@ Examples:
 Sorts the internship list according to name attribute.
 * `sort salary region` +
 Sorts the internship list according to salary first then region.
+* `sort salary region industry` +
+Sorts the internship list according to salary first then region, then industry
+* `sort salary salary` +
+Is simply `sort salary`
+* `sort salary name industry role` +
+Only the first three attributes will be sorted. i.e `sort salary name industry` but not role
+// end:filterSort[]
 
 // tag::saveunsave[]
 === Saving an internship to a Saved Collection : `save` [since v1.2]
