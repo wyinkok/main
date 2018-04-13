@@ -144,7 +144,7 @@ Sorts the internship list according to salary first then region, then industry
 Is simply `sort salary`
 * `sort salary name industry role` +
 Only the first three attributes will be sorted. i.e `sort salary name industry` but not role
-// end:filterSort[]
+// end::filterSort[]
 
 // tag::saveunsave[]
 === Saving an internship to a Saved Collection : `save` [since v1.2]
