@@ -37,13 +37,14 @@ This app will not work with earlier versions of Java 8.
 image::ui.png[width="790"]
 +
 .  Type the command `start` in the command box and press kbd:[Enter] if you would like to begin a conversation with JobbiBot.
-.  Alternatively, if you would like to search for an internship directly. Type your command in the command box and press kbd:[Enter] to execute it. +
+.  Alternatively, if you would like to search for an internship directly without conversing with JobbiBot. Type your command in the command box and press kbd:[Enter] to execute it. +
 
 .  Some example commands you can try:
 
 * *`help`* : open the help window
-* *`list`* : lists all contacts
-* **`save`**`3` : save the 3rd contact shown in the current list to a personal Saved Collection
+* *`list`* : lists all internship
+* **`save`**`3` : save the 3rd internship shown in the current list to a personal Saved Internship Collection
+* **`find saved`** : view the Saved Internship Collection
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for more details of each command.
@@ -52,7 +53,7 @@ image::ui.png[width="790"]
 == Features
 
 === Viewing help : `help`
-Shows more details of each command and a glossary of industries, roles and skills that the user may refer to in his or her search.
+Shows more details of each command and a glossary of industries and roles that the student may refer to in his or her search.
 
 Format: `help`
 
@@ -62,10 +63,17 @@ Format: `help`
 Initiates the message thread of JobbiBot. +
 Format: `start`
 
-=== Restart conversation with program : `new` [since v1.3]
+=== Clears previous conversation with program : `new` [since v1.3]
 
-Restarts a new message thread of JobbiBot and the previous thread is deleted. +
+Clears previous message thread with JobbiBot. To restart the conversation, type `start` again. +
 Format: `new`
+
+Example:
+
+* `new` +
+Clears previous conversation with JobbiBot
+* `start` +
+Initiates a new message thread with JobbiBot
 // end::startnew[]
 
 // tag::findwithfeature[]
@@ -93,17 +101,15 @@ Returns any internship with `Data` or `Analyst` in its description.
 Returns any internship having names or description matching `Dow`, `Micron`, or `Dyson`.
 * `find Engineering` +
 Returns any internship having `Engineering` in its description.
-* `find Betsy@gmail.com` +
-Returns any internship having contact email `Betsy@gmail.com`.
 * `find Serangoon` +
-Returns any internship having address or description matching `Serangoon` in it.
+Returns any internship that has a region matching `Serangoon` in it.
 
 // end::findwithfeature[]
 
 // tag::filterSort[]
 === Filtering Internship by keyword(s): `filter` [since v1.3]
 
-Filter the internship list according to the given keywords. +
+Filters the internship list according to the given keywords. +
 Format: `filter KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -124,7 +130,7 @@ Returns only entries containing data and analytics. e.g `data analytics internsh
 
 Sorts the internship list according to the given keyword(s). +
 Format: `sort KEYWORD [MORE_KEYWORDS]` +
-Keywords are only limited to the following internship attribute types: `Address` `Email` `Industry` `Region` `Name` `Role` `Salary`
+Keywords are only limited to the following internship attribute types: `Industry` `Region` `Name` `Role` `Salary`
 
 ****
 * The sort is case insensitive. e.g `name` will match `Name`
@@ -197,7 +203,7 @@ Selects the internship identified by the index number used in the last internshi
 Format: `select INDEX`
 
 ****
-* Selects the internship and loads the Google search page the internship at the specified `INDEX`.
+* Selects the internship and loads the full internship web page for the internship at the specified `INDEX`.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -206,7 +212,7 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd internship in the address book.
+Selects the 2nd internship in the internship book.
 * `find Singapore Tourism Board` +
 `select 1` +
 Selects the 1st internship in the results of the `find` command.
@@ -282,38 +288,33 @@ Format: `exit`
 Internships data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually
 
-=== Adding a command alias: `alias` [coming in v2.0]
-
-Customise aliases for any valid command, find or filter attribute
-Format: `alias [COMMAND] [ALIAS]`
-
 == Command Summary
 
 * *Help* : `help`
-* *Start JobbiBot* : `start`
-* *Refresh JobbiBot Conversation*: `new`
+* *Start JobbiBot conversation* : `start`
+* *Clears previous JobbiBot conversation*: `new`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Analytics Engineering`
 * *Filter* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `filter Marketing Singapore`
-* *Save* : `save INDEX` +
+* *Save an internship*  : `save INDEX` +
 e.g. `save 2`
-* *Unsave* : `unsave INDEX` +
+* *Unsave an internship* : `unsave INDEX` +
 e.g. `unsave 2`
-* *Show Saved Collection* : `find saved` or `filter saved` +
+* *Show Saved Internship Collection* : `find saved` or `filter saved` +
 e.g. `find saved` or `filter saved`
-* *Select* : `select INDEX` +
+* *Select an internship* : `select INDEX` +
 e.g.`select 3`
-* *List* : `list`
+* *List all internships* : `list`
 * *Undo* : `undo`
 * *Redo* : `redo`
 * *Exit* : `exit`
 
 // tag::glossary[]
 == List of Industries
-This serves as a non-exhaustive lists of skills that users can search for
+This serves as a non-exhaustive lists of industries that users can search for in JobbiBot.
 
-* Arts Design
+* Arts
 * Automotive
 * Biomedical Sciences
 * Business
@@ -323,21 +324,21 @@ This serves as a non-exhaustive lists of skills that users can search for
 * Healthcare
 * Hospitality
 * Legal
+* Manufacturing
 * Media
 * Retail
-* Research
 * Social Enterprise
 * Technology
 * Veterinary Services
 
 == List of Internship Roles
-This table is a non exhaustive list of potential internship roles that users can search for. Internship roles are organised by industry but not all industries are listed in this table.
+This table is a non exhaustive list of potential internship roles that users can search for in JobbiBot. Internship roles are organised by industry but not all industries are listed in this table.
 
 [width="100%",cols="35%,65%",options="header",]
 |=======================================================================
 |Industry | Internship Role
 
-.5+| Arts / Design | Animator
+.5+| Arts            | Animator
                      | Film Editor
                      | Graphic Designer
                      | Photographer
@@ -350,17 +351,12 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Sales
                      | Product Manager
 .4+| Consultancy
+                     | Business Consultant
                      | Human Resource Consultant
-                     | Sales Consultant
-                     | Technology Consultant
+                     | Sales Marketing Consultant
                      | Wealth Management Consultant
 .1+| Education
                      | Teacher
-.4+| Engineering
-                     | Aerospace Engineer
-                     | Electrical Engineer
-                     | Manufacturing Engineer
-                     | Mechanical Engineer
 .6+| Finance
                      | Accountant
                      | Audit Assistant
@@ -368,9 +364,6 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Private Equity Analyst
                      | Risk Management
                      | Wealth Management Analyst
-.2+| Healthcare
-                     | Patient Support
-                     | Patient Advocate
 .4+| Hospitality
                      | Customer Experience
                      | Events Planning and Management
@@ -387,9 +380,9 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Social Media
                      | Writer
  .3+| Retail
-                      | Buyer
-                      | Merchandiser
-                      | Shop Assistant
+                     | Buyer
+                     | Merchandiser
+                     | Shop Assistant
 .18+| Technology
                      | Android Developer
                      | Computer Hardware Engineer
@@ -412,10 +405,3 @@ This table is a non exhaustive list of potential internship roles that users can
 |=======================================================================
 
 // end::glossary[]
-
-== FAQ
-
-*Q*: How do I update the internship list to the most updated version? +
-*A*: Download the database from the www.dummywebsite.com and replace the InternshipBook.xml file in main\data.
-
-
