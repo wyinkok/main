@@ -232,7 +232,7 @@ Classes used by multiple components are in the `seedu.InternshipBook.commons` pa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::Filter Command Feature[]
+// tag::filter[]
 === Filter Feature
 ==== Implementation
 
@@ -331,7 +331,8 @@ See Diagram below: <Insert Diagram to show how the propagation works here>
 
 See diagram below <Insert Model Manager Diagram>
 
-// end::Search and Filter Command[]
+// end::filter[]
+
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -746,11 +747,9 @@ b. Require developers to download those libraries manually (this creates extra w
 [width="59%",cols="22%,<23%,<15%,<50%",options="header",]
 |=======================================================================
 |Contributor |Feature | Major/Minor | Remarks
-| Colin | Ranking/Filtering| Major | Implement a complete set of ranking/filtering/searching commands
+| Colin | Sorting/Filtering| Major | Designed and implemented a complete set of sorting/filtering/searching commands. Searching implemented by TanCiKang
 
-| Colin | Model Enhancement | Minor | Modify list view to work with new commands. Allow Refiltering / Searching / Finding from existing list instead of new list
-
-| Colin | Save Command | Minor | Enable users to view their Saved Collection
+| Colin | Model Enhancement | Minor | Modify list view to work with new commands. Allow filtering / sorting from existing list instead of new list
 
 | Ci Kang | Enhance Find Command | Major | Add tags to internship that matches keywords in find command and enable find command to search for multiple attributes
 

@@ -100,6 +100,7 @@ Returns any internship having address or description matching `Serangoon` in it.
 
 // end::findwithfeature[]
 
+// tag::filterSort[]
 === Filtering Internship by keyword(s): `filter` [since v1.3]
 
 Filter the internship list according to the given keywords. +
@@ -143,7 +144,7 @@ Sorts the internship list according to salary first then region, then industry
 Is simply `sort salary`
 * `sort salary name industry role` +
 Only the first three attributes will be sorted. i.e `sort salary name industry` but not role
-
+// end:filterSort[]
 
 // tag::saveunsave[]
 === Saving an internship to a Saved Collection : `save` [since v1.2]

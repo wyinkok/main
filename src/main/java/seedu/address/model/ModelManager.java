@@ -45,7 +45,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Internship> filteredInternships;
     private final SortedList<Internship> sortedFilteredInternships;
 
-
     /**
      * Initializes a ModelManager with the given jobbiBot and userPrefs.
      */
