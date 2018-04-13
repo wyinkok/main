@@ -36,7 +36,7 @@ public class TypicalInternshipsWithSavedTag {
             .withEmail("ConsultingIntern@example.com").withAddress("Raffles Boulevard").withTags("saved")
             .withIndustry("Business").withRegion("Raffles Place").withRole("Consulting Intern").build();
 
-    public static final String KEYWORD_MATCHING_SAFETY = "Safety"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_SAFETY = "Safety"; // A keyword that matches SAFETY
 
     private TypicalInternshipsWithSavedTag() {} // prevents instantiation
 
