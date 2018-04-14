@@ -115,18 +115,15 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find address of internship in internship book -> 1 internships found */
+        /* Case: find address of internship in internship book -> 0 internships found */
         command = FindCommand.COMMAND_WORD + " " + "Boulevard";
-        expectedModel.updateInternship(BUSINESS3, addTag(getInternshipWithoutTags(BUSINESS3), "Boulevard"));
-        ModelHelper.setSearchedList(expectedModel, BUSINESS3);
+        ModelHelper.setSearchedList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find email of internship in internship book -> 1 internships found */
+        /* Case: find email of internship in internship book -> 0 internships found */
         command = FindCommand.COMMAND_WORD + " " + BUSINESS3.getEmail().value;
-        expectedModel.updateInternship(BUSINESS3, addTag(getInternshipWithoutTags(BUSINESS3),
-                BUSINESS3.getEmail().value));
-        ModelHelper.setSearchedList(expectedModel, BUSINESS3);
+        ModelHelper.setSearchedList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
