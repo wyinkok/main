@@ -66,6 +66,11 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
+        /* Case: find internship with 1 repeated keyword entered -> 1 internship found */
+        command = FindCommand.COMMAND_WORD + " Data Data";
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
         /* Case: find multiple internships in address book, 2 keywords -> 2 internships found */
         command = FindCommand.COMMAND_WORD + " Data Consulting";
         expectedModel.updateInternship(DATASCIENCE, addTag(removeAllTag(DATASCIENCE), "Data"));
@@ -78,7 +83,6 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         command = FindCommand.COMMAND_WORD + " Consulting Data";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
-
 
         /* Case: find multiple internships in address book, 2 keywords with 1 repeat -> 2 internships found */
         command = FindCommand.COMMAND_WORD + " Consulting Data Data";
@@ -132,6 +136,15 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
+        /* Case: mixed case command word -> 3 internship found */
+        command = "FiNd Engineering";
+        expectedModel.updateInternship(ENGINEERING1, addTag(removeAllTag(ENGINEERING1), "Engineering"));
+        expectedModel.updateInternship(ENGINEERING2, addTag(removeAllTag(ENGINEERING2), "Engineering"));
+        expectedModel.updateInternship(ENGINEERING3, addTag(removeAllTag(ENGINEERING3), "Engineering"));
+        ModelHelper.setSearchedList(expectedModel, ENGINEERING1, ENGINEERING2, ENGINEERING3);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
         /* Case: find tags of internship in address book -> 0 internships found */
         List<Tag> tags = new ArrayList<>(BUSINESS1.getTags());
         command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
@@ -168,14 +181,6 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
-        /* Case: mixed case command word -> 3 internship found */
-        command = "FiNd Engineering";
-        expectedModel.updateInternship(ENGINEERING1, addTag(removeAllTag(ENGINEERING1), "Engineering"));
-        expectedModel.updateInternship(ENGINEERING2, addTag(removeAllTag(ENGINEERING2), "Engineering"));
-        expectedModel.updateInternship(ENGINEERING3, addTag(removeAllTag(ENGINEERING3), "Engineering"));
-        ModelHelper.setSearchedList(expectedModel, ENGINEERING1, ENGINEERING2, ENGINEERING3);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
     }
 
     /**
