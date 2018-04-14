@@ -34,13 +34,17 @@ import seedu.address.model.tag.UniqueTagList;
 public class FilterCommandSystemTest extends JobbiBotSystemTest {
 
     @Test
-    public void filter() {
+    public void filter() throws DuplicateInternshipException, InternshipNotFoundException {
+
+        Model expectedModel = getModel();
+        Model modelBeforeFiltering = getModel();
+
+    /* -------------------------Filtering on an unsearched list ---------------------------------------------------- */
 
         /* Case: filter multiple internships in internship book, command with leading spaces and trailing spaces
          * -> 2 internships found
          */
         String command = "   " + FilterCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_AUDIT + "  ";
-        Model expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, BUSINESS2, BUSINESS4);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
@@ -142,16 +146,77 @@ public class FilterCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-
-        /* Case: undo previous filter command -> rejected */
+        /* Case: undo previous filter command -> success */
         command = UndoCommand.COMMAND_WORD;
-        assertCommandSuccess(command, expectedModel, UndoCommand.MESSAGE_SUCCESS);
+        assertCommandSuccess(command, modelBeforeFiltering, UndoCommand.MESSAGE_SUCCESS);
 
-        /* Case: redo previous filter command -> rejected */
+        /* Case: redo previous filter command -> success */
         command = RedoCommand.COMMAND_WORD;
         ModelHelper.setFilteredList(expectedModel, DATASCIENCE);
-        assertCommandSuccess(command, expectedModel, RedoCommand.MESSAGE_SUCCESS);
+        assertCommandSuccess(command, modelBeforeFiltering, RedoCommand.MESSAGE_SUCCESS);
 
+        /* Case: filter with mixed case keywords -> 1 internships found */
+        command = FilterCommand.COMMAND_WORD + " " + "DaTA";
+        ModelHelper.setFilteredList(expectedModel, DATASCIENCE);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: filter with mixed case keywords -> 1 internships found */
+        command = "fiLtEr" + " " + "Data";
+        ModelHelper.setFilteredList(expectedModel, DATASCIENCE);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: filter with attribute string to be searched as substring of keyword -> 0 internships found */
+        command = FilterCommand.COMMAND_WORD + " " + "DataEXTRA";
+        ModelHelper.setFilteredList(expectedModel);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: filter with keyword as substring of attribute in internship > 0 internships found */
+        command = FilterCommand.COMMAND_WORD + " " + "Dat";
+        ModelHelper.setFilteredList(expectedModel);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* -------------------------Filtering on a searched list ---------------------------------------------------- */
+
+        /* Initialize Search List to limit filtering range */
+        command = FindCommand.COMMAND_WORD + " " + "Engineering";
+        expectedModel.updateInternship(ENGINEERING1, ENGINEERING1.addTagsToInternship("Engineering"));
+        expectedModel.updateInternship(ENGINEERING2, ENGINEERING2.addTagsToInternship("Engineering"));
+        expectedModel.updateInternship(ENGINEERING3, ENGINEERING3.addTagsToInternship("Engineering"));
+        ModelHelper.setSearchedList(expectedModel, ENGINEERING1, ENGINEERING2, ENGINEERING3);
+        assertCommandSuccess(command, expectedModel);
+
+        /* Case: Filter keyword that exists in full list but not searched list -> 0 Internships found */
+        expectedModel = getModel();
+        modelBeforeFiltering = getModel();
+        command = FilterCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_AUDIT;
+        ModelHelper.setFilteredList(expectedModel);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: undo previous filter command -> success */
+        command = UndoCommand.COMMAND_WORD;
+        assertCommandSuccess(command, modelBeforeFiltering, UndoCommand.MESSAGE_SUCCESS);
+
+        /* Case: redo previous filter command -> success */
+        command = RedoCommand.COMMAND_WORD;
+        ModelHelper.setFilteredList(expectedModel, ENGINEERING1, ENGINEERING2, ENGINEERING3);;
+        assertCommandSuccess(command, modelBeforeFiltering, RedoCommand.MESSAGE_SUCCESS);
+
+        /* Case: Filter keyword that exists in full list but not searched list -> 1 Internships found */
+        command = FilterCommand.COMMAND_WORD + " " + "ST";
+        ModelHelper.setFilteredList(expectedModel, ENGINEERING1);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
+        /* Case: Filter keyword that exists in full list but not searched list -> 2 Internships found */
+        command = FilterCommand.COMMAND_WORD + " " + "Jurong";
+        ModelHelper.setFilteredList(expectedModel, ENGINEERING1, ENGINEERING2);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
     }
     /* --------------------------------------- Helper Methods ----------------------------------------------------- */
 
@@ -181,23 +246,5 @@ public class FilterCommandSystemTest extends JobbiBotSystemTest {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
-    }
-    /**
-     * Executes {@code command} and verifies that the command box displays {@code command}, the result display
-     * box displays {@code expectedResultMessage} and the model related components equal to the current model.
-     * These verifications are done by
-     * {@code JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
-     * error style.
-     * @see JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     */
-    private void assertCommandFailure(String command, String expectedResultMessage) {
-        Model expectedModel = getModel();
-
-        executeCommand(command);
-        assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
-        assertCommandBoxShowsErrorStyle();
-        assertStatusBarUnchanged();
     }
 }
