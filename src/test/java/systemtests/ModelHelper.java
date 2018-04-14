@@ -15,7 +15,7 @@ public class ModelHelper {
     private static final Predicate<Internship> PREDICATE_MATCHING_NO_INTERNSHIPS = unused -> false;
 
     /**
-     * Updates {@code model}'s filtered list to display only {@code toDisplay}.
+     * Updates {@code model}'s searched list to display only {@code toDisplay}.
      */
     public static void setSearchedList(Model model, List<Internship> toDisplay) {
         Optional<Predicate<Internship>> predicate =
@@ -28,6 +28,22 @@ public class ModelHelper {
      */
     public static void setSearchedList(Model model, Internship... toDisplay) {
         setSearchedList(model, Arrays.asList(toDisplay));
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to display only {@code toDisplay}.
+     */
+    public static void setFilteredList(Model model, List<Internship> toDisplay) {
+        Optional<Predicate<Internship>> predicate =
+                toDisplay.stream().map(ModelHelper::getPredicateMatching).reduce(Predicate::or);
+        model.updateFilteredInternshipList(predicate.orElse(PREDICATE_MATCHING_NO_INTERNSHIPS));
+    }
+
+    /**
+     * @see ModelHelper#setFilteredList(Model, List)
+     */
+    public static void setFilteredList(Model model, Internship... toDisplay) {
+        setFilteredList(model, Arrays.asList(toDisplay));
     }
 
     /**
