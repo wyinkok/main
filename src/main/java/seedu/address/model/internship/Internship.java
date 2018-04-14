@@ -134,6 +134,9 @@ public class Internship {
     }
 
     //@@author niloc94
+    /**
+     * Helper method to return an Internship attributes string value
+     */
     public String getValue(String keyword) {
         switch (keyword.toLowerCase()) {
         case "name":
@@ -150,6 +153,12 @@ public class Internship {
 
         case "role":
             return getRole().toString();
+
+        case "address":
+            return getAddress().toString();
+
+        case "email":
+            return getEmail().toString();
 
         default:
             assert false; // Keyword already parsed to attribute type. Program should never reach here
