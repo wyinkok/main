@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.model.internship.Internship.ATTRIBUTES_LIST;
+import static seedu.address.model.internship.Internship.SORTABLE_ATTRIBUTES_LIST;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class SortCommandParser implements Parser<SortCommand> {
 
     private static final String MESSAGE_INVALID_SORT_ATTRIBUTE = "Invalid attributes given! Possible attributes are : "
-            + ATTRIBUTES_LIST;
+            + SORTABLE_ATTRIBUTES_LIST;
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
@@ -38,7 +38,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         // Checks if keywords are proper internship attributes
         if (!keywords.stream().allMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(ATTRIBUTES_LIST, keyword))) {
+                    StringUtil.containsWordIgnoreCase(SORTABLE_ATTRIBUTES_LIST, keyword))) {
             throw new ParseException(MESSAGE_INVALID_SORT_ATTRIBUTE);
         }
 

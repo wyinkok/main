@@ -15,7 +15,7 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Internship {
 
-    public static final String ATTRIBUTES_LIST = "Name Salary Email Address Industry Region Role";
+    public static final String SORTABLE_ATTRIBUTES_LIST = "Name Salary Industry Region Role";
     private final Name name;
     private final Salary salary;
     private final Email email;
@@ -122,10 +122,6 @@ public class Internship {
         builder.append(getName())
                 .append(" Salary: ")
                 .append(getSalary())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
                 .append(" Industry: ")
                 .append(getIndustry())
                 .append(" Region: ")
@@ -146,9 +142,6 @@ public class Internship {
         case "salary":
             return getSalary().toString();
 
-        case "address":
-            return getAddress().toString();
-
         case "industry":
             return getIndustry().toString();
 
@@ -157,9 +150,6 @@ public class Internship {
 
         case "role":
             return getRole().toString();
-
-        case "email":
-            return getEmail().toString();
 
         default:
             assert false; // Keyword already parsed to attribute type. Program should never reach here
