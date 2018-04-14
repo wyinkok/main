@@ -198,7 +198,7 @@ public class Internship {
                     internshipTags.delete(tagToBeRemoved);
                 } catch (TagNotFoundException e) {
                     assert false;
-                    throw new AssertionError( "Impossible! Should not have TagNotFoundException");
+                    throw new AssertionError("Impossible! Should not have TagNotFoundException");
                 }
             }
         }

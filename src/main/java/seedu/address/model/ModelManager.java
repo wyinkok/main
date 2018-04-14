@@ -18,7 +18,6 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.JobbiBotChangedEvent;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
@@ -103,7 +102,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     /**
      * Add keyword tags that matches the internship to the list of internships in filteredInternships
-     * @throws CommandException
      */
     public void addTagsToFilteredList() {
         for (String keyword: filterKeywords) {
@@ -126,7 +124,6 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Remove all tags that are not 'saved' from the internship list
      *
-     * @throws CommandException
      */
     public void removeTagsFromInternshipList() {
         for (Internship internship : getFilteredInternshipList()) {
