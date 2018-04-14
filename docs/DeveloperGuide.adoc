@@ -689,6 +689,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+
 == Documentation
 
 We use asciidoc for writing documentation.
@@ -1094,7 +1095,11 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and region is retained.
 
+// tag::manualtestwyin[]
 === Starting a conversation with JobbiBot
+
+Starting a conversation with JobbiBot when the application is launched .
+
 .. Test case: `start`
     Expected: JobbiBot prints a response message in the message thread.
 .. Test case: `start x` (where x is an integer, alphabet or non alphanumerical character)
@@ -1103,14 +1108,17 @@ These instructions only provide a starting point for testers to work on; testers
     Expected: JobbiBot says that the conversation has already started and subsequent `start` commands has no effect on initiating the conversation again.
 
 === Clearing a previous conversation with JobbiBot
-.. Test case: `new`
-    Expected: Clears entire previous message thread and user only sees the JobbiBot welcome message left.
+
+Restarting a conversation with JobbiBot after typing more than 4 commands in the CLI.
+
 .. Test case: `new x` (where x is an integer, alphabet or non alphanumerical character)
     Expected: Previous conversation is not cleared. Error details shown in the message thread.
+.. Test case: `new`
+    Expected: Clears entire previous message thread and user only sees the JobbiBot welcome message left.
 
 === Saving an internship to Saved Collection
 
-. Saving an internship while all internships are listed
+. Saving an internship while all internships are listed.
 
 .. Prerequisites: List all internships using the `list` command. Multiple internships in the list.
 .. Test case: `save 1` +
@@ -1125,9 +1133,10 @@ These instructions only provide a starting point for testers to work on; testers
  or x is a mathematical expression that evaluates to an positive integer),  +
    Expected: Similar to previous.
 
+
 === Removing an internship to Saved Collection
 
-. Removing an internship while all internships are listed
+. Removing an internship while all internships are listed.
 
 .. Prerequisites: List all internships from the Saved Internship Collection using the `find saved` or `filter saved` command. Multiple internships in the Saved Collection.
 .. Test case: `unsave 1` +
@@ -1139,6 +1148,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect save commands to try: `unsave`, `unsave x` or `x unsave` (where x is larger than the list size or x is not an alphanumerical character
  or x is a mathematical expression that evaluates to an positive integer),  +
    Expected: Similar to previous.
+// end::manualtestwyin[]
 
 === Saving data
 
