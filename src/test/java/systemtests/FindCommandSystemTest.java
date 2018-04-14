@@ -67,6 +67,11 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
+        /* Case: find internship with 1 repeated keyword entered -> 1 internship found */
+        command = FindCommand.COMMAND_WORD + " Data Data";
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
         /* Case: find multiple internships in internship book, 2 keywords -> 2 internships found */
         command = FindCommand.COMMAND_WORD + " Data Consulting";
         expectedModel.updateInternship(DATASCIENCE, addTag(getInternshipWithoutTags(DATASCIENCE), "Data"));

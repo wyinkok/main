@@ -109,6 +109,7 @@ public class InternshipBookParser {
         //@@author wyinkok
         case NewChatCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
+            hasStarted = false;
             return new NewChatCommand();
 
         //@@author

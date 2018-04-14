@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Industry {
 
     public static final String MESSAGE_INDUSTRY_CONSTRAINTS =
-            "Internship industry should only contain alphanumeric values, and it should not be blank";
+            "Internship industry can take any values and it should not be blank";
 
     /*
      * The first character of the industry must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String INDUSTRY_VALIDATION_REGEX = "[\\p{Alnum}]+";
+    public static final String INDUSTRY_VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
 

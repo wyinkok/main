@@ -25,7 +25,7 @@ public class XmlAdaptedInternshipTest {
     private static final String INVALID_SALARY = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_INDUSTRY = "_Engineering";
+    private static final String INVALID_INDUSTRY = " ";
     private static final String INVALID_REGION = " Geylang";
     private static final String INVALID_ROLE = " ";
     private static final String INVALID_TAG = " ";
