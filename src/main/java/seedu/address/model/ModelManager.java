@@ -231,6 +231,18 @@ public class ModelManager extends ComponentManager implements Model {
         return;
     }
 
+    //@@author TanCiKang
+    /**
+     * Remove all tags from all internship in the internship list with the exception of saved tag
+     * @param model
+     */
+    public static void removeTagsFromAllInternshipList(Model model) {
+
+        model.updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+        ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
+        return;
+    }
+
     //=========== Filtered Internship List Accessors =============================================================
 
     /**
