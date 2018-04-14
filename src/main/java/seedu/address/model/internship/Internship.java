@@ -3,11 +3,17 @@ package seedu.address.model.internship;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.internship.exceptions.TagNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import sun.jvm.hotspot.utilities.AssertionFailure;
 
 /**
  * Represents a Internship in the internship book.
@@ -18,6 +24,8 @@ public class Internship {
     public static final String SORTABLE_ATTRIBUTES_LIST = "Name Salary Industry Region Role";
     public static final String SORTABLE_ATTRIBUTES_LIST_WITH_NEGATIVE = SORTABLE_ATTRIBUTES_LIST
             + "-Name -Salary -Industry -Region -Role";
+    private static final String SAVED_TAG_NAME = "[saved]";
+
     private final Name name;
     private final Salary salary;
     private final Email email;
@@ -174,5 +182,64 @@ public class Internship {
             assert false; // Keyword already parsed to attribute type. Program should never reach here
             throw new AssertionError();
         }
+    }
+
+    //@@author TanCiKang
+    /**
+     * Remove all tags other than 'saved' tags from individual internship
+     *
+     * @return
+     */
+    public Internship removeTagsFromInternship() {
+        final UniqueTagList internshipTags = new UniqueTagList(getTags());
+
+        for (Tag tagToBeRemoved : tags) {
+            if (!tagToBeRemoved.toString().equals(SAVED_TAG_NAME)) {
+                try {
+                    internshipTags.delete(tagToBeRemoved);
+                } catch (TagNotFoundException e) {
+                    assert false;
+                    throw new AssertionError( "Impossible! Should not have TagNotFoundException");
+                }
+            }
+        }
+
+        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
+
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+
+        return new Internship(
+                getName(), getSalary(), getEmail(), getAddress(),
+                getIndustry(), getRegion(), getRole(), correctTagReferences);
+    }
+
+    //@@author TanCiKang
+    /**
+     * Adds keyword tags that matches the individual internship to the internship except keywords with only
+     * non-alphanumeric characters
+     * @param keyword
+     * @return Internship
+     * @throws CommandException
+     */
+    public Internship addTagsToInternship(String keyword) {
+        final UniqueTagList internshipTags = new UniqueTagList(getTags());
+
+        try {
+            internshipTags.add(new Tag(keyword));
+        } catch (UniqueTagList.DuplicateTagException e) {
+            throw new AssertionError("Operation would result in duplicate tags");
+        }
+
+        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
+
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+
+        return new Internship(
+                getName(), getSalary(), getEmail(), getAddress(),
+                getIndustry(), getRegion(), getRole(), correctTagReferences);
     }
 }

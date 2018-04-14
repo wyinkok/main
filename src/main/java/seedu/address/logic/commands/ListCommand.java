@@ -21,7 +21,7 @@ public class ListCommand extends Command {
         ModelManager.setKeywords(new ArrayList<>());
         model.updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         // remove all tags from filtered list except 'saved' tags
-        ModelManager.removeTagsFromInternshipList(model.getFilteredInternshipList(), model);
+        model.removeTagsFromInternshipList();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
