@@ -67,6 +67,11 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
+        /* Case: find internship with 1 repeated keyword entered -> 1 internship found */
+        command = FindCommand.COMMAND_WORD + " Data Data";
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
+
         /* Case: find multiple internships in internship book, 2 keywords -> 2 internships found */
         command = FindCommand.COMMAND_WORD + " Data Consulting";
         expectedModel.updateInternship(DATASCIENCE, addTag(getInternshipWithoutTags(DATASCIENCE), "Data"));
@@ -195,8 +200,7 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         /* Case: find while a internship is selected -> selected card deselected */
         showAllInternships();
         selectInternship(Index.fromOneBased(1));
-        assertFalse(getInternshipListPanel().getHandleToSelectedCard()
-            .getName().equals(BUSINESS3.getName().fullName));
+        assertFalse(getInternshipListPanel().getHandleToSelectedCard().getName().equals(BUSINESS3.getName().fullName));
         command = FindCommand.COMMAND_WORD + " Consulting";
         expectedModel.updateInternship(BUSINESS3, addTag(getInternshipWithoutTags(BUSINESS3), "Consulting"));
         ModelHelper.setSearchedList(expectedModel, BUSINESS3);
