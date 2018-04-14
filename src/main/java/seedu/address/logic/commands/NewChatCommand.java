@@ -18,5 +18,4 @@ public class NewChatCommand extends Command {
         EventsCenter.getInstance().post(new StartAppRequestEvent());
         return new CommandResult(MESSAGE_RESTART_ACKNOWLEDGEMENT);
     }
-
 }

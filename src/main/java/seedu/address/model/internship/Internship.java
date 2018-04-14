@@ -16,6 +16,8 @@ import seedu.address.model.tag.UniqueTagList;
 public class Internship {
 
     public static final String SORTABLE_ATTRIBUTES_LIST = "Name Salary Industry Region Role";
+    public static final String SORTABLE_ATTRIBUTES_LIST_WITH_NEGATIVE
+            = "Name Salary Industry Region Role -Name -Salary -Industry -Region -Role";
     private final Name name;
     private final Salary salary;
     private final Email email;
@@ -136,28 +138,36 @@ public class Internship {
     //@@author niloc94
     /**
      * Helper method to return an Internship attributes string value
+     * Negative attributes are for use with sorter class
      */
     public String getValue(String keyword) {
         switch (keyword.toLowerCase()) {
         case "name":
+        case "-name":
             return getName().toString();
 
         case "salary":
+        case "-salary":
             return getSalary().toString();
 
         case "industry":
+        case "-industry":
             return getIndustry().toString();
 
         case "region":
+        case "-region":
             return getRegion().toString();
 
         case "role":
+        case "-role":
             return getRole().toString();
 
         case "address":
+        case "-address":
             return getAddress().toString();
 
         case "email":
+        case "-email":
             return getEmail().toString();
 
         default:

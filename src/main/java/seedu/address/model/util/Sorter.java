@@ -35,18 +35,25 @@ public class Sorter {
 
     /**
      * Helper method to compare string and integer values in attributes
-     * String values are compared without case sensitivity, sorted from A-Z
-     * Integer values (salary) are sorted from highest to lowest
+     * String values are compareTo each other without case sensitivity
+     * Integer values (salary) are compareTo each other to sort from highest to lowest
+     * '-' char at the start of attributeToCompare flips the order of the Internship objects being compared
      *
-     * @param o1
-     * @param o2
-     * @param attributeToCompare
+     * @param attributeToCompare the internship attribute to compare
+     * @param o1 internship object 1
+     * @param o2 internship object 2
      * @return
      */
     private static int attributeCompare(Internship o1, Internship o2, String attributeToCompare) {
         if (attributeToCompare.equalsIgnoreCase("salary")) {
             return new Integer(Integer.parseInt(o2.getValue(attributeToCompare)))
                     .compareTo(new Integer(Integer.parseInt(o1.getValue(attributeToCompare))));
+        } else if (attributeToCompare.equalsIgnoreCase("-salary")) {
+            return new Integer(Integer.parseInt(o1.getValue(attributeToCompare)))
+                    .compareTo(new Integer(Integer.parseInt(o2.getValue(attributeToCompare))));
+        } else if (attributeToCompare.charAt(0) == '-') {
+            return o2.getValue(attributeToCompare).toLowerCase()
+                    .compareTo(o1.getValue(attributeToCompare).toLowerCase());
         } else {
             return o1.getValue(attributeToCompare).toLowerCase()
                     .compareTo(o2.getValue(attributeToCompare).toLowerCase());
@@ -55,9 +62,13 @@ public class Sorter {
 
     /**
      * Creates a comparator which sort according objects according to three attributes entered by the user
+     * Keyword attributes are sorted from A-Z by default (ignoring case sensitivity)
+     * Integer values are sorted from highest to lowest by default
+     * For keywords with '-' at the start of that keyword attribute,
+     * the reverses sort order for that attribute is applied
      *
-     * @param keywords
-     * @return
+     * @param keywords the list of string keys entered by the user
+     * @return a custom comparator which compare two Internship Object according to their the keyword attributes given
      */
     public static Comparator<Internship> makeComparator(List<String> keywords) {
         assignValuesToAttributes(keywords);

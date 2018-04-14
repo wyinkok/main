@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.model.internship.Internship.SORTABLE_ATTRIBUTES_LIST;
+import static seedu.address.model.internship.Internship.SORTABLE_ATTRIBUTES_LIST_WITH_NEGATIVE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +24,8 @@ public class SortCommandParser implements Parser<SortCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
-     * and returns an FindCommand object for execution.
+     * and returns an SortCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
@@ -36,9 +38,9 @@ public class SortCommandParser implements Parser<SortCommand> {
         String[] nameKeywords = trimmedArgs.split("\\s+");
         List<String> keywords = new ArrayList<>(Arrays.asList(nameKeywords));
 
-        // Checks if keywords are proper internship attributes
+        // Checks if keywords are proper internship attributes, can contain -attribute for reverse sort
         if (!keywords.stream().allMatch(keyword ->
-                    StringUtil.containsWordIgnoreCase(SORTABLE_ATTRIBUTES_LIST, keyword))) {
+                    StringUtil.containsWordIgnoreCase(SORTABLE_ATTRIBUTES_LIST_WITH_NEGATIVE, keyword))) {
             throw new ParseException(MESSAGE_INVALID_SORT_ATTRIBUTE);
         }
 
