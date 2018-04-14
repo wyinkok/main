@@ -77,7 +77,7 @@ public class Sorter {
             public int compare(Internship o1, Internship o2) {
                 if (attributeCompare(o1, o2, attribute1) == 0 && attributeCompare(o1, o2, attribute1) == 0) {
                     return attributeCompare(o1, o2, attribute3);
-                } else if (attributeCompare(o1, o2, attribute1) == 0 && attributeCompare(o1, o2, attribute2) != 0 ) {
+                } else if (attributeCompare(o1, o2, attribute1) == 0 && attributeCompare(o1, o2, attribute2) != 0) {
                     return attributeCompare(o1, o2, attribute2);
                 } else {
                     return attributeCompare(o1, o2, attribute1);

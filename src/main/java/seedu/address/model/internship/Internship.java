@@ -16,8 +16,8 @@ import seedu.address.model.tag.UniqueTagList;
 public class Internship {
 
     public static final String SORTABLE_ATTRIBUTES_LIST = "Name Salary Industry Region Role";
-    public static final String SORTABLE_ATTRIBUTES_LIST_WITH_NEGATIVE
-            = "Name Salary Industry Region Role -Name -Salary -Industry -Region -Role";
+    public static final String SORTABLE_ATTRIBUTES_LIST_WITH_NEGATIVE = SORTABLE_ATTRIBUTES_LIST +
+            "-Name -Salary -Industry -Region -Role";
     private final Name name;
     private final Salary salary;
     private final Email email;
