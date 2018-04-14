@@ -20,7 +20,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all internships according "
             + "to the argument(s) given and displays them as a list with index numbers.\n"
-            + "Maximum of 3 arguments will be sorted\n"
+            + "Up to 3 arguments will be sorted."
             + "Negative valid arguments (e.g sort -industry) sorts in reverse orders\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " Industry Role Region";
