@@ -77,6 +77,20 @@ public class FindCommandTest {
         assertCommandSuccess(command, expectedMessage, Arrays.asList(DATASCIENCE, BUSINESS3));
     }
 
+    @Test
+    public void execute_multipleKeywordsWithDuplicate_singleInternshipFound() {
+        String expectedMessage = String.format(FindCommand.MESSAGE_SEARCH_RESPONSE, 1);
+        FindCommand command = prepareCommand("Data Data");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(DATASCIENCE));
+    }
+
+    @Test
+    public void execute_multipleKeywordsWithDuplicate_multipleInternshipsFound() {
+        String expectedMessage = String.format(FindCommand.MESSAGE_SEARCH_RESPONSE, 2);
+        FindCommand command = prepareCommand("Data Data Consulting Consulting");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(DATASCIENCE, BUSINESS3));
+    }
+
     /**
      * Parses {@code userInput} into a {@code FindCommand}.
      */
