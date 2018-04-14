@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.ModelManager;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 
 /**
