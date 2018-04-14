@@ -130,9 +130,12 @@ Returns only entries containing data and analytics. e.g `data analytics internsh
 
 Sorts the internship list according to the given keyword(s). +
 Format: `sort KEYWORD [MORE_KEYWORDS]` +
-Keywords are only limited to the following internship attribute types: `Industry` `Region` `Name` `Role` `Salary`
+Keywords are only limited to the following internship attribute types: `Industry` `Region` `Name` `Role` `Salary` +
+Keywords can include '-' (e.g `-Industry` `-Region` `-Name` `-Role` `-Salary`) to reverse the order of the sort for that attribute
 
 ****
+* Salary is sorted from highest to lowest by default
+* Other attributes are sorted from A-Z by default
 * The sort is case insensitive. e.g `name` will match `Name`
 * The ordering of the keywords matters. e.g `sort Name Salary` will sort name before salary
 * Only the first three keywords will be sorted. Subsequent keywords will be ignored
@@ -150,6 +153,11 @@ Sorts the internship list according to salary first then region, then industry
 Is simply `sort salary`
 * `sort salary name industry role` +
 Only the first three attributes will be sorted. i.e `sort salary name industry` but not role
+* `sort -role` +
+Sorts the internship list according to role attribute in reverse order (from Z-A)
+* `sort name -industry` +
+Sorts the internship list according to name (from A-Z), and then by industry (from Z-A)
+
 // end::filterSort[]
 
 // tag::saveunsave[]
