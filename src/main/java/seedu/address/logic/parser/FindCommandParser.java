@@ -36,6 +36,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArrayList<String> uniqueKeywords = new ArrayList<>(new HashSet<>(Arrays.asList(nameKeywords)));
 
         ModelManager.setKeywords(uniqueKeywords);
+
         return new FindCommand(new InternshipContainsKeywordsPredicate(uniqueKeywords));
     }
 }

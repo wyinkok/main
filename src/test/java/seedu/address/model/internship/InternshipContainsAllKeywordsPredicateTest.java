@@ -54,9 +54,6 @@ public class InternshipContainsAllKeywordsPredicateTest {
                 new InternshipContainsAllKeywordsPredicate(Collections.singletonList("Charlie"));
         assertTrue(predicate.test(PREDICATE_TEST_INTERNSHIP));
 
-        predicate = new InternshipContainsAllKeywordsPredicate(Collections.singletonList("ABC"));
-        assertTrue(predicate.test(PREDICATE_TEST_INTERNSHIP));
-
         predicate = new InternshipContainsAllKeywordsPredicate(Collections.singletonList("Data"));
         assertTrue(predicate.test(PREDICATE_TEST_INTERNSHIP));
 
@@ -70,17 +67,17 @@ public class InternshipContainsAllKeywordsPredicateTest {
         predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("Data", "Scientist"));
         assertTrue(predicate.test(PREDICATE_TEST_INTERNSHIP));
 
-        predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("Data", "Tech", "ABC"));
+        predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("Data", "Tech", "Company"));
         assertTrue(predicate.test(PREDICATE_TEST_INTERNSHIP));
 
         // Mixed-case keywords
         predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(PREDICATE_TEST_INTERNSHIP));
 
-        predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("DaTa", "ToWn", "aBc"));
+        predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("DaTa", "ToWn", "COmpany"));
         assertTrue(predicate.test(PREDICATE_TEST_INTERNSHIP));
 
-        predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("AbC@Example.com", "TECH"));
+        predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("DaTa"));
         assertTrue(predicate.test(PREDICATE_TEST_INTERNSHIP));
 
         // Zero keywords
@@ -128,13 +125,13 @@ public class InternshipContainsAllKeywordsPredicateTest {
     public void test_canHandleNonAlphaNumericKeywords_returnsTrue() {
         // Can Handle Commas, [], and both
         InternshipContainsAllKeywordsPredicate predicate =
-                new InternshipContainsAllKeywordsPredicate(Arrays.asList("Street"));
-        assertTrue(predicate.test(new InternshipBuilder().withAddress("Street,").build()));
+                new InternshipContainsAllKeywordsPredicate(Arrays.asList("Test"));
+        assertTrue(predicate.test(new InternshipBuilder().withIndustry("Test,").build()));
 
         predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("saved"));
         assertTrue(predicate.test(new InternshipBuilder().withTags("[saved]").build()));
 
-        predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("Street", "saved"));
-        assertTrue(predicate.test(new InternshipBuilder().withAddress("Street,").withTags("[saved]").build()));
+        predicate = new InternshipContainsAllKeywordsPredicate(Arrays.asList("Test", "saved"));
+        assertTrue(predicate.test(new InternshipBuilder().withIndustry("Test,").withTags("[saved]").build()));
     }
 }

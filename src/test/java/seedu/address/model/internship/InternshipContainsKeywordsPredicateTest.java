@@ -131,23 +131,6 @@ public class InternshipContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_emailContainsKeywords_returnsTrue() {
-        // One keyword
-        InternshipContainsKeywordsPredicate predicate =
-                new InternshipContainsKeywordsPredicate(Collections.singletonList("charlotte@example.com"));
-        assertTrue(predicate.test(new InternshipBuilder().withEmail("charlotte@example.com").build()));
-
-        // Only one matching keyword
-        predicate =
-                new InternshipContainsKeywordsPredicate(Arrays.asList("charlotte@example.com", "bernice@example.com"));
-        assertTrue(predicate.test(new InternshipBuilder().withEmail("charlotte@example.com").build()));
-
-        // Mixed-case keyword
-        predicate = new InternshipContainsKeywordsPredicate(Arrays.asList("CharLotTe@exaMPle.CoM"));
-        assertTrue(predicate.test(new InternshipBuilder().withEmail("charlotte@example.com").build()));
-    }
-
-    @Test
     public void test_emailDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         InternshipContainsKeywordsPredicate predicate =
