@@ -55,8 +55,6 @@ include::../UserGuide.adoc[tag=startnew]
 
 include::../UserGuide.adoc[tag=saveunsave]
 
-include::../UserGuide.adoc[tag=glossary]
-
 
 == Contributions to the Developer Guide
 
@@ -69,3 +67,7 @@ include::../DeveloperGuide.adoc[tag=ui]
 include::../DeveloperGuide.adoc[tag=chatbot]
 
 include::../DeveloperGuide.adoc[tag=saveunsave]
+
+=== Some Instructions for Manual Testing
+
+include::../DeveloperGuide.adoc[tag=manualtestwyin]
