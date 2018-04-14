@@ -324,7 +324,6 @@ This serves as a non-exhaustive lists of industries that users can search for in
 
 * Arts
 * Automotive
-* Biomedical Sciences
 * Business
 * Consultancy
 * Education
