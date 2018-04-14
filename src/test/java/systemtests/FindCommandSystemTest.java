@@ -119,16 +119,21 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
 
         /* Case: find email of internship in internship book -> 1 internships found */
         command = FindCommand.COMMAND_WORD + " " + BUSINESS3.getEmail().value;
-        expectedModel.updateInternship(BUSINESS3, addTag(getInternshipWithoutTags(BUSINESS3), BUSINESS3.getEmail().value));
+        expectedModel.updateInternship(BUSINESS3, addTag(getInternshipWithoutTags(BUSINESS3),
+                BUSINESS3.getEmail().value));
         ModelHelper.setSearchedList(expectedModel, BUSINESS3);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find internship in internship book, keyword is same as name but of different case -> 3 internships found */
+        /* Case: find internship in internship book, keyword is same as name but of different case -> 3 internships
+         found */
         command = FindCommand.COMMAND_WORD + " EnGinEeRing";
-        expectedModel.updateInternship(ENGINEERING1, addTag(getInternshipWithoutTags(ENGINEERING1), "EnGinEeRing"));
-        expectedModel.updateInternship(ENGINEERING2, addTag(getInternshipWithoutTags(ENGINEERING2), "EnGinEeRing"));
-        expectedModel.updateInternship(ENGINEERING3, addTag(getInternshipWithoutTags(ENGINEERING3), "EnGinEeRing"));
+        expectedModel.updateInternship(ENGINEERING1, addTag(getInternshipWithoutTags(ENGINEERING1),
+                "EnGinEeRing"));
+        expectedModel.updateInternship(ENGINEERING2, addTag(getInternshipWithoutTags(ENGINEERING2),
+                "EnGinEeRing"));
+        expectedModel.updateInternship(ENGINEERING3, addTag(getInternshipWithoutTags(ENGINEERING3),
+                "EnGinEeRing"));
         ModelHelper.setSearchedList(expectedModel, ENGINEERING1, ENGINEERING2, ENGINEERING3);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
@@ -200,9 +205,12 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
 
         /* Case: mixed case command word -> 3 internships found with Engineering tags added to them */
         command = "FiNd Engineering";
-        expectedModel.updateInternship(ENGINEERING1, addTag(getInternshipWithoutTags(ENGINEERING1), "Engineering"));
-        expectedModel.updateInternship(ENGINEERING2, addTag(getInternshipWithoutTags(ENGINEERING2), "Engineering"));
-        expectedModel.updateInternship(ENGINEERING3, addTag(getInternshipWithoutTags(ENGINEERING3), "Engineering"));
+        expectedModel.updateInternship(ENGINEERING1, addTag(getInternshipWithoutTags(ENGINEERING1),
+                "Engineering"));
+        expectedModel.updateInternship(ENGINEERING2, addTag(getInternshipWithoutTags(ENGINEERING2),
+                "Engineering"));
+        expectedModel.updateInternship(ENGINEERING3, addTag(getInternshipWithoutTags(ENGINEERING3),
+                "Engineering"));
         ModelHelper.setSearchedList(expectedModel, ENGINEERING1, ENGINEERING2, ENGINEERING3);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
