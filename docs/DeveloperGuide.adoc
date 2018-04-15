@@ -340,22 +340,23 @@ and step-by-step prompts on how to narrow down their internship search. They are
 This is an important feature for our target users because they may not always know how to begin their search or what to look for.
 
 ==== Current (Main) Implementation
-Each message is contained within a ListCell, otherwise named as a `ChatBotCard` in JobbiBot. A `ChatBotCard` is made up of a JavaFX HBox class that contains a Label class.
-The Label is used to display the text either from Jobbi's response to user input or vice versa.
+Each message is displayed within a ListCell, otherwise named as a `ChatBotCard` in JobbiBot. A `ChatBotCard` is made up of a JavaFX HBox class that consists of a Label class.
+The Label is used to either display a Jobbi message or an user command input. This mechanism inherits from UiPart and is executed by the UiManager.
 
-When a new event is raised, typically when a user keys in a command, there are three methods that handle Jobbi and user responses in order to render the conversation between Jobbi and the user on the ListView.
+When a new event is raised, typically when a user keys in a command, there are three main methods that handle Jobbi and user responses in order to render the conversation between Jobbi and the user on the ListView.
 
 The first method to handle each user input in the command box is `handleUserResponse`.
 ----
     public ObservableList<String> handleUserResponse(ObservableList<String> listToUpdateWithUserResponse) {
-        historySnapshot = logic.getHistorySnapshot();
+        ...
+
         // Checks if user has typed the `start` command and adds the current element in the history snapshot list to the ObservableList<String>
         if (historySnapshot.hasElement("start")) {
             listToUpdateWithUserResponse.add("USER:   " + historySnapshot.current());
 
-            // ... Checks if user has restarted conversation if Jobbi ...
+        // ... Checks if user has restarted conversation if Jobbi ...
 
-        // Returns the updated list which is used in `buildConversation` method to render the updated ListView
+        // Returns the updated list which is used in the `buildConversation` method to render the updated ListView
         return listToUpdateWithUserResponse;
     }
 ----
@@ -364,24 +365,22 @@ The second method to handle each Jobbi's response is `handleJobbiResponse`.
 ----
     public ObservableList<String> handleJobbiResponse(ObservableList<String> listToUpdateWithJobbiResponse,
                                                       String message) {
-        historySnapshot = logic.getHistorySnapshot();
+        ...
         // Checks if the user has typed in `start` command to initiate conversation and add the message returned from the EventBus
         if (historySnapshot.hasElement("start")) {
             listToUpdateWithJobbiResponse.add("JOBBI:  " + message);
 
-            // ... Checks if user has restarted conversation if Jobbi ...
+        // ... Checks if user has restarted conversation if Jobbi ...
 
-          // Returns the updated list which is used in `buildConversation` method to render the updated ListView
+          // Returns the updated list which is used in the `buildConversation` method to render the updated ListView
         return listToUpdateWithJobbiResponse;
     }
 ----
 
-Finally, the last method takes an ObservableList of strings which has been updated with the latest Jobbi and user response to an event
-and renders the ListView of the message thread.
+Finally, the last method takes an ObservableList of strings which has been updated with the both latest Jobbi and user response to an event
+and renders a new ListView of the message thread.
 ----
     public void buildConversation(ObservableList<String> listToBuild) {
-        // Calls handleUserResponse() method with a ObservableList<String> that stores all the previous String messages between Jobbi and User
-        ObservableList<String> updatedMessages = handleUserResponse(listToBuild);
 
         // Maps each message in the updated ObservableList<String> to a ChatBotCard
         ObservableList<ChatBotCard> mappedList = EasyBind.map(
@@ -396,10 +395,10 @@ A JavaFX ListView class was specifically chosen because it allows for the vertic
 A ListView instance is buildable with many ListCell objects so a message thread between Jobbi and user can grow extensively.
 It also enables scrolling so that the user is able to scroll up and down to view his or her chat history.
 
-However, two main aspects of the ListView class was altered:
+However, two main aspects of the ListView class was altered so that it resembles a message thread:
 
-* The ability to select a list cell was disabled since users would not need to select individual messages
-* Auto scrolling to the latest message was added so that users will always see the latest message response first.
+* The ability to select a list cell was disabled since users should not be able to to select individual messages.
+* Auto-scrolling to the latest message was added so that users will always see the latest message on the ListView first.
 
 // end::chatbot[]
 
@@ -413,17 +412,17 @@ internships that they would like to save for a quick reference in the future as 
 a particular internship again.
 
 However, the special part of this feature is that users do not add or remove the `saved` tags in the CLI.
-Instead, they simply type in the command `save` or `unsave` with an index number and the command internally
-add a new "saved" tag to the internship or remove the tag. This mechanism inherits from `UndoableCommand` and is
+Instead, they simply type in the command `save` or `unsave` followed by an index number and the command internally
+adds a new "saved" tag to the internship or remove the tag. This mechanism inherits from `UndoableCommand` and is
 executed by the `LogicManager`.
 
-To achieve the internal addition of a saved tag, we added a `addSavedTagToInternship` method
+To achieve the internal addition of a saved tag, we added an `addSavedTagToInternship` method
 within the SaveCommand object. This method is self-invocated by the object's other methods, such as `preprocessUndoableCommand`.
 ----
 private Internship addSavedTagToInternship(Internship internship) throws CommandException {
+
         //Creates a UniqueTagList of the specific internship's tags only
         final UniqueTagList internshipTags = new UniqueTagList(internshipToSave.getTags());
-
 
         //Adds a 'saved' tag only to internships that do not already possess the 'saved' tag or else an exception is thrown
         try {
@@ -450,17 +449,16 @@ image::SaveCommandSequenceDiagram.png[width="800"]
 
 Similarly, to achieve the internal removal of a saved tag, we added a `removeSavedTagToInternship` method
 within the UnsaveCommand object. The implementation of this method and its concept is exactly the opposite of
-the SaveCommand.
+the SaveCommand since the `saved` tag is being removed.
 
 ----
     private Internship removeSavedTagToInternship(Internship internship) {
+
         //Creates a UniqueTagList of the specific internship's tags only
         final UniqueTagList internshipTags = new UniqueTagList(internshipToUnsave.getTags());
 
-
         //Checks for an existing "saved" tag and removes it from the UniqueTagList
         internshipTags.delete(new Tag(SAVED_TAG));
-
 
         // ... rebuilds the new list of tags and returns same person object without "saved" tag  ...
     }
@@ -474,19 +472,19 @@ When users want to remove the internship from their collection, they can type th
 To view the entire collection, they can type `find saved` or `filter saved` into the CLI that basically searches for all the
 internships with "saved" tags and displays the filtered list.
 
-We chose to use the additional and removal of tags for two main reasons:
+We chose to use the addition and removal of tags for two main reasons:
 
-* It is visible to the user which internship has been saved or unsaved
-* It is more straightforward in terms of implementation to do a search by a specific tag to display the Saved Collection
+* It is visible to the user which internship has been saved or unsaved.
+* It is more straightforward in terms of implementation to do a search by a specific tag to display the Saved Collection.
 * Users are able to further narrow down on their search from the Saved Collection. For example, `find saved business` will return a filtered list of internships
 in the Saved Collection that are related to the business industry.
 
 ===== Alternative Solution 1: Readapt the existing Implementation of the `edit` Command
-The `edit` command allowed users to edit the tags of a specific internship. We could have potentially used it to add the `saved` tag to specific internships
+The `edit` command allowed users to edit the tags of a specific existing internship. We could have potentially used it to add the `saved` tag to specific internships
 
 *** Pros: Much simpler implementation since the `edit` command has been provided by the Address Book 4.
-*** Cons 1: Editing tags with the `edit` command erases previous tags from the internship but we want to add the `saved` tag to the existing tags.
-*** Cons 2: The command line input is relatively less user friendly. For example, user had to input `edit 1 t/saved` to add `saved` tag to the first internship of the filtered list.
+*** Cons 1: Editing tags with the `edit` command erase previous tags from the internship but we want to add the `saved` tag to the existing tags.
+*** Cons 2: The command line input is relatively less user-friendly. For example, the user had to input `edit 1 t/saved` to add `saved` tag to the first internship of the filtered list.
 On the other hand, the `save` command only requires the user to type in `save 1` for the same outcome.
 
 ===== Alternative Solution 2: Create an additional model
@@ -857,11 +855,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` | lazy student | save specific internships I am interested it and access it anytime | further narrow down on my interested internships conveniently
 
-|`* * ` | organised student | split up my saved internships into personalised collections | categorise and organise my interested internship in various folders
+|`* *`| organised student | split up my saved internships into personalised collections | categorise and organise my interested internship in various folders
 
-|`* * ` | new student  | input my relevant skill sets/interests | explore internships that are suitable and interesting for me
+|`* *` | new student  | input my relevant skill sets/interests | explore internships that are suitable and interesting for me
 
-|`* * ` | curious student | given data analysis about successful internships and job search within a faculty or in a given year | overview of the job prospects in that year and understand the market competitiveness
+|`* *` | curious student | given data analysis about successful internships and job search within a faculty or in a given year | overview of the job prospects in that year and understand the market competitiveness
 
 |`* *` |lazy student | be able to upload my files / details somewhere | reuse these information for my applications
 
@@ -927,13 +925,14 @@ Use case ends.
 ** 4a1. JobbiBot shows an error message
 ** Use case resumes at step 2.
 
+
 [discrete]
 === Use case: Unsave internship
 
 *MSS*
 
-1.  User requests to list internships
-2.  JobbiBot shows a list of all internships
+1.  User requests to list the Saved Collection
+2.  JobbiBot shows a list of the Saved Collection
 3.  User requests to remove a specific internship from the Saved Collection
 4.  JobbiBot removes the internship from the Saved Collection
 +
@@ -942,7 +941,7 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 2a. The Saved Collection is empty.
 +
 [none]
 ** Use case ends.
@@ -962,8 +961,6 @@ Use case ends.
 
 [discrete]
 === Use case: Finding Internship
-
-*System*: JobbiBot
 
 *MSS*
 
@@ -987,8 +984,6 @@ Use case resumes at step 3.
 [discrete]
 === Use case: Filtering Internship
 
-*System*: JobbiBot
-
 *MSS*
 
 1. User keys in a list of keywords to filter the currently searched internship list (from the finding internship use case above)
@@ -1010,8 +1005,6 @@ Use case ends.
 
 [discrete]
 === Use case: Sorting Internship
-
-*System*: JobbiBot
 
 *MSS*
 
@@ -1100,21 +1093,23 @@ These instructions only provide a starting point for testers to work on; testers
 
 Starting a conversation with JobbiBot when the application is launched .
 
-.. Test case: `start`
-    Expected: JobbiBot prints a response message in the message thread.
-.. Test case: `start x` (where x is an integer, alphabet or non alphanumerical character)
+.. Test case: `start` +
+    Expected: JobbiBot prints a response message in the message thread that prompts the user to find preferred industries and roles.
+.. Test case: `start x` (where x is an integer, alphabet or non alphanumerical character) +
     Expected: Conversation not started. Error details shown in the message thread.
-.. Test case: Subsequent `start` commands after entering the initial `start` commands
+.. Test case: Subsequent `start` commands after entering the initial `start` commands +
     Expected: JobbiBot says that the conversation has already started and subsequent `start` commands has no effect on initiating the conversation again.
 
 === Clearing a previous conversation with JobbiBot
 
 Restarting a conversation with JobbiBot after typing more than 4 commands in the CLI.
 
-.. Test case: `new x` (where x is an integer, alphabet or non alphanumerical character)
+.. Test case: `new x` (where x is an integer, alphabet or non alphanumerical character) +
     Expected: Previous conversation is not cleared. Error details shown in the message thread.
-.. Test case: `new`
+.. Test case: `new` +
     Expected: Clears entire previous message thread and user only sees the JobbiBot welcome message left.
+.. Test case: `list` +
+    Expected: Error detail is shown in the message thread. JobbiBot prompts the user to type the `start` command to restart the conversation.
 
 === Saving an internship to Saved Collection
 
@@ -1122,8 +1117,8 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
 
 .. Prerequisites: List all internships using the `list` command. Multiple internships in the list.
 .. Test case: `save 1` +
-   Expected: First internship is saved from the list as visible from the `saved` tag added to the internship. Details of the successful saved internship shown as a JobbiBot response in the message thread.
-.. Test case: `save 1` to save the same internship from the same list again
+   Expected: First internship is saved from the list as visible from the `saved` tag added to the internship. Details of the successful saved internship are shown as a JobbiBot response in the message thread.
+.. Test case: `save 1` to save the same internship from the same list again +
     Expected: Internship cannot be saved twice. Error details shown in the message thread.
 .. Test case: `save 0` +
    Expected: No internship is saved. Error details shown in the message thread.
@@ -1131,7 +1126,7 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
   Expected: No internship is saved. Error details shown in the message thread.
 .. Other incorrect save commands to try: `save`, `save x` or `x save` (where x is larger than the list size or x is not an alphanumerical character
  or x is a mathematical expression that evaluates to an positive integer),  +
-   Expected: Similar to previous.
+   Expected: No internship is saved. Error details shown in the message thread.
 
 
 === Removing an internship to Saved Collection
@@ -1140,20 +1135,12 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
 
 .. Prerequisites: List all internships from the Saved Internship Collection using the `find saved` or `filter saved` command. Multiple internships in the Saved Collection.
 .. Test case: `unsave 1` +
-   Expected: First internship is removed from the Saved Collection as visible from the `saved` tag being removed from the internship and the internship is removed from the Saved Collection. Details of the successful removal is shown as a JobbiBot response in the message thread.
+   Expected: First internship is removed from the Saved Collection as visible from the `saved` tag being removed from the internship and the internship is removed from the Saved Collection. Details of the successful removal are shown as a JobbiBot response in the message thread.
 .. Test case: `unsave 0` +
    Expected: No internship is removed from Saved Collection. Error details shown in the message thread.
 .. Test case: `save -2` +
   Expected: No internship is removed from Saved Collection. Error details shown in the message thread.
 .. Other incorrect save commands to try: `unsave`, `unsave x` or `x unsave` (where x is larger than the list size or x is not an alphanumerical character
  or x is a mathematical expression that evaluates to an positive integer),  +
-   Expected: Similar to previous.
+   Expected: No internship is removed from Saved Collection. Error details shown in the message thread.
 // end::manualtestwyin[]
-
-=== Saving data
-
-. Dealing with missing/corrupted data files
-
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
