@@ -114,6 +114,14 @@ public class InternshipBookParser {
             checkIfContainArguments(arguments);
             hasRestarted = false;
             checkIfConversationRestarted();
+            if (!hasStarted) {
+                hasStarted = true;
+                return new StartCommand();
+            } else {
+                throw new ParseException("Our conversation has already started"
+                        + " Type 'new' if you would like to restart our conversation");
+            }
+
         case NewChatCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
             hasStarted = false;
