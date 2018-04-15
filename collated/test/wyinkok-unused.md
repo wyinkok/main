@@ -38,7 +38,7 @@ public class GlossaryWindowHandle extends StageHandle {
         return WebViewUtil.getLoadedUrl(getChildNode(GLOSSARY_WINDOW_BROWSER_ID));
     }
 }
-     */
+ */
 ```
 ###### \java\seedu\address\logic\commands\GlossaryCommandTest.java
 ``` java
