@@ -20,8 +20,7 @@ public class ListCommand extends Command {
     public CommandResult execute() {
         ModelManager.setKeywords(new ArrayList<>());
         model.updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-        // remove all tags from filtered list except 'saved' tags
-        model.removeTagsFromInternshipList();
+        model.removeTagsFromFilteredList();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

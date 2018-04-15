@@ -12,16 +12,16 @@ JobbiBot is an interactive application that aims to guide university students in
 Line Interface application where most of the functions are accessed through typing the commands. Through JobbiBot,
 users would be able to narrow down the overwhelming amount of internship opportunities by different attributes such as salary and industry with
 the help of JobbiBot which will guide the user slowly through the process with prompts and useful tips.
-Afterwhich they can either save the list of internships while making the decision, select the internship and obtain comprehensive details about
-the internship or they may restart the process and filter the internships differently.
 
 == Summary of contributions
 
-* *Major enhancement*: modified the find function *to enable user to do a distinct union search*
-** What it does: Allows users to search for multiple keywords and all internships containing ANY of the keywords will be listed.
+* *Major enhancement*: Modified the find function *to enable user to do a distinct union search*
+** What it does:
+*** Allows users to search for multiple keywords and all internships containing ANY of the keywords will be listed.
 the internship in the list are then tagged with tags containing keywords which it matches.
 ** Justification: This feature improves the product significantly because a user can narrow down their internships opportunities
-yet at the same time keep their options open by selecting multiple keywords to search for.
+yet at the same time keep their options open by selecting multiple keywords to search for. The union search will return ALL internships
+that matches any of the keywords. They can then filter from the list to get their desired internship.
 
 ** Highlights: Enable the search of multiple keywords in all the attributes of the internships and can repeat the find command indefinitely until
 a suitable list of internships are obtained for further filtering.
@@ -35,14 +35,21 @@ a suitable list of internships are obtained for further filtering.
 
 ** Project management:
 *** Managed release `v1.3` on GitHub
+*** Setting up of initial milestones, issues and tasks for the team
+
 ** Enhancements to existing features:
 *** Implemented Role https://github.com/CS2103JAN2018-F11-B3/main/issues/54[#52], Salary https://github.com/CS2103JAN2018-F11-B3/main/issues/64[#64], Industry https://github.com/CS2103JAN2018-F11-B3/main/issues/66[#66] and Region https://github.com/CS2103JAN2018-F11-B3/main/issues/67[#67] attributes
 *** Morph Person Class to Internship Class https://github.com/CS2103JAN2018-F11-B3/main/issues/65[#65]
+
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Updated the model component in developers guide to match the current model
+*** Remove unused commands and features provided by AddressBook4 from the User guide https://github.com/CS2103JAN2018-F11-B3/main/pull/85/files[#85]
+*** Added and updated NFR and UseCase to the Developers Guide https://github.com/CS2103JAN2018-F11-B3/main/pull/2[#2] https://github.com/CS2103JAN2018-F11-B3/main/pull/3[#3] https://github.com/CS2103JAN2018-F11-B3/main/pull/52[#52]
+
 ** Community:
 *** Collate codes for team https://github.com/CS2103JAN2018-F11-B3/main/pull/102[#102]
 *** Setting up of Travis Auto Publishing for the team
+*** Populating of database https://github.com/CS2103JAN2018-F11-B3/main/pull/193[#193]
 
 == Contributions to the User Guide
 
@@ -53,8 +60,6 @@ a suitable list of internships are obtained for further filtering.
 
 include::../UserGuide.adoc[tag=findwithfeature]
 
-//include::../UserGuide.adoc[tag=dataencryption]
-
 == Contributions to the Developer Guide
 
 |===
@@ -63,9 +68,8 @@ include::../UserGuide.adoc[tag=findwithfeature]
 
 include::../DeveloperGuide.adoc[tag=findwithfeatures]
 
-//include::../DeveloperGuide.adoc[]
+include::../DeveloperGuide.adoc[tag=usecase1]
 
+include::../DeveloperGuide.adoc[tag=nonfunctionalrequirements]
 
 ---
-
-_{Optionally, you may include other projects in your portfolio.}_

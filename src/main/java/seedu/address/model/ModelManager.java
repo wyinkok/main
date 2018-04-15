@@ -101,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author TanCiKang
     @Override
     /**
-     * Add keyword tags that matches the internship to the list of internships in filteredInternships
+     * Add keyword tags that matches the internship to the list of filteredInternships
      */
     public void addTagsToFilteredList() {
         for (String keyword: filterKeywords) {
@@ -122,10 +122,10 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author TanCiKang
     @Override
     /**
-     * Remove all tags that are not 'saved' from the internship list
+     * Remove all tags that are not 'saved' from the filtered list
      *
      */
-    public void removeTagsFromInternshipList() {
+    public void removeTagsFromFilteredList() {
         for (Internship internship : getFilteredInternshipList()) {
             try {
                 updateInternship(internship, internship.removeTagsFromInternship());
@@ -140,12 +140,12 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author TanCiKang
     @Override
     /**
-     * Remove all tags from all internship in the internship list with the exception of saved tag
+     * Remove all tags from the internship list with the exception of saved tag
      * @param model
      */
     public void removeTagsFromAllInternshipList() {
         updateSearchedInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
-        removeTagsFromInternshipList();
+        removeTagsFromFilteredList();
     }
 
     //=========== Filtered Internship List Accessors =============================================================
