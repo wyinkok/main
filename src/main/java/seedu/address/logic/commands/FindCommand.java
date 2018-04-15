@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.ModelManager;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 
 /**
@@ -32,12 +31,9 @@ public class FindCommand extends Command {
     //@@author TanCiKang
     @Override
     public CommandResult execute() {
-
-        ModelManager.removeTagsFromAllInternshipList(model);
+        model.removeTagsFromAllInternshipList();
         model.updateSearchedInternshipList(predicate);
-        // add tags that have keywords matching the internship
-        ModelManager.addTagsToFilteredList(ModelManager.getKeywords(), model.getFilteredInternshipList(), model);
-
+        model.addTagsToFilteredList();
         return getCommandResult();
     }
 

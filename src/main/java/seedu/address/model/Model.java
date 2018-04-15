@@ -51,4 +51,10 @@ public interface Model {
      * Creates a comparator based on the keyword arguments and apply it to the SortedList of Internship
      */
     void setComparator(List<String> keywords);
+
+    void removeTagsFromAllInternshipList();
+
+    void removeTagsFromInternshipList();
+
+    void addTagsToFilteredList();
 }
