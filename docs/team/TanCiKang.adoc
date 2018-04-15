@@ -10,18 +10,17 @@
 
 JobbiBot is an interactive application that aims to guide university students in their search for internships. JobbiBot is a Command
 Line Interface application where most of the functions are accessed through typing the commands. Through JobbiBot,
-users would be able to narrow down the overwhelming amount of internship opportunities by different attributes such as salary and industry with
+users would be able to narrow down the overwhelming amount of internship opportunities by different attributes such as industry with
 the help of JobbiBot which will guide the user slowly through the process with prompts and useful tips.
 
 == Summary of contributions
 
 * *Major enhancement*: Modified the find function *to enable user to do a distinct union search*
-** What it does:
-*** Allows users to search for multiple keywords and all internships containing ANY of the keywords will be listed.
+** What it does: Allows users to search for multiple keywords and all internships containing any of the keywords will be listed.
 the internship in the list are then tagged with tags containing keywords which it matches.
 ** Justification: This feature improves the product significantly because a user can narrow down their internships opportunities
 yet at the same time keep their options open by selecting multiple keywords to search for. The union search will return ALL internships
-that matches any of the keywords. They can then filter from the list to get their desired internship.
+that matches any of the keywords.
 
 ** Highlights: Enable the search of multiple keywords in all the attributes of the internships and can repeat the find command indefinitely until
 a suitable list of internships are obtained for further filtering.
@@ -52,7 +51,6 @@ a suitable list of internships are obtained for further filtering.
 *** Populating of database https://github.com/CS2103JAN2018-F11-B3/main/pull/193[#193]
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
