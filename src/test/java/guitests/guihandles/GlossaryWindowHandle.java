@@ -36,4 +36,4 @@ public class GlossaryWindowHandle extends StageHandle {
         return WebViewUtil.getLoadedUrl(getChildNode(GLOSSARY_WINDOW_BROWSER_ID));
     }
 }
-     */
+ */

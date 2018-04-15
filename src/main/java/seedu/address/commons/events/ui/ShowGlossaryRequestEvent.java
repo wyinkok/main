@@ -13,6 +13,5 @@ public class ShowGlossaryRequestEvent extends BaseEvent {
     public String toString() {
         return this.getClass().getSimpleName();
     }
-
 }
  */

@@ -123,7 +123,6 @@ public class ChatBotPanel extends UiPart<Region> {
         handleJobbiResponse(messageList, event.message);
     }
 
-    //@@author
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code ChatBotCard}.
      */

@@ -7,6 +7,9 @@ import guitests.guihandles.ChatBotCardHandle;
 import seedu.address.ui.testutil.GuiTestAssert;
 public class ChatBotCardTest extends GuiUnitTest {
 
+    private static String JOBBI_WELCOME_MESSAGE = "Hello there, I am Jobbi! "
+            + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
+
     @Test
     public void display() {
         // non undoable command (user input)
@@ -33,13 +36,10 @@ public class ChatBotCardTest extends GuiUnitTest {
         uiPartRule.setUiPart(chatBotCardForErrorCommand);
         assertCardDisplay(chatBotCardForErrorCommand, errorCommand);
 
-        // Jobbi Welcome Message
-        String welcomeMessage = "Hello there, I am Jobbi! "
-                + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
-        ChatBotCard chatBotCardForWelcomeMessage = new ChatBotCard("Hello there, I am Jobbi! "
-                + "I am here to help you find your ideal internship today. Type 'start' to begin your search.");
+        // checks if Jobbi's Welcome Message is displayed on the ChatBotCard
+        ChatBotCard chatBotCardForWelcomeMessage = new ChatBotCard(JOBBI_WELCOME_MESSAGE);
         uiPartRule.setUiPart(chatBotCardForWelcomeMessage);
-        assertCardDisplay(chatBotCardForWelcomeMessage, welcomeMessage);
+        assertCardDisplay(chatBotCardForWelcomeMessage, JOBBI_WELCOME_MESSAGE);
     }
 
     /**

@@ -80,6 +80,7 @@ public class InternshipBookParser {
 
         //=========== Command without arguments =============================================================
 
+        //@@author
         case ListCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
             checkIfConversationRestarted();
@@ -113,13 +114,7 @@ public class InternshipBookParser {
             checkIfContainArguments(arguments);
             hasRestarted = false;
             checkIfConversationRestarted();
-            if (!hasStarted) {
-                hasStarted = true;
-                return new StartCommand();
-            } else {
-                throw new ParseException("Our conversation has already started"
-                        + "Type 'new' if you would like to restart our conversation");
-            }
+
 
         case NewChatCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
@@ -138,12 +133,10 @@ public class InternshipBookParser {
         }
     }
 
-
     //@@author wyinkok
-
     /**
      * Checks if the user has typed in the start command after the new command to restart the conversation successfully
-     * @throws ParseException if any other command is typed in after the new command
+     * @throws ParseException if any other command (other than exit and help) is typed in after the new command
      */
     private void checkIfConversationRestarted() throws ParseException {
         if (hasRestarted) {

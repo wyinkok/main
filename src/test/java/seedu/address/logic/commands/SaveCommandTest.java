@@ -50,7 +50,7 @@ public class SaveCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredInternshipList().size() + 1);
         SaveCommand saveCommand = prepareCommand(outOfBoundIndex);
 
@@ -58,11 +58,11 @@ public class SaveCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() throws UniqueTagList.DuplicateTagException {
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
         Index outOfBoundIndex = INDEX_SECOND_INTERNSHIP;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of internship book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getJobbiBot().getInternshipList().size());
 
         SaveCommand saveCommand = prepareCommand(outOfBoundIndex);
@@ -94,7 +94,7 @@ public class SaveCommandTest {
     }
 
     @Test
-    public void executeUndoRedo_invalidIndexUnfilteredList_failure() throws UniqueTagList.DuplicateTagException {
+    public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         UndoRedoStack undoRedoStack = new UndoRedoStack();
         UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);

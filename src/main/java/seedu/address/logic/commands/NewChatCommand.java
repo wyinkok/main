@@ -11,7 +11,7 @@ public class NewChatCommand extends Command {
 
     public static final String COMMAND_WORD = "new";
 
-    public static final String MESSAGE_RESTART_ACKNOWLEDGEMENT = "We've successfully restarted our conversation";
+    public static final String MESSAGE_RESTART_ACKNOWLEDGEMENT = "We've successfully restarted our conversation.";
 
     @Override
     public CommandResult execute() {

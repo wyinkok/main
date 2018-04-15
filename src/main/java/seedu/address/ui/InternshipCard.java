@@ -49,6 +49,7 @@ public class InternshipCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    //@@author wyinkok
     public InternshipCard(Internship internship, int displayedIndex) {
         super(FXML);
         this.internship = internship;
@@ -66,6 +67,7 @@ public class InternshipCard extends UiPart<Region> {
         internship.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    //@@author
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
