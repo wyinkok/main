@@ -140,7 +140,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.testutil.SavedInternshipBuilder;
 
 /**
@@ -167,7 +166,7 @@ public class SaveCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() throws Exception {
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredInternshipList().size() + 1);
         SaveCommand saveCommand = prepareCommand(outOfBoundIndex);
 
@@ -175,11 +174,11 @@ public class SaveCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() throws UniqueTagList.DuplicateTagException {
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
         Index outOfBoundIndex = INDEX_SECOND_INTERNSHIP;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of internship book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getJobbiBot().getInternshipList().size());
 
         SaveCommand saveCommand = prepareCommand(outOfBoundIndex);
@@ -211,7 +210,7 @@ public class SaveCommandTest {
     }
 
     @Test
-    public void executeUndoRedo_invalidIndexUnfilteredList_failure() throws UniqueTagList.DuplicateTagException {
+    public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         UndoRedoStack undoRedoStack = new UndoRedoStack();
         UndoCommand undoCommand = prepareUndoCommand(model, undoRedoStack);
         RedoCommand redoCommand = prepareRedoCommand(model, undoRedoStack);
@@ -845,6 +844,9 @@ import guitests.guihandles.ChatBotCardHandle;
 import seedu.address.ui.testutil.GuiTestAssert;
 public class ChatBotCardTest extends GuiUnitTest {
 
+    private static final String JOBBI_WELCOME_MESSAGE = "Hello there, I am Jobbi! "
+            + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
+
     @Test
     public void display() {
         // non undoable command (user input)
@@ -871,13 +873,10 @@ public class ChatBotCardTest extends GuiUnitTest {
         uiPartRule.setUiPart(chatBotCardForErrorCommand);
         assertCardDisplay(chatBotCardForErrorCommand, errorCommand);
 
-        // Jobbi Welcome Message
-        String welcomeMessage = "Hello there, I am Jobbi! "
-                + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
-        ChatBotCard chatBotCardForWelcomeMessage = new ChatBotCard("Hello there, I am Jobbi! "
-                + "I am here to help you find your ideal internship today. Type 'start' to begin your search.");
+        // checks if Jobbi's Welcome Message is displayed on the ChatBotCard
+        ChatBotCard chatBotCardForWelcomeMessage = new ChatBotCard(JOBBI_WELCOME_MESSAGE);
         uiPartRule.setUiPart(chatBotCardForWelcomeMessage);
-        assertCardDisplay(chatBotCardForWelcomeMessage, welcomeMessage);
+        assertCardDisplay(chatBotCardForWelcomeMessage, JOBBI_WELCOME_MESSAGE);
     }
 
     /**
@@ -913,6 +912,8 @@ import seedu.address.model.ModelManager;
 
 public class ChatBotListPanelTest extends GuiUnitTest {
 
+    private static final String EXPECTED_WELCOME_MESSAGE = "JOBBI:   " + "Hello there, I am Jobbi! "
+            + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
     private ChatBotListPanelHandle chatBotListPanelHandle;
 
     @Before
@@ -928,13 +929,9 @@ public class ChatBotListPanelTest extends GuiUnitTest {
     }
     @Test
     public void display_welcomeMessage() {
-        String expectedWelcomeMessage = "JOBBI:   " + "Hello there, I am Jobbi! "
-                + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
         ChatBotCardHandle actualCard = chatBotListPanelHandle.getHandleToWelcomeMessage();
-        assertCardDisplaysMessage(expectedWelcomeMessage, actualCard);
+        assertCardDisplaysMessage(EXPECTED_WELCOME_MESSAGE, actualCard);
     }
-
-
 }
 
 ```
@@ -986,8 +983,8 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
 
         /* Case: save the last internship in the list -> saved */
         Model modelBeforeSavingLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeSavingLast);
-        assertCommandSuccess(lastPersonIndex);
+        Index lastInternshipIndex = getLastIndex(modelBeforeSavingLast);
+        assertCommandSuccess(lastInternshipIndex);
 
         /* Case: undo saving the last internship in the list -> last internship restored */
         command = UndoCommand.COMMAND_WORD;
@@ -996,13 +993,13 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
 
         /* Case: redo saving the last internship in the list -> last internship saved again */
         command = RedoCommand.COMMAND_WORD;
-        addSavedTagToInternship(modelBeforeSavingLast, lastPersonIndex);
+        addSavedTagToInternship(modelBeforeSavingLast, lastInternshipIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeSavingLast, expectedResultMessage);
 
         /* Case: save the middle internship in the list -> saved */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex);
+        Index middleInternshipIndex = getMidIndex(getModel());
+        assertCommandSuccess(middleInternshipIndex);
 
         /* ------------------ Performing save operation while a filtered list is being shown ---------------------- */
 
@@ -1251,8 +1248,8 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
 
         /* Case: save the last internship in the list -> saved */
         Model modelBeforeSavingLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeSavingLast);
-        assertCommandSuccess(lastPersonIndex);
+        Index lastInternshipIndex = getLastIndex(modelBeforeSavingLast);
+        assertCommandSuccess(lastInternshipIndex);
 
         /* Case: undo saving the last internship in the list -> last internship restored */
         command = UndoCommand.COMMAND_WORD;
@@ -1261,13 +1258,13 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
 
         /* Case: redo saving the last internship in the list -> last internship saved again */
         command = RedoCommand.COMMAND_WORD;
-        removeSavedTagToInternship(modelBeforeSavingLast, lastPersonIndex);
+        removeSavedTagToInternship(modelBeforeSavingLast, lastInternshipIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeSavingLast, expectedResultMessage);
 
         /* Case: unsave the middle internship in the list -> unsaved */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex);
+        Index middleInternshipIndex = getMidIndex(getModel());
+        assertCommandSuccess(middleInternshipIndex);
 
         /* ------------------ Performing save operation while a filtered list is being shown ---------------------- */
 
@@ -1351,18 +1348,18 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
     }
 
     /**
-     * Removes the saved internship from Saved Collection at {@code toRemove} by creating
-     * a default {@code UnsaveCommand} using {@code toRemove} and
+     * Removes the saved internship from Saved Collection at {@code toUnsave} by creating
+     * a default {@code UnsaveCommand} using {@code toUnsave} and
      * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
      * @see UnsaveCommandSystemTest#assertCommandSuccess(String, Index, Internship)
      */
-    private void assertCommandSuccess(Index toRemove) throws CommandException {
+    private void assertCommandSuccess(Index toUnsave) throws CommandException {
         Model expectedModel = getModel();
-        Internship unsavedInternship = removeSavedTagToInternship(expectedModel, toRemove);
+        Internship unsavedInternship = removeSavedTagToInternship(expectedModel, toUnsave);
         String expectedResultMessage = String.format(MESSAGE_UNSAVED_INTERNSHIP_SUCCESS, unsavedInternship);
 
         assertCommandSuccess(
-                UnsaveCommand.COMMAND_WORD + " " + toRemove.getOneBased(), expectedModel,
+                UnsaveCommand.COMMAND_WORD + " " + toUnsave.getOneBased(), expectedModel,
                 expectedResultMessage);
     }
 
@@ -1380,8 +1377,8 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
      * 1. Asserts that chat bot panel displays the success message of executing {@code UnsaveCommand}.<br>
-     * 2. Asserts that the model related components are updated to reflect the internship at index {@code toSave} being
-     * updated to values specified {@code editedInternship}.<br>
+     * 2. Asserts that the model related components are updated to reflect the internship at index {@code toUnsave}
+     * being updated to values specified {@code unsavedInternship}.<br>
      * @param toUnsave the index of the current model's filtered list.
      * @see UnsaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
@@ -1393,7 +1390,7 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
                     expectedModel.getFilteredInternshipList().get(toUnsave.getZeroBased()), unsavedInternship);
         } catch (DuplicateInternshipException | InternshipNotFoundException e) {
             throw new IllegalArgumentException(
-                    "editedInternship is a duplicate in expectedModel, or it isn't found in the model.");
+                    "unsavedInternship is a duplicate in expectedModel, or it isn't found in the model.");
         }
 
         assertCommandSuccess(command, expectedModel,
