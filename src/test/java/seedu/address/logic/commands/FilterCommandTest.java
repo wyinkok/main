@@ -69,7 +69,7 @@ public class FilterCommandTest {
 
         //execute_multipleKeywords_zeroInternshipsFound
         expectedMessage = String.format(FilterCommand.MESSAGE_FILTER_RESPONSE_NO_INTERNSHIP);
-        command = prepareCommand("ENGINEERING BUSINESS");
+        command = prepareCommand("Engineering Business");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
 
         //execute_singleKeyword_multipleInternshipsFound()
