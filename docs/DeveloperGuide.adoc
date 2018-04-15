@@ -199,7 +199,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 === Model component
 
 .Structure of the Model Component
-image::ModelDesign1.png[width="800"]
+image::ModelComponentClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -549,11 +549,8 @@ want to search for other internship while keeping those that are searched before
             }
         }
 
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
-
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        ...
+        ...
 
         return new Internship(
                 getName(), getSalary(), getEmail(), getAddress(),
@@ -568,12 +565,8 @@ want to search for other internship while keeping those that are searched before
         } catch (UniqueTagList.DuplicateTagException e) {
             throw new AssertionError("Operation would result in duplicate tags");
         }
-
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
-
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        ...
+        ...
 
         return new Internship(
                 getName(), getSalary(), getEmail(), getAddress(),
@@ -583,14 +576,66 @@ want to search for other internship while keeping those that are searched before
 
 Implementation of the codes
 
-Initial: To implement the 
+Initial: To implement the addTagsToFilteredList method, a double for loop was used to loop through both keywords and internships
+in order to find the match and proceed with the addition of tags to the internship.
 
-Code Refinement:
+----
+    public static void addTagsToFilteredList (List<String> filterKeywords,
+                                              ObservableList<Internship> filteredInternships, Model model)
+            throws CommandException {
+
+        for (String keywords : filterKeywords) {
+            for (Internship filteredInternship : filteredInternships) {
+                if (StringUtil.containsWordIgnoreCase(filteredInternship.toString(), keywords)) {
+                    try {
+                        model.updateInternship(filteredInternship,
+                                addTagsToInternshipWithMatch(keywords, filteredInternship));
+                    } catch (DuplicateInternshipException e) {
+                        throw new CommandException(MESSAGE_DUPLICATE_INTERNSHIP);
+                    } catch (InternshipNotFoundException e) {
+                        throw new AssertionError("The target internship cannot be missing");
+                    }
+                }
+            }
+        }
+    }
+----
+
+Code Refinement: However, there were SRP violation there as the method was used to find internship that is matching the keyword,
+add the keyword tag and also update the internship. Furthermore, the code was deeply nested as well. As such, concept of abstraction
+was used to separate the functions into individual methods as shown below.
+----
+    public CommandResult execute() {
+        model.removeTagsFromAllInternshipList();
+        model.updateSearchedInternshipList(predicate);
+        model.addTagsToFilteredList();
+        return getCommandResult();
+    }
+----
 
 ==== Additional Enhancement
 
-Using list command to reset
+From the users perspective, they might want to find again if the result was not up to their satisfaction.
+As such, the implementation was designed in such a way that subsequent find will reset the tags from the internship.
 
+Since List command is used to show the entire list in the display, a feature is added to it such that all the tags are removed from the internships
+to allow the user to see the entire internship list.
+----
+    public void removeTagsFromFilteredList() {
+        for (Internship internship : getFilteredInternshipList()) {
+            try {
+                updateInternship(internship, internship.removeTagsFromInternship());
+            } catch (DuplicateInternshipException e) {
+                throw new AssertionError(MESSAGE_DUPLICATE_SAVED_INTERNSHIP);
+            } catch (InternshipNotFoundException e) {
+                throw new AssertionError("The target internship cannot be missing");
+            }
+        }
+    }
+----
+Rather than throwing exception, assertion is used instead because users do not key in the value but instead, downloads
+the internship book and insert it into the program. As such, there should not be any duplicate internship. Any duplicate internships
+will result in the program malfunctioning and no internship being listed on the left panel.
 // end::findwithfeatures[]
 
 // tag::undoredo[]
@@ -922,11 +967,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |=======================================================================
 
+
 [appendix]
 == Use Cases
 
 (For all use cases below, the *System* is the `JobbiBot` and the *Actor* is the `user`, unless specified otherwise)
 [discrete]
+// tag::usecase1[]
 === Use case: Start conversation with Jobbi
 
 *MSS*
@@ -977,7 +1024,6 @@ Use case ends.
 [none]
 ** 4a1. JobbiBot shows an error message
 ** Use case resumes at step 2.
-
 [discrete]
 === Use case: Unsave internship
 
@@ -1073,8 +1119,9 @@ Use case ends.
 
 +
 Use case ends.
+// end::usecase1[]
 
-
+// tag::nonfunctionalrequirements[]
 [appendix]
 == Non Functional Requirements
 
@@ -1088,8 +1135,7 @@ Use case ends.
 .  Should have a clean and easy to use interface.
 .  Should be designed for a British-English speaking user.
 .  Should be current and up to date (i.e. companies recruitment status).
-
-_{More to be added}_
+// end::nonfunctionalrequirements[]
 
 // tag::glossary[]
 [appendix]
