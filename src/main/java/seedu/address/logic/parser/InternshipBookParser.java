@@ -114,8 +114,7 @@ public class InternshipBookParser {
             checkIfContainArguments(arguments);
             hasRestarted = false;
             checkIfConversationRestarted();
-
-
+            
         case NewChatCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
             hasStarted = false;
@@ -136,7 +135,7 @@ public class InternshipBookParser {
     //@@author wyinkok
     /**
      * Checks if the user has typed in the start command after the new command to restart the conversation successfully
-     * @throws ParseException if any other command (other than exit and help) is typed in after the new command
+     * @throws ParseException if any other command is typed in after the new command
      */
     private void checkIfConversationRestarted() throws ParseException {
         if (hasRestarted) {
