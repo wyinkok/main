@@ -149,7 +149,7 @@ public class SampleDataUtil {
             new Internship(new Name("Mc Corporate Services Pte Ltd"), new Salary("450"),
                 new Email("Mccorp@example.com"), new Address("1 Coleman Street"), new Industry("Legal"),
                 new Region("Central"), new Role("Legal Corporate Secretarial Internship"), getTagSet()),
-            new Internship(new Name("Schneider Electric Ptd Ltd"), new Salary("800"),
+            new Internship(new Name("Schneider Electric Pte Ltd"), new Salary("800"),
                 new Email("Schneider@example.com"), new Address("50 Kallang Ave"), new Industry("Legal"),
                 new Region("Central"), new Role("Legal Intern"), getTagSet()),
             new Internship(new Name("PropertyLimBrothersMedia"), new Salary("1500"),
