@@ -28,7 +28,7 @@ a suitable list of internships are obtained for further filtering.
 * *Minor enhancement*: Modified the preview list on the left to show important attributes and full details on the right panel if internship is selected.
 
 * *Code contributed*: [https://github.com/CS2103JAN2018-F11-B3/main/blob/master/collated/functional/TanCiKang.md[Functional Code]]
- [https://github.com[Test code]]
+ [https://github.com/CS2103JAN2018-F11-B3/main/blob/master/collated/test/TanCiKang.md[Test code]]
 
 * *Other contributions*:
 
