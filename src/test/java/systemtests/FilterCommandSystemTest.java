@@ -18,7 +18,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-i
+
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 
