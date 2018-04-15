@@ -1297,7 +1297,7 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
 .. Test case: `find google` then `filter development` +
     Expected: JobbiBot returns no internship found as there is no internships that contains 'google' and 'development'.
 
-.. Test case: `find google business ` then `filter development` +
+.. Test case: `find google business` then `filter development` +
     Expected: JobbiBot returns only the internship containing both 'business' and 'development' as there are internship that contains both 'google' and 'development'. There should be a `business` tag on the internship shown.
 
 .. Test case: `find google` then `list` then `filter development` +
@@ -1343,6 +1343,6 @@ Keyword attribute with '-' are sorted in reverse order. +
 .. Test case: `find business` then `filter seragoon` then `sort role` +
         Expected: JobbiBot should show a list of internships that contains both business and serangoon, sorted by role from A-Z (case insensitive).
 
-// end:: manualtestcolin[]
+// end::manualtestcolin[]
 
 
