@@ -27,6 +27,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     public LogicManager(Model model) {
         this.model = model;
+        model.removeTagsFromAllInternshipList();
         history = new CommandHistory();
         internshipBookParser = new InternshipBookParser();
         undoRedoStack = new UndoRedoStack();
