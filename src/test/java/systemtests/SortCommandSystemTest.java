@@ -171,4 +171,6 @@ public class SortCommandSystemTest extends JobbiBotSystemTest {
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }
+    
 }
+
