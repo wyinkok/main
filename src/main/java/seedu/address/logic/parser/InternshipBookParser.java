@@ -114,7 +114,6 @@ public class InternshipBookParser {
             checkIfContainArguments(arguments);
             hasRestarted = false;
             checkIfConversationRestarted();
-            
         case NewChatCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
             hasStarted = false;
