@@ -511,7 +511,7 @@ which internship suits them more and enable them to further filter from the list
 The add tag feature is implemented as part of the find command. However, as models will be change due to the addition of tags,
 some codes are implemented within ModelManager.
 
-image::FindCommandSequenceDiagram.png[width="1200"]
+image::FindCommandSequenceDiagram.png[width="800"]
 
 As it can be seen from the diagram, `Logic` uses the `InternshipBookParser` class to parse the user command.
 After which, `FindCommandParser` is created and use to parse the keyword. The keyword is then set in `ModelManager` via the
@@ -971,7 +971,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 (For all use cases below, the *System* is the `JobbiBot` and the *Actor* is the `user`, unless specified otherwise)
 [discrete]
-// tag::usecase1[]
 === Use case: Start conversation with Jobbi
 
 *MSS*
@@ -1057,6 +1056,9 @@ Use case ends.
 ** Use case resumes at step 2.
 
 [discrete]
+
+// tag::usecase1[]
+
 === Use case: Finding Internship
 
 *MSS*
@@ -1112,6 +1114,7 @@ Use case ends.
 
 +
 Use case ends.
+
 // end::usecase1[]
 
 // tag::nonfunctionalrequirements[]
