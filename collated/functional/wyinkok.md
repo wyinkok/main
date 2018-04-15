@@ -30,7 +30,7 @@ public class NewChatCommand extends Command {
 
     public static final String COMMAND_WORD = "new";
 
-    public static final String MESSAGE_RESTART_ACKNOWLEDGEMENT = "We've successfully restarted our conversation";
+    public static final String MESSAGE_RESTART_ACKNOWLEDGEMENT = "We've successfully restarted our conversation.";
 
     @Override
     public CommandResult execute() {
@@ -303,8 +303,8 @@ public class UnsaveCommand extends UndoableCommand {
                 hasStarted = true;
                 return new StartCommand();
             } else {
-                throw new ParseException("Our conversation has already started"
-                        + "Type 'new' if you would like to restart our conversation");
+                throw new ParseException("Our conversation has already started."
+                        + " Type 'new' if you would like to restart our conversation");
             }
 
         case NewChatCommand.COMMAND_WORD:
@@ -447,7 +447,6 @@ public class ChatBotCard extends UiPart<Region> {
      */
     public void setMessage(String msg) {
         messages.setText(msg);
-
     }
 }
 ```
@@ -575,6 +574,43 @@ public class ChatBotPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         buildConversation(messageList);
         handleJobbiResponse(messageList, event.message);
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code ChatBotCard}.
+     */
+    class ChatBotListViewCell extends ListCell<ChatBotCard> {
+        @Override
+        protected void updateItem(ChatBotCard message, boolean isEmpty) {
+            super.updateItem(message, isEmpty);
+            if (isEmpty || message == null) {
+                setGraphic(null);
+                setText(null);
+
+            } else {
+                setGraphic(message.getRoot());
+            }
+        }
+    }
+}
+```
+###### \java\seedu\address\ui\InternshipCard.java
+``` java
+    public InternshipCard(Internship internship, int displayedIndex) {
+        super(FXML);
+        this.internship = internship;
+        id.setText(displayedIndex + ". ");
+        name.setText(internship.getName().fullName);
+        industryTitle.setText("Industry: ");
+        industry.setText(internship.getIndustry().value);
+        roleTitle.setText("Role: ");
+        role.setText(internship.getRole().value);
+        salaryTitle.setText("Stipend: $");
+        salary.setText(internship.getSalary().value);
+        regionTitle.setText("Region: ");
+        region.setText(internship.getRegion().value);
+
+        internship.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
 ```

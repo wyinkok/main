@@ -130,34 +130,6 @@ public class SortCommand extends Command {
 
         //=========== Command without arguments =============================================================
 
-        case ListCommand.COMMAND_WORD:
-            checkIfContainArguments(arguments);
-            checkIfConversationRestarted();
-            return new ListCommand();
-
-        case HistoryCommand.COMMAND_WORD:
-            checkIfContainArguments(arguments);
-            checkIfConversationRestarted();
-            return new HistoryCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            checkIfContainArguments(arguments);
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            checkIfContainArguments(arguments);
-            return new HelpCommand();
-
-        case UndoCommand.COMMAND_WORD:
-            checkIfContainArguments(arguments);
-            checkIfConversationRestarted();
-            return new UndoCommand();
-
-        case RedoCommand.COMMAND_WORD:
-            checkIfContainArguments(arguments);
-            checkIfConversationRestarted();
-            return new RedoCommand();
-
 ```
 ###### \java\seedu\address\logic\parser\InternshipBookParser.java
 ``` java
