@@ -78,7 +78,7 @@ public class InternshipBookParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        if (parser.hasStarted == false) {
+        if (parser.getHasStarted() == false) {
             parser.parseCommand(StartCommand.COMMAND_WORD);
         }
         try {
@@ -181,7 +181,7 @@ public class InternshipBookParserTest {
 
     @Test
     public void parseCommand_start() throws Exception {
-        parser.hasStarted = false;
+        parser.resetHasStarted();
         assertTrue(parser.parseCommand(StartCommand.COMMAND_WORD) instanceof StartCommand);
         try {
             parser.parseCommand(StartCommand.COMMAND_WORD + " 3");
