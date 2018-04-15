@@ -242,8 +242,6 @@ The search command takes in one or more keywords and returns all internships tha
 
 The filter command takes in one or more keywords and returns all internships that contains *ALL* of the keyword(s) from the last searched internship list or the full internship list if the users has not used the search command feature.
 
-See diagram below: <Insert Diagram Here>
-
 
 ==== Design Considerations
 
@@ -257,8 +255,6 @@ See diagram below: <Insert Diagram Here>
 ** Pros: Easy to implement, only need to create a List<String> to store the last searched arguments and add them to the filter command arguments when filter commmand is executed
 ** Cons: Fatal design error in the following example: `search marketing analytics`, then `filter singapore` will only return results that contain marketing analytics and singapore.
 Whereas the desired output should be internships that either contain marketing singapore or analytics singapore. It was not feasible/easy to change the filter command to produce this desired outcome
-
-See diagram below: <Insert Diagram 2 Here>
 
 ===== Aspect: Alternative Implementation 'Filter Command'
 
@@ -274,7 +270,6 @@ which returns all internships that contains (marketing or analytics or data or e
 ** Note: This add tag feature (done by Ci Kang) is now used to distinguish between search keywords.
 E.g `search marketing analytics` will display marketing tag for internship that contain marketing and display analytics tag for internship that contains analytics.
 
-See diagram below: <Insert Diagram 3 Here>
 
 ===== Aspect: Current Implementation 'Filter Command'
 * Current implementation makes use of the Java FXCollections filteredList.
@@ -328,8 +323,6 @@ See Diagram below: <Insert Diagram to show how the propagation works here>
 ** Pros: Design feature solved in relatively "easy" way without having to change the existing code significantly
 ** Cons: Was harder to implement as it required knowledge of how the model interacts and worked as well as how the filteredList Java FXCollection worked.
 
-
-See diagram below <Insert Model Manager Diagram>
 
 // end::filter[]
 
@@ -1269,10 +1262,39 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
 
 === Sorting the JobbiBot Internship List
 
-. Should sort according to keyword attribute entered +
-Keywords
+. Should sort according to keyword(s) entered +
+Valid keyword attributes are: `name` `role` `region` `salary` `industry` , and  `-name` `-role` `-region` `-salary` `-industry` +
+Attributes are sorted from A-Z by default (case insensitive). Salary is sorted from highest to lowest by default. +
+Keyword attribute with '-' are sorted in reverse order. +
 
+.. Test case: `sort [keyword]` +
+    Expected: JobbiBot should return a list of internship sorted according to that keyword, sorted from A-Z (case insensitive)
 
+.. Test case: `sort salary` +
+    Expected: JobbiBot should return a list of internship sorted according by salary from highest to lowest
+
+.. Test case: `sort -salary` +
+    Expected: JobbiBot should return a list of internship sorted according by salary from lowest to highest
+
+.. Test case: `sort [-keyword]` +
+    Expected: JobbiBot should return a list of internship sorted according to that keyword, sorted from Z-A (case insensitive)
+
+.. Test case: `sort [keyword1] [keyword2] [keyword3]` +
+    Expected: JobbiBot should return a list of internship sorted according to that keyword1 first, and if there is a tie, keyword2, and if there is a tie again, keyword3
+
+.. Test case: `sort [keyword1] [keyword2] [keyword3] [moreKeyword]` +
+    Expected: Jobbibot should only sort according to the first three keywords. Subsequent arguments are ignored.
+
+. Should should only show internships from the current searched/filtered list. Use `list command` before the start of each test case
+
+.. Test case: `sort role` +
+    Expected: JobbiBot should show a list of ALL internships, sorted by role from A-Z (case insensitive).
+
+.. Test case: `find business` then `sort role` +
+    Expected: JobbiBot should show a list of internships that contains business, sorted by role from A-Z (case insensitive).
+
+.. Test case: `find business` then `filter seragoon` then `sort role` +
+        Expected: JobbiBot should show a list of internships that contains both business and serangoon, sorted by role from A-Z (case insensitive).
 
 
 // end:: manualtestcolin[]
