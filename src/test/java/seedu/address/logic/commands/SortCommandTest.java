@@ -3,6 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalInternshipsForSorting.IN1;
+import static seedu.address.testutil.TypicalInternshipsForSorting.IN2;
+import static seedu.address.testutil.TypicalInternshipsForSorting.IN3;
+import static seedu.address.testutil.TypicalInternshipsForSorting.IN4;
+import static seedu.address.testutil.TypicalInternshipsForSorting.IN5;
 import static seedu.address.testutil.TypicalInternshipsForSorting.getTypicalInternshipForSorting;
 
 import java.util.ArrayList;
@@ -23,7 +28,7 @@ import seedu.address.model.internship.Internship;
 /**
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.
  */
-public class SortCommandTest {
+public class SortCommandTest{
 
     private Model model = new ModelManager(getTypicalInternshipForSorting(), new UserPrefs());
 
@@ -53,31 +58,45 @@ public class SortCommandTest {
     }
 
     @Test
+    public void sort_oneKeyword_salaryAttribute() {
+        String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        SortCommand command = prepareCommand("salary");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN3, IN4, IN5));
+    }
+
+    @Test
     public void sort_oneKeyword() {
         String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
         SortCommand command = prepareCommand("role");
-        assertCommandSuccess(command, expectedMessage, Arrays.asList());
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN3, IN4, IN5));
     }
 
     @Test
     public void sort_twoKeyword() {
         String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
         SortCommand command = prepareCommand("role industry");
-        assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN4, IN5 ,IN3));
     }
 
     @Test
     public void sort_threeKeyword() {
         String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
         SortCommand command = prepareCommand("role industry name");
-        assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN5, IN4, IN3));
+    }
+
+    @Test
+    public void sort_moreThanThreeKeyword() {
+        String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        SortCommand command = prepareCommand("role industry name salary");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN5, IN4, IN3));
     }
 
     /**
      * Parses {@code userInput} into a {@code SortCommand}.
      */
     private SortCommand prepareCommand(String arguments) {
-        List<String> keywords = new ArrayList<>(Arrays.asList(arguments));
+        List<String> keywords = new ArrayList<>(Arrays.asList(arguments.split("\\s+")));
         SortCommand command = new SortCommand(keywords);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;

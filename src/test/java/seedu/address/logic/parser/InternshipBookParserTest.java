@@ -71,10 +71,9 @@ public class InternshipBookParserTest {
     @Test
     public void parseCommand_filter() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        ArrayList<String> uniqueKeywords = new ArrayList<>(new HashSet<>(keywords));
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FilterCommand(new InternshipContainsAllKeywordsPredicate(uniqueKeywords)), command);
+        assertEquals(new FilterCommand(new InternshipContainsAllKeywordsPredicate(keywords)), command);
     }
 
     @Test

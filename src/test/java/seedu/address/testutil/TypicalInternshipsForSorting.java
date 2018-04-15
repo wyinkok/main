@@ -13,15 +13,27 @@ import seedu.address.model.internship.exceptions.DuplicateInternshipException;
  */
 public class TypicalInternshipsForSorting {
 
-    public static final Internship IN1 = new InternshipBuilder().withName("AAA").withSalary("1000")
+    public static final Internship IN1 = new InternshipBuilder().withName("NameA").withSalary("1100")
+            .withIndustry("IndustryA").withRegion("RegionA").withRole("RoleA").build();
+
+    public static final Internship IN2 = new InternshipBuilder().withName("NameB").withSalary("1000")
             .withEmail("XXX@XXX.com").withAddress("XXX")
-            .withIndustry("IndustryA1").withRegion("RegionA").withRole("RoleA1").build();
-    public static final Internship IN2 = new InternshipBuilder().withName("AAA").withSalary("1000")
+            .withIndustry("IndustryB").withRegion("RegionB").withRole("RoleB").build();
+
+    public static final Internship IN3 = new InternshipBuilder().withName("NameC").withSalary("900")
             .withEmail("XXX@XXX.com").withAddress("XXX")
-            .withIndustry("IndustryA1").withRegion("RegionA").withRole("RoleA2").build();
-    public static final Internship IN3 = new InternshipBuilder().withName("AAA").withSalary("1000")
+            .withIndustry("IndustryC").withRegion("RegionC").withRole("RoleC").build();
+
+    // Clone of IN3, different industry
+    public static final Internship IN4 = new InternshipBuilder().withName("NameC").withSalary("900")
             .withEmail("XXX@XXX.com").withAddress("XXX")
-            .withIndustry("IndustryA1").withRegion("RegionA").withRole("RoleA3").build();
+            .withIndustry("IndustryA").withRegion("RegionC").withRole("RoleC").build();
+
+    // Clone of IN4, different name
+    public static final Internship IN5 = new InternshipBuilder().withName("NameA").withSalary("900")
+            .withEmail("XXX@XXX.com").withAddress("XXX")
+            .withIndustry("IndustryA").withRegion("RegionC").withRole("RoleC").build();
+
 
     private TypicalInternshipsForSorting() {} // prevents instantiation
 
@@ -41,6 +53,6 @@ public class TypicalInternshipsForSorting {
     }
 
     public static List<Internship> getTypicalInternshipsForSorting() {
-        return new ArrayList<>(Arrays.asList(IN1, IN2, IN3));
+        return new ArrayList<>(Arrays.asList(IN1, IN2, IN3, IN4, IN5));
     }
 }
