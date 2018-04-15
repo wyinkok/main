@@ -528,17 +528,68 @@ as a `CommandResult` object and returns it to the `LogicManager` and subsequentl
 
 ==== Design Considerations
 
-Location of the functions
+Initial: Adding the addition and removal of tags from internship method under `FindCommand` since it is ultimately used when executing FindCommand.
 
-Alternative 1:
+Refinement: Since the addition and removal of tags to internship involves modifying of internship, these methods are added to the
+internship class as shown below. An additional check for `saved` tag was added as well as from the users perspective, they would
+want to search for other internship while keeping those that are searched before with the `saved` tag.
 
-Alternative 2:
+----
+    public Internship removeTagsFromInternship() {
+        final UniqueTagList internshipTags = new UniqueTagList(getTags());
+
+        for (Tag tagToBeRemoved : tags) {
+            if (!tagToBeRemoved.toString().equals(SAVED_TAG_NAME)) {
+                try {
+                    internshipTags.delete(tagToBeRemoved);
+                } catch (TagNotFoundException e) {
+                    assert false;
+                    throw new AssertionError("Impossible! Should not have TagNotFoundException");
+                }
+            }
+        }
+
+        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
+
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+
+        return new Internship(
+                getName(), getSalary(), getEmail(), getAddress(),
+                getIndustry(), getRegion(), getRole(), correctTagReferences);
+    }
+
+    public Internship addTagsToInternship(String keyword) {
+        final UniqueTagList internshipTags = new UniqueTagList(getTags());
+
+        try {
+            internshipTags.add(new Tag(keyword));
+        } catch (UniqueTagList.DuplicateTagException e) {
+            throw new AssertionError("Operation would result in duplicate tags");
+        }
+
+        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        internshipTags.forEach(tag -> masterTagObjects.put(tag, tag));
+
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        internshipTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+
+        return new Internship(
+                getName(), getSalary(), getEmail(), getAddress(),
+                getIndustry(), getRegion(), getRole(), correctTagReferences);
+    }
+----
 
 Implementation of the codes
 
-Alternative 1:
+Initial: To implement the 
 
-Alternative 2:
+Code Refinement:
+
+==== Additional Enhancement
+
+Using list command to reset
 
 // end::findwithfeatures[]
 
