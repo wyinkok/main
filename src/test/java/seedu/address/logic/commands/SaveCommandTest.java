@@ -23,7 +23,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.testutil.SavedInternshipBuilder;
 
 /**

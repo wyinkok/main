@@ -186,8 +186,8 @@ public class UnsaveCommandSystemTest extends JobbiBotSystemTest {
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
      * 1. Asserts that chat bot panel displays the success message of executing {@code UnsaveCommand}.<br>
-     * 2. Asserts that the model related components are updated to reflect the internship at index {@code toUnsave} being
-     * updated to values specified {@code unsavedInternship}.<br>
+     * 2. Asserts that the model related components are updated to reflect the internship at index {@code toUnsave}
+     * being updated to values specified {@code unsavedInternship}.<br>
      * @param toUnsave the index of the current model's filtered list.
      * @see UnsaveCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */

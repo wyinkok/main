@@ -7,7 +7,7 @@ import guitests.guihandles.ChatBotCardHandle;
 import seedu.address.ui.testutil.GuiTestAssert;
 public class ChatBotCardTest extends GuiUnitTest {
 
-    private static String JOBBI_WELCOME_MESSAGE = "Hello there, I am Jobbi! "
+    private static final String JOBBI_WELCOME_MESSAGE = "Hello there, I am Jobbi! "
             + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
 
     @Test
