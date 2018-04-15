@@ -242,8 +242,6 @@ The search command takes in one or more keywords and returns all internships tha
 
 The filter command takes in one or more keywords and returns all internships that contains *ALL* of the keyword(s) from the last searched internship list or the full internship list if the users has not used the search command feature.
 
-See diagram below: <Insert Diagram Here>
-
 
 ==== Design Considerations
 
@@ -257,8 +255,6 @@ See diagram below: <Insert Diagram Here>
 ** Pros: Easy to implement, only need to create a List<String> to store the last searched arguments and add them to the filter command arguments when filter commmand is executed
 ** Cons: Fatal design error in the following example: `search marketing analytics`, then `filter singapore` will only return results that contain marketing analytics and singapore.
 Whereas the desired output should be internships that either contain marketing singapore or analytics singapore. It was not feasible/easy to change the filter command to produce this desired outcome
-
-See diagram below: <Insert Diagram 2 Here>
 
 ===== Aspect: Alternative Implementation 'Filter Command'
 
@@ -274,7 +270,6 @@ which returns all internships that contains (marketing or analytics or data or e
 ** Note: This add tag feature (done by Ci Kang) is now used to distinguish between search keywords.
 E.g `search marketing analytics` will display marketing tag for internship that contain marketing and display analytics tag for internship that contains analytics.
 
-See diagram below: <Insert Diagram 3 Here>
 
 ===== Aspect: Current Implementation 'Filter Command'
 * Current implementation makes use of the Java FXCollections filteredList.
@@ -328,8 +323,6 @@ See Diagram below: <Insert Diagram to show how the propagation works here>
 ** Pros: Design feature solved in relatively "easy" way without having to change the existing code significantly
 ** Cons: Was harder to implement as it required knowledge of how the model interacts and worked as well as how the filteredList Java FXCollection worked.
 
-
-See diagram below <Insert Model Manager Diagram>
 
 // end::filter[]
 
@@ -511,11 +504,11 @@ which internship suits them more and enable them to further filter from the list
 The add tag feature is implemented as part of the find command. However, as models will be change due to the addition of tags,
 some codes are implemented within ModelManager.
 
-image::FindCommandSequenceDiagram.png[width="1200"]
+image::FindCommandSequenceDiagram.png[width="800"]
 
 As it can be seen from the diagram, `Logic` uses the `InternshipBookParser` class to parse the user command.
 After which, `FindCommandParser` is created and use to parse the keyword. The keyword is then set in `ModelManager` via the
-setKeywords() method. A `FindCommand` object is then created followed by the `internshipContainsKeywordsPredicate`.
+setKeywords() method.
 
 In the second phase, the command is being executed in `FindCommand`. The first updateSearchedInternshipList() update the
 searchedInternship with all the internships available and remove all tags from them apart from `saved` tags. Following which
@@ -546,14 +539,14 @@ want to search for other internship while keeping those that are searched before
                 }
             }
         }
-
         ...
         ...
-
-        return new Internship(
-                getName(), getSalary(), getEmail(), getAddress(),
+        return new Internship(getName(), getSalary(), getEmail(), getAddress(),
                 getIndustry(), getRegion(), getRole(), correctTagReferences);
     }
+----
+
+----
 
     public Internship addTagsToInternship(String keyword) {
         final UniqueTagList internshipTags = new UniqueTagList(getTags());
@@ -565,9 +558,7 @@ want to search for other internship while keeping those that are searched before
         }
         ...
         ...
-
-        return new Internship(
-                getName(), getSalary(), getEmail(), getAddress(),
+        return new Internship(     getName(), getSalary(), getEmail(), getAddress(),
                 getIndustry(), getRegion(), getRole(), correctTagReferences);
     }
 ----
@@ -971,7 +962,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 (For all use cases below, the *System* is the `JobbiBot` and the *Actor* is the `user`, unless specified otherwise)
 [discrete]
-// tag::usecase1[]
 === Use case: Start conversation with Jobbi
 
 *MSS*
@@ -1057,11 +1047,14 @@ Use case ends.
 ** Use case resumes at step 2.
 
 [discrete]
+
+// tag::usecase1[]
+
 === Use case: Finding Internship
 
 *MSS*
 
-1. User keys in a list of keywords to search  for internship byby
+1. User keys in a list of keywords to search  for internship by
 2. JobbiBot returns user the list of internships which contains the keywords
 3. User can choose to re-search again if not satisfied
 
@@ -1099,6 +1092,7 @@ Use case ends.
 ** 2a1. JobbiBot will recommend user to re-filter using other keywords
 ** 2a2. User can also use undo function to return back to last searched or filtered internship list
 
+// end::usecase1[]
 
 [discrete]
 === Use case: Sorting Internship
@@ -1112,7 +1106,6 @@ Use case ends.
 
 +
 Use case ends.
-// end::usecase1[]
 
 // tag::nonfunctionalrequirements[]
 [appendix]
@@ -1243,6 +1236,7 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
    Expected: No internship is removed from Saved Collection. Error details shown in the message thread.
 
 
+
 // tag::manualtestcikang[]
 
 === Finding an internship
@@ -1288,5 +1282,67 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
       Expected: Right panel display full details of internship from internsg.
 
 // end::manualtestcikang[]
+
+// tag:: manualtestcolin[]
+=== Filtering the JobbiBot Internship List
+
+. Should only apply filter to the current searched(find command) list. Use `list command` before the start of each test case
+
+.. Test case: `filter business` +
+    Expected: JobbiBot returns all internship containing 'business' in the current internship list. There should be no tags unlike the case of find command
+
+.. Test case: `filter business development` +
+    Expected: JobbiBot returns all internship containing the keywords 'business' and 'development' in the current internship list. There should be no tags unlike the case of find command
+
+.. Test case: `find google` then `filter development` +
+    Expected: JobbiBot returns no internship found as there is no internships that contains 'google' and 'development'.
+
+.. Test case: `find google business ` then `filter development` +
+    Expected: JobbiBot returns only the internship containing both 'business' and 'development' as there are internship that contains both 'google' and 'development'. There should be a `business` tag on the internship shown.
+
+.. Test case: `find google` then `list` then `filter development` +
+    Expected: Jobbibot return all internships containing 'development' as list command resets the searched list that the filter command works on. No searched tags on the internship.
+
+.. Test case: `filter business` then `filter development` +
+    Expected: JobbiBot returns all internship that contains development. Filtering only works on last searched or default list (cannot filter from a filtered list). No searched tags on the internships.
+
+
+=== Sorting the JobbiBot Internship List
+
+. Should sort according to keyword(s) entered +
+Valid keyword attributes are: `name` `role` `region` `salary` `industry` , and  `-name` `-role` `-region` `-salary` `-industry` +
+Attributes are sorted from A-Z by default (case insensitive). Salary is sorted from highest to lowest by default. +
+Keyword attribute with '-' are sorted in reverse order. +
+
+.. Test case: `sort [keyword]` +
+    Expected: JobbiBot should return a list of internship sorted according to that keyword, sorted from A-Z (case insensitive)
+
+.. Test case: `sort salary` +
+    Expected: JobbiBot should return a list of internship sorted according by salary from highest to lowest
+
+.. Test case: `sort -salary` +
+    Expected: JobbiBot should return a list of internship sorted according by salary from lowest to highest
+
+.. Test case: `sort [-keyword]` +
+    Expected: JobbiBot should return a list of internship sorted according to that keyword, sorted from Z-A (case insensitive)
+
+.. Test case: `sort [keyword1] [keyword2] [keyword3]` +
+    Expected: JobbiBot should return a list of internship sorted according to that keyword1 first, and if there is a tie, keyword2, and if there is a tie again, keyword3
+
+.. Test case: `sort [keyword1] [keyword2] [keyword3] [moreKeyword]` +
+    Expected: Jobbibot should only sort according to the first three keywords. Subsequent arguments are ignored.
+
+. Should should only show internships from the current searched/filtered list. Use `list command` before the start of each test case
+
+.. Test case: `sort role` +
+    Expected: JobbiBot should show a list of ALL internships, sorted by role from A-Z (case insensitive).
+
+.. Test case: `find business` then `sort role` +
+    Expected: JobbiBot should show a list of internships that contains business, sorted by role from A-Z (case insensitive).
+
+.. Test case: `find business` then `filter seragoon` then `sort role` +
+        Expected: JobbiBot should show a list of internships that contains both business and serangoon, sorted by role from A-Z (case insensitive).
+
+// end:: manualtestcolin[]
 
 
