@@ -107,13 +107,16 @@ Returns any internship having names or description matching `Dow`, `Micron`, or 
 Returns any internship having `Engineering` in its description.
 * `find Serangoon` +
 Returns any internship that has a region matching `Serangoon` in it.
+* `find 800` +
+Returns any internship that has a salary of 800 ONLY +
+Tip: use `sort salary` to see internship containing salaries above a certain value
 
 // end::findwithfeature[]
 
 // tag::filterSort[]
 === Filtering Internship by keyword(s): `filter` [since v1.3]
 
-Filters the internship list according to the given keywords. +
+Filters the displayed internship list according to the given keywords.  +
 Format: `filter KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -133,6 +136,9 @@ Examples:
 Returns any entries containing data. e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics. e.g `data analytics internship`, `data analytics singapore`
+* `filter 1000` +
+Returns any internship that has a salary of 1000 ONLY +
+Tip: use `sort salary` to see internship containing salaries above a certain value
 
 === Sorting Internship by keyword(s): `sort` [since v1.4]
 
@@ -347,7 +353,6 @@ This serves as a non-exhaustive lists of industries that users can search for in
 * Retail
 * Social Enterprise
 * Technology
-* Veterinary Services
 
 == List of Internship Roles
 This table is a non exhaustive list of potential internship roles that users can search for in JobbiBot. Internship roles are organised by industry but not all industries are listed in this table.
@@ -361,9 +366,11 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Graphic Designer
                      | Photographer
                      | Videographer
-.6+| Business
+.8+| Business
+                     | Business Analyst
                      | Business Analytics
                      | Business Development
+                     | Business Development Associate
                      | Market Researcher
                      | Operations
                      | Sales
@@ -387,6 +394,10 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Events Planning and Management
                      | Guest Services and Relations
                      | Sustainability
+.3+| IT
+                     | Business Development Associate
+                     | Technology Analyst Intern
+                     | Web Technology Intern
 .1+| Legal
                      | Legal Counsel
 .7+| Media

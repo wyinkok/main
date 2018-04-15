@@ -147,7 +147,7 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple tags in single internship in internship book -> 1 internships found */
+        /* Case: find multiple keywords from the same internship in internship book -> 1 internships found */
         command = FindCommand.COMMAND_WORD + " " + "Deloitte Pagar";
         expectedModel.updateInternship(BUSINESS2, addTag(getInternshipWithoutTags(BUSINESS2),
                 "Deloitte Pagar"));
@@ -155,7 +155,7 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find single tag in multiple internships in internship book -> 2 internship found */
+        /* Case: find single keyword that is in multiple internships in internship book -> 2 internship found */
         command = FindCommand.COMMAND_WORD + " " + "Manufacturing";
         expectedModel.updateInternship(ENGINEERING1, addTag(getInternshipWithoutTags(ENGINEERING1),
                 "Manufacturing"));
@@ -165,7 +165,7 @@ public class FindCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple tags in multiple internships in internship book -> 3 internships found */
+        /* Case: find multiple keywords that is in multiple internships in internship book -> 3 internships found */
         command = FindCommand.COMMAND_WORD + " " + "PwC Audit";
         expectedModel.updateInternship(BUSINESS1, addTag(getInternshipWithoutTags(BUSINESS1),
                 "PwC saved"));

@@ -1236,6 +1236,54 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
 // end::manualtestwyin[]
 
 
+// tag::manualtestcikang[]
+
+=== Finding an internship
+
+. Find internships using keyword/s
+
+.. Prerequisites: Nil
+.. Test case: `find KEYWORD` +
+   Expected: Internships matching the keyword are all listed on the left panel. Keywords matching the internship are added as tags to the internships.
+.. Test case: `find KEYWORD1 KEYWORD2` +
+   Expected: Searched internship list on the left is replaced with the new list matching KEYWORD1 and/or KEYWORD2.
+.. Test case: `find ` +
+   Expected: Invalid command format. Error details shown in the message thread.
+
+=== Finding saved internships
+
+. Find saved internships
+
+.. Prerequisites: Have saved at least one internship with the save command.
+.. Test case: `find saved` +
+   Expected: Saved Internships matching are all listed on the left panel.
+.. Test case: `find KEYWORD1 saved` +
+   Expected: Internships matching keyword1 and/or saved are showed, internships matching keyword1 have keyword tags added.
+
+=== List internships
+
+. List internships
+
+.. Prerequisites: Have saved at least one internship, have executed find command such that the list on the left panel is not the full list.
+.. Test case: `list` +
+   Expected: Left panel display full internships, keyword tags attached during find command are removed.
+.. Test case: `list KEYWORD` +
+   Expected: Invalid command format. Error details shown in the message thread.
+.. Other incorrect list commands to try: `list 0`, `list 1` or `list abc` +
+   Expected: Similar to previous.
+
+=== Select internship
+
+   . Select internship
+
+   .. Prerequisites: Have saved at least one internship available in the left panel.
+   .. Test case: `select 1` +
+      Expected: Right panel display full details of internship from internsg.
+
+// end::manualtestcikang[]
+
+
+
 // tag:: manualtestcolin[]
 === Filtering the JobbiBot Internship List
 
@@ -1296,6 +1344,6 @@ Keyword attribute with '-' are sorted in reverse order. +
 .. Test case: `find business` then `filter seragoon` then `sort role` +
         Expected: JobbiBot should show a list of internships that contains both business and serangoon, sorted by role from A-Z (case insensitive).
 
-
 // end:: manualtestcolin[]
+
 

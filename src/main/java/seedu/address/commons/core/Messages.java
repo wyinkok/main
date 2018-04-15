@@ -10,5 +10,4 @@ public class Messages {
     public static final String MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX = "The internship index provided is invalid";
     public static final String MESSAGE_INTERNSHIPS_LISTED_OVERVIEW = "%1$d internships listed!";
     public static final String MESSAGE_INVALID_RESTART_COMMAND = "Conversation has not restarted. Please type `start`";
-
 }

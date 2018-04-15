@@ -16,7 +16,6 @@ and https://www.yale-nus.edu.sg[Yale-NUS College].
 image::Wyin.jpg[width="150", align="left"]
 {empty}[http://github.com/wyinkok[github]]
 {empty}[https://github.com/wyinkok/main/blob/master/docs/team/WyinKok-projectportfolio.adoc[PPP via Github]]
-{empty}[file:///Users/wyin/Documents/AddressBook/main/build/docs/html5/team/WyinKok-projectportfolio.html[PPP via HTML]]
 
 Role: Team Lead +
 Responsibilities: UI component
@@ -34,7 +33,7 @@ Responsibilities: Model component
 
 === Tan Ci Kang
 image::CiKang.jpg[width="150", align="left"]
-{empty}[https://github.com/TanCiKang[github]]
+{empty}[https://github.com/TanCiKang[github]] [https://github.com/CS2103JAN2018-F11-B3/main/blob/master/docs/team/TanCiKang.adoc[Project Portfolio]]
 
 Role: Developer +
 Responsibilities: Logic component
