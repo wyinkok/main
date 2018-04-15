@@ -13,12 +13,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.runners.MethodSorters;
 
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import org.junit.runners.MethodSorters;
 
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
