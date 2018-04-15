@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import java.util.Arrays;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.SortCommand;
 
 public class SortCommandParserTest {
