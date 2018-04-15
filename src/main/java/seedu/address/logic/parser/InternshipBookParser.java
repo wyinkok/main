@@ -118,7 +118,7 @@ public class InternshipBookParser {
                 hasStarted = true;
                 return new StartCommand();
             } else {
-                throw new ParseException("Our conversation has already started"
+                throw new ParseException("Our conversation has already started."
                         + " Type 'new' if you would like to restart our conversation");
             }
 
