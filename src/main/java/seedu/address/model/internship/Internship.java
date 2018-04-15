@@ -186,8 +186,7 @@ public class Internship {
     //@@author TanCiKang
     /**
      * Remove all tags other than 'saved' tags from individual internship
-     *
-     * @return
+     * @return internship
      */
     public Internship removeTagsFromInternship() {
         final UniqueTagList internshipTags = new UniqueTagList(getTags());

@@ -52,9 +52,19 @@ public interface Model {
      */
     void setComparator(List<String> keywords);
 
+    //@@author TanCiKang
+    /**
+     *  Remove tags from the entire internship list
+     */
     void removeTagsFromAllInternshipList();
 
-    void removeTagsFromInternshipList();
+    /**
+     *  Remove tags from the filtered list
+     */
+    void removeTagsFromFilteredList();
 
+    /**
+     * Add keyword tags that matches the internship to the list of filteredInternships
+     */
     void addTagsToFilteredList();
 }
