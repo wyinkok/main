@@ -3,36 +3,26 @@ package systemtests;
 import static seedu.address.commons.core.Messages.MESSAGE_INTERNSHIPS_LISTED_OVERVIEW;
 import static seedu.address.testutil.TypicalInternships.BUSINESS1;
 import static seedu.address.testutil.TypicalInternships.BUSINESS2;
-import static seedu.address.testutil.TypicalInternships.BUSINESS3;
 import static seedu.address.testutil.TypicalInternships.BUSINESS4;
 import static seedu.address.testutil.TypicalInternships.DATASCIENCE;
 import static seedu.address.testutil.TypicalInternships.ENGINEERING1;
 import static seedu.address.testutil.TypicalInternships.ENGINEERING2;
 import static seedu.address.testutil.TypicalInternships.ENGINEERING3;
 import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_AUDIT;
-import static seedu.address.testutil.TypicalInternshipsForSorting.getTypicalInternshipForSorting;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.logging.Filter;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.internship.Internship;
+i
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
-import seedu.address.model.internship.exceptions.TagNotFoundException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
+
+
 //@@author niloc94
 public class FilterCommandSystemTest extends JobbiBotSystemTest {
 
@@ -136,8 +126,8 @@ public class FilterCommandSystemTest extends JobbiBotSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: filter with keywords from tag attribute -> 1 internships found */
-        command = FilterCommand.COMMAND_WORD + " " + BUSINESS1.getTags().toString().
-                replaceAll("[\\[+\\]+]", " ");
+        command = FilterCommand.COMMAND_WORD + " " + BUSINESS1.getTags().toString()
+                .replaceAll("[\\[+\\]+]", " ");
         ModelHelper.setFilteredList(expectedModel, BUSINESS1);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();

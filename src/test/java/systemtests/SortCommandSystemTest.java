@@ -1,25 +1,16 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INTERNSHIPS_LISTED_OVERVIEW;
-import static seedu.address.testutil.TypicalInternships.BUSINESS1;
-import static seedu.address.testutil.TypicalInternships.BUSINESS2;
-import static seedu.address.testutil.TypicalInternships.BUSINESS4;
-import static seedu.address.testutil.TypicalInternships.DATASCIENCE;
-import static seedu.address.testutil.TypicalInternships.ENGINEERING1;
-import static seedu.address.testutil.TypicalInternships.ENGINEERING2;
-import static seedu.address.testutil.TypicalInternships.ENGINEERING3;
-import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_AUDIT;
 import static seedu.address.testutil.TypicalInternshipsForSorting.IN1;
 import static seedu.address.testutil.TypicalInternshipsForSorting.IN2;
-import static seedu.address.testutil.TypicalInternshipsForSorting.IN3;
 import static seedu.address.testutil.TypicalInternshipsForSorting.IN4;
 import static seedu.address.testutil.TypicalInternshipsForSorting.IN5;
 import static seedu.address.testutil.TypicalInternshipsForSorting.getTypicalInternshipForSorting;
 
 import java.util.Arrays;
-import java.util.logging.Filter;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -37,6 +28,8 @@ import seedu.address.testutil.TypicalInternshipsForSorting;
 //@@author niloc94
 public class SortCommandSystemTest extends JobbiBotSystemTest {
 
+    private Model model = new ModelManager(getTypicalInternshipForSorting(), new UserPrefs());
+
     /**
      * Returns the data with saved tags to be loaded into the file in {@link #getDataFileLocation()}.
      */
@@ -45,12 +38,11 @@ public class SortCommandSystemTest extends JobbiBotSystemTest {
         return TypicalInternshipsForSorting.getTypicalInternshipForSorting();
     }
 
-    private Model model = new ModelManager(getTypicalInternshipForSorting(), new UserPrefs());
+
+    /* -------------------------Sorting on an unfiltered list ------------------------------------------------- */
 
     @Test
     public void sort_unsearched_unfiltered()  {
-
-        /* -------------------------Sorting on an unfiltered list ---------------------------------------------------- */
 
         /* Case: Sort with one argument, command with leading spaces and trailing spaces */
         String command = "   " + SortCommand.COMMAND_WORD + " " + "-salary" + "  ";
@@ -124,7 +116,7 @@ public class SortCommandSystemTest extends JobbiBotSystemTest {
      * @throws DuplicateInternshipException
      * @throws InternshipNotFoundException
      */
-    private void initializeSearchedList() throws DuplicateInternshipException, InternshipNotFoundException{
+    private void initializeSearchedList() throws DuplicateInternshipException, InternshipNotFoundException {
         String command = FindCommand.COMMAND_WORD + " " + "IndustryA IndustryB";
         model.updateInternship(IN1, IN1.addTagsToInternship("IndustryA"));
         model.updateInternship(IN4, IN4.addTagsToInternship("IndustryA"));

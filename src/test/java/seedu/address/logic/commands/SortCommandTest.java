@@ -28,7 +28,7 @@ import seedu.address.model.internship.Internship;
 /**
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.
  */
-public class SortCommandTest{
+public class SortCommandTest {
 
     private Model model = new ModelManager(getTypicalInternshipForSorting(), new UserPrefs());
 
@@ -92,12 +92,12 @@ public class SortCommandTest{
         // Two keywords, one negative
         expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
         command = prepareCommand("region -salary");
-        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN3, IN5 ,IN4));
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN3, IN5, IN4));
 
         // Two Negative
         expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
         command = prepareCommand("-region -salary");
-        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN5, IN4, IN3, IN2 ,IN1));
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN5, IN4, IN3, IN2, IN1));
 
         // Three keyword
         expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
