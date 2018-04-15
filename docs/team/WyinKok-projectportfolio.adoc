@@ -75,4 +75,6 @@ include::../DeveloperGuide.adoc[tag=saveunsave]
 
 === Some Instructions for Manual Testing
 
-include::../DeveloperGuide.adoc[tag=manualtestwyin]
+include::../DeveloperGuide.adoc[tag=startmanualtestwyin]
+
+include::../DeveloperGuide.adoc[tag=savemanualtestwyin]

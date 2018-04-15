@@ -1185,7 +1185,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and region is retained.
 
-// tag::manualtestwyin[]
+// tag::startmanualtestwyin[]
 === Starting a conversation with JobbiBot
 
 Starting a conversation with JobbiBot when the application is launched .
@@ -1196,7 +1196,7 @@ Starting a conversation with JobbiBot when the application is launched .
     Expected: Conversation not started. Error details shown in the message thread.
 .. Test case: Subsequent `start` commands after entering the initial `start` commands +
     Expected: JobbiBot says that the conversation has already started and subsequent `start` commands has no effect on initiating the conversation again.
-
+// end::startmanualtestwyin[]
 === Clearing a previous conversation with JobbiBot
 
 Restarting a conversation with JobbiBot after typing more than 4 commands in the CLI.
@@ -1208,6 +1208,7 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
 .. Test case: `list` +
     Expected: Error detail is shown in the message thread. JobbiBot prompts the user to type the `start` command to restart the conversation.
 
+// tag::savemanualtestwyin[]
 === Saving an internship to Saved Collection
 
 . Saving an internship while all internships are listed.
@@ -1224,7 +1225,7 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
 .. Other incorrect save commands to try: `save`, `save x` or `x save` (where x is larger than the list size or x is not an alphanumerical character
  or x is a mathematical expression that evaluates to an positive integer),  +
    Expected: No internship is saved. Error details shown in the message thread.
-
+// end::savemanualtestwyin[]
 
 === Removing an internship to Saved Collection
 
@@ -1240,7 +1241,7 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
 .. Other incorrect save commands to try: `unsave`, `unsave x` or `x unsave` (where x is larger than the list size or x is not an alphanumerical character
  or x is a mathematical expression that evaluates to an positive integer),  +
    Expected: No internship is removed from Saved Collection. Error details shown in the message thread.
-// end::manualtestwyin[]
+
 
 // tag::manualtestcikang[]
 
