@@ -239,15 +239,6 @@ public class FilterCommandSystemTest extends JobbiBotSystemTest {
     }
 
     /**
-     * Overloaded method to allow for different expected result message
-     */
-    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
-        executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
-        assertCommandBoxShowsDefaultStyle();
-    }
-
-    /**
      * Executes {@code command} and verifies that the command box displays {@code command}, the result display
      * box displays {@code expectedResultMessage} and the model related components equal to the current model.
      * These verifications are done by

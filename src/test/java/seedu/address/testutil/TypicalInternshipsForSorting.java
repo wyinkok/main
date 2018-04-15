@@ -25,14 +25,14 @@ public class TypicalInternshipsForSorting {
             .withIndustry("IndustryC").withRegion("RegionC").withRole("RoleC").build();
 
     // Clone of IN3, different industry
-    public static final Internship IN4 = new InternshipBuilder().withName("NameC").withSalary("900")
+    public static final Internship IN4 = new InternshipBuilder().withName("NameC").withSalary("800")
             .withEmail("XXX@XXX.com").withAddress("XXX")
-            .withIndustry("IndustryA").withRegion("RegionC").withRole("RoleC").build();
+            .withIndustry("IndustryA").withRegion("RegionD").withRole("RoleC").build();
 
     // Clone of IN4, different name
-    public static final Internship IN5 = new InternshipBuilder().withName("NameA").withSalary("900")
+    public static final Internship IN5 = new InternshipBuilder().withName("NameA").withSalary("700")
             .withEmail("XXX@XXX.com").withAddress("XXX")
-            .withIndustry("IndustryA").withRegion("RegionC").withRole("RoleC").build();
+            .withIndustry("IndustryA").withRegion("RegionD").withRole("RoleC").build();
 
 
     private TypicalInternshipsForSorting() {} // prevents instantiation
