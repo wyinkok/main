@@ -1283,6 +1283,14 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
 .. Other incorrect list commands to try: `list 0`, `list 1` or `list abc` +
    Expected: Similar to previous.
 
+=== Select internship
+
+   . Select internship
+
+   .. Prerequisites: Have saved at least one internship available in the left panel.
+   .. Test case: `select 1` +
+      Expected: Right panel display full details of internship from internsg.
+
 // end::manualtestcikang[]
 
 === Saving data

@@ -177,7 +177,7 @@ public class SampleDataUtil {
                 new Email("Cochat@example.com"), new Address("10 Serangoon Road #08-10"), new Industry("Healthcare"),
                 new Region("Serangoon"), new Role("Social Enterprise Marcom Writer"), getTagSet()),
             new Internship(new Name("Bettr Barista Coffee Academy"), new Salary("800"),
-                new Email("BettrBarista@example.com"), new Address("37 Mactaggart Road #07-03"), new Industry("Services"),
+                new Email("BettrBari@example.com"), new Address("37 Mactaggart Road #07-03"), new Industry("Services"),
                 new Region("West"), new Role("Social Enterprise Intern"), getTagSet()),
             new Internship(new Name("Aii International Pte Ltd"), new Salary("400"),
                 new Email("AiiINT@example.com"), new Address("442 Orchard Road #03-01"), new Industry("Marketing"),
