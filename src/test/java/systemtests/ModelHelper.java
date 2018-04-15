@@ -52,4 +52,11 @@ public class ModelHelper {
     private static Predicate<Internship> getPredicateMatching(Internship other) {
         return internship -> internship.equals(other);
     }
+
+    /**
+     * Updates {@code model}'s list to display the sorted list {@code toDisplay}.
+     */
+    public static void setSortedList(Model model, List<String> keywords) {
+        model.setComparator(keywords);
+    }
 }

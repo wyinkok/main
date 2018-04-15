@@ -106,7 +106,7 @@ public class FilterCommandTest {
      */
     private void assertCommandSuccess(FilterCommand command, String expectedMessage, List<Internship> expectedList) {
         JobbiBot expectedJobbiBot = new JobbiBot(model.getJobbiBot());
-        CommandResult commandResult = command.executeUndoableCommand();
+        CommandResult commandResult = command.execute();
 
         assertEquals(expectedMessage, commandResult.feedbackToUser);
         assertEquals(expectedList, model.getFilteredInternshipList());
