@@ -86,13 +86,15 @@ Finds internships which contains any of the keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
+
 * The find is case insensitive. e.g `analyst` will match `Analyst`
-* Tags other than 'saved' tag attached when using find/search function will be removed when using 'list'.
+* Tags other than 'saved' tag attached when using find/search function will be removed when using `list`.
 * The order of the keywords does not matter. e.g. `Sales Marketing` will match `Marketing Sales`
 * Duplicate keywords does not matter e.g `Sales Marketing Sales` is simply `Sales Marketing`
 * Internships matching at least one keyword will be returned (i.e. an OR search). e.g. `Micro Dyson` will return `Dyson Technology`, `Dyson Engineering` `Microsoft`
-* Keyword/s matching the internship is added to the internship as tag/s.
-* Keywords tags are reset if user types the `find` command again.
+* Keyword(s) matching the internship is added to the internship as tag(s).
+* Keyword tags are reset if user types the `find` command again.
+
 ****
 
 Examples:
@@ -245,7 +247,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the internship book's content ('save' and `clear`).
+Undoable commands: those commands that modify the internship book's content (`save` and `unsave`).
 ====
 
 Examples:
