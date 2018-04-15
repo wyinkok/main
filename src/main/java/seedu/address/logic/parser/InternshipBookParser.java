@@ -33,8 +33,8 @@ public class InternshipBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static boolean hasStarted = false;
     private static boolean hasRestarted = false;
+    private static boolean hasStarted = false;
 
     /**
      * Parses user input into command for execution.
@@ -138,9 +138,15 @@ public class InternshipBookParser {
         }
     }
 
+    public void resetHasStarted() {
+        hasStarted = false;
+    }
+
+    public boolean getHasStarted() {
+        return hasStarted;
+    }
 
     //@@author wyinkok
-
     /**
      * Checks if the user has typed in the start command after the new command to restart the conversation successfully
      * @throws ParseException if any other command is typed in after the new command

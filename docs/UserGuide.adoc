@@ -86,13 +86,15 @@ Finds internships which contains any of the keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
+
 * The find is case insensitive. e.g `analyst` will match `Analyst`
-* Tags other than 'saved' tag attached when using find/search function will be removed when using 'list'.
+* Tags other than 'saved' tag attached when using find/search function will be removed when using `list`.
 * The order of the keywords does not matter. e.g. `Sales Marketing` will match `Marketing Sales`
 * Duplicate keywords does not matter e.g `Sales Marketing Sales` is simply `Sales Marketing`
 * Internships matching at least one keyword will be returned (i.e. an OR search). e.g. `Micro Dyson` will return `Dyson Technology`, `Dyson Engineering` `Microsoft`
-* Keyword/s matching the internship is added to the internship as tag/s.
-* Keywords tags are reset if user types the `find` command again.
+* Keyword(s) matching the internship is added to the internship as tag(s).
+* Keyword tags are reset if user types the `find` command again.
+
 ****
 
 Examples:
@@ -105,6 +107,9 @@ Returns any internship having names or description matching `Dow`, `Micron`, or 
 Returns any internship having `Engineering` in its description.
 * `find Serangoon` +
 Returns any internship that has a region matching `Serangoon` in it.
+* `find 800` +
+Returns any internship that has a salary of 800 ONLY +
+Tip: use `sort salary` to see internship containing salaries above a certain value
 
 // end::findwithfeature[]
 
@@ -127,6 +132,7 @@ Examples:
 Returns any entries containing data. e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics. e.g `data analytics internship`, `data analytics singapore`
+
 
 === Sorting Internship by keyword(s): `sort` [since v1.4]
 
@@ -245,7 +251,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the internship book's content ('save' and `clear`).
+Undoable commands: those commands that modify the internship book's content (`save` and `unsave`).
 ====
 
 Examples:

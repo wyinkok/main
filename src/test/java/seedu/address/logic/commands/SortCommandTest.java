@@ -3,7 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
+import static seedu.address.testutil.TypicalInternshipsForSorting.IN1;
+import static seedu.address.testutil.TypicalInternshipsForSorting.IN2;
+import static seedu.address.testutil.TypicalInternshipsForSorting.IN3;
+import static seedu.address.testutil.TypicalInternshipsForSorting.IN4;
+import static seedu.address.testutil.TypicalInternshipsForSorting.IN5;
+import static seedu.address.testutil.TypicalInternshipsForSorting.getTypicalInternshipForSorting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +30,7 @@ import seedu.address.model.internship.Internship;
  */
 public class SortCommandTest {
 
-    private Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipForSorting(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -53,32 +58,93 @@ public class SortCommandTest {
     }
 
     @Test
-    public void sort_oneKeyword() {
+    public void sort() {
+        // Salary keyword
         String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
-        SortCommand command = prepareCommand("role");
-        assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());
-    }
+        SortCommand command = prepareCommand("salary");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN3, IN4, IN5));
 
-    @Test
-    public void sort_twoKeyword() {
-        String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
-        SortCommand command = prepareCommand("role", "industry");
-        assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());
-    }
+        // One keyword, non-salary attribute
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("role");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN3, IN4, IN5));
 
-    @Test
-    public void sort_threeKeyword() {
-        String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
-        SortCommand command = prepareCommand("role", "industry", "name");
-        assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());
-    }
+        // One keyword with negative attribute
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("-salary");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN5, IN4, IN3, IN2, IN1));
 
+        // Two keyword
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("role industry");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN5, IN4, IN3));
+
+        // Two repeated keyword
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("role role");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN5, IN4, IN3));
+
+        // Two keyword, negative of each other
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("role -role");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN5, IN4, IN3));
+
+        // Two keywords, one negative
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("region -salary");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN3, IN5, IN4));
+
+        // Two Negative
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("-region -salary");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN5, IN4, IN3, IN2, IN1));
+
+        // Three keyword
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("role industry name");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN5, IN4, IN3));
+
+        // Three keyword, one negative
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("role -industry name");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN3, IN5, IN4));
+
+        // Three keyword, two negative
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("role -industry -name");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN3, IN4, IN5));
+
+        // Three keyword, three negative
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("-role -industry -name");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN3, IN4, IN5, IN2, IN1));
+
+        // More than three keywords
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("role industry name salary");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN5, IN4, IN3));
+
+        // More than three keywords, all negative
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("-role -industry -name -salary");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN3, IN4, IN5, IN2, IN1));
+
+        // More than three keywords, 1 negative
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("role industry name -salary");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN5, IN4, IN3));
+
+        // More than three keywords, 2 negative
+        expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
+        command = prepareCommand("role -industry name salary");
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(IN1, IN2, IN3, IN5, IN4));
+    }
 
     /**
      * Parses {@code userInput} into a {@code SortCommand}.
      */
-    private SortCommand prepareCommand(String... arguments) {
-        List<String> keywords = new ArrayList<>(Arrays.asList(arguments));
+    private SortCommand prepareCommand(String arguments) {
+        List<String> keywords = new ArrayList<>(Arrays.asList(arguments.split("\\s+")));
         SortCommand command = new SortCommand(keywords);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;

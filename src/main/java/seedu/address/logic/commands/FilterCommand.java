@@ -9,7 +9,7 @@ import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
  *
  */
 
-public class FilterCommand extends UndoableCommand {
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
@@ -19,11 +19,11 @@ public class FilterCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " Marketing";
 
     public static final String MESSAGE_FILTER_RESPONSE = "How would you to sort your results by? You may only sort by "
-            + "Address Email Industry Region Name Role Salary \n\nE.g sort industry role salary";
+            + "Industry Region Name Role Salary \n\nE.g sort industry role salary";
 
     public static final String MESSAGE_FILTER_RESPONSE_NO_INTERNSHIP = "No internships found ! You may want to try "
             + "using lesser keywords or change your keywords \n"
-            + "E.g filter singapore ";
+            + "E.g filter Central";
 
     private final InternshipContainsAllKeywordsPredicate predicate;
 
@@ -32,7 +32,7 @@ public class FilterCommand extends UndoableCommand {
     }
 
     @Override
-    public CommandResult executeUndoableCommand() {
+    public CommandResult execute() {
         model.updateFilteredInternshipList(predicate);
         return getCommandResult();
     }
