@@ -340,7 +340,6 @@ This serves as a non-exhaustive lists of industries that users can search for in
 * Retail
 * Social Enterprise
 * Technology
-* Veterinary Services
 
 == List of Internship Roles
 This table is a non exhaustive list of potential internship roles that users can search for in JobbiBot. Internship roles are organised by industry but not all industries are listed in this table.
@@ -354,9 +353,11 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Graphic Designer
                      | Photographer
                      | Videographer
-.6+| Business
+.8+| Business
+                     | Business Analyst
                      | Business Analytics
                      | Business Development
+                     | Business Development Associate
                      | Market Researcher
                      | Operations
                      | Sales
@@ -380,6 +381,10 @@ This table is a non exhaustive list of potential internship roles that users can
                      | Events Planning and Management
                      | Guest Services and Relations
                      | Sustainability
+.3+| IT
+                     | Business Development Associate
+                     | Technology Analyst Intern
+                     | Web Technology Intern
 .1+| Legal
                      | Legal Counsel
 .7+| Media
