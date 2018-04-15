@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.util.StringUtil;
+
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -19,7 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
-    private static final String MESSAGE_INVALID_SORT_ATTRIBUTE = "Invalid attributes given! Possible attributes are : "
+    public static final String MESSAGE_INVALID_SORT_ATTRIBUTE = "Invalid attributes given! Possible attributes are : "
             + SORTABLE_ATTRIBUTES_LIST;
 
     /**

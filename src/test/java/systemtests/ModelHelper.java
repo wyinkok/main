@@ -15,7 +15,7 @@ public class ModelHelper {
     private static final Predicate<Internship> PREDICATE_MATCHING_NO_INTERNSHIPS = unused -> false;
 
     /**
-     * Updates {@code model}'s filtered list to display only {@code toDisplay}.
+     * Updates {@code model}'s searched list to display only {@code toDisplay}.
      */
     public static void setSearchedList(Model model, List<Internship> toDisplay) {
         Optional<Predicate<Internship>> predicate =
@@ -31,9 +31,32 @@ public class ModelHelper {
     }
 
     /**
+     * Updates {@code model}'s filtered list to display only {@code toDisplay}.
+     */
+    public static void setFilteredList(Model model, List<Internship> toDisplay) {
+        Optional<Predicate<Internship>> predicate =
+                toDisplay.stream().map(ModelHelper::getPredicateMatching).reduce(Predicate::or);
+        model.updateFilteredInternshipList(predicate.orElse(PREDICATE_MATCHING_NO_INTERNSHIPS));
+    }
+
+    /**
+     * @see ModelHelper#setFilteredList(Model, List)
+     */
+    public static void setFilteredList(Model model, Internship... toDisplay) {
+        setFilteredList(model, Arrays.asList(toDisplay));
+    }
+
+    /**
      * Returns a predicate that evaluates to true if this {@code Internship} equals to {@code other}.
      */
     private static Predicate<Internship> getPredicateMatching(Internship other) {
         return internship -> internship.equals(other);
+    }
+
+    /**
+     * Updates {@code model}'s list to display the sorted list {@code toDisplay}.
+     */
+    public static void setSortedList(Model model, List<String> keywords) {
+        model.setComparator(keywords);
     }
 }

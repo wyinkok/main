@@ -22,6 +22,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
@@ -30,10 +31,12 @@ import seedu.address.logic.commands.NewChatCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StartCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnsaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -63,6 +66,28 @@ public class InternshipBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new InternshipContainsKeywordsPredicate(uniqueKeywords)), command);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FilterCommand(new InternshipContainsAllKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        if (parser.getHasStarted() == false) {
+            parser.parseCommand(StartCommand.COMMAND_WORD);
+        }
+        try {
+            parser.parseCommand(SortCommand.COMMAND_WORD + " 3");
+            fail("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(SortCommandParser.MESSAGE_INVALID_SORT_ATTRIBUTE,
+                    pe.getMessage());
+        }
     }
 
     @Test
@@ -156,6 +181,7 @@ public class InternshipBookParserTest {
 
     @Test
     public void parseCommand_start() throws Exception {
+        parser.resetHasStarted();
         assertTrue(parser.parseCommand(StartCommand.COMMAND_WORD) instanceof StartCommand);
         try {
             parser.parseCommand(StartCommand.COMMAND_WORD + " 3");

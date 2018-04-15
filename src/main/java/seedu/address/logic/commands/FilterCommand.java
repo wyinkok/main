@@ -9,7 +9,7 @@ import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
  *
  */
 
-public class FilterCommand extends UndoableCommand {
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
@@ -32,7 +32,7 @@ public class FilterCommand extends UndoableCommand {
     }
 
     @Override
-    public CommandResult executeUndoableCommand() {
+    public CommandResult execute() {
         model.updateFilteredInternshipList(predicate);
         return getCommandResult();
     }
