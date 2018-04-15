@@ -880,7 +880,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *MSS*
 
-1.  User requests to start conversation with Jobbi
+1.  User requests to start conversation with JobbiBot
 2.  JobbiBot replies with the next prompt to indicate conversation has started
 +
 Use case ends.

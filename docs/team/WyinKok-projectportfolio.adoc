@@ -13,8 +13,8 @@ Users will communicate with Jobbi their via the CLI. In response, Jobbi will int
 
 == Summary of contributions
 
-* *Major enhancement*: Revamp the GUI into a chat application
-** What it does: It provides the end user with an interactive interface to search for their ideal internships
+* *Major enhancement*: Revamp the GUI into a chat application.
+** What it does: It provides the end user with an interactive interface to search for their ideal internships.
 ** Justification: This feature caters to users who prefer to use an interactive application or require step by step guidance in searching for internships.
 ** Highlights: This enhancement enhances the existing user interface. It required a firm understanding of user profile in order to create a chatbot persona that is realistic and approachable. The implementation was too challenging as it required an understanding of JavaFX components to revamp the GUI. The GUI was also beautified make JobbiBot more aesthetically appealing to young students.
 
@@ -25,24 +25,29 @@ Users will communicate with Jobbi their via the CLI. In response, Jobbi will int
 * *Other contributions*:
 
 ** Project management:
-*** Set up the team repository
-*** Managed releases `v1.4` on GitHub
+*** Set up the team repository.
+*** Managed releases `v1.4` on GitHub.
+*** Set up all the tags, tagged issues and responded to most of the bugs from peer testing.
+
 ** Planning and design:
-*** Designed the wireframe of the new JobbiBot GUI
-*** Planned attributes to be displayed on individual Internship Cards and Browser Panel
-*** Created multiple interations of chatbot conversation scenarios
+*** Designed the wireframe of the new JobbiBot GUI.
+*** Planned attributes to be displayed on individual Internship Cards and Browser Panel.
+*** Created multiple iterations of chatbot conversation scenarios and implemented the final iteration. (Pull request https://github.com/CS2103JAN2018-F11-B3/main/pull/81[#81])
 
 ** Enhancements to existing features:
-*** Populated database of internships (Pull requests https://github.com/CS2103JAN2018-F11-B3/main/pull/155[#155])
-*** Removed unused commands and features provided by Address Book version 4 (Pull requests https://github.com/CS2103JAN2018-F11-B3/main/pull/153[#153])
-*** Updated the GUI color scheme and font (Pull requests https://github.com/CS2103JAN2018-F11-B3/main/pull/9[#9])
+*** Frequent quality control for User Guide and Developer Guide.
+*** Populated database of internships. (Pull request https://github.com/CS2103JAN2018-F11-B3/main/pull/155[#155])
+*** Removed unused commands and features provided by Address Book version 4. (Pull request https://github.com/CS2103JAN2018-F11-B3/main/pull/153[#153])
+*** Updated the GUI color scheme and font. (Pull request https://github.com/CS2103JAN2018-F11-B3/main/pull/9[#9])
 
 ** Documentation:
-*** Edited the ReadMe document (Pull request https://github.com/CS2103JAN2018-F11-B3/main/pull/99[#99], https://github.com/CS2103JAN2018-F11-B3/main/pull/103[#103])
-*** Did cosmetic tweaks to existing contents of the User Guide: (Pull request https://github.com/CS2103JAN2018-F11-B3/main/pull/89[#89])
+*** Edited the ReadMe document. (Pull request https://github.com/CS2103JAN2018-F11-B3/main/pull/99[#99], https://github.com/CS2103JAN2018-F11-B3/main/pull/103[#103])
+*** Did cosmetic tweaks to existing contents of the User Guide and added a suggested list of industries and roles for our target user. (Pull request https://github.com/CS2103JAN2018-F11-B3/main/pull/89[#89])
+*** Quality control for both User guide and Developer's guide.
+*** Updated use cases, target profile and user stories as we refined our product through the weeks.
 
 ** Community:
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103JAN2018-W11-B4/main/issues/180[1], https://github.com/CS2103JAN2018-W11-B4/main/issues/199[2], https://github.com/CS2103JAN2018-W11-B4/main/issues/183[3])
+*** Reported bugs and suggestions for other teams in the class. (Examples:  https://github.com/CS2103JAN2018-W11-B4/main/issues/180[1], https://github.com/CS2103JAN2018-W11-B4/main/issues/199[2], https://github.com/CS2103JAN2018-W11-B4/main/issues/183[3])
 
 == Contributions to the User Guide
 
