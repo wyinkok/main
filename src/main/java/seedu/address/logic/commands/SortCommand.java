@@ -49,7 +49,7 @@ public class SortCommand extends Command {
      * @return
      */
     private CommandResult getCommandResult() {
-        if (model.getFilteredInternshipList().size() > 1) {
+        if (model.getFilteredInternshipList().size() > 0) {
             return new CommandResult(SORT_SUCCESSS_MESSAGE);
         } else {
             return new CommandResult(NOTHING_TO_SORT_MESSAGE);
