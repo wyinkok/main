@@ -256,6 +256,5 @@ public class FilterCommandSystemTest extends JobbiBotSystemTest {
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }
-    
 }
 

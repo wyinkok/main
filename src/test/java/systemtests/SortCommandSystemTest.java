@@ -164,13 +164,11 @@ public class SortCommandSystemTest extends JobbiBotSystemTest {
      * @see JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
-
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, model);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();
     }
-    
 }
 
