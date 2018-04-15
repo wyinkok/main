@@ -117,9 +117,13 @@ Filters the internship list according to the given keywords. +
 Format: `filter KEYWORD [MORE_KEYWORDS]`
 
 ****
+* Only internships in the last searched (find command) list will be filtered
+* If there is no last searched (find command), filter command will filter from the entire list
+* If the list command is used, the searched list (find command) is reset, and any filter command used before find command will filter the entire list
 * The keywords is case insensitive. e.g `marketing` will match `Marketing`
 * The order of the keywords does not matter. e.g. `Marketing Analytics` will match `Analytics Marketing`
 * Only full words will be matched e.g. `Market` will not match `Marketing`
+* Note that there is no tags added unlike the case of find command, as the filter command matches only internships containing all the keywords argument and hence there is no need to distinguish between the different keywords.
 * Only internships which contain all the keyword will be returned. e.g `filter Marketing Analytics` will return only internships containing Marketing AND Analytics but not Marketing Research or Data Analytics
 ****
 
@@ -140,6 +144,7 @@ Keywords can include '-' (e.g `-Industry` `-Region` `-Name` `-Role` `-Salary`) t
 ****
 * Salary is sorted from highest to lowest by default
 * Other attributes are sorted from A-Z by default
+* '-' character before the attribute (e.g -industry) causes that attribute to be sorted in revese order
 * The sort is case insensitive. e.g `name` will match `Name`
 * The ordering of the keywords matters. e.g `sort Name Salary` will sort name before salary
 * Only the first three keywords will be sorted. Subsequent keywords will be ignored

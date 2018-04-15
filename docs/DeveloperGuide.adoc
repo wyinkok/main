@@ -1241,3 +1241,38 @@ Restarting a conversation with JobbiBot after typing more than 4 commands in the
  or x is a mathematical expression that evaluates to an positive integer),  +
    Expected: No internship is removed from Saved Collection. Error details shown in the message thread.
 // end::manualtestwyin[]
+
+
+// tag:: manualtestcolin[]
+=== Filtering the JobbiBot Internship List
+
+. Should only apply filter to the current searched(find command) list. Use `list command` before the start of each test case
+
+.. Test case: `filter business` +
+    Expected: JobbiBot returns all internship containing 'business' in the current internship list. There should be no tags unlike the case of find command
+
+.. Test case: `filter business development` +
+    Expected: JobbiBot returns all internship containing the keywords 'business' and 'development' in the current internship list. There should be no tags unlike the case of find command
+
+.. Test case: `find google` then `filter development` +
+    Expected: JobbiBot returns no internship found as there is no internships that contains 'google' and 'development'.
+
+.. Test case: `find google business ` then `filter development` +
+    Expected: JobbiBot returns only the internship containing both 'business' and 'development' as there are internship that contains both 'google' and 'development'. There should be a `business` tag on the internship shown.
+
+.. Test case: `find google` then `list` then `filter development` +
+    Expected: Jobbibot return all internships containing 'development' as list command resets the searched list that the filter command works on. No searched tags on the internship.
+
+.. Test case: `filter business` then `filter development` +
+    Expected: JobbiBot returns all internship that contains development. Filtering only works on last searched or default list (cannot filter from a filtered list). No searched tags on the internships.
+
+
+=== Sorting the JobbiBot Internship List
+
+. Should sort according to keyword attribute entered +
+Keywords
+
+
+
+
+// end:: manualtestcolin[]
