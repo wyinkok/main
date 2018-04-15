@@ -25,6 +25,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.InternshipContainsAllKeywordsPredicate;
 
+//@@author niloc94
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
  */

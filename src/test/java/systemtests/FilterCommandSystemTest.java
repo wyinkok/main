@@ -21,7 +21,6 @@ import seedu.address.model.Model;
 import seedu.address.model.internship.exceptions.DuplicateInternshipException;
 import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 
-
 //@@author niloc94
 public class FilterCommandSystemTest extends JobbiBotSystemTest {
 
