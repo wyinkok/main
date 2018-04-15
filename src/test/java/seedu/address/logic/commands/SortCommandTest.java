@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalInternships.getTypicalInternshipBook;
+import static seedu.address.testutil.TypicalInternshipsForSorting.getTypicalInternshipForSorting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ import seedu.address.model.internship.Internship;
  */
 public class SortCommandTest {
 
-    private Model model = new ModelManager(getTypicalInternshipBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalInternshipForSorting(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -56,28 +56,27 @@ public class SortCommandTest {
     public void sort_oneKeyword() {
         String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
         SortCommand command = prepareCommand("role");
-        assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());
+        assertCommandSuccess(command, expectedMessage, Arrays.asList());
     }
 
     @Test
     public void sort_twoKeyword() {
         String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
-        SortCommand command = prepareCommand("role", "industry");
+        SortCommand command = prepareCommand("role industry");
         assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());
     }
 
     @Test
     public void sort_threeKeyword() {
         String expectedMessage = String.format(SortCommand.SORT_SUCCESSS_MESSAGE);
-        SortCommand command = prepareCommand("role", "industry", "name");
+        SortCommand command = prepareCommand("role industry name");
         assertCommandSuccess(command, expectedMessage, model.getFilteredInternshipList());
     }
-
 
     /**
      * Parses {@code userInput} into a {@code SortCommand}.
      */
-    private SortCommand prepareCommand(String... arguments) {
+    private SortCommand prepareCommand(String arguments) {
         List<String> keywords = new ArrayList<>(Arrays.asList(arguments));
         SortCommand command = new SortCommand(keywords);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
