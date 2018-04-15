@@ -105,6 +105,9 @@ Returns any internship having names or description matching `Dow`, `Micron`, or 
 Returns any internship having `Engineering` in its description.
 * `find Serangoon` +
 Returns any internship that has a region matching `Serangoon` in it.
+* `find 800` +
+Returns any internship that has a salary of 800 ONLY +
+Tip: use `sort salary` to see internship containing salaries above a certain value
 
 // end::findwithfeature[]
 
@@ -127,6 +130,7 @@ Examples:
 Returns any entries containing data. e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics. e.g `data analytics internship`, `data analytics singapore`
+
 
 === Sorting Internship by keyword(s): `sort` [since v1.4]
 

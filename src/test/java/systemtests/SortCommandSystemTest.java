@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalInternshipsForSorting.IN5;
 import static seedu.address.testutil.TypicalInternshipsForSorting.getTypicalInternshipForSorting;
 
 import java.util.Arrays;
+import java.util.logging.Filter;
 
 import org.junit.Test;
 import seedu.address.logic.commands.FilterCommand;
@@ -24,6 +25,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.JobbiBot;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -46,36 +48,92 @@ public class SortCommandSystemTest extends JobbiBotSystemTest {
     private Model model = new ModelManager(getTypicalInternshipForSorting(), new UserPrefs());
 
     @Test
-    public void sort() {
+    public void sort_unsearched_unfiltered()  {
 
-    /* -------------------------Sorting on an unfiltered list ---------------------------------------------------- */
+        /* -------------------------Sorting on an unfiltered list ---------------------------------------------------- */
 
         /* Case: Sort with one argument, command with leading spaces and trailing spaces */
-        String command = "   " + SortCommand.COMMAND_WORD + " " + "role" + "  ";
-        ModelHelper.setSortedList(model, Arrays.asList("role"));
+        String command = "   " + SortCommand.COMMAND_WORD + " " + "-salary" + "  ";
+        ModelHelper.setSortedList(model, Arrays.asList("-salary"));
         assertCommandSuccess(command, model);
         assertSelectedCardUnchanged();
 
-    /* -------------------------Sorting on a filtered list ------------------------------------------------------- */
+        /* Case: Sort with mixed case keywords */
+        command = SortCommand.COMMAND_WORD + " sAlary";
+        ModelHelper.setSortedList(model, Arrays.asList("salary"));
+        assertCommandSuccess(command, model);
+        assertSelectedCardUnchanged();
 
+        /* Case: Sort with mixed case command word */
+        command = "sORT" + " -salary";
+        ModelHelper.setSortedList(model, Arrays.asList("-salary"));
+        assertCommandSuccess(command, model);
+        assertSelectedCardUnchanged();
 
+        /* Case: Sort, keyword contains substring of valid argument  */
+        command = SortCommand.COMMAND_WORD + " salaries";
+        assertCommandFailure(command, SortCommandParser.MESSAGE_INVALID_SORT_ATTRIBUTE);
 
+        /* Case: Sort, keyword is substring of valid argument */
+        command = SortCommand.COMMAND_WORD + " sal";
+        assertCommandFailure(command, SortCommandParser.MESSAGE_INVALID_SORT_ATTRIBUTE);
 
+        /* Case: undo previous filter command -> failure */
+        command = UndoCommand.COMMAND_WORD;
+        assertCommandFailure(command, UndoCommand.MESSAGE_FAILURE);
 
-
+        /* Case: redo previous filter command -> failure */
+        command = RedoCommand.COMMAND_WORD;
+        assertCommandFailure(command, UndoCommand.MESSAGE_FAILURE);
+    }
 
     /* -------------------------Sorting on a searched list ------------------------------------------------------- */
 
+    @Test
+    public void sort_searched_unfiltered() throws DuplicateInternshipException, InternshipNotFoundException {
 
+        /* Initialize a searched list */
+        initializeSearchedList();
 
+        /* Test Cases same as unsearched and unfiltered */
+        sort_unsearched_unfiltered();
+    }
 
+    /* -------------------------Sorting on a filtered list ------------------------------------------------------- */
 
+    @Test
+    public void sort_searched_filtered() throws DuplicateInternshipException, InternshipNotFoundException {
 
+        /* Initialize a searched and filtered list */
+        initializeSearchedList();
+        String command = FilterCommand.COMMAND_WORD + " " + "IndustryA";
+        ModelHelper.setFilteredList(model, IN1, IN4, IN5);
+        assertCommandSuccess(command, model);
+        assertSelectedCardUnchanged();
+
+        /* Test Cases same as unsearched and unfiltered */
+        sort_unsearched_unfiltered();
     }
 
 
-
     /* --------------------------------------- Helper Methods ----------------------------------------------------- */
+
+    /**
+     * Helper method to initialize a searched list
+     *
+     * @throws DuplicateInternshipException
+     * @throws InternshipNotFoundException
+     */
+    private void initializeSearchedList() throws DuplicateInternshipException, InternshipNotFoundException{
+        String command = FindCommand.COMMAND_WORD + " " + "IndustryA IndustryB";
+        model.updateInternship(IN1, IN1.addTagsToInternship("IndustryA"));
+        model.updateInternship(IN4, IN4.addTagsToInternship("IndustryA"));
+        model.updateInternship(IN5, IN5.addTagsToInternship("IndustryA"));
+        model.updateInternship(IN2, IN2.addTagsToInternship("IndustryB"));
+        ModelHelper.setSearchedList(model, IN1, IN2, IN4, IN5);
+        assertCommandSuccess(command, model);
+        assertSelectedCardUnchanged();
+    }
 
     /**
      * Executes {@code command} and verifies that the command box displays an empty string, the result display
@@ -106,10 +164,9 @@ public class SortCommandSystemTest extends JobbiBotSystemTest {
      * @see JobbiBotSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
-        Model expectedModel = getModel();
 
         executeCommand(command);
-        assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
+        assertApplicationDisplaysExpected(command, expectedResultMessage, model);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();

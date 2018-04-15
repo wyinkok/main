@@ -135,7 +135,7 @@ public class FilterCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: filter with keywords from role attribute -> 1 internships found */
+        /* Case: filter with keywords from tag attribute -> 1 internships found */
         command = FilterCommand.COMMAND_WORD + " " + BUSINESS1.getTags().toString().
                 replaceAll("[\\[+\\]+]", " ");
         ModelHelper.setFilteredList(expectedModel, BUSINESS1);
@@ -168,13 +168,13 @@ public class FilterCommandSystemTest extends JobbiBotSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: filter with attribute string to be searched as substring of keyword -> 0 internships found */
+        /* Case: filter, keyword argument contains substring of internship attribute value -> 0 internships found */
         command = FilterCommand.COMMAND_WORD + " " + "DataEXTRA";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: filter with keyword as substring of attribute in internship > 0 internships found */
+        /* Case: filter,  keyword argument is substring of internship attribute value > 0 internships found */
         command = FilterCommand.COMMAND_WORD + " " + "Dat";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
