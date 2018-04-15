@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_RESTART_COMMAND;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
@@ -33,6 +34,7 @@ public class InternshipBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static boolean hasStarted = false;
+    private static boolean hasRestarted = false;
 
     /**
      * Parses user input into command for execution.
@@ -51,33 +53,41 @@ public class InternshipBookParser {
         switch (commandWord) {
 
         case SelectCommand.COMMAND_WORD:
+            checkIfConversationRestarted();
             return new SelectCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
+            checkIfConversationRestarted();
             return new FindCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
+            checkIfConversationRestarted();
             return new FilterCommandParser().parse(arguments);
 
         //@@author wyinkok
         case SaveCommand.COMMAND_WORD:
+            checkIfConversationRestarted();
             return new SaveCommandParser().parse(arguments);
 
         case UnsaveCommand.COMMAND_WORD:
+            checkIfConversationRestarted();
             return new UnsaveCommandParser().parse(arguments);
 
         //@@author niloc94
         case SortCommand.COMMAND_WORD:
+            checkIfConversationRestarted();
             return new SortCommandParser().parse(arguments);
 
         //=========== Command without arguments =============================================================
 
         case ListCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
+            checkIfConversationRestarted();
             return new ListCommand();
 
         case HistoryCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
+            checkIfConversationRestarted();
             return new HistoryCommand();
 
         case ExitCommand.COMMAND_WORD:
@@ -86,35 +96,59 @@ public class InternshipBookParser {
 
         case HelpCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
+            checkIfConversationRestarted();
             return new HelpCommand();
 
         case UndoCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
+            checkIfConversationRestarted();
             return new UndoCommand();
 
         case RedoCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
+            checkIfConversationRestarted();
             return new RedoCommand();
 
+        //@@author wyinkok
         case StartCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
+            hasRestarted = false;
+            checkIfConversationRestarted();
             if (!hasStarted) {
                 hasStarted = true;
                 return new StartCommand();
             } else {
                 throw new ParseException("Our conversation has already started"
-                        + "\nType 'new' to restart our conversation");
+                        + "Type 'new' if you would like to restart our conversation");
             }
 
-        //@@author wyinkok
         case NewChatCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
             hasStarted = false;
-            return new NewChatCommand();
+            if (!hasRestarted) {
+                hasRestarted = true;
+                return new NewChatCommand();
+            } else {
+                throw new AssertionError("Conversation should only restart after Start Command is "
+                        + "entered again");
+            }
 
         //@@author
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+
+    //@@author wyinkok
+
+    /**
+     * Checks if the user has typed in the start command after the new command to restart the conversation successfully
+     * @throws ParseException if any other command is typed in after the new command
+     */
+    private void checkIfConversationRestarted() throws ParseException {
+        if (hasRestarted) {
+            throw new ParseException(MESSAGE_INVALID_RESTART_COMMAND);
         }
     }
 

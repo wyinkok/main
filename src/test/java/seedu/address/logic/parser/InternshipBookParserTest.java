@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_RESTART_COMMAND;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP;
 
@@ -13,9 +14,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import org.junit.runners.MethodSorters;
 
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -32,7 +36,9 @@ import seedu.address.logic.commands.UnsaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InternshipBookParserTest {
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -96,14 +102,14 @@ public class InternshipBookParserTest {
     }
 
     @Test
-    public void parseCommand_select() throws Exception {
+    public void parseCommand_startThenSelect() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
                 SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased());
         assertEquals(new SelectCommand(INDEX_FIRST_INTERNSHIP), command);
     }
 
     @Test
-    public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
+    public void parseCommand_startThenRedoCommandWord_returnsRedoCommand() throws Exception {
         assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
         try {
             parser.parseCommand(RedoCommand.COMMAND_WORD + " 3");
@@ -140,8 +146,9 @@ public class InternshipBookParserTest {
         parser.parseCommand("unknownCommand");
     }
 
+    //@@author wyinkok
     @Test
-    public void parseCommand_save() throws Exception {
+    public void parseCommand_startThenSave() throws Exception {
         SaveCommand command = (SaveCommand) parser.parseCommand(
                 SaveCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased());
         assertEquals(new SaveCommand(INDEX_FIRST_INTERNSHIP), command);
@@ -176,6 +183,16 @@ public class InternshipBookParserTest {
         UnsaveCommand command = (UnsaveCommand) parser.parseCommand(
                 UnsaveCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased());
         assertEquals(new UnsaveCommand(INDEX_FIRST_INTERNSHIP), command);
+    }
+
+    @Test
+    public void parseCommand_newThenUnsave() {
+        try {
+            parser.parseCommand(UnsaveCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased());
+            fail("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(MESSAGE_INVALID_RESTART_COMMAND, pe.getMessage());
+        }
     }
 
 }
