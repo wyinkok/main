@@ -15,6 +15,8 @@ import seedu.address.model.ModelManager;
 
 public class ChatBotListPanelTest extends GuiUnitTest {
 
+    private static final String EXPECTED_WELCOME_MESSAGE = "JOBBI:   " + "Hello there, I am Jobbi! "
+            + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
     private ChatBotListPanelHandle chatBotListPanelHandle;
 
     @Before
@@ -30,12 +32,8 @@ public class ChatBotListPanelTest extends GuiUnitTest {
     }
     @Test
     public void display_welcomeMessage() {
-        String expectedWelcomeMessage = "JOBBI:   " + "Hello there, I am Jobbi! "
-                + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
         ChatBotCardHandle actualCard = chatBotListPanelHandle.getHandleToWelcomeMessage();
-        assertCardDisplaysMessage(expectedWelcomeMessage, actualCard);
+        assertCardDisplaysMessage(EXPECTED_WELCOME_MESSAGE, actualCard);
     }
-
-
 }
 

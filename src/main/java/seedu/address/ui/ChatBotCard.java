@@ -36,6 +36,5 @@ public class ChatBotCard extends UiPart<Region> {
      */
     public void setMessage(String msg) {
         messages.setText(msg);
-
     }
 }

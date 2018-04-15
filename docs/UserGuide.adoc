@@ -116,7 +116,7 @@ Tip: use `sort salary` to see internship containing salaries above a certain val
 // tag::filterSort[]
 === Filtering Internship by keyword(s): `filter` [since v1.3]
 
-Filters the internship list according to the given keywords. +
+Filters the displayed internship list according to the given keywords.  +
 Format: `filter KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -132,7 +132,9 @@ Examples:
 Returns any entries containing data. e.g Data Analytics, Data Science
 * `filter data analytics` +
 Returns only entries containing data and analytics. e.g `data analytics internship`, `data analytics singapore`
-
+* `filter 1000` +
+Returns any internship that has a salary of 1000 ONLY +
+Tip: use `sort salary` to see internship containing salaries above a certain value
 
 === Sorting Internship by keyword(s): `sort` [since v1.4]
 

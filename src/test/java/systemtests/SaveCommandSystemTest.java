@@ -45,8 +45,8 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
 
         /* Case: save the last internship in the list -> saved */
         Model modelBeforeSavingLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeSavingLast);
-        assertCommandSuccess(lastPersonIndex);
+        Index lastInternshipIndex = getLastIndex(modelBeforeSavingLast);
+        assertCommandSuccess(lastInternshipIndex);
 
         /* Case: undo saving the last internship in the list -> last internship restored */
         command = UndoCommand.COMMAND_WORD;
@@ -55,13 +55,13 @@ public class SaveCommandSystemTest extends JobbiBotSystemTest {
 
         /* Case: redo saving the last internship in the list -> last internship saved again */
         command = RedoCommand.COMMAND_WORD;
-        addSavedTagToInternship(modelBeforeSavingLast, lastPersonIndex);
+        addSavedTagToInternship(modelBeforeSavingLast, lastInternshipIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeSavingLast, expectedResultMessage);
 
         /* Case: save the middle internship in the list -> saved */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex);
+        Index middleInternshipIndex = getMidIndex(getModel());
+        assertCommandSuccess(middleInternshipIndex);
 
         /* ------------------ Performing save operation while a filtered list is being shown ---------------------- */
 
