@@ -511,11 +511,11 @@ which internship suits them more and enable them to further filter from the list
 The add tag feature is implemented as part of the find command. However, as models will be change due to the addition of tags,
 some codes are implemented within ModelManager.
 
-image::FindCommandSequenceDiagram.png[width="1200"]
+image::FindCommandSequenceDiagram.png[width="800"]
 
 As it can be seen from the diagram, `Logic` uses the `InternshipBookParser` class to parse the user command.
 After which, `FindCommandParser` is created and use to parse the keyword. The keyword is then set in `ModelManager` via the
-setKeywords() method. A `FindCommand` object is then created followed by the `internshipContainsKeywordsPredicate`.
+setKeywords() method.
 
 In the second phase, the command is being executed in `FindCommand`. The first updateSearchedInternshipList() update the
 searchedInternship with all the internships available and remove all tags from them apart from `saved` tags. Following which
@@ -546,14 +546,14 @@ want to search for other internship while keeping those that are searched before
                 }
             }
         }
-
         ...
         ...
-
-        return new Internship(
-                getName(), getSalary(), getEmail(), getAddress(),
+        return new Internship(getName(), getSalary(), getEmail(), getAddress(),
                 getIndustry(), getRegion(), getRole(), correctTagReferences);
     }
+----
+
+----
 
     public Internship addTagsToInternship(String keyword) {
         final UniqueTagList internshipTags = new UniqueTagList(getTags());
@@ -565,9 +565,7 @@ want to search for other internship while keeping those that are searched before
         }
         ...
         ...
-
-        return new Internship(
-                getName(), getSalary(), getEmail(), getAddress(),
+        return new Internship(     getName(), getSalary(), getEmail(), getAddress(),
                 getIndustry(), getRegion(), getRole(), correctTagReferences);
     }
 ----
@@ -971,7 +969,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 (For all use cases below, the *System* is the `JobbiBot` and the *Actor* is the `user`, unless specified otherwise)
 [discrete]
-// tag::usecase1[]
 === Use case: Start conversation with Jobbi
 
 *MSS*
@@ -1057,11 +1054,14 @@ Use case ends.
 ** Use case resumes at step 2.
 
 [discrete]
+
+// tag::usecase1[]
+
 === Use case: Finding Internship
 
 *MSS*
 
-1. User keys in a list of keywords to search  for internship byby
+1. User keys in a list of keywords to search  for internship by
 2. JobbiBot returns user the list of internships which contains the keywords
 3. User can choose to re-search again if not satisfied
 
@@ -1099,6 +1099,7 @@ Use case ends.
 ** 2a1. JobbiBot will recommend user to re-filter using other keywords
 ** 2a2. User can also use undo function to return back to last searched or filtered internship list
 
+// end::usecase1[]
 
 [discrete]
 === Use case: Sorting Internship
@@ -1112,7 +1113,6 @@ Use case ends.
 
 +
 Use case ends.
-// end::usecase1[]
 
 // tag::nonfunctionalrequirements[]
 [appendix]
