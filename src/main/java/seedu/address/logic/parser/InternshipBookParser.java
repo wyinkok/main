@@ -33,8 +33,8 @@ public class InternshipBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static boolean hasStarted = false;
     private static boolean hasRestarted = false;
+    public static boolean hasStarted = false;
 
     /**
      * Parses user input into command for execution.

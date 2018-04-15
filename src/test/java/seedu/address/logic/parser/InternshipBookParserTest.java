@@ -78,6 +78,9 @@ public class InternshipBookParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
+        if (parser.hasStarted == false) {
+            parser.parseCommand(StartCommand.COMMAND_WORD);
+        }
         try {
             parser.parseCommand(SortCommand.COMMAND_WORD + " 3");
             fail("The expected ParseException was not thrown.");
@@ -178,6 +181,7 @@ public class InternshipBookParserTest {
 
     @Test
     public void parseCommand_start() throws Exception {
+        parser.hasStarted = false;
         assertTrue(parser.parseCommand(StartCommand.COMMAND_WORD) instanceof StartCommand);
         try {
             parser.parseCommand(StartCommand.COMMAND_WORD + " 3");
