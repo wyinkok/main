@@ -15,9 +15,9 @@ import seedu.address.model.ModelManager;
 
 public class ChatBotListPanelTest extends GuiUnitTest {
 
-    private ChatBotListPanelHandle chatBotListPanelHandle;
     private static final String EXPECTED_WELCOME_MESSAGE = "JOBBI:   " + "Hello there, I am Jobbi! "
             + "I am here to help you find your ideal internship today. Type 'start' to begin your search.";
+    private ChatBotListPanelHandle chatBotListPanelHandle;
 
     @Before
     public void setUp() {
