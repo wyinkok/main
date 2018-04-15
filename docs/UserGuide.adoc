@@ -30,7 +30,7 @@ internship matches faster than traditional GUI apps. Interested? Jump to the <<Q
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  Download the latest `jobbibot.jar` link:{https://github.com/CS2103JAN2018-F11-B3/main/releases}/releases[here].
+.  Download the latest `jobbibot.jar` https://github.com/CS2103JAN2018-F11-B3/main/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your JobbiBot.
 .  Double-click the file to start the app. The GUI like the one below should appear in a few seconds.
 +
@@ -65,15 +65,17 @@ Format: `start`
 
 === Clears previous conversation with program : `new` [since v1.3]
 
-Clears previous message thread with JobbiBot. To restart the conversation, type `start` again. +
+Clears previous message thread with JobbiBot. To restart the conversation, user has to type `start` again except for the `exit` and `help` commands. +
 Format: `new`
 
 Example:
 
 * `new` +
-Clears previous conversation with JobbiBot
+Clears previous conversation with JobbiBot.
+* `list` +
+Typing `list` command before `start` command will throw an error. User will be prompted to type the `start` command first.
 * `start` +
-Initiates a new message thread with JobbiBot
+Initiates a new message thread with JobbiBot.
 // end::startnew[]
 
 // tag::findwithfeature[]
@@ -88,9 +90,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Tags other than 'saved' tag attached when using find/search function will be removed when using 'list'.
 * The order of the keywords does not matter. e.g. `Sales Marketing` will match `Marketing Sales`
 * Duplicate keywords does not matter e.g `Sales Marketing Sales` is simply `Sales Marketing`
-* Internships matching at least one keyword will be returned (i.e. `OR` search). e.g. `Micro Dyson` will return `Dyson Technology`, `Dyson Engineering` `Microsoft`
-* Keyword/s matching the internship is added to the internship as a tag/s.
-* Keywords tags are reset if user uses find again.
+* Internships matching at least one keyword will be returned (i.e. an OR search). e.g. `Micro Dyson` will return `Dyson Technology`, `Dyson Engineering` `Microsoft`
+* Keyword/s matching the internship is added to the internship as tag/s.
+* Keywords tags are reset if user types the `find` command again.
 ****
 
 Examples:
@@ -116,7 +118,7 @@ Format: `filter KEYWORD [MORE_KEYWORDS]`
 * The keywords is case insensitive. e.g `marketing` will match `Marketing`
 * The order of the keywords does not matter. e.g. `Marketing Analytics` will match `Analytics Marketing`
 * Only full words will be matched e.g. `Market` will not match `Marketing`
-* Only Internships which contain all the keyword will be returned. e.g `filter Marketing Analytics` will return only internships containing Marketing AND Analytics but not Marketing Research or Data Analytics
+* Only internships which contain all the keyword will be returned. e.g `filter Marketing Analytics` will return only internships containing Marketing AND Analytics but not Marketing Research or Data Analytics
 ****
 
 Examples:
@@ -148,15 +150,15 @@ Sorts the internship list according to name attribute.
 * `sort salary region` +
 Sorts the internship list according to salary first then region.
 * `sort salary region industry` +
-Sorts the internship list according to salary first then region, then industry
+Sorts the internship list according to salary first then region, then industry.
 * `sort salary salary` +
 Is simply `sort salary`
 * `sort salary name industry role` +
-Only the first three attributes will be sorted. i.e `sort salary name industry` but not role
+Only the first three attributes will be sorted. i.e `sort salary name industry` but not by role
 * `sort -role` +
-Sorts the internship list according to role attribute in reverse order (from Z-A)
+Sorts the internship list according to role attribute in reverse order (from Z-A).
 * `sort name -industry` +
-Sorts the internship list according to name (from A-Z), and then by industry (from Z-A)
+Sorts the internship list according to name (from A-Z), and then by industry (from Z-A).
 
 // end::filterSort[]
 
@@ -305,6 +307,8 @@ There is no need to save manually
 e.g. `find Analytics Engineering`
 * *Filter* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `filter Marketing Singapore`
+* *Sort* : `sort KEYWORD [MORE_KEYWORDS]`
+e.g. `sort industry role salary`
 * *Save an internship*  : `save INDEX` +
 e.g. `save 2`
 * *Unsave an internship* : `unsave INDEX` +

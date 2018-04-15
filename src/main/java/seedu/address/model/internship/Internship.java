@@ -24,6 +24,7 @@ public class Internship {
     public static final String SORTABLE_ATTRIBUTES_LIST_WITH_NEGATIVE = SORTABLE_ATTRIBUTES_LIST
             + " -Name -Salary -Industry -Region -Role";
     private static final String SAVED_TAG_NAME = "[saved]";
+    
     private final Name name;
     private final Salary salary;
     private final Email email;
