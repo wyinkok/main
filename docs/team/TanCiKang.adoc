@@ -72,4 +72,8 @@ include::../DeveloperGuide.adoc[tag=usecase1]
 
 include::../DeveloperGuide.adoc[tag=nonfunctionalrequirements]
 
+=== Some Instructions for Manual Testing
+
+include::../DeveloperGuide.adoc[tag=manualtestcikang]
+
 ---
