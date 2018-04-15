@@ -96,7 +96,6 @@ public class InternshipBookParser {
 
         case HelpCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
-            checkIfConversationRestarted();
             return new HelpCommand();
 
         case UndoCommand.COMMAND_WORD:
