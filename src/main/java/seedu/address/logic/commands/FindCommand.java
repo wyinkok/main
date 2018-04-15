@@ -14,13 +14,14 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all internships whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " Marketing Analytics Singapore";
+            + "Example: " + COMMAND_WORD + " Marketing Analytics";
 
     public static final String MESSAGE_SEARCH_RESPONSE = "Awesome, would you like to narrow down your search even "
-            + "more? You may filter by region and specific address \n\nE.g  filter singapore hongkong tanjong pagar";
+            + ("more? You may like to filter by region and salary. If not, you may go on to sort your results "
+            + "by typing 'sort [KEYWORD]' \n\nE.g  filter Central 800. ");
 
     public static final String MESSAGE_SEARCH_RESPONSE_NO_INTERNSHIPS = "Woops, no internship found ! "
-            + "Try using lesser keywords or entering other keywords  \nE.g: search marketing business";
+            + "Try using lesser keywords or entering other keywords  \nE.g: find finance";
 
     private final InternshipContainsKeywordsPredicate predicate;
 

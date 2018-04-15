@@ -12,8 +12,8 @@ public class StartCommand extends Command {
     public static final String COMMAND_WORD = "start";
 
     public static final String MESSAGE_START_ACKNOWLEDGEMENT = "Next, please key in all the industries and roles"
-            + " that you are interested in.  To view the full list of possible industries and roles "
-            + "key in 'help' \n\nE.g  search healthcare technology engineering marketing consulting";
+            + " that you are interested in.  To view a suggested list of possible industries and roles, "
+            + "type 'help'. \n\nE.g  find finance technology marketing consulting";
 
     @Override
     public CommandResult execute() {
