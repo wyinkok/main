@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalInternships.ENGINEERING2;
 import static seedu.address.testutil.TypicalInternships.ENGINEERING3;
 import static seedu.address.testutil.TypicalInternships.KEYWORD_MATCHING_AUDIT;
 
-
 import org.junit.Test;
 
 import seedu.address.logic.commands.FilterCommand;
@@ -31,7 +30,7 @@ public class FilterCommandSystemTest extends JobbiBotSystemTest {
 
         Model expectedModel = getModel();
 
-    /* -------------------------Filtering on an unsearched list ---------------------------------------------------- */
+        /* -------------------------Filtering on an unsearched list ------------------------------------------ */
 
         /* Case: filter multiple internships in internship book, command with leading spaces and trailing spaces
          * -> 2 internships found
