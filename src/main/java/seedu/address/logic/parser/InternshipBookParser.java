@@ -92,7 +92,6 @@ public class InternshipBookParser {
 
         case ExitCommand.COMMAND_WORD:
             checkIfContainArguments(arguments);
-            checkIfConversationRestarted();
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:

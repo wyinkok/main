@@ -65,7 +65,7 @@ Format: `start`
 
 === Clears previous conversation with program : `new` [since v1.3]
 
-Clears previous message thread with JobbiBot. To restart the conversation, type `start` again. +
+Clears previous message thread with JobbiBot. To restart the conversation, user has to type `start` again except for the `exit` command. +
 Format: `new`
 
 Example:
